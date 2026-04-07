@@ -72,9 +72,9 @@ const config: SiteConfig = {
   rating: 8.7,
 
   author: {
-    name: 'Marie Dupont',
-    avatar: '/logo.svg',
-    bio: 'Journaliste santé et bien-être. Spécialisée dans les compléments alimentaires depuis 2019.',
+    name: 'Rick',
+    avatar: '/author-avatar.png',
+    bio: 'Expert en compléments alimentaires et nutrition sportive. Testeur et rédacteur chez LMC depuis 2024.',
   },
 
   seo: {

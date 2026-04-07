@@ -26,11 +26,6 @@ const { title, description, author, authorAvatar, date, readingTime, bannerImage
 ---
 
 <section class="hero-blog-gradient relative overflow-hidden text-white">
-  <!-- Decorative circles (positioned by global.css .circle._0/._1/._2) -->
-  <div class="circle _0"></div>
-  <div class="circle _1"></div>
-  <div class="circle _2"></div>
-
   <div class="pt-16 pb-20 md:pt-24 md:pb-28 relative z-10">
     <div class="mx-auto" style="max-width: 1280px;">
       <div class="px-5 md:px-10">
@@ -77,15 +72,18 @@ const { title, description, author, authorAvatar, date, readingTime, bannerImage
           </span>
         </div>
 
-        <!-- Banner image -->
-        <div class="rounded-xl overflow-hidden shadow-card-promo" style="max-width: 900px;">
-          <img
-            src={bannerImage}
-            alt="Bannière"
-            class="w-full h-auto object-cover"
-            loading="eager"
-          />
-        </div>
+        <!-- Banner image with rounded corners -->
+        {bannerImage && (
+          <div style="max-width: 900px;">
+            <img
+              src={bannerImage}
+              alt="Bannière"
+              class="w-full h-auto rounded-2xl object-cover shadow-lg"
+              style="max-height: 400px;"
+              loading="eager"
+            />
+          </div>
+        )}
 
         <!-- Optional product CTA -->
         {product && (

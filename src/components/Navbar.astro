@@ -19,13 +19,10 @@ const { siteName, logoSrc, navLinks, ctaText, ctaLink } = Astro.props;
   id="navbar"
   class="navbar fixed top-0 left-0 right-0 z-50 bg-white transition-shadow duration-300"
 >
-  <div class="mx-auto flex h-[80px] max-w-[1280px] items-center justify-between px-[40px] max-lg:px-6 max-md:h-[72px] max-md:px-5">
-    <!-- Logo -->
-    <a href="/" class="flex shrink-0 items-center gap-2.5">
-      <img src={logoSrc} alt={siteName} class="h-9 w-9" />
-      <span class="font-heading text-[18px] font-bold leading-none tracking-tight text-text-dark">
-        {siteName}
-      </span>
+  <div class="navbar-inner mx-auto flex h-[80px] max-w-[1280px] items-center justify-between px-[40px] max-lg:px-6 max-md:h-[72px] max-md:px-5">
+    <!-- Logo (left, no text) -->
+    <a href="/" class="flex shrink-0 items-center">
+      <img src={logoSrc} alt={siteName} class="h-[40px] w-auto max-md:h-[32px]" />
     </a>
 
     <!-- Desktop Nav Links (centered) -->
@@ -40,7 +37,7 @@ const { siteName, logoSrc, navLinks, ctaText, ctaLink } = Astro.props;
       ))}
     </nav>
 
-    <!-- Desktop CTA Button -->
+    <!-- Desktop CTA Button (right) -->
     <a
       href={ctaLink}
       rel="nofollow sponsored"
@@ -77,6 +74,9 @@ const { siteName, logoSrc, navLinks, ctaText, ctaLink } = Astro.props;
       <span class="hamburger-bar block h-[2px] w-[24px] origin-center bg-text-dark transition-all duration-300"></span>
     </button>
   </div>
+
+  <!-- Orange bottom border -->
+  <div class="h-[3px] w-full bg-[#ef7a1a]"></div>
 
   <!-- Mobile Menu Overlay (full-screen) -->
   <div
@@ -142,9 +142,19 @@ const { siteName, logoSrc, navLinks, ctaText, ctaLink } = Astro.props;
 </header>
 
 <!-- Spacer to offset fixed navbar -->
-<div class="h-[80px] max-md:h-[72px]"></div>
+<div class="navbar-spacer"></div>
 
 <style>
+  /* ── Navbar dimensions ── */
+  .navbar-spacer {
+    height: 83px; /* 80px nav + 3px border */
+  }
+  @media (max-width: 767px) {
+    .navbar-spacer {
+      height: 75px; /* 72px nav + 3px border */
+    }
+  }
+
   /* ── Navbar shadow on scroll ── */
   .navbar.scrolled {
     box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1);
