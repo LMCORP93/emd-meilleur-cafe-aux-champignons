@@ -1,0 +1,84 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import Hero from '@/components/Hero.astro';
+import QuickSummary from '@/components/QuickSummary.astro';
+import DiscountCard from '@/components/DiscountCard.astro';
+import ArticleBody from '@/components/ArticleBody.astro';
+import ProsCons from '@/components/ProsCons.astro';
+import FaqAccordion from '@/components/FaqAccordion.astro';
+import TableOfContents from '@/components/TableOfContents.astro';
+import Footer from '@/components/Footer.astro';
+
+import config from '@/data/site.config';
+---
+
+<BaseLayout>
+  <Header />
+
+  <!-- Main Content with Sidebar -->
+  <main>
+    <div class="container-wide py-8 lg:py-12">
+      <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
+        <!-- Content Area -->
+        <div class="flex-1 min-w-0">
+          <Hero />
+
+          <!-- Quick Summary -->
+          <div class="container-content">
+            <QuickSummary />
+          </div>
+
+          <!-- First Discount Card (inline, visible on all screens) -->
+          <div class="container-content">
+            <DiscountCard />
+          </div>
+
+          <!-- Article Body Sections -->
+          <ArticleBody />
+
+          <!-- Pros & Cons -->
+          <ProsCons />
+
+          <!-- Second Discount Card -->
+          <div class="container-content">
+            <DiscountCard />
+          </div>
+
+          <!-- FAQ -->
+          <FaqAccordion />
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="w-full lg:w-72 xl:w-80 flex-shrink-0 space-y-6">
+          <!-- Table of Contents -->
+          <TableOfContents />
+
+          <!-- Sticky Discount Card (desktop only) -->
+          <DiscountCard sticky />
+
+          <!-- Author Box -->
+          <div class="card p-5 hidden lg:block">
+            <div class="flex items-center gap-3 mb-3">
+              <img
+                src={config.author.avatar}
+                alt={config.author.name}
+                width="44"
+                height="44"
+                class="w-11 h-11 rounded-full border-2 border-brand-orange"
+                loading="lazy"
+              />
+              <div>
+                <p class="font-heading font-bold text-sm text-brand-heading">{config.author.name}</p>
+                <p class="text-xs text-brand-body/60">Rédacteur en chef</p>
+              </div>
+            </div>
+            <p class="text-xs text-brand-body leading-relaxed">{config.author.bio}</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>

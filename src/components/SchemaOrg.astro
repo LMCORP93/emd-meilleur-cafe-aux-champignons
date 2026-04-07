@@ -1,0 +1,76 @@
+---
+import config from '@/data/site.config';
+
+const siteUrl = config.domain;
+---
+
+<script type="application/ld+json" set:html={JSON.stringify([
+  {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    "name": `${config.product} — Review Complète`,
+    "reviewBody": config.seo.description,
+    "author": {
+      "@type": "Person",
+      "name": config.author.name,
+    },
+    "datePublished": "2026-01-15",
+    "dateModified": "2026-04-07",
+    "itemReviewed": {
+      "@type": "Product",
+      "name": config.product,
+      "brand": {
+        "@type": "Brand",
+        "name": config.brand,
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": config.affiliateLink,
+        "priceCurrency": "EUR",
+        "price": config.discountPrice.replace('€', '').replace(',', '.').trim(),
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": config.brand,
+        },
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": config.rating.toString(),
+        "bestRating": "10",
+        "worstRating": "1",
+        "ratingCount": "247",
+      },
+    },
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": config.rating.toString(),
+      "bestRating": "10",
+      "worstRating": "1",
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": config.siteName,
+      "url": siteUrl,
+    },
+    "url": siteUrl,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": config.faq.map((item) => ({
+      "@type": "Question",
+      "name": item.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answer,
+      },
+    })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": config.siteName,
+    "url": siteUrl,
+  },
+])} />

@@ -1,0 +1,124 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Header from '@/components/Header.astro';
+import ProductCard from '@/components/ProductCard.astro';
+import Footer from '@/components/Footer.astro';
+import StarRating from '@/components/StarRating.astro';
+
+import config from '@/data/site.config';
+---
+
+<BaseLayout
+  title={`Comparatif ${config.productCategory} — Top ${config.products.length} Produits 2026`}
+  description={`Découvrez notre comparatif complet des ${config.products.length} meilleurs ${config.productCategory.toLowerCase()} en 2026. Tests, avis, prix et codes promo exclusifs.`}
+  canonicalPath="/comparatif"
+>
+  <Header />
+
+  <main>
+    <!-- Page Header -->
+    <section class="section-padding bg-brand-beige/40">
+      <div class="container-content text-center">
+        <h1 class="text-3xl sm:text-4xl font-heading font-bold text-brand-heading mb-4">
+          Comparatif {config.productCategory}
+        </h1>
+        <p class="text-lg text-brand-body max-w-2xl mx-auto mb-6">
+          Notre sélection des {config.products.length} meilleurs produits testés et comparés en 2026.
+          Classement basé sur l'efficacité, la qualité des ingrédients et le rapport qualité-prix.
+        </p>
+
+        <!-- Table of Contents for Products -->
+        <div class="card p-5 max-w-lg mx-auto">
+          <h2 class="font-heading font-bold text-sm text-brand-heading mb-3 text-left">
+            📋 Produits comparés
+          </h2>
+          <ol class="space-y-2 text-left">
+            {config.products.map((product, index) => (
+              <li>
+                <a
+                  href={`#produit-${product.slug}`}
+                  class="flex items-center gap-3 text-sm text-brand-body hover:text-brand-orange transition-colors no-underline group py-1"
+                >
+                  <span class:list={[
+                    'flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-white',
+                    product.rank === 1 ? 'bg-brand-orange' : product.rank === 2 ? 'bg-gray-500' : product.rank === 3 ? 'bg-amber-700' : 'bg-gray-400',
+                  ]}>
+                    {product.rank}
+                  </span>
+                  <span class="group-hover:underline underline-offset-2">{product.name}</span>
+                  <span class="ml-auto flex items-center gap-1">
+                    <StarRating rating={product.rating} />
+                    <span class="text-xs font-bold text-brand-heading">{product.rating}</span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- Intro -->
+    <section class="section-padding">
+      <div class="container-content">
+        <div class="space-y-4 text-brand-body leading-relaxed">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt
+            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+            laboris nisi ut aliquip ex ea commodo consequat.
+          </p>
+          <p>
+            Notre équipe a passé des mois à tester et analyser les produits les plus populaires du marché.
+            Chaque produit a été évalué selon des critères stricts : composition, efficacité, tolérance,
+            prix et service client. Voici notre verdict.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Cards -->
+    <section class="pb-16">
+      <div class="container-content max-w-3xl mx-auto">
+        {config.products.map((product, index) => (
+          <ProductCard product={product} index={index} />
+        ))}
+      </div>
+    </section>
+
+    <!-- Methodology -->
+    <section class="section-padding bg-brand-beige/40">
+      <div class="container-content max-w-3xl mx-auto">
+        <h2 class="text-2xl font-heading font-bold text-brand-heading mb-6">
+          🔬 Notre Méthodologie
+        </h2>
+        <div class="space-y-4 text-brand-body leading-relaxed">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis
+            ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur
+            ridiculus mus.
+          </p>
+          <p>
+            Maecenas faucibus mollis interdum. Praesent commodo cursus magna, vel scelerisque nisl
+            consectetur et. Donec id elit non mi porta gravida at eget metus. Nulla vitae elit libero,
+            a pharetra augue.
+          </p>
+          <div class="grid sm:grid-cols-2 gap-4 mt-6">
+            {[
+              { label: 'Efficacité', weight: '35%' },
+              { label: 'Composition', weight: '25%' },
+              { label: 'Rapport qualité-prix', weight: '20%' },
+              { label: 'Service client', weight: '20%' },
+            ].map((criterion) => (
+              <div class="card p-4 flex items-center justify-between">
+                <span class="text-sm font-bold text-brand-heading">{criterion.label}</span>
+                <span class="text-sm text-brand-orange font-bold">{criterion.weight}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</BaseLayout>

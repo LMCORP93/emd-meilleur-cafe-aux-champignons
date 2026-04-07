@@ -1,0 +1,85 @@
+---
+import config from '@/data/site.config';
+---
+
+<section id="faq" class="section-padding bg-brand-beige/40">
+  <div class="container-content">
+    <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-heading mb-8">
+      ❓ Questions Fréquentes
+    </h2>
+
+    <div class="space-y-3">
+      {config.faq.map((item, index) => (
+        <div class="card faq-item overflow-hidden">
+          <button
+            class:list={[
+              'faq-toggle w-full flex items-center justify-between p-5 text-left',
+              'hover:bg-gray-50/50 transition-colors',
+              index === 0 && 'bg-white',
+            ]}
+            aria-expanded={index === 0 ? 'true' : 'false'}
+            data-faq-index={index}
+          >
+            <span class="font-heading font-bold text-sm sm:text-base text-brand-heading pr-4">
+              {item.question}
+            </span>
+            <svg
+              class:list={[
+                'faq-icon w-5 h-5 flex-shrink-0 text-brand-orange transition-transform duration-200',
+                index === 0 && 'rotate-180',
+              ]}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div
+            class:list={[
+              'faq-content px-5 overflow-hidden transition-all duration-200',
+              index === 0 ? 'pb-5 max-h-96' : 'max-h-0',
+            ]}
+          >
+            <p class="text-sm text-brand-body leading-relaxed pt-0">
+              {item.answer}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.faq-toggle').forEach((button) => {
+    button.addEventListener('click', () => {
+      const content = button.nextElementSibling;
+      const icon = button.querySelector('.faq-icon');
+      const isOpen = button.getAttribute('aria-expanded') === 'true';
+
+      // Close all other items
+      document.querySelectorAll('.faq-toggle').forEach((otherBtn) => {
+        if (otherBtn !== button) {
+          otherBtn.setAttribute('aria-expanded', 'false');
+          const otherContent = otherBtn.nextElementSibling;
+          otherContent?.classList.remove('pb-5', 'max-h-96');
+          otherContent?.classList.add('max-h-0');
+          otherBtn.querySelector('.faq-icon')?.classList.remove('rotate-180');
+        }
+      });
+
+      // Toggle current
+      button.setAttribute('aria-expanded', String(!isOpen));
+      if (isOpen) {
+        content?.classList.remove('pb-5', 'max-h-96');
+        content?.classList.add('max-h-0');
+        icon?.classList.remove('rotate-180');
+      } else {
+        content?.classList.add('pb-5', 'max-h-96');
+        content?.classList.remove('max-h-0');
+        icon?.classList.add('rotate-180');
+      }
+    });
+  });
+</script>

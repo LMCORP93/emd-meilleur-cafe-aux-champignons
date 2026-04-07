@@ -1,0 +1,205 @@
+---
+import config from '@/data/site.config';
+import type { Product } from '@/data/site.config';
+import StarRating from './StarRating.astro';
+
+interface Props {
+  product: Product;
+  index: number;
+}
+
+const { product, index } = Astro.props;
+
+const medals = ['🏆', '🥈', '🥉'];
+const rankBadge = product.rank <= 3
+  ? medals[product.rank - 1]
+  : `#${product.rank}`;
+
+const borderColor = product.rank === 1
+  ? 'border-brand-orange'
+  : 'border-gray-100';
+---
+
+<div id={`produit-${product.slug}`} class:list={['card overflow-hidden border-2 mb-6 scroll-mt-24', borderColor]}>
+  <!-- Rank Badge -->
+  <div class:list={[
+    'flex items-center justify-between px-5 py-3 border-b',
+    product.rank === 1
+      ? 'bg-brand-orange text-white border-brand-orange'
+      : 'bg-brand-beige border-gray-100',
+  ]}>
+    <div class="flex items-center gap-3">
+      <span class="text-2xl">{rankBadge}</span>
+      <div>
+        <span class:list={[
+          'font-heading font-bold text-lg',
+          product.rank === 1 ? 'text-white' : 'text-brand-heading',
+        ]}>
+          TOP {product.rank}
+        </span>
+        <span class:list={[
+          'block text-xs',
+          product.rank === 1 ? 'text-white/80' : 'text-brand-body/60',
+        ]}>
+          Notre sélection
+        </span>
+      </div>
+    </div>
+    <div class="text-right">
+      <div class="flex items-center gap-1.5">
+        <StarRating rating={product.rating} />
+      </div>
+      <span class:list={[
+        'font-heading font-bold text-lg',
+        product.rank === 1 ? 'text-white' : 'text-brand-heading',
+      ]}>
+        {product.rating}/10
+      </span>
+    </div>
+  </div>
+
+  <div class="p-5 sm:p-6">
+    <div class="flex flex-col sm:flex-row gap-6">
+      <!-- Product Image -->
+      <div class="flex-shrink-0 mx-auto sm:mx-0">
+        <div class="w-36 h-36 rounded-card bg-brand-beige flex items-center justify-center">
+          <img
+            src={product.image}
+            alt={product.name}
+            width="96"
+            height="96"
+            class="w-24 h-24 object-contain"
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <!-- Product Info -->
+      <div class="flex-1 text-center sm:text-left">
+        <h3 class="font-heading font-bold text-xl text-brand-heading mb-1">{product.name}</h3>
+        <p class="text-sm text-brand-body mb-3">{product.brand}</p>
+
+        <!-- Metadata -->
+        <div class="flex flex-wrap justify-center sm:justify-start gap-3 mb-4">
+          <span class="inline-flex items-center gap-1 text-xs bg-brand-tertiary rounded-full px-3 py-1 text-brand-body">
+            {product.origin}
+          </span>
+          <span class:list={[
+            'inline-flex items-center gap-1 text-xs rounded-full px-3 py-1',
+            product.availability === 'En stock'
+              ? 'bg-brand-green-bg text-brand-green'
+              : 'bg-brand-orange-bg text-brand-orange',
+          ]}>
+            <span class:list={[
+              'w-1.5 h-1.5 rounded-full',
+              product.availability === 'En stock' ? 'bg-brand-green' : 'bg-brand-orange',
+            ]}></span>
+            {product.availability}
+          </span>
+        </div>
+
+        <!-- Pricing -->
+        <div class="flex items-center justify-center sm:justify-start gap-2 mb-4">
+          <span class="text-brand-body/50 line-through text-sm">{product.originalPrice}</span>
+          <span class="text-2xl font-heading font-bold text-brand-green">{product.discountPrice}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Promo Code -->
+    {product.promoCode && (
+      <div class="border-2 border-dashed border-brand-orange/40 rounded-card p-3 mb-4 text-center bg-brand-orange/5">
+        <p class="text-xs text-brand-body mb-1 uppercase tracking-wide font-bold">Code Promo</p>
+        <p class="font-heading font-bold text-xl text-brand-orange tracking-widest">{product.promoCode}</p>
+      </div>
+    )}
+
+    <!-- CTA -->
+    <a
+      href={product.affiliateLink}
+      target="_blank"
+      rel="noopener noreferrer sponsored"
+      class="btn-primary-lg w-full text-center block mb-4"
+    >
+      → Visiter {product.brand}
+    </a>
+
+    <!-- Verified -->
+    <div class="flex items-center justify-center gap-1.5 text-xs text-brand-body/60">
+      <svg class="w-3.5 h-3.5 text-brand-green" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+      </svg>
+      <span>Offre vérifiée — Mis à jour le 07/04/2026</span>
+    </div>
+
+    <!-- Expandable Section -->
+    <div class="mt-5 pt-5 border-t border-gray-100">
+      <button
+        class="product-toggle w-full flex items-center justify-between text-left hover:text-brand-orange transition-colors"
+        aria-expanded="false"
+        data-product-index={index}
+      >
+        <span class="font-heading font-bold text-sm text-brand-heading">En savoir plus</span>
+        <svg
+          class="product-icon w-5 h-5 text-brand-orange transition-transform duration-200"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      <div class="product-content max-h-0 overflow-hidden transition-all duration-200">
+        <div class="pt-4 grid sm:grid-cols-2 gap-4">
+          <div class="rounded-card bg-brand-green-bg p-4">
+            <h4 class="font-heading font-bold text-sm text-brand-green mb-3">Avantages</h4>
+            <ul class="space-y-2">
+              {product.pros.map((pro) => (
+                <li class="flex items-start gap-2 text-sm text-brand-body">
+                  <svg class="w-4 h-4 text-brand-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>{pro}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="rounded-card bg-brand-orange-bg p-4">
+            <h4 class="font-heading font-bold text-sm text-brand-orange mb-3">Inconvénients</h4>
+            <ul class="space-y-2">
+              {product.cons.map((con) => (
+                <li class="flex items-start gap-2 text-sm text-brand-body">
+                  <svg class="w-4 h-4 text-brand-orange flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>{con}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.product-toggle').forEach((button) => {
+    button.addEventListener('click', () => {
+      const content = button.nextElementSibling;
+      const icon = button.querySelector('.product-icon');
+      const isOpen = button.getAttribute('aria-expanded') === 'true';
+
+      button.setAttribute('aria-expanded', String(!isOpen));
+      if (isOpen) {
+        content?.classList.remove('max-h-96', 'pb-4');
+        content?.classList.add('max-h-0');
+        icon?.classList.remove('rotate-180');
+      } else {
+        content?.classList.add('max-h-96', 'pb-4');
+        content?.classList.remove('max-h-0');
+        icon?.classList.add('rotate-180');
+      }
+    });
+  });
+</script>

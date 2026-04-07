@@ -1,0 +1,29 @@
+---
+import config from '@/data/site.config';
+
+const { tocItems } = config;
+---
+
+<nav aria-label="Table des matières" class="card p-5 mb-8 lg:mb-0 lg:sticky lg:top-24">
+  <h3 class="font-heading font-bold text-base text-brand-heading mb-4 flex items-center gap-2">
+    <svg class="w-4 h-4 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+    </svg>
+    Sommaire
+  </h3>
+  <ol class="space-y-2">
+    {tocItems.map((item, index) => (
+      <li>
+        <a
+          href={`#${item.id}`}
+          class="flex items-start gap-2 text-sm text-brand-body hover:text-brand-orange transition-colors no-underline group"
+        >
+          <span class="text-brand-body/40 group-hover:text-brand-orange/60 font-mono text-xs mt-0.5 flex-shrink-0">
+            {String(index + 1).padStart(2, '0')}
+          </span>
+          <span class="group-hover:underline underline-offset-2">{item.label}</span>
+        </a>
+      </li>
+    ))}
+  </ol>
+</nav>

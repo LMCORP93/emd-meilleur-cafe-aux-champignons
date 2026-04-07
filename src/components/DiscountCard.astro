@@ -1,0 +1,84 @@
+---
+import config from '@/data/site.config';
+import StarRating from './StarRating.astro';
+
+interface Props {
+  product?: typeof config.products[number];
+  sticky?: boolean;
+}
+
+const { sticky = false } = Astro.props;
+const product = Astro.props.product;
+const name = product?.name ?? config.product;
+const brand = product?.brand ?? config.brand;
+const rating = product?.rating ?? config.rating;
+const promoCode = product?.promoCode ?? config.promoCode;
+const originalPrice = product?.originalPrice ?? config.originalPrice;
+const discountPrice = product?.discountPrice ?? config.discountPrice;
+const affiliateLink = product?.affiliateLink ?? config.affiliateLink;
+
+const displayClass = sticky
+  ? 'hidden lg:block'
+  : 'block';
+---
+
+<div class:list={['card overflow-hidden mb-8', displayClass]}>
+  <!-- Product Image -->
+  <div class="bg-brand-beige p-6 flex items-center justify-center">
+    <div class="w-32 h-32 rounded-full bg-white shadow-inner flex items-center justify-center">
+      <img
+        src={product?.image ?? '/favicon.svg'}
+        alt={name}
+        width="96"
+        height="96"
+        class="w-24 h-24 object-contain"
+        loading="lazy"
+      />
+    </div>
+  </div>
+
+  <div class="p-5">
+    <!-- Product Name & Rating -->
+    <div class="text-center mb-4">
+      <h3 class="font-heading font-bold text-lg text-brand-heading mb-1">{name}</h3>
+      <p class="text-sm text-brand-body mb-2">{brand}</p>
+      <div class="flex items-center justify-center gap-2">
+        <StarRating rating={rating} />
+        <span class="text-sm font-bold text-brand-heading">{rating}/10</span>
+      </div>
+    </div>
+
+    <!-- Pricing -->
+    <div class="text-center mb-4">
+      <span class="text-brand-body/50 line-through text-sm mr-2">{originalPrice}</span>
+      <span class="text-2xl font-heading font-bold text-brand-green">{discountPrice}</span>
+    </div>
+
+    <!-- Promo Code Box -->
+    {promoCode && (
+      <div class="border-2 border-dashed border-brand-orange/40 rounded-card p-3 mb-4 text-center bg-brand-orange/5">
+        <p class="text-xs text-brand-body mb-1 uppercase tracking-wide font-bold">Code Promo</p>
+        <p class="font-heading font-bold text-xl text-brand-orange tracking-widest">{promoCode}</p>
+        <p class="text-xs text-brand-body/60 mt-1">Copiez ce code lors de la commande</p>
+      </div>
+    )}
+
+    <!-- CTA Button -->
+    <a
+      href={affiliateLink}
+      target="_blank"
+      rel="noopener noreferrer sponsored"
+      class="btn-primary-lg w-full text-center block"
+    >
+      → Voir l'Offre
+    </a>
+
+    <!-- Verified footer -->
+    <div class="flex items-center justify-center gap-1.5 mt-3 text-xs text-brand-body/60">
+      <svg class="w-3.5 h-3.5 text-brand-green" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+      </svg>
+      <span>Code vérifié le 07/04/2026</span>
+    </div>
+  </div>
+</div>

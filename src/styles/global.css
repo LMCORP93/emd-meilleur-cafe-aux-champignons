@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base resets ─────────────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-brand-cream text-brand-body font-body leading-relaxed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold text-brand-heading leading-tight;
+  }
+}
+
+/* ── Component utilities ────────────────────────────────────── */
+@layer components {
+  .container-content {
+    @apply max-w-content mx-auto px-4 sm:px-6;
+  }
+
+  .container-wide {
+    @apply max-w-wide mx-auto px-4 sm:px-6;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-card
+           bg-brand-orange text-white font-bold font-heading text-base
+           hover:bg-brand-orange-hover transition-colors duration-200
+           shadow-sm hover:shadow-md no-underline;
+  }
+
+  .btn-primary-lg {
+    @apply btn-primary text-lg px-8 py-4 rounded-cardlg;
+  }
+
+  .card {
+    @apply bg-white rounded-cardlg shadow-sm border border-gray-100;
+  }
+
+  .section-padding {
+    @apply py-10 sm:py-14;
+  }
+}

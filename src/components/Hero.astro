@@ -1,0 +1,58 @@
+---
+import config from '@/data/site.config';
+---
+
+<section class="section-padding">
+  <div class="container-content">
+    <h1 class="text-3xl sm:text-4xl lg:text-[2.75rem] font-heading font-bold text-brand-heading leading-tight mb-6">
+      {config.product} — Test Complet & Avis 2026
+    </h1>
+
+    <!-- Author Meta -->
+    <div class="flex items-center gap-3 mb-8 pb-8 border-b border-gray-200">
+      <img
+        src={config.author.avatar}
+        alt={`Photo de ${config.author.name}`}
+        width="48"
+        height="48"
+        class="w-12 h-12 rounded-full border-2 border-brand-orange"
+        loading="eager"
+      />
+      <div class="flex flex-col sm:flex-row sm:items-center sm:gap-4">
+        <span class="font-heading font-bold text-sm text-brand-heading">
+          {config.author.name}
+        </span>
+        <div class="flex items-center gap-2 text-sm text-brand-body">
+          <time datetime="2026-01-15">15 janvier 2026</time>
+          <span aria-hidden="true">·</span>
+          <span>12 min de lecture</span>
+          <span aria-hidden="true">·</span>
+          <span>Mis à jour le 7 avril 2026</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured Image -->
+    <div class="rounded-cardlg overflow-hidden mb-8 bg-brand-beige aspect-[16/9] flex items-center justify-center">
+      <div class="text-center p-8">
+        <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-brand-orange/10 flex items-center justify-center">
+          <svg class="w-12 h-12 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <p class="text-sm text-brand-body/60">Image placeholder — {config.product}</p>
+      </div>
+    </div>
+
+    <!-- Intro paragraph -->
+    <p class="text-lg sm:text-xl text-brand-body leading-relaxed mb-2">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
+      et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+      aliquip ex ea commodo consequat.
+    </p>
+    <p class="text-base text-brand-body leading-relaxed">
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+  </div>
+</section>

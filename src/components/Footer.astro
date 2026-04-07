@@ -1,0 +1,64 @@
+---
+import config from '@/data/site.config';
+---
+
+<footer class="bg-brand-dark text-white/70 mt-16">
+  <div class="container-wide py-12">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <!-- Brand -->
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex items-center gap-2 mb-4">
+          <div class="w-8 h-8 rounded-full bg-brand-orange flex items-center justify-center">
+            <span class="text-white font-heading font-bold text-xs">R</span>
+          </div>
+          <span class="font-heading font-bold text-white">{config.siteName}</span>
+        </div>
+        <p class="text-sm leading-relaxed text-white/50 mb-4">
+          {config.tagline}
+        </p>
+      </div>
+
+      <!-- Navigation -->
+      <div>
+        <h4 class="font-heading font-bold text-white text-sm mb-4">Navigation</h4>
+        <ul class="space-y-2">
+          <li><a href="/" class="text-sm text-white/50 hover:text-brand-orange transition-colors no-underline">Review Complète</a></li>
+          <li><a href="/comparatif" class="text-sm text-white/50 hover:text-brand-orange transition-colors no-underline">Comparatif</a></li>
+          <li><a href="#faq" class="text-sm text-white/50 hover:text-brand-orange transition-colors no-underline">FAQ</a></li>
+        </ul>
+      </div>
+
+      <!-- Legal -->
+      <div>
+        <h4 class="font-heading font-bold text-white text-sm mb-4">Mentions Légales</h4>
+        <ul class="space-y-2">
+          <li><a href="/mentions-legales" class="text-sm text-white/50 hover:text-brand-orange transition-colors no-underline">Mentions Légales</a></li>
+          <li><a href="/politique-confidentialite" class="text-sm text-white/50 hover:text-brand-orange transition-colors no-underline">Confidentialité</a></li>
+          <li><a href="/contact" class="text-sm text-white/50 hover:text-brand-orange transition-colors no-underline">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- About -->
+      <div>
+        <h4 class="font-heading font-bold text-white text-sm mb-4">À Propos</h4>
+        <p class="text-sm text-white/50 leading-relaxed">
+          {config.author.bio}
+        </p>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="mt-10 pt-6 border-t border-white/10">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-xs text-white/40">
+          © {new Date().getFullYear()} {config.siteName}. Tous droits réservés.
+        </p>
+        <p class="text-xs text-white/30 text-center sm:text-right max-w-md">
+          ⚠️ Disclosure : Ce site contient des liens affiliés. Nous pouvons percevoir une commission
+          si vous effectuez un achat via nos liens, sans aucun surcoût pour vous. Notre avis reste
+          indépendant et basé sur nos tests.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
