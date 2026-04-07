@@ -1,63 +1,137 @@
 ---
-import config from '@/data/site.config';
+interface NavLink {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  siteName: string;
+  logoSrc: string;
+  navLinks: NavLink[];
+  copyright: string;
+}
+
+const { siteName, logoSrc, navLinks, copyright } = Astro.props;
+
+// Split nav links into two columns for the links grid
+const half = Math.ceil(navLinks.length / 2);
+const linksCol1 = navLinks.slice(0, half);
+const linksCol2 = navLinks.slice(half);
 ---
 
-<footer class="bg-brand-dark text-white/70 mt-16">
-  <div class="container-wide py-12">
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-      <!-- Brand -->
-      <div class="col-span-2 md:col-span-1">
-        <div class="flex items-center gap-2 mb-4">
-          <div class="w-8 h-8 rounded-full bg-brand-orange flex items-center justify-center">
-            <span class="text-white font-heading font-bold text-xs">R</span>
+<footer class="relative hero-blog-gradient text-white overflow-hidden">
+  <!-- Curve divider at top (white semicircle blending into #f4f2ec page bg) -->
+  <div class="curve-mask">
+    <div class="curve-circle" style="--curve-color: #f4f2ec;"></div>
+  </div>
+
+  <!-- Main footer content -->
+  <div class="pt-16 pb-12 md:pt-20 md:pb-16 relative z-10">
+    <div class="mx-auto" style="max-width: 1280px;">
+      <div class="px-5 md:px-10">
+        <!-- 3-column footer grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-8 mb-12">
+
+          <!-- Column 1: Logo + site name + description -->
+          <div class="lg:pr-8">
+            <div class="flex items-center gap-3 mb-4">
+              <img
+                src={logoSrc}
+                alt={siteName}
+                class="w-10 h-10 rounded-lg"
+                width="40"
+                height="40"
+              />
+              <span class="font-heading font-bold text-lg text-white">
+                {siteName}
+              </span>
+            </div>
+            <p class="text-white/75 text-sm leading-relaxed max-w-xs">
+              Votre guide de confiance pour comparer les meilleurs produits. Des avis honnêtes et des offres exclusives pour vous aider à faire le bon choix.
+            </p>
           </div>
-          <span class="font-heading font-bold text-white">{config.siteName}</span>
+
+          <!-- Column 2: Navigation links grid -->
+          <div>
+            <h4 class="font-heading font-bold text-white text-base mb-5 tracking-tight">
+              Navigation
+            </h4>
+            <div class="grid grid-cols-2 gap-x-6 gap-y-2">
+              {navLinks.map((link) => (
+                <a
+                  href={link.href}
+                  class="text-white/70 hover:text-white text-sm transition-colors duration-200 py-1"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <!-- Column 3: Legal links + social icons -->
+          <div class="md:col-span-2 lg:col-span-1">
+            <h4 class="font-heading font-bold text-white text-base mb-5 tracking-tight">
+              Informations
+            </h4>
+            <ul class="flex flex-col gap-2 mb-6 list-none p-0 m-0">
+              <li>
+                <a href="/politique-de-confidentialite" class="text-white/70 hover:text-white text-sm transition-colors duration-200">
+                  Politique de confidentialité
+                </a>
+              </li>
+              <li>
+                <a href="/mentions-legales" class="text-white/70 hover:text-white text-sm transition-colors duration-200">
+                  Mentions légales
+                </a>
+              </li>
+              <li>
+                <a href="/contact" class="text-white/70 hover:text-white text-sm transition-colors duration-200">
+                  Contact
+                </a>
+              </li>
+            </ul>
+
+            <!-- Social icons placeholder -->
+            <div class="flex items-center gap-3">
+              <a href="#" aria-label="Facebook" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </a>
+              <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                </svg>
+              </a>
+              <a href="#" aria-label="Twitter / X" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors duration-200">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
         </div>
-        <p class="text-sm leading-relaxed text-white/50 mb-4">
-          {config.tagline}
-        </p>
-      </div>
 
-      <!-- Navigation -->
-      <div>
-        <h4 class="font-heading font-bold text-white text-sm mb-4">Navigation</h4>
-        <ul class="space-y-2">
-          <li><a href="/" class="text-sm text-white/50 hover:text-brand-orange transition-colors no-underline">Review Complète</a></li>
-          <li><a href="/comparatif" class="text-sm text-white/50 hover:text-brand-orange transition-colors no-underline">Comparatif</a></li>
-          <li><a href="#faq" class="text-sm text-white/50 hover:text-brand-orange transition-colors no-underline">FAQ</a></li>
-        </ul>
-      </div>
+        <!-- Divider line -->
+        <div class="h-px bg-white/20 mb-8"></div>
 
-      <!-- Legal -->
-      <div>
-        <h4 class="font-heading font-bold text-white text-sm mb-4">Mentions Légales</h4>
-        <ul class="space-y-2">
-          <li><a href="/mentions-legales" class="text-sm text-white/50 hover:text-brand-orange transition-colors no-underline">Mentions Légales</a></li>
-          <li><a href="/politique-confidentialite" class="text-sm text-white/50 hover:text-brand-orange transition-colors no-underline">Confidentialité</a></li>
-          <li><a href="/contact" class="text-sm text-white/50 hover:text-brand-orange transition-colors no-underline">Contact</a></li>
-        </ul>
-      </div>
-
-      <!-- About -->
-      <div>
-        <h4 class="font-heading font-bold text-white text-sm mb-4">À Propos</h4>
-        <p class="text-sm text-white/50 leading-relaxed">
-          {config.author.bio}
-        </p>
-      </div>
-    </div>
-
-    <!-- Bottom Bar -->
-    <div class="mt-10 pt-6 border-t border-white/10">
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p class="text-xs text-white/40">
-          © {new Date().getFullYear()} {config.siteName}. Tous droits réservés.
-        </p>
-        <p class="text-xs text-white/30 text-center sm:text-right max-w-md">
-          ⚠️ Disclosure : Ce site contient des liens affiliés. Nous pouvons percevoir une commission
-          si vous effectuez un achat via nos liens, sans aucun surcoût pour vous. Notre avis reste
-          indépendant et basé sur nos tests.
-        </p>
+        <!-- Bottom bar: copyright + legal links -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p class="text-white/60 text-sm">
+            {copyright}
+          </p>
+          <div class="flex items-center gap-6">
+            <a href="/politique-de-confidentialite" class="text-white/50 hover:text-white/80 text-sm transition-colors duration-200">
+              Confidentialité
+            </a>
+            <a href="/mentions-legales" class="text-white/50 hover:text-white/80 text-sm transition-colors duration-200">
+              Mentions légales
+            </a>
+            <a href="/contact" class="text-white/50 hover:text-white/80 text-sm transition-colors duration-200">
+              Contact
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>

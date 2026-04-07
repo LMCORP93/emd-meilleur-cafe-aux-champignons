@@ -1,0 +1,128 @@
+---
+import ReviewTag from './ReviewTag.astro';
+import StarRating from './StarRating.astro';
+
+interface Product {
+  name: string;
+  logoSrc: string;
+  rating: number;
+  reviewLabel: string;
+  ctaText: string;
+  ctaLink: string;
+}
+
+interface Props {
+  tag: string;
+  heading: string;
+  summaryText: string;
+  product: Product;
+  assets: string[];
+  considerations: string[];
+}
+
+const { tag, heading, summaryText, product, assets, considerations } = Astro.props;
+---
+
+<section id="quick-summary" class="padding-section-small">
+  <div class="container-medium padding-global">
+    <!-- Tag pill -->
+    <div class="mb-6">
+      <ReviewTag emoji="📋" text={tag} variant="summary" />
+    </div>
+
+    <!-- 2-column grid: Left summary / Right CTA card -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      <!-- LEFT: Heading + summary text -->
+      <div>
+        <h2 class="font-heading font-bold text-2xl md:text-3xl text-text-dark mb-4">
+          {heading}
+        </h2>
+        <p class="text-text-grey leading-relaxed">{summaryText}</p>
+      </div>
+
+      <!-- RIGHT: White CTA card -->
+      <div class="bg-white rounded-xl shadow-card p-6 flex flex-col items-center text-center">
+        <!-- Trophy emoji -->
+        <span class="text-3xl mb-2">🏆</span>
+
+        <!-- Top 1 label -->
+        <p class="font-heading font-bold text-sm text-primary mb-3">Top 1</p>
+
+        <!-- Product logo -->
+        <img
+          src={product.logoSrc}
+          alt={product.name}
+          class="w-20 h-20 object-contain mb-4"
+        />
+
+        <!-- Star rating -->
+        <StarRating rating={product.rating} size="md" />
+
+        <!-- Review label -->
+        <p class="text-text-grey text-sm mt-1 mb-5">{product.reviewLabel}</p>
+
+        <!-- Full-width CTA button -->
+        <a
+          href={product.ctaLink}
+          rel="nofollow sponsored"
+          target="_blank"
+          class="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-heading font-semibold text-sm px-8 py-3 rounded w-full transition-colors"
+        >
+          {product.ctaText}
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14" />
+            <path d="m12 5 7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Points forts / Points à considérer -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+      <!-- Points forts (blue) -->
+      <div class="rounded-lg p-5" style="background-color: #ecf1ff;">
+        <h5 class="flex items-center gap-2 font-heading font-semibold text-sm mb-4" style="color: #4d65ff;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4d65ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+            <path d="m9 11 3 3L22 4" />
+          </svg>
+          Points forts
+        </h5>
+        <ul class="space-y-2">
+          {assets.map((item) => (
+            <li class="flex items-start gap-2 text-sm" style="color: #4d65ff;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4d65ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Points à considérer (red) -->
+      <div class="rounded-lg p-5" style="background-color: #fdeaea;">
+        <h5 class="flex items-center gap-2 font-heading font-semibold text-sm mb-4" style="color: #3b0b0b;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3b0b0b" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <path d="m15 9-6 6" />
+            <path d="m9 9 6 6" />
+          </svg>
+          Points à considérer
+        </h5>
+        <ul class="space-y-2">
+          {considerations.map((item) => (
+            <li class="flex items-start gap-2 text-sm" style="color: #3b0b0b;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3b0b0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0">
+                <circle cx="12" cy="12" r="10" />
+                <path d="m15 9-6 6" />
+                <path d="m9 9 6 6" />
+              </svg>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

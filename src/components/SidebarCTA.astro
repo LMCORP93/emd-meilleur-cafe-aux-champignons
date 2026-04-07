@@ -1,0 +1,80 @@
+---
+import PromoCodeButton from './PromoCodeButton.astro';
+
+interface Props {
+  logoSrc: string;
+  promoCode: string;
+  promoPercent: number;
+  originalPrice: string;
+  discountPrice: string;
+  ctaLink: string;
+  heroImage: string;
+  rating: number;
+  reviewCount: number;
+}
+
+const { logoSrc, promoCode, promoPercent, originalPrice, discountPrice, ctaLink, heroImage, rating, reviewCount } = Astro.props;
+---
+
+<div class="sidebar-cta bg-white rounded-xl shadow-card p-5 hidden lg:block sticky top-24">
+  <!-- Logo + heading -->
+  <div class="text-center mb-4">
+    <img
+      src={logoSrc}
+      alt="Logo"
+      class="w-16 h-16 mx-auto object-contain mb-3"
+    />
+    <h4 class="font-heading font-bold text-text-dark text-base">
+      Get {promoPercent}% OFF Your Order 👇
+    </h4>
+  </div>
+
+  <!-- Pricing -->
+  <div class="flex items-baseline justify-center gap-3 mb-4">
+    <span class="compare-at-price-text text-sm">{originalPrice}</span>
+    <span class="price-text text-xl font-heading">{discountPrice}</span>
+  </div>
+
+  <!-- Promo code + CTA -->
+  <div class="space-y-3 mb-4">
+    <div class="flex justify-center">
+      <PromoCodeButton code={promoCode} percent={`${promoPercent}%`} />
+    </div>
+    <a
+      href={ctaLink}
+      rel="nofollow sponsored"
+      target="_blank"
+      class="flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-heading font-semibold text-sm px-6 py-2.5 rounded w-full transition-colors"
+    >
+      Acheter maintenant
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" />
+        <path d="m12 5 7 7-7 7" />
+      </svg>
+    </a>
+  </div>
+
+  <!-- Product hero image -->
+  <div class="bg-bg-light rounded-lg p-3 mb-4">
+    <img
+      src={heroImage}
+      alt="Product"
+      class="w-full h-32 object-contain"
+      loading="lazy"
+    />
+  </div>
+
+  <!-- Trustpilot stars + rating -->
+  <div class="text-center">
+    <div class="flex justify-center gap-0.5 mb-1">
+      {[1, 2, 3, 4, 5].map(() => (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fee050" stroke="#fee050" stroke-width="0.5" class="w-4 h-4">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+        </svg>
+      ))}
+    </div>
+    <p class="text-text-grey text-xs">
+      {rating.toFixed(1)}/10 · {reviewCount.toLocaleString('fr-FR')} avis Trustpilot
+    </p>
+  </div>
+</div>

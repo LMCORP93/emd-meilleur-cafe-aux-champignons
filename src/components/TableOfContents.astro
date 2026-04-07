@@ -1,29 +1,84 @@
 ---
-import config from '@/data/site.config';
+interface TocItem {
+  id: string;
+  label: string;
+}
 
-const { tocItems } = config;
+interface Props {
+  items: TocItem[];
+}
+
+const { items } = Astro.props;
 ---
 
-<nav aria-label="Table des matières" class="card p-5 mb-8 lg:mb-0 lg:sticky lg:top-24">
-  <h3 class="font-heading font-bold text-base text-brand-heading mb-4 flex items-center gap-2">
-    <svg class="w-4 h-4 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+<div class="mb-8 bg-white rounded-xl shadow-card overflow-hidden">
+  <!-- Accordion trigger -->
+  <button
+    id="toc-trigger"
+    class="accordion-trigger flex items-center justify-between w-full text-left px-5 py-4 cursor-pointer"
+    data-target="toc-content"
+  >
+    <span class="font-heading font-semibold text-text-dark text-sm flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#242424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
+      </svg>
+      Sommaire
+    </span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="accordion-chevron transition-transform duration-200 rotate-180">
+      <path d="m6 9 6 6 6-6" />
     </svg>
-    Sommaire
-  </h3>
-  <ol class="space-y-2">
-    {tocItems.map((item, index) => (
-      <li>
+  </button>
+
+  <!-- Content (starts visible, chevron rotated) -->
+  <div id="toc-content" class="accordion-content">
+    <div class="px-5 pb-5">
+      {items.map((item, i) => (
         <a
           href={`#${item.id}`}
-          class="flex items-start gap-2 text-sm text-brand-body hover:text-brand-orange transition-colors no-underline group"
+          class="toc-link flex items-start gap-3 py-1.5 group no-underline"
+          onclick="event.preventDefault(); document.querySelector('#{item.id}')?.scrollIntoView({behavior:'smooth'});"
         >
-          <span class="text-brand-body/40 group-hover:text-brand-orange/60 font-mono text-xs mt-0.5 flex-shrink-0">
-            {String(index + 1).padStart(2, '0')}
-          </span>
-          <span class="group-hover:underline underline-offset-2">{item.label}</span>
+          <!-- Timeline dot + dashed connector -->
+          <div class="flex flex-col items-center mt-1.5 shrink-0">
+            <div class={`w-2.5 h-2.5 rounded-full shrink-0 ${i === 0 ? 'bg-primary border-2 border-primary' : 'bg-white border-2 border-border-light'}`}></div>
+            {i < items.length - 1 && (
+              <div class="w-px h-7 border-l border-dashed border-border-lighter mt-0.5"></div>
+            )}
+          </div>
+
+          <!-- Label -->
+          <span class="text-sm text-text-body leading-snug group-hover:text-primary transition-colors pt-0.5">{item.label}</span>
         </a>
-      </li>
-    ))}
-  </ol>
-</nav>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script>
+  function initTocAccordion() {
+    const trigger = document.getElementById('toc-trigger');
+    if (!trigger) return;
+
+    trigger.addEventListener('click', () => {
+      const targetId = trigger.getAttribute('data-target');
+      if (!targetId) return;
+      const content = document.getElementById(targetId);
+      if (!content) return;
+
+      const isHidden = content.classList.contains('hidden');
+      content.classList.toggle('hidden');
+      const chevron = trigger.querySelector('.accordion-chevron');
+      if (chevron) {
+        if (isHidden) {
+          chevron.classList.add('rotate-180');
+          chevron.classList.remove('rotate-0');
+        } else {
+          chevron.classList.remove('rotate-180');
+          chevron.classList.add('rotate-0');
+        }
+      }
+    });
+  }
+
+  initTocAccordion();
+</script>

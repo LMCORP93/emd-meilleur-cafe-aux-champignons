@@ -1,0 +1,99 @@
+---
+import StarRating from './StarRating.astro';
+import PromoCodeButton from './PromoCodeButton.astro';
+
+interface Product {
+  name: string;
+  image: string;
+  rating: number;
+  productType: string;
+  origin: string;
+  availability: string;
+  promoCode: string;
+  promoPercent: number;
+  originalPrice: string;
+  discountPrice: string;
+  affiliateLink: string;
+}
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+---
+
+<div class="review-grid-card mb-8">
+  <!-- LEFT: Product image in grey bg -->
+  <div class="bg-bg-light flex items-center justify-center p-6">
+    <img
+      src={product.image}
+      alt={product.name}
+      class="w-28 h-28 object-contain"
+      loading="lazy"
+    />
+  </div>
+
+  <!-- RIGHT: Content area -->
+  <div class="p-5 md:p-6 flex flex-col justify-between">
+    <div>
+      <!-- Product name -->
+      <h4 class="font-heading font-bold text-text-dark text-lg mb-1">
+        {product.name}
+      </h4>
+
+      <!-- Star rating -->
+      <div class="mb-3">
+        <StarRating rating={product.rating} size="sm" />
+      </div>
+
+      <!-- Info bullets -->
+      <div class="flex flex-wrap items-center gap-2 mb-4">
+        <span class="inline-flex items-center gap-1 bg-bg-light text-text-grey text-xs px-2.5 py-1 rounded">
+          {product.productType}
+        </span>
+        <span class="inline-flex items-center gap-1 bg-bg-light text-text-grey text-xs px-2.5 py-1 rounded">
+          {product.origin}
+        </span>
+        <span class="inline-flex items-center gap-1 bg-bg-light text-text-grey text-xs px-2.5 py-1 rounded">
+          {product.availability}
+        </span>
+        {product.promoCode && product.promoPercent > 0 && (
+          <span class="inline-flex items-center gap-1 bg-primary/10 text-primary text-xs font-semibold px-2.5 py-1 rounded">
+            Code: {product.promoCode}
+          </span>
+        )}
+      </div>
+
+      <!-- Price row -->
+      <div class="flex items-baseline gap-3 mb-4">
+        <span class="compare-at-price-text text-sm">{product.originalPrice}</span>
+        <span class="price-text text-xl font-heading">{product.discountPrice}</span>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="flex flex-wrap gap-3">
+        {product.promoCode && product.promoPercent > 0 && (
+          <PromoCodeButton code={product.promoCode} percent={`${product.promoPercent}%`} />
+        )}
+        <a
+          href={product.affiliateLink}
+          rel="nofollow sponsored"
+          target="_blank"
+          class="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-heading font-semibold text-sm px-6 py-2.5 rounded transition-colors"
+        >
+          Acheter maintenant
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14" />
+            <path d="m12 5 7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Verified code text -->
+    <p class="text-xs mt-3 flex items-center gap-1" style="color: #00b67a;">
+      ✅ Code vérifié et valide pour 2026
+    </p>
+  </div>
+</div>

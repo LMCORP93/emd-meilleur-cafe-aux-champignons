@@ -1,66 +1,121 @@
 ---
+import '@/styles/global.css';
+import Navbar from '@/components/Navbar.astro';
+import Footer from '@/components/Footer.astro';
+import NewsletterModal from '@/components/NewsletterModal.astro';
+import StickyPromoButton from '@/components/StickyPromoButton.astro';
 import config from '@/data/site.config';
-import SchemaOrg from '@/components/SchemaOrg.astro';
 
 interface Props {
   title?: string;
   description?: string;
-  canonicalPath?: string;
+  ogImage?: string;
 }
 
 const {
   title = config.seo.title,
   description = config.seo.description,
-  canonicalPath = '',
+  ogImage = config.seo.ogImage,
 } = Astro.props;
-
-const canonicalUrl = new URL(canonicalPath, config.domain).toString();
-const ogImage = new URL(config.seo.ogImage, config.domain).toString();
 ---
 
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content={description} />
-  <meta name="robots" content="index, follow" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
 
-  <title>{title}</title>
-  <link rel="canonical" href={canonicalUrl} />
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
 
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
-  <meta property="og:image" content={ogImage} />
-  <meta property="og:url" content={canonicalUrl} />
-  <meta property="og:site_name" content={config.siteName} />
-  <meta property="og:locale" content="fr_FR" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content={title} />
-  <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content={ogImage} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=PT+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- JSON-LD slot -->
+    <slot name="json-ld" />
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=PT+Sans:wght@400;700&display=swap"
-    rel="stylesheet"
-  />
+    <!-- GTAG placeholder -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script> -->
+  </head>
+  <body>
+    <Navbar
+      siteName={config.siteName}
+      logoSrc="/favicon.svg"
+      navLinks={[
+        { label: 'Comparatif', href: '/comparatif' },
+        { label: 'Blog', href: '/' },
+      ]}
+      ctaText="Obtenir -25%"
+      ctaLink={config.affiliateLink}
+    />
 
-  <!-- Structured Data -->
-  <SchemaOrg />
+    <slot />
 
-  <slot name="head" />
-</head>
-<body>
-  <slot />
-</body>
+    <NewsletterModal
+      promoCode={config.promoCode}
+      promoPercent={25}
+      ctaLink={config.affiliateLink}
+      heroImage="/favicon.svg"
+    />
+
+    <StickyPromoButton promoPercent={25} promoCode={config.promoCode} />
+    <Footer
+      siteName={config.siteName}
+      logoSrc="/favicon.svg"
+      navLinks={[
+        { label: 'Accueil', href: '/' },
+        { label: 'Comparatif', href: '/comparatif' },
+        { label: 'Contact', href: '/contact' },
+      ]}
+      copyright="© 2026 LoremReview. Tous droits réservés."
+    />
+  </body>
 </html>
+
+<!-- Global: Copy promo code buttons -->
+<script>
+  document.querySelectorAll('.copy-promo-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const code = (btn as HTMLElement).getAttribute('data-code') || '';
+      navigator.clipboard.writeText(code).then(() => {
+        // Show brief feedback
+        const existing = btn.parentElement?.querySelector('.copy-feedback');
+        if (existing) {
+          existing.textContent = '✓ Code copié !';
+          existing.classList.add('show');
+          setTimeout(() => existing.classList.remove('show'), 2000);
+        } else {
+          const fb = document.createElement('span');
+          fb.className = 'copy-feedback show';
+          fb.textContent = '✓ Code copié !';
+          btn.parentElement?.appendChild(fb);
+          setTimeout(() => fb.classList.remove('show'), 2000);
+        }
+      });
+    });
+  });
+</script>

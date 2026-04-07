@@ -1,49 +1,36 @@
 ---
-import config from '@/data/site.config';
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: FaqItem[];
+}
+
+const { items } = Astro.props;
 ---
 
-<section id="faq" class="section-padding bg-brand-beige/40">
-  <div class="container-content">
-    <h2 class="text-2xl sm:text-3xl font-heading font-bold text-brand-heading mb-8">
-      ❓ Questions Fréquentes
-    </h2>
+<section id="faq" class="padding-section-small">
+  <div class="container-medium padding-global">
+    <h2 class="mb-8">Questions Fréquentes</h2>
 
-    <div class="space-y-3">
-      {config.faq.map((item, index) => (
-        <div class="card faq-item overflow-hidden">
+    <div class="max-w-content">
+      {items.map((item, i) => (
+        <div class="faq-item py-4 first:pt-0 last:pb-0">
           <button
-            class:list={[
-              'faq-toggle w-full flex items-center justify-between p-5 text-left',
-              'hover:bg-gray-50/50 transition-colors',
-              index === 0 && 'bg-white',
-            ]}
-            aria-expanded={index === 0 ? 'true' : 'false'}
-            data-faq-index={index}
+            class="faq-trigger flex items-center justify-between w-full text-left gap-4 cursor-pointer"
+            data-target={`faq-answer-${i}`}
           >
-            <span class="font-heading font-bold text-sm sm:text-base text-brand-heading pr-4">
-              {item.question}
-            </span>
-            <svg
-              class:list={[
-                'faq-icon w-5 h-5 flex-shrink-0 text-brand-orange transition-transform duration-200',
-                index === 0 && 'rotate-180',
-              ]}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            <span class="font-heading font-semibold text-text-dark text-sm md:text-base leading-snug">{item.question}</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-chevron transition-transform duration-300 shrink-0">
+              <path d="m6 9 6 6 6-6" />
             </svg>
           </button>
-          <div
-            class:list={[
-              'faq-content px-5 overflow-hidden transition-all duration-200',
-              index === 0 ? 'pb-5 max-h-96' : 'max-h-0',
-            ]}
-          >
-            <p class="text-sm text-brand-body leading-relaxed pt-0">
-              {item.answer}
-            </p>
+          <div id={`faq-answer-${i}`} class="faq-content overflow-hidden transition-all duration-300" style="max-height: 0; opacity: 0;">
+            <div class="rich-text text-sm text-text-body leading-relaxed pt-3">
+              <p>{item.answer}</p>
+            </div>
           </div>
         </div>
       ))}
@@ -52,34 +39,41 @@ import config from '@/data/site.config';
 </section>
 
 <script>
-  document.querySelectorAll('.faq-toggle').forEach((button) => {
-    button.addEventListener('click', () => {
-      const content = button.nextElementSibling;
-      const icon = button.querySelector('.faq-icon');
-      const isOpen = button.getAttribute('aria-expanded') === 'true';
+  function initFaq() {
+    const triggers = document.querySelectorAll('.faq-trigger');
 
-      // Close all other items
-      document.querySelectorAll('.faq-toggle').forEach((otherBtn) => {
-        if (otherBtn !== button) {
-          otherBtn.setAttribute('aria-expanded', 'false');
-          const otherContent = otherBtn.nextElementSibling;
-          otherContent?.classList.remove('pb-5', 'max-h-96');
-          otherContent?.classList.add('max-h-0');
-          otherBtn.querySelector('.faq-icon')?.classList.remove('rotate-180');
+    triggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const targetId = trigger.getAttribute('data-target');
+        if (!targetId) return;
+
+        const target = document.getElementById(targetId);
+        if (!target) return;
+
+        // Check if this item is currently open
+        const isOpen = target.style.maxHeight && target.style.maxHeight !== '0px';
+
+        // Close all others (only one open at a time)
+        document.querySelectorAll('.faq-content').forEach((content) => {
+          content.style.maxHeight = '0px';
+          content.style.opacity = '0';
+        });
+        document.querySelectorAll('.faq-chevron').forEach((chevron) => {
+          (chevron as SVGElement).style.transform = 'rotate(0deg)';
+        });
+
+        // Toggle target
+        if (!isOpen) {
+          target.style.maxHeight = target.scrollHeight + 'px';
+          target.style.opacity = '1';
+          const chevron = trigger.querySelector('.faq-chevron');
+          if (chevron) {
+            (chevron as SVGElement).style.transform = 'rotate(180deg)';
+          }
         }
       });
-
-      // Toggle current
-      button.setAttribute('aria-expanded', String(!isOpen));
-      if (isOpen) {
-        content?.classList.remove('pb-5', 'max-h-96');
-        content?.classList.add('max-h-0');
-        icon?.classList.remove('rotate-180');
-      } else {
-        content?.classList.add('pb-5', 'max-h-96');
-        content?.classList.remove('max-h-0');
-        icon?.classList.add('rotate-180');
-      }
     });
-  });
+  }
+
+  initFaq();
 </script>

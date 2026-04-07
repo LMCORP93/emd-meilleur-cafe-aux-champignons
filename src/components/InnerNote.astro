@@ -1,0 +1,15 @@
+---
+interface Props {
+  text: string;
+  imageSrc?: string;
+}
+
+const { text, imageSrc } = Astro.props;
+---
+
+<div class="inner-note mb-6">
+  {imageSrc && (
+    <img src={imageSrc} alt="" class="w-full rounded mb-3" loading="lazy" />
+  )}
+  <p class="text-text-body text-sm leading-relaxed mb-0">{text}</p>
+</div>

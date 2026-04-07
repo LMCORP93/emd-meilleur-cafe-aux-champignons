@@ -1,84 +1,310 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import Header from '@/components/Header.astro';
-import Hero from '@/components/Hero.astro';
-import QuickSummary from '@/components/QuickSummary.astro';
-import DiscountCard from '@/components/DiscountCard.astro';
-import ArticleBody from '@/components/ArticleBody.astro';
-import ProsCons from '@/components/ProsCons.astro';
-import FaqAccordion from '@/components/FaqAccordion.astro';
+import BlogHero from '@/components/BlogHero.astro';
+import FirstReview from '@/components/FirstReview.astro';
 import TableOfContents from '@/components/TableOfContents.astro';
-import Footer from '@/components/Footer.astro';
-
+import ReviewPromoCard from '@/components/ReviewPromoCard.astro';
+import InnerNote from '@/components/InnerNote.astro';
+import FaqAccordion from '@/components/FaqAccordion.astro';
+import SidebarCTA from '@/components/SidebarCTA.astro';
+import ArticleGrid from '@/components/ArticleGrid.astro';
+import EditorialCriteria from '@/components/EditorialCriteria.astro';
 import config from '@/data/site.config';
+
+const topProduct = config.products[0];
+
+const sampleArticles = [
+  {
+    title: 'Les meilleurs compléments alimentaires en 2026',
+    excerpt: 'Notre sélection des produits les plus efficaces pour votre bien-être quotidien.',
+    image: '/favicon.svg',
+    href: '/',
+  },
+  {
+    title: 'Comment choisir un complément de qualité ?',
+    excerpt: 'Les critères essentiels pour identifier un produit fiable et efficace.',
+    image: '/favicon.svg',
+    href: '/',
+  },
+  {
+    title: 'Guide complet sur les vitamines essentielles',
+    excerpt: 'Tout ce que vous devez savoir sur les vitamines et leurs bienfaits.',
+    image: '/favicon.svg',
+    href: '/',
+  },
+];
 ---
 
-<BaseLayout>
-  <Header />
+<BaseLayout title={config.seo.title} description={config.seo.description} ogImage={config.seo.ogImage}>
+  <!-- JSON-LD -->
+  <script type="application/ld+json" slot="json-ld" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": config.seo.title,
+    "description": config.seo.description,
+    "author": {
+      "@type": "Person",
+      "name": config.author.name,
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": config.siteName,
+    },
+    "datePublished": "2026-01-15",
+    "dateModified": "2026-04-07",
+  })} />
 
-  <!-- Main Content with Sidebar -->
-  <main>
-    <div class="container-wide py-8 lg:py-12">
-      <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
-        <!-- Content Area -->
-        <div class="flex-1 min-w-0">
-          <Hero />
+  <!-- Blog Hero with inline CTA -->
+  <BlogHero
+    title={config.seo.title}
+    description={config.seo.description}
+    author={config.author.name}
+    authorAvatar={config.author.avatar}
+    date="15 Janvier 2026"
+    readingTime="10 min de lecture"
+    bannerImage="/favicon.svg"
+    product={{
+      name: topProduct.name,
+      image: topProduct.image,
+      promoCode: topProduct.promoCode,
+      promoPercent: topProduct.promoPercent,
+      originalPrice: topProduct.originalPrice,
+      discountPrice: topProduct.discountPrice,
+      affiliateLink: topProduct.affiliateLink,
+    }}
+  />
 
-          <!-- Quick Summary -->
-          <div class="container-content">
-            <QuickSummary />
-          </div>
+  <main class="padding-section-medium">
+    <div class="container-medium padding-global">
+      <div class="blog-grid">
+        <!-- Content area -->
+        <div>
+          <!-- Introduction -->
+          <section id="introduction" class="mb-8">
+            <div class="rich-text">
+              <h2>Introduction</h2>
+              <p>
+                Vous cherchez le {config.product.toLowerCase()} idéal ? Vous êtes au bon endroit. Dans ce guide complet, nous analysons en profondeur le {config.product.toLowerCase()} pour vous aider à prendre une décision éclairée.
+              </p>
+              <p>
+                Après des semaines de tests et d'analyses, voici notre verdict complet avec tous les détails que vous devez connaître avant d'acheter.
+              </p>
+            </div>
+          </section>
 
-          <!-- First Discount Card (inline, visible on all screens) -->
-          <div class="container-content">
-            <DiscountCard />
-          </div>
+          <!-- First Review / Quick Summary -->
+          <FirstReview
+            tag="En bref"
+            heading="Résumé rapide du Lorem Supplement"
+            summaryText="Le Lorem Supplement est notre coup de cœur pour 2026. Avec une composition naturelle certifiée, des résultats cliniquement prouvés et un excellent service client, il se démarque nettement de la concurrence. Grâce à notre code promo exclusif, vous bénéficiez de -25% sur votre première commande."
+            product={{
+              name: topProduct.name,
+              logoSrc: topProduct.brandLogo,
+              rating: topProduct.rating,
+              reviewLabel: 'Meilleur choix 2026',
+              ctaText: 'Découvrir le produit',
+              ctaLink: topProduct.affiliateLink,
+            }}
+            assets={config.quickSummary.assets}
+            considerations={config.quickSummary.considerations}
+          />
 
-          <!-- Article Body Sections -->
-          <ArticleBody />
+          <!-- Composition -->
+          <section id="composition" class="mb-8">
+            <div class="rich-text">
+              <h2>Composition & Ingrédients</h2>
+              <p>
+                La composition du Lorem Supplement est l'un de ses principaux atouts. Voici les ingrédients clés qui font la différence :
+              </p>
+              <ul>
+                <li><strong>Vitamines B complexe</strong> — Pour l'énergie et le métabolisme</li>
+                <li><strong>Zinc</strong> — Soutien immunitaire et antioxydant naturel</li>
+                <li><strong>Magnésium</strong> — Réduction de la fatigue et du stress</li>
+                <li><strong>Extraits de plantes</strong> — Formule exclusive brevetée</li>
+              </ul>
+              <p>
+                Chaque ingrédient est dosé de manière optimale selon les études scientifiques les plus récentes. La formulation est 100% naturelle, sans additifs ni conservateurs artificiels.
+              </p>
+            </div>
+          </section>
+
+          <!-- ReviewPromoCard 1 -->
+          <ReviewPromoCard product={{
+            name: topProduct.name,
+            image: topProduct.image,
+            rating: topProduct.rating,
+            productType: topProduct.productType,
+            origin: topProduct.origin,
+            availability: topProduct.availability,
+            promoCode: topProduct.promoCode,
+            promoPercent: topProduct.promoPercent,
+            originalPrice: topProduct.originalPrice,
+            discountPrice: topProduct.discountPrice,
+            affiliateLink: topProduct.affiliateLink,
+          }} />
+
+          <!-- Efficacité -->
+          <section id="efficacite" class="mb-8">
+            <div class="rich-text">
+              <h2>Efficacité & Résultats</h2>
+              <p>
+                D'après notre test de 4 semaines et les retours de plus de 2 000 utilisateurs, les résultats du Lorem Supplement sont convaincants :
+              </p>
+              <ul>
+                <li><strong>Semaine 1-2</strong> — Premiers effets sur l'énergie et le bien-être général</li>
+                <li><strong>Semaine 3-4</strong> — Résultats visibles sur les objectifs principaux</li>
+                <li><strong>Semaine 8+</strong> — Effets optimaux avec une cure continue</li>
+              </ul>
+              <p>
+                Note globale : <strong>8.7/10</strong> — Un des meilleurs scores de notre comparatif.
+              </p>
+            </div>
+          </section>
+
+          <!-- Inner Note -->
+          <InnerNote text="💡 Notre conseil : Pour des résultats optimaux, nous recommandons une cure d'au moins 8 semaines. N'oubliez pas d'utiliser le code promo LOREM25 pour bénéficier de -25% sur votre commande." />
+
+          <!-- Prix -->
+          <section id="prix" class="mb-8">
+            <div class="rich-text">
+              <h2>Prix & Offres</h2>
+              <p>
+                Le Lorem Supplement est positionné dans le segment premium du marché. Voici les différentes offres disponibles :
+              </p>
+              <ul>
+                <li><strong>1 boîte</strong> — 49,90 € au lieu de 69,90 € avec le code LOREM25</li>
+                <li><strong>3 boîtes</strong> — Remise supplémentaire de 10%</li>
+                <li><strong>6 boîtes</strong> — Meilleur tarif + livraison gratuite</li>
+              </ul>
+              <p>
+                La garantie satisfait ou remboursé de 60 jours offre une sécurité supplémentaire.
+              </p>
+            </div>
+          </section>
+
+          <!-- ReviewPromoCard 2 -->
+          <ReviewPromoCard product={{
+            name: config.products[1].name,
+            image: config.products[1].image,
+            rating: config.products[1].rating,
+            productType: config.products[1].productType,
+            origin: config.products[1].origin,
+            availability: config.products[1].availability,
+            promoCode: config.products[1].promoCode,
+            promoPercent: config.products[1].promoPercent,
+            originalPrice: config.products[1].originalPrice,
+            discountPrice: config.products[1].discountPrice,
+            affiliateLink: config.products[1].affiliateLink,
+          }} />
+
+          <!-- Avis -->
+          <section id="avis" class="mb-8">
+            <div class="rich-text">
+              <h2>Avis Clients</h2>
+              <p>
+                Avec une note moyenne de 4.8/5 sur Trustpilot (plus de 2 300 avis), le Lorem Supplement jouit d'une excellente réputation auprès des utilisateurs.
+              </p>
+              <p>
+                Les points les plus appréciés sont l'efficacité du produit, la rapidité de livraison et la réactivité du service client. Quelques utilisateurs mentionnent un prix élevé sans promotion.
+              </p>
+            </div>
+          </section>
 
           <!-- Pros & Cons -->
-          <ProsCons />
+          <section id="pros-cons" class="mb-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div class="bg-success-bg/50 rounded-xl p-5">
+                <h4 class="flex items-center gap-2 font-heading font-semibold text-success-text mb-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#114e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><path d="m9 11 3 3L22 4" />
+                  </svg>
+                  Avantages
+                </h4>
+                <ul class="space-y-2">
+                  {config.pros.map((pro) => (
+                    <li class="flex items-start gap-2 text-sm text-success-text">
+                      <span class="mt-0.5">✓</span>
+                      <span>{pro}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div class="bg-warning-bg/50 rounded-xl p-5">
+                <h4 class="flex items-center gap-2 font-heading font-semibold text-warning-text mb-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5e5515" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" /><path d="m15 9-6 6" /><path d="m9 9 6 6" />
+                  </svg>
+                  Inconvénients
+                </h4>
+                <ul class="space-y-2">
+                  {config.cons.map((con) => (
+                    <li class="flex items-start gap-2 text-sm text-warning-text">
+                      <span class="mt-0.5">⚠</span>
+                      <span>{con}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </section>
 
-          <!-- Second Discount Card -->
-          <div class="container-content">
-            <DiscountCard />
-          </div>
+          <!-- ReviewPromoCard 3 -->
+          <ReviewPromoCard product={{
+            name: config.products[2].name,
+            image: config.products[2].image,
+            rating: config.products[2].rating,
+            productType: config.products[2].productType,
+            origin: config.products[2].origin,
+            availability: config.products[2].availability,
+            promoCode: config.products[2].promoCode,
+            promoPercent: config.products[2].promoPercent,
+            originalPrice: config.products[2].originalPrice,
+            discountPrice: config.products[2].discountPrice,
+            affiliateLink: config.products[2].affiliateLink,
+          }} />
+
+          <!-- Conclusion -->
+          <section id="conclusion" class="mb-8">
+            <div class="rich-text">
+              <h2>Conclusion</h2>
+              <p>
+                Après notre analyse complète, le Lorem Supplement s'impose comme le meilleur choix en 2026. Sa formulation premium, ses résultats prouvés et la garantie de 60 jours en font un investissement sûr pour votre bien-être.
+              </p>
+              <p>
+                N'oubliez pas d'utiliser le code <strong>LOREM25</strong> pour profiter de -25% sur votre commande. Cette offre est limitée et peut expirer à tout moment.
+              </p>
+            </div>
+          </section>
 
           <!-- FAQ -->
-          <FaqAccordion />
+          <FaqAccordion items={config.faq} />
         </div>
 
         <!-- Sidebar -->
-        <aside class="w-full lg:w-72 xl:w-80 flex-shrink-0 space-y-6">
-          <!-- Table of Contents -->
-          <TableOfContents />
-
-          <!-- Sticky Discount Card (desktop only) -->
-          <DiscountCard sticky />
-
-          <!-- Author Box -->
-          <div class="card p-5 hidden lg:block">
-            <div class="flex items-center gap-3 mb-3">
-              <img
-                src={config.author.avatar}
-                alt={config.author.name}
-                width="44"
-                height="44"
-                class="w-11 h-11 rounded-full border-2 border-brand-orange"
-                loading="lazy"
-              />
-              <div>
-                <p class="font-heading font-bold text-sm text-brand-heading">{config.author.name}</p>
-                <p class="text-xs text-brand-body/60">Rédacteur en chef</p>
-              </div>
-            </div>
-            <p class="text-xs text-brand-body leading-relaxed">{config.author.bio}</p>
+        <div>
+          <div class="mb-6">
+            <TableOfContents items={config.tocItems} />
           </div>
-        </aside>
+
+          <SidebarCTA
+            logoSrc={topProduct.brandLogo}
+            promoCode={topProduct.promoCode}
+            promoPercent={topProduct.promoPercent}
+            originalPrice={topProduct.originalPrice}
+            discountPrice={topProduct.discountPrice}
+            ctaLink={topProduct.affiliateLink}
+            heroImage={topProduct.image}
+            rating={topProduct.rating}
+            reviewCount={topProduct.reviewCount}
+          />
+        </div>
       </div>
     </div>
   </main>
 
-  <Footer />
+  <!-- Article Grid -->
+  <ArticleGrid articles={sampleArticles} />
+
+  <!-- Editorial Criteria -->
+  <EditorialCriteria />
 </BaseLayout>

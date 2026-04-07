@@ -6,15 +6,20 @@ export interface Product {
   brand: string;
   slug: string;
   image: string;
+  brandLogo: string;
   rating: number;
+  reviewCount: number;
   promoCode: string;
+  promoPercent: number;
   originalPrice: string;
   discountPrice: string;
   affiliateLink: string;
   origin: string;
   availability: string;
+  productType: string;
   pros: string[];
   cons: string[];
+  description: string;
 }
 
 export interface SiteConfig {
@@ -151,13 +156,17 @@ const config: SiteConfig = {
       brand: 'Lorem Brand',
       slug: 'lorem-supplement-pro',
       image: '/favicon.svg',
+      brandLogo: '/favicon.svg',
       rating: 8.7,
+      reviewCount: 2340,
       promoCode: 'LOREM25',
+      promoPercent: 25,
       originalPrice: '69,90 €',
       discountPrice: '49,90 €',
       affiliateLink: 'https://example.com/go',
       origin: '🇫🇷 France',
       availability: 'En stock',
+      productType: 'Complément alimentaire',
       pros: [
         'Composition premium certifiée',
         'Résultats prouvés cliniquement',
@@ -168,6 +177,7 @@ const config: SiteConfig = {
         'Prix élevé sans promo',
         'Livraison 3-5 jours',
       ],
+      description: 'Le Lorem Supplement Pro est notre choix numéro 1. Sa formulation premium à base d\'ingrédients naturels a été validée par des études cliniques. Avec une garantie de 60 jours et des résultats visibles dès les 2 premières semaines, c\'est le produit le plus complet du marché.',
     },
     {
       rank: 2,
@@ -175,13 +185,17 @@ const config: SiteConfig = {
       brand: 'Ipsum Labs',
       slug: 'ipsum-vitality-max',
       image: '/favicon.svg',
+      brandLogo: '/favicon.svg',
       rating: 7.9,
+      reviewCount: 1850,
       promoCode: 'IPSUM15',
+      promoPercent: 15,
       originalPrice: '59,90 €',
       discountPrice: '49,90 €',
       affiliateLink: 'https://example.com/go2',
       origin: '🇩🇪 Allemagne',
       availability: 'En stock',
+      productType: 'Complément alimentaire',
       pros: [
         'Rapport qualité-prix intéressant',
         'Fabriqué en Allemagne',
@@ -191,6 +205,7 @@ const config: SiteConfig = {
         'Goût parfois critiqué',
         'Moins d\'ingrédients actifs',
       ],
+      description: 'L\'Ipsum Vitality Max se distingue par sa fabrication allemande et son excellent rapport qualité-prix. Une alternative solide pour ceux qui recherchent un produit fiable à un prix plus accessible.',
     },
     {
       rank: 3,
@@ -198,13 +213,17 @@ const config: SiteConfig = {
       brand: 'Dolor Health',
       slug: 'dolor-wellness-formula',
       image: '/favicon.svg',
+      brandLogo: '/favicon.svg',
       rating: 7.2,
+      reviewCount: 980,
       promoCode: 'DOLOR10',
+      promoPercent: 10,
       originalPrice: '44,90 €',
       discountPrice: '39,90 €',
       affiliateLink: 'https://example.com/go3',
       origin: '🇬🇧 Royaume-Uni',
       availability: 'Stock limité',
+      productType: 'Complément alimentaire',
       pros: [
         'Prix accessible',
         'Bonne tolérance digestive',
@@ -214,6 +233,7 @@ const config: SiteConfig = {
         'Pas de garantie remboursé',
         'Efficacité modérée',
       ],
+      description: 'Le Dolor Wellness Formula est une option économique avec une bonne tolérance digestive. Idéal pour les budgets serrés, bien que ses résultats soient plus modestes.',
     },
     {
       rank: 4,
@@ -221,13 +241,17 @@ const config: SiteConfig = {
       brand: 'Sit Amet',
       slug: 'sit-amet-booster',
       image: '/favicon.svg',
+      brandLogo: '/favicon.svg',
       rating: 6.5,
+      reviewCount: 450,
       promoCode: '',
+      promoPercent: 0,
       originalPrice: '39,90 €',
       discountPrice: '39,90 €',
       affiliateLink: 'https://example.com/go4',
       origin: '🇺🇸 États-Unis',
       availability: 'En stock',
+      productType: 'Complément alimentaire',
       pros: [
         'Prix le plus bas du comparatif',
         'Disponible en parapharmacie',
@@ -237,6 +261,7 @@ const config: SiteConfig = {
         'Délai de livraison long (10-15 jours)',
         'Résultats variables selon les utilisateurs',
       ],
+      description: 'Le Sit Amet Booster est le plus abordable de notre comparatif. Ses résultats sont cependant variables et le délai de livraison depuis les États-Unis peut être un frein.',
     },
   ],
 };
