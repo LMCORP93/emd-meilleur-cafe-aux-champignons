@@ -7,7 +7,6 @@ interface TableHeader {
 interface TableRow {
   cells: (string | number)[];
   highlight?: boolean;
-  badge?: string;
 }
 
 interface Props {
@@ -38,9 +37,6 @@ const { title, headers, rows } = Astro.props;
           <tr class={`comparison-table-row ${row.highlight ? 'comparison-table-row--highlight' : ''}`}>
             {row.cells.map((cell, j) => (
               <td class={`comparison-table-td comparison-table-td--${headers[j]?.align || 'left'}`}>
-                {j === 0 && row.badge && (
-                  <span class="comparison-table-badge">{row.badge}</span>
-                )}
                 {cell}
               </td>
             ))}
@@ -92,7 +88,7 @@ const { title, headers, rows } = Astro.props;
   .comparison-table-th--center { text-align: center; }
 
   .comparison-table-row {
-    border-bottom: 1px solid #eaeaea;
+    border-bottom: 1px solid #e0e0e0;
     transition: background-color 0.15s;
   }
   .comparison-table-row:last-child {
@@ -118,19 +114,5 @@ const { title, headers, rows } = Astro.props;
   .comparison-table-td--left:first-child {
     font-weight: 600;
     color: #242424;
-  }
-
-  .comparison-table-badge {
-    display: inline-block;
-    background-color: #ef7a1a;
-    color: #fff;
-    font-size: 0.625rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 0.125rem 0.375rem;
-    border-radius: 4px;
-    margin-right: 0.5rem;
-    vertical-align: middle;
   }
 </style>
