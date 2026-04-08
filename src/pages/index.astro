@@ -3,6 +3,8 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import BlogHero from '@/components/BlogHero.astro';
 import FirstReview from '@/components/FirstReview.astro';
 import TableOfContents from '@/components/TableOfContents.astro';
+import ImageBlock from '@/components/ImageBlock.astro';
+import ComparisonTable from '@/components/ComparisonTable.astro';
 import ReviewPromoCard from '@/components/ReviewPromoCard.astro';
 import InnerNote from '@/components/InnerNote.astro';
 import FaqAccordion from '@/components/FaqAccordion.astro';
@@ -54,7 +56,7 @@ const sampleArticles = [
     "dateModified": "2026-04-07",
   })} />
 
-  <!-- Blog Hero with inline CTA -->
+  <!-- Blog Hero -->
   <BlogHero
     title={config.seo.title}
     description={config.seo.description}
@@ -74,13 +76,38 @@ const sampleArticles = [
     }}
   />
 
-  <main class="padding-section-medium">
-    <div class="container-medium padding-global">
+  <main class="padding-section-medium" style="background-color: #ffffff;">
+    <div class="container-large padding-global">
       <div class="blog-grid">
-        <!-- Content area -->
-        <div>
-          <!-- Introduction -->
-          <section id="introduction" class="mb-8">
+
+        <!-- ═══ LEFT COLUMN (content) ═══ -->
+        <div class="content-column">
+
+          <!-- 1. Quick Summary (En bref) -->
+          <FirstReview
+            tag="En bref"
+            heading="Résumé rapide du Lorem Supplement"
+            paragraphs={[
+              "Le Lorem Supplement est notre coup de cœur pour 2026. Avec une composition naturelle certifiée et des résultats cliniquement prouvés, il se démarque nettement de la concurrence.",
+              "Après des semaines de tests, notre verdict est sans appel : excellent rapport qualité-prix grâce à notre code promo exclusif."
+            ]}
+            assets={config.quickSummary.assets}
+            considerations={config.quickSummary.considerations}
+            product={{
+              brandName: "Mush N Go",
+              brandLogoSrc: "/logo-mushngo.svg",
+              rating: topProduct.rating,
+              reviewLabel: "Meilleur choix 2026",
+              ctaText: "En savoir plus",
+              ctaLink: topProduct.affiliateLink,
+            }}
+          />
+
+          <!-- 2. Table of Contents -->
+          <TableOfContents items={config.tocItems} />
+
+          <!-- 3. Rich Text multi-sections (Introduction + Composition + Efficacité) -->
+          <section id="introduction" class="content-section">
             <div class="rich-text">
               <h2>Introduction</h2>
               <p>
@@ -92,25 +119,15 @@ const sampleArticles = [
             </div>
           </section>
 
-          <!-- First Review / Quick Summary -->
-          <FirstReview
-            tag="En bref"
-            heading="Résumé rapide du Lorem Supplement"
-            summaryText="Le Lorem Supplement est notre coup de cœur pour 2026. Avec une composition naturelle certifiée, des résultats cliniquement prouvés et un excellent service client, il se démarque nettement de la concurrence. Grâce à notre code promo exclusif, vous bénéficiez de -25% sur votre première commande."
-            product={{
-              name: topProduct.name,
-              logoSrc: topProduct.brandLogo,
-              rating: topProduct.rating,
-              reviewLabel: 'Meilleur choix 2026',
-              ctaText: 'Découvrir le produit',
-              ctaLink: topProduct.affiliateLink,
-            }}
-            assets={config.quickSummary.assets}
-            considerations={config.quickSummary.considerations}
+          <!-- 4. Image Block -->
+          <ImageBlock
+            src="/banner-placeholder.jpg"
+            alt="Photo produit"
+            caption="Le Lorem Supplement en conditionnement d'origine."
           />
 
-          <!-- Composition -->
-          <section id="composition" class="mb-8">
+          <!-- 5. Composition -->
+          <section id="composition" class="content-section">
             <div class="rich-text">
               <h2>Composition & Ingrédients</h2>
               <p>
@@ -122,13 +139,10 @@ const sampleArticles = [
                 <li><strong>Magnésium</strong> — Réduction de la fatigue et du stress</li>
                 <li><strong>Extraits de plantes</strong> — Formule exclusive brevetée</li>
               </ul>
-              <p>
-                Chaque ingrédient est dosé de manière optimale selon les études scientifiques les plus récentes. La formulation est 100% naturelle, sans additifs ni conservateurs artificiels.
-              </p>
             </div>
           </section>
 
-          <!-- ReviewPromoCard 1 -->
+          <!-- 6. ReviewPromoCard — Produit principal -->
           <ReviewPromoCard product={{
             name: topProduct.name,
             image: topProduct.image,
@@ -143,12 +157,12 @@ const sampleArticles = [
             affiliateLink: topProduct.affiliateLink,
           }} />
 
-          <!-- Efficacité -->
-          <section id="efficacite" class="mb-8">
+          <!-- 7. Efficacité -->
+          <section id="efficacite" class="content-section">
             <div class="rich-text">
               <h2>Efficacité & Résultats</h2>
               <p>
-                D'après notre test de 4 semaines et les retours de plus de 2 000 utilisateurs, les résultats du Lorem Supplement sont convaincants :
+                D'après notre test de 4 semaines et les retours de plus de 2 000 utilisateurs, les résultats sont convaincants :
               </p>
               <ul>
                 <li><strong>Semaine 1-2</strong> — Premiers effets sur l'énergie et le bien-être général</li>
@@ -161,143 +175,119 @@ const sampleArticles = [
             </div>
           </section>
 
-          <!-- Inner Note -->
-          <InnerNote text="💡 Notre conseil : Pour des résultats optimaux, nous recommandons une cure d'au moins 8 semaines. N'oubliez pas d'utiliser le code promo LOREM25 pour bénéficier de -25% sur votre commande." />
+          <!-- 8. Inner Note (highlight box — bg #f4f2ec) -->
+          <InnerNote
+            emoji="📌"
+            text="Pour des résultats optimaux, nous recommandons une cure d'au moins 8 semaines. N'oubliez pas d'utiliser le code promo <strong>LMC</strong> pour bénéficier de -10% sur votre commande."
+          />
 
-          <!-- Prix -->
-          <section id="prix" class="mb-8">
+          <!-- 9. Prix -->
+          <section id="prix" class="content-section">
             <div class="rich-text">
               <h2>Prix & Offres</h2>
               <p>
                 Le Lorem Supplement est positionné dans le segment premium du marché. Voici les différentes offres disponibles :
               </p>
               <ul>
-                <li><strong>1 boîte</strong> — 49,90 € au lieu de 69,90 € avec le code LOREM25</li>
+                <li><strong>1 boîte</strong> — 49,90 € au lieu de 69,90 € avec le code LMC</li>
                 <li><strong>3 boîtes</strong> — Remise supplémentaire de 10%</li>
                 <li><strong>6 boîtes</strong> — Meilleur tarif + livraison gratuite</li>
               </ul>
-              <p>
-                La garantie satisfait ou remboursé de 60 jours offre une sécurité supplémentaire.
-              </p>
             </div>
           </section>
 
-          <!-- ReviewPromoCard 2 -->
-          <ReviewPromoCard product={{
-            name: config.products[1].name,
-            image: config.products[1].image,
-            rating: config.products[1].rating,
-            productType: config.products[1].productType,
-            origin: config.products[1].origin,
-            availability: config.products[1].availability,
-            promoCode: config.products[1].promoCode,
-            promoPercent: config.products[1].promoPercent,
-            originalPrice: config.products[1].originalPrice,
-            discountPrice: config.products[1].discountPrice,
-            affiliateLink: config.products[1].affiliateLink,
-          }} />
+          <!-- 10. Inner Note (warning) -->
+          <InnerNote
+            emoji="⚠️"
+            text="La garantie satisfait ou remboursé de 60 jours offre une sécurité supplémentaire. Pensez à activer votre garantie dès réception du colis."
+          />
 
-          <!-- Avis -->
-          <section id="avis" class="mb-8">
+          <!-- 11. Avis Clients -->
+          <section id="avis" class="content-section">
             <div class="rich-text">
               <h2>Avis Clients</h2>
               <p>
-                Avec une note moyenne de 4.8/5 sur Trustpilot (plus de 2 300 avis), le Lorem Supplement jouit d'une excellente réputation auprès des utilisateurs.
+                Avec une note moyenne de 4.8/5 sur Trustpilot (plus de 2 300 avis), le Lorem Supplement jouit d'une excellente réputation.
               </p>
               <p>
-                Les points les plus appréciés sont l'efficacité du produit, la rapidité de livraison et la réactivité du service client. Quelques utilisateurs mentionnent un prix élevé sans promotion.
+                Les points les plus appréciés : efficacité, rapidité de livraison, réactivité du service client.
               </p>
             </div>
           </section>
 
-          <!-- Pros & Cons -->
-          <section id="pros-cons" class="mb-8">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div class="bg-success-bg/50 rounded-xl p-5">
-                <h4 class="flex items-center gap-2 font-heading font-semibold text-success-text mb-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#114e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><path d="m9 11 3 3L22 4" />
-                  </svg>
-                  Avantages
-                </h4>
-                <ul class="space-y-2">
-                  {config.pros.map((pro) => (
-                    <li class="flex items-start gap-2 text-sm text-success-text">
-                      <span class="mt-0.5">✓</span>
-                      <span>{pro}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div class="bg-warning-bg/50 rounded-xl p-5">
-                <h4 class="flex items-center gap-2 font-heading font-semibold text-warning-text mb-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5e5515" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10" /><path d="m15 9-6 6" /><path d="m9 9 6 6" />
-                  </svg>
-                  Inconvénients
-                </h4>
-                <ul class="space-y-2">
-                  {config.cons.map((con) => (
-                    <li class="flex items-start gap-2 text-sm text-warning-text">
-                      <span class="mt-0.5">⚠</span>
-                      <span>{con}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          <!-- 12. Inner Note (check) -->
+          <InnerNote
+            emoji="✅"
+            text="Le Lorem Supplement a été testé et validé par notre équipe. Nous recommandons ce produit sans hésitation."
+          />
+
+          <!-- 13. Avantages & Inconvénients -->
+          <section id="pros-cons" class="content-section">
+            <div class="rich-text">
+              <h2>Avantages & Inconvénients</h2>
+              <h3>Ce qu'on aime</h3>
+              <ul>
+                {config.pros.map((pro) => <li>{pro}</li>)}
+              </ul>
+              <h3>Ce qu'on aime moins</h3>
+              <ul>
+                {config.cons.map((con) => <li>{con}</li>)}
+              </ul>
             </div>
           </section>
 
-          <!-- ReviewPromoCard 3 -->
-          <ReviewPromoCard product={{
-            name: config.products[2].name,
-            image: config.products[2].image,
-            rating: config.products[2].rating,
-            productType: config.products[2].productType,
-            origin: config.products[2].origin,
-            availability: config.products[2].availability,
-            promoCode: config.products[2].promoCode,
-            promoPercent: config.products[2].promoPercent,
-            originalPrice: config.products[2].originalPrice,
-            discountPrice: config.products[2].discountPrice,
-            affiliateLink: config.products[2].affiliateLink,
-          }} />
+          <!-- 14. Comparison Table -->
+          <ComparisonTable
+            title="Notre classement"
+            headers={[
+              { label: '#', align: 'center' },
+              { label: 'Produit' },
+              { label: 'Note', align: 'center' },
+              { label: 'Prix' },
+              { label: 'Promo' },
+            ]}
+            rows={[
+              { cells: [1, 'Lorem Supplement Pro', '9,8/10', '80,00 $', 'LMC -10%'], highlight: true, badge: 'Top 1' },
+              { cells: [2, 'Ipsum Vitality Max', '7,9/10', '49,90 €', '-15%'] },
+              { cells: [3, 'Dolor Wellness', '7,2/10', '39,90 €', '-10%'] },
+              { cells: [4, 'Sit Amet Booster', '6,5/10', '39,90 €', '—'] },
+            ]}
+          />
 
-          <!-- Conclusion -->
-          <section id="conclusion" class="mb-8">
+          <!-- 15. Conclusion -->
+          <section id="conclusion" class="content-section">
             <div class="rich-text">
               <h2>Conclusion</h2>
               <p>
-                Après notre analyse complète, le Lorem Supplement s'impose comme le meilleur choix en 2026. Sa formulation premium, ses résultats prouvés et la garantie de 60 jours en font un investissement sûr pour votre bien-être.
+                Après notre analyse complète, le Lorem Supplement s'impose comme le meilleur choix en 2026. Sa formulation premium, ses résultats prouvés et la garantie de 60 jours en font un investissement sûr.
               </p>
               <p>
-                N'oubliez pas d'utiliser le code <strong>LOREM25</strong> pour profiter de -25% sur votre commande. Cette offre est limitée et peut expirer à tout moment.
+                N'oubliez pas d'utiliser le code <strong>LMC</strong> pour profiter de -10% sur votre commande.
               </p>
             </div>
           </section>
 
-          <!-- FAQ -->
+          <!-- 16. FAQ -->
           <FaqAccordion items={config.faq} />
         </div>
 
-        <!-- Sidebar -->
-        <div>
-          <div class="mb-6">
-            <TableOfContents items={config.tocItems} />
+        <!-- ═══ RIGHT COLUMN (sticky sidebar) ═══ -->
+        <div class="sidebar-column">
+          <div class="sidebar-sticky">
+            <SidebarCTA
+              logoSrc={topProduct.brandLogo}
+              promoCode={topProduct.promoCode}
+              promoPercent={topProduct.promoPercent}
+              originalPrice={topProduct.originalPrice}
+              discountPrice={topProduct.discountPrice}
+              ctaLink={topProduct.affiliateLink}
+              heroImage={topProduct.image}
+              rating={topProduct.rating}
+              reviewCount={topProduct.reviewCount}
+            />
           </div>
-
-          <SidebarCTA
-            logoSrc={topProduct.brandLogo}
-            promoCode={topProduct.promoCode}
-            promoPercent={topProduct.promoPercent}
-            originalPrice={topProduct.originalPrice}
-            discountPrice={topProduct.discountPrice}
-            ctaLink={topProduct.affiliateLink}
-            heroImage={topProduct.image}
-            rating={topProduct.rating}
-            reviewCount={topProduct.reviewCount}
-          />
         </div>
+
       </div>
     </div>
   </main>

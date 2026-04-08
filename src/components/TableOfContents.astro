@@ -11,43 +11,33 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<div class="mb-8 bg-white rounded-xl shadow-card overflow-hidden">
-  <!-- Accordion trigger -->
-  <button
-    id="toc-trigger"
-    class="accordion-trigger flex items-center justify-between w-full text-left px-5 py-4 cursor-pointer"
-    data-target="toc-content"
-  >
-    <span class="font-heading font-semibold text-text-dark text-sm flex items-center gap-2">
-      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#242424" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
-      </svg>
-      Sommaire
-    </span>
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="accordion-chevron transition-transform duration-200 rotate-180">
+<div class="toc-card">
+  <!-- Header -->
+  <button class="toc-header" id="toc-trigger">
+    <span class="toc-title">Sommaire</span>
+    <svg class="toc-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="m6 9 6 6 6-6" />
     </svg>
   </button>
 
-  <!-- Content (starts visible, chevron rotated) -->
-  <div id="toc-content" class="accordion-content">
-    <div class="px-5 pb-5">
+  <!-- Content -->
+  <div class="toc-content" id="toc-content">
+    <div class="toc-list">
       {items.map((item, i) => (
         <a
           href={`#${item.id}`}
-          class="toc-link flex items-start gap-3 py-1.5 group no-underline"
-          onclick="event.preventDefault(); document.querySelector('#{item.id}')?.scrollIntoView({behavior:'smooth'});"
+          class="toc-item"
+          onclick={`event.preventDefault(); document.querySelector('#${item.id}')?.scrollIntoView({behavior:'smooth'});`}
         >
-          <!-- Timeline dot + dashed connector -->
-          <div class="flex flex-col items-center mt-1.5 shrink-0">
-            <div class={`w-2.5 h-2.5 rounded-full shrink-0 ${i === 0 ? 'bg-primary border-2 border-primary' : 'bg-white border-2 border-border-light'}`}></div>
+          <!-- Timeline dot + connector -->
+          <div class="toc-timeline">
+            <div class={`toc-dot ${i === 0 ? 'toc-dot-active' : ''}`}></div>
             {i < items.length - 1 && (
-              <div class="w-px h-7 border-l border-dashed border-border-lighter mt-0.5"></div>
+              <div class={`toc-connector ${i === 0 ? 'toc-connector-active' : ''}`}></div>
             )}
           </div>
-
           <!-- Label -->
-          <span class="text-sm text-text-body leading-snug group-hover:text-primary transition-colors pt-0.5">{item.label}</span>
+          <span class={`toc-label ${i === 0 ? 'toc-label-active' : ''}`}>{item.label}</span>
         </a>
       ))}
     </div>
@@ -58,27 +48,119 @@ const { items } = Astro.props;
   function initTocAccordion() {
     const trigger = document.getElementById('toc-trigger');
     if (!trigger) return;
+    const content = document.getElementById('toc-content');
+    const chevron = trigger.querySelector('.toc-chevron');
+    if (!content || !chevron) return;
 
     trigger.addEventListener('click', () => {
-      const targetId = trigger.getAttribute('data-target');
-      if (!targetId) return;
-      const content = document.getElementById(targetId);
-      if (!content) return;
-
-      const isHidden = content.classList.contains('hidden');
-      content.classList.toggle('hidden');
-      const chevron = trigger.querySelector('.accordion-chevron');
-      if (chevron) {
-        if (isHidden) {
-          chevron.classList.add('rotate-180');
-          chevron.classList.remove('rotate-0');
-        } else {
-          chevron.classList.remove('rotate-180');
-          chevron.classList.add('rotate-0');
-        }
-      }
+      const isHidden = content.classList.contains('toc-hidden');
+      content.classList.toggle('toc-hidden');
+      chevron.classList.toggle('toc-chevron-up', !isHidden);
     });
   }
-
   initTocAccordion();
 </script>
+
+<style>
+  .toc-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 1rem;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+
+  /* Header */
+  .toc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    border: none;
+    background: none;
+  }
+  .toc-title {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.125rem, 1rem + 0.6vw, 1.375rem);
+    color: #242424;
+    margin: 0;
+    line-height: 1.3;
+  }
+  .toc-chevron {
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+  .toc-chevron.toc-chevron-up {
+    transform: rotate(180deg);
+  }
+
+  /* Content */
+  .toc-content {
+    padding: 0 1.25rem 1.25rem;
+    transition: all 0.2s ease;
+  }
+  .toc-content.toc-hidden {
+    display: none;
+  }
+
+  .toc-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .toc-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .toc-item:hover .toc-label {
+    color: #ef7a1a;
+  }
+
+  /* Timeline */
+  .toc-timeline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    padding-top: 0.3rem;
+  }
+  .toc-dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1.5px solid #e0e0e0;
+    flex-shrink: 0;
+  }
+  .toc-dot-active {
+    background: #ef7a1a;
+    border-color: #ef7a1a;
+  }
+  .toc-connector {
+    width: 0;
+    height: 1rem;
+    border-left: 1px dashed #e0e0e0;
+    margin-top: 0.25rem;
+  }
+  .toc-connector-active {
+    border-left: 1px solid #ef7a1a;
+  }
+
+  /* Label */
+  .toc-label {
+    font-size: clamp(0.8125rem, 0.8rem + 0.1vw, 0.875rem);
+    color: #333;
+    line-height: 1.4;
+    transition: color 0.2s;
+  }
+  .toc-label-active {
+    color: #242424;
+    font-weight: 600;
+  }
+</style>

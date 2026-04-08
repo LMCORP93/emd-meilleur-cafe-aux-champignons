@@ -7,31 +7,37 @@ interface Props {
 const { code, percent } = Astro.props;
 ---
 
-<div class="inline-block">
-  <button
-    class="copy-promo-btn inline-flex items-center gap-2 bg-bg-tertiary border border-border-light rounded px-4 py-2 text-sm hover:bg-border-lighter transition-colors cursor-pointer"
-    data-code={code}
-  >
-    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <rect width="14" height="14" x="8" y="8" rx="2" ry="2" /><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+<button
+  class="copy-promo-btn promo-code-btn"
+  data-code={code}
+  data-code-text={code}
+  type="button"
+>
+  <span class="promo-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2m0 16H8V7h11z"></path>
     </svg>
-    <span class="font-mono font-semibold text-text-dark">{code}</span>
-    <span class="text-primary font-semibold">-{percent}</span>
-  </button>
-  <p class="copy-feedback">✓ Code copié !</p>
-</div>
+  </span>
+  <span class="promo-code-text">{code}</span>
+  <span class="promo-percent">-{percent}</span>
+</button>
 
 <script>
   function initPromoCopyButtons() {
     document.querySelectorAll('.copy-promo-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
         const code = (btn as HTMLElement).getAttribute('data-code') || '';
-        const feedback = btn.nextElementSibling as HTMLElement | null;
+        const textEl = btn.querySelector('.promo-code-text');
 
         navigator.clipboard.writeText(code).then(() => {
-          if (feedback && feedback.classList.contains('copy-feedback')) {
-            feedback.classList.add('show');
-            setTimeout(() => { feedback.classList.remove('show'); }, 2000);
+          if (textEl) {
+            const original = textEl.textContent || '';
+            textEl.textContent = '✓ Copié !';
+            textEl.style.color = '#00b67a';
+            setTimeout(() => {
+              textEl.textContent = original;
+              textEl.style.color = '';
+            }, 1500);
           }
         });
       });
@@ -40,3 +46,47 @@ const { code, percent } = Astro.props;
 
   initPromoCopyButtons();
 </script>
+
+<style>
+  .promo-code-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.5rem 0.75rem;
+    border: 2px dashed #ef7a1a;
+    border-radius: 8px;
+    background: transparent;
+    color: #ef7a1a;
+    cursor: pointer;
+    font-family: 'Archivo', sans-serif;
+    font-size: 0.875rem;
+    line-height: 1;
+    transition: background-color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+    height: 2.25rem;
+  }
+  .promo-code-btn:hover {
+    background-color: rgba(239, 122, 26, 0.06);
+    border-color: #ff8c2e;
+  }
+  .promo-code-btn:active {
+    background-color: rgba(239, 122, 26, 0.12);
+  }
+  .promo-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+  }
+  .promo-code-text {
+    font-weight: 600;
+    color: #242424;
+    transition: color 0.2s;
+  }
+  .promo-percent {
+    font-weight: 600;
+    color: #ef7a1a;
+  }
+</style>

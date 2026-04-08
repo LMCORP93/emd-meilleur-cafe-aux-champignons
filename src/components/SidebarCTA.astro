@@ -16,35 +16,36 @@ interface Props {
 const { logoSrc, promoCode, promoPercent, originalPrice, discountPrice, ctaLink, heroImage, rating, reviewCount } = Astro.props;
 ---
 
-<div class="sidebar-cta bg-white rounded-xl shadow-card p-5 hidden lg:block sticky top-24">
+<div class="sidebar-cta">
   <!-- Logo + heading -->
-  <div class="text-center mb-4">
+  <div class="sidebar-cta-header">
     <img
       src={logoSrc}
       alt="Logo"
-      class="w-16 h-16 mx-auto object-contain mb-3"
+      class="sidebar-cta-logo"
+      loading="lazy"
     />
-    <h4 class="font-heading font-bold text-text-dark text-base">
-      Get {promoPercent}% OFF Your Order 👇
+    <h4 class="sidebar-cta-heading">
+      Profitez de -{promoPercent}% sur votre commande 👇
     </h4>
   </div>
 
   <!-- Pricing -->
-  <div class="flex items-baseline justify-center gap-3 mb-4">
-    <span class="compare-at-price-text text-sm">{originalPrice}</span>
-    <span class="price-text text-xl font-heading">{discountPrice}</span>
+  <div class="sidebar-cta-pricing">
+    <span class="sidebar-cta-price-old">{originalPrice}</span>
+    <span class="sidebar-cta-price-new">{discountPrice}</span>
   </div>
 
   <!-- Promo code + CTA -->
-  <div class="space-y-3 mb-4">
-    <div class="flex justify-center">
+  <div class="sidebar-cta-actions">
+    <div class="sidebar-cta-promo-wrap">
       <PromoCodeButton code={promoCode} percent={`${promoPercent}%`} />
     </div>
     <a
       href={ctaLink}
       rel="nofollow sponsored"
       target="_blank"
-      class="flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-heading font-semibold text-sm px-6 py-2.5 rounded w-full transition-colors"
+      class="sidebar-cta-btn"
     >
       Acheter maintenant
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -54,27 +55,167 @@ const { logoSrc, promoCode, promoPercent, originalPrice, discountPrice, ctaLink,
     </a>
   </div>
 
-  <!-- Product hero image -->
-  <div class="bg-bg-light rounded-lg p-3 mb-4">
+  <!-- Verified text -->
+  <p class="sidebar-cta-verified">
+    ✅ Code vérifié et valide pour 2026
+  </p>
+
+  <!-- Product image -->
+  <div class="sidebar-cta-image">
     <img
       src={heroImage}
       alt="Product"
-      class="w-full h-32 object-contain"
       loading="lazy"
     />
   </div>
 
   <!-- Trustpilot stars + rating -->
-  <div class="text-center">
-    <div class="flex justify-center gap-0.5 mb-1">
+  <div class="sidebar-cta-trustpilot">
+    <div class="sidebar-cta-stars">
       {[1, 2, 3, 4, 5].map(() => (
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#fee050" stroke="#fee050" stroke-width="0.5" class="w-4 h-4">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#00b67a" stroke="#00b67a" stroke-width="0.5" class="sidebar-cta-star">
           <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
         </svg>
       ))}
     </div>
-    <p class="text-text-grey text-xs">
-      {rating.toFixed(1)}/10 · {reviewCount.toLocaleString('fr-FR')} avis Trustpilot
+    <p class="sidebar-cta-reviews">
+      +{reviewCount.toLocaleString('fr-FR')} avis Trustpilot vérifiés
     </p>
   </div>
 </div>
+
+<style>
+  .sidebar-cta {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 1rem;
+    padding: 1.5rem;
+  }
+
+  /* Header */
+  .sidebar-cta-header {
+    text-align: center;
+    margin-bottom: 1.25rem;
+  }
+  .sidebar-cta-logo {
+    width: 4rem;
+    height: 4rem;
+    object-fit: contain;
+    margin: 0 auto 0.75rem;
+    display: block;
+  }
+  .sidebar-cta-heading {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 700;
+    font-size: 0.9375rem;
+    color: #242424;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* Pricing */
+  .sidebar-cta-pricing {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+  .sidebar-cta-price-old {
+    text-decoration: line-through;
+    color: #777;
+    font-size: 0.875rem;
+  }
+  .sidebar-cta-price-new {
+    font-family: 'Archivo', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ef7a1a;
+  }
+
+  /* Actions */
+  .sidebar-cta-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .sidebar-cta-promo-wrap {
+    display: flex;
+    justify-content: center;
+  }
+  .sidebar-cta-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: #ef7a1a;
+    color: #fff;
+    font-family: 'Archivo', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.625rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.2s;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+  }
+  .sidebar-cta-btn:hover {
+    background-color: #ff8c2e;
+    color: #fff;
+  }
+  .sidebar-cta-btn:active {
+    background-color: #d66a12;
+  }
+
+  /* Verified */
+  .sidebar-cta-verified {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #00b67a;
+    margin: 0 0 1.25rem;
+  }
+
+  /* Image */
+  .sidebar-cta-image {
+    background-color: #f4f2ec;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+  }
+  .sidebar-cta-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Trustpilot */
+  .sidebar-cta-trustpilot {
+    text-align: center;
+  }
+  .sidebar-cta-stars {
+    display: flex;
+    justify-content: center;
+    gap: 0.125rem;
+    margin-bottom: 0.5rem;
+  }
+  .sidebar-cta-star {
+    width: 1rem;
+    height: 1rem;
+  }
+  .sidebar-cta-reviews {
+    font-size: 0.8125rem;
+    color: #333;
+    margin: 0;
+  }
+
+  /* Mobile: show at bottom of content */
+  @media (max-width: 991px) {
+    .sidebar-cta {
+      position: static;
+    }
+  }
+</style>

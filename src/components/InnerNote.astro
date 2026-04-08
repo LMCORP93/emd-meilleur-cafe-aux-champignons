@@ -1,15 +1,35 @@
 ---
 interface Props {
   text: string;
-  imageSrc?: string;
+  emoji?: string;
 }
 
-const { text, imageSrc } = Astro.props;
+const { text, emoji = '📌' } = Astro.props;
 ---
 
-<div class="inner-note mb-6">
-  {imageSrc && (
-    <img src={imageSrc} alt="" class="w-full rounded mb-3" loading="lazy" />
-  )}
-  <p class="text-text-body text-sm leading-relaxed mb-0">{text}</p>
+<div class="inner-note">
+  <p class="inner-note-text">
+    <span class="inner-note-emoji">{emoji}</span>
+    <Fragment set:html={text} />
+  </p>
 </div>
+
+<style>
+  .inner-note {
+    background-color: #f4f2ec;
+    border-radius: 1rem;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .inner-note-text {
+    margin: 0;
+    font-size: 0.9375rem;
+    line-height: 1.625;
+    color: #2d2d2d;
+  }
+
+  .inner-note-emoji {
+    margin-right: 0.5rem;
+  }
+</style>

@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Fluid Typography (matches Webflow vw calc) ──────────────────── */
+/* ── Base font size (fluid root) ────────────────────────────────── */
 html {
-  font-size: clamp(10px, calc(0.625rem + 0.41666667vw), 16px);
+  font-size: 16px;
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -12,30 +12,22 @@ html {
   text-rendering: optimizeLegibility;
 }
 
-@media (max-width: 1440px) {
-  html { font-size: clamp(10px, calc(0.8127rem + 0.2081vw), 16px); }
-}
-@media (max-width: 479px) {
-  html { font-size: clamp(10px, calc(0.7495rem + 0.8368vw), 16px); }
-}
-
 /* ── Base resets ─────────────────────────────────────────────────── */
 @layer base {
   body {
-    @apply bg-bg-cream text-text-body font-body;
+    @apply text-text-body font-body text-text-regular;
     margin: 0;
     min-height: 100vh;
+    background-color: #ffffff;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-heading font-bold text-text-dark;
-  }
-  h1 { @apply text-fluid-4xl tracking-tight; }
-  h2 { @apply text-fluid-3xl tracking-tight; }
-  h3 { @apply text-fluid-2xl; }
-  h4 { @apply text-fluid-xl; }
-  h5 { @apply text-fluid-lg; }
-  h6 { @apply text-fluid-base; }
+  /* ── Headings (Archivo, semantic scale) ── */
+  h1 { @apply font-heading text-h1; }
+  h2 { @apply font-heading text-h2; }
+  h3 { @apply font-heading text-h3; }
+  h4 { @apply font-heading text-h4; }
+  h5 { @apply font-heading text-h5; }
+  h6 { @apply font-heading text-h6; }
 
   img {
     max-width: 100%;
@@ -45,6 +37,15 @@ html {
 
   a {
     background-color: transparent;
+  }
+
+  /* Global focus outline (Blueprint Blue) */
+  *:focus {
+    outline: 2px solid #4d65ff;
+    outline-offset: 2px;
+  }
+  *:focus:not(:focus-visible) {
+    outline: none;
   }
 
   p {
@@ -65,7 +66,7 @@ html {
   }
 }
 
-/* ── Containers (match Webflow) ───────────────────────────────────── */
+/* ── Containers (72rem max) ─────────────────────────────────────── */
 @layer components {
   .container-medium {
     max-width: 56rem;
@@ -78,7 +79,7 @@ html {
     margin-right: auto;
   }
   .container-large {
-    max-width: 64rem;
+    max-width: 72rem;
     margin-left: auto;
     margin-right: auto;
   }
@@ -175,8 +176,8 @@ html {
   pointer-events: none;
 }
 .circle._0 { width: 20rem; height: 20rem; top: -5rem; right: -5rem; }
-.circle._1 { width: 10rem; height: 10rem; top: 10rem; right: 15rem; }
-.circle._2 { width: 6rem; height: 6rem; top: 2rem; left: 10%; }
+.circle._1 { width: 10rem; height: 10rem; top: 2rem; right: 15rem; }
+.circle._2 { width: 6rem; height: 6rem; top: 4rem; left: 10%; opacity: 0.5; }
 .circle._3 { width: 15rem; height: 15rem; bottom: 5rem; left: -3rem; }
 @media (max-width: 991px) {
   .circle { display: none; }
@@ -192,13 +193,7 @@ html {
   font-weight: 600;
 }
 
-/* ── Inner note box ──────────────────────────────────────────────── */
-.inner-note {
-  background-color: #f8f8f8;
-  border-left: 4px solid #ef7a1a;
-  border-radius: 0 0.5rem 0.5rem 0;
-  padding: 1.25rem 1.5rem;
-}
+/* ── Inner note box (moved to component scoped styles) ──────────── */
 
 /* ── Rich text content styling ────────────────────────────────────── */
 .rich-text h2 { margin-top: 2.5rem; margin-bottom: 1rem; }
@@ -229,8 +224,29 @@ html {
 /* ── Blog grid (content + sidebar) ───────────────────────────────── */
 .blog-grid {
   display: grid;
-  grid-template-columns: 1fr 20rem;
-  gap: 2rem;
+  grid-template-columns: 2fr 0.5fr;
+  gap: 3rem;
+  align-items: start;
+}
+.content-column {
+  display: flex;
+  flex-direction: column;
+}
+.content-section {
+  margin-bottom: 2rem;
+}
+
+/* ── Sidebar (sticky) ───────────────────────────────────────────── */
+.sidebar-column {
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-sticky {
+  position: sticky;
+  top: 6rem;
+}
+.sidebar-sticky-spacer {
+  height: 1.5rem;
 }
 @media (max-width: 991px) {
   .blog-grid {

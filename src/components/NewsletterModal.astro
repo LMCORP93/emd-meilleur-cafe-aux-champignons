@@ -35,10 +35,10 @@ const { promoCode, promoPercent, ctaLink, heroImage } = Astro.props;
 
         <!-- Heading -->
         <h3 class="font-heading font-bold text-xl md:text-2xl text-text-dark mb-2">
-          Unlock your exclusive offer
+          Votre offre exclusive vous attend !
         </h3>
         <p class="text-text-grey text-sm mb-6 leading-relaxed">
-          Use this promo code at checkout and save {promoPercent}% on your order!
+          Utilisez ce code promo lors de votre commande et économisez {promoPercent}% immédiatement !
         </p>
 
         <!-- Promo code copy button -->
@@ -62,7 +62,8 @@ const { promoCode, promoPercent, ctaLink, heroImage } = Astro.props;
           href={ctaLink}
           rel="nofollow sponsored"
           target="_blank"
-          class="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-heading font-semibold text-base px-8 py-3 rounded w-full mb-6 transition-colors no-underline"
+          class="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-heading font-semibold text-base px-8 py-3 w-full mb-6 transition-colors no-underline"
+          style="border-radius: 8px;"
         >
           Profiter de l'offre
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
