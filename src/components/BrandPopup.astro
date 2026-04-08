@@ -1,0 +1,330 @@
+---
+interface Props {
+  brand: string;
+  brandLogo: string;
+  productImage: string;
+  productName: string;
+  productType: string;
+  description: string;
+  promoCode: string;
+  promoPercent: number;
+  originalPrice: string;
+  discountPrice: string;
+  affiliateLink: string;
+  rating: number;
+}
+
+const {
+  brand, brandLogo, productImage, productName, productType,
+  description, promoCode, promoPercent, originalPrice, discountPrice,
+  affiliateLink, rating,
+} = Astro.props;
+---
+
+<div id="brand-popup" class="brand-popup" role="dialog" aria-modal="true" aria-label="Offre exclusive">
+  <!-- Overlay -->
+  <div id="popup-overlay" class="brand-popup-overlay"></div>
+
+  <!-- Modal Content -->
+  <div class="brand-popup-container">
+    <div class="brand-popup-card">
+      <!-- Close button -->
+      <button id="popup-close" class="brand-popup-close" aria-label="Fermer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#242424" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 6 6 18" /><path d="m6 6 12 12" />
+        </svg>
+      </button>
+
+      <div class="brand-popup-body">
+        <!-- Top: brand + tag -->
+        <div class="brand-popup-header">
+          <img src={brandLogo} alt={`Logo ${brand}`} class="brand-popup-logo" width="80" height="80" />
+          <span class="brand-popup-tag">Offre exclusive</span>
+        </div>
+
+        <!-- Product name + description -->
+        <h3 class="brand-popup-title">{productName}</h3>
+        <p class="brand-popup-desc">{description}</p>
+
+        <!-- Product image (square, rounded) -->
+        <div class="brand-popup-image-wrap">
+          <img src={productImage} alt={productName} class="brand-popup-image" loading="lazy" />
+        </div>
+
+        <!-- Price -->
+        <div class="brand-popup-price">
+          <span class="brand-popup-price-old">{originalPrice}</span>
+          <span class="brand-popup-price-new">{discountPrice}</span>
+        </div>
+
+        <!-- Promo code -->
+        {promoCode && promoPercent > 0 && (
+          <div class="brand-popup-promo">
+            <div class="brand-popup-promo-row">
+              <span class="brand-popup-promo-label">Code promo :</span>
+              <button
+                id="popup-copy-btn"
+                class="copy-promo-btn brand-popup-copy"
+                data-code={promoCode}
+              >
+                <span class="promo-code-text">{promoCode}</span>
+                <span class="promo-percent">-{promoPercent}%</span>
+              </button>
+            </div>
+            <p id="popup-copy-feedback" class="copy-feedback">✓ Code copié !</p>
+          </div>
+        )}
+
+        <!-- CTA Button -->
+        <a
+          href={affiliateLink}
+          rel="nofollow sponsored"
+          target="_blank"
+          class="btn-solid brand-popup-cta"
+        >
+          <span>Profiter de l'offre</span>
+          <span class="btn-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initBrandPopup() {
+    const popup = document.getElementById('brand-popup') as HTMLElement | null;
+    const overlay = document.getElementById('popup-overlay');
+    const closeBtn = document.getElementById('popup-close');
+    const copyBtn = document.getElementById('popup-copy-btn') as HTMLElement | null;
+    const feedback = document.getElementById('popup-copy-feedback');
+
+    if (!popup) return;
+
+    // Only once per session
+    if (sessionStorage.getItem('emd-brand-popup-shown')) return;
+
+    // Show after 7s delay
+    const timer = setTimeout(() => {
+      popup.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      sessionStorage.setItem('emd-brand-popup-shown', 'true');
+    }, 7000);
+
+    const closePopup = () => {
+      popup.classList.remove('is-open');
+      document.body.style.overflow = '';
+      clearTimeout(timer);
+    };
+
+    if (overlay) overlay.addEventListener('click', closePopup);
+    if (closeBtn) closeBtn.addEventListener('click', closePopup);
+
+    const escHandler = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && popup.classList.contains('is-open')) {
+        closePopup();
+        document.removeEventListener('keydown', escHandler);
+      }
+    };
+    document.addEventListener('keydown', escHandler);
+
+    // Copy promo code
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        const code = copyBtn.getAttribute('data-code') || '';
+        const textEl = copyBtn.querySelector('.promo-code-text');
+        navigator.clipboard.writeText(code).then(() => {
+          if (textEl) {
+            const original = textEl.textContent || '';
+            textEl.textContent = '✓ Copié !';
+            textEl.style.color = '#00b67a';
+            setTimeout(() => { textEl.textContent = original; textEl.style.color = ''; }, 1500);
+          }
+        });
+      });
+    }
+  }
+
+  initBrandPopup();
+</script>
+
+<style>
+  /* ── Popup hidden by default ── */
+  .brand-popup {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  .brand-popup.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* ── Overlay ── */
+  .brand-popup-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+  }
+
+  /* ── Container ── */
+  .brand-popup-container {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  /* ── Card ── */
+  .brand-popup-card {
+    position: relative;
+    background: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+  }
+
+  /* ── Close button ── */
+  .brand-popup-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 10;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #f4f4f4;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  .brand-popup-close:hover {
+    background: #e0e0e0;
+  }
+
+  /* ── Body ── */
+  .brand-popup-body {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+    .brand-popup-body { padding: 2.5rem; gap: 1.25rem; }
+  }
+
+  /* ── Header: logo + tag ── */
+  .brand-popup-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .brand-popup-logo {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+  }
+  .brand-popup-tag {
+    display: inline-block;
+    background-color: #ef7a1a;
+    color: #fff;
+    font-family: 'Archivo', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+  }
+
+  /* ── Title ── */
+  .brand-popup-title {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: #242424;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  /* ── Description ── */
+  .brand-popup-desc {
+    font-size: 0.875rem;
+    color: #595b61;
+    line-height: 1.6;
+    margin: 0;
+    max-width: 360px;
+  }
+
+  /* ── Product image (square, rounded) ── */
+  .brand-popup-image-wrap {
+    width: 100%;
+    max-width: 200px;
+  }
+  .brand-popup-image {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: contain;
+    border-radius: 0.5rem;
+  }
+
+  /* ── Price ── */
+  .brand-popup-price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+  .brand-popup-price-old {
+    font-size: 0.875rem;
+    color: #999;
+    text-decoration: line-through;
+  }
+  .brand-popup-price-new {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: #ef7a1a;
+    line-height: 1;
+  }
+
+  /* ── Promo ── */
+  .brand-popup-promo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  .brand-popup-promo-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .brand-popup-promo-label {
+    font-size: 0.8125rem;
+    color: #777;
+  }
+
+  /* ── CTA ── */
+  .brand-popup-cta {
+    width: 100%;
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+    text-decoration: none;
+  }
+</style>

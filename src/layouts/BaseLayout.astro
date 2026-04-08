@@ -2,7 +2,7 @@
 import '@/styles/global.css';
 import Navbar from '@/components/Navbar.astro';
 import Footer from '@/components/Footer.astro';
-import NewsletterModal from '@/components/NewsletterModal.astro';
+import BrandPopup from '@/components/BrandPopup.astro';
 import StickyPromoButton from '@/components/StickyPromoButton.astro';
 import config from '@/data/site.config';
 
@@ -82,14 +82,22 @@ const {
 
     <slot />
 
-    <NewsletterModal
-      promoCode={config.promoCode}
-      promoPercent={10}
-      ctaLink={config.affiliateLink}
-      heroImage="/logo.svg"
+    <BrandPopup
+      brand={config.products[0].brand}
+      brandLogo={config.products[0].brandLogo}
+      productImage={config.products[0].image}
+      productName={config.products[0].name}
+      productType={config.products[0].productType}
+      description={config.products[0].description}
+      promoCode={config.products[0].promoCode}
+      promoPercent={config.products[0].promoPercent}
+      originalPrice={config.products[0].originalPrice}
+      discountPrice={config.products[0].discountPrice}
+      affiliateLink={config.products[0].affiliateLink}
+      rating={config.products[0].rating}
     />
 
-    <StickyPromoButton promoPercent={10} promoCode={config.promoCode} />
+    <StickyPromoButton promoPercent={config.products[0].promoPercent} promoCode={config.products[0].promoCode} affiliateLink={config.products[0].affiliateLink} />
     <Footer
       siteName={config.siteName}
       logoSrc="/logo.svg"
