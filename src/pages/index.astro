@@ -106,48 +106,40 @@ const sampleArticles = [
           <!-- 2. Table of Contents -->
           <TableOfContents items={config.tocItems} />
 
-          <!-- ═══ TEMPLATE ELEMENTS — À valider un par un ═══ -->
+          <!-- ══════════════════════════════════════════════════════════
+               TEMPLATE ELEMENTS — On valide un par un
+               ══════════════════════════════════════════════════════════ -->
 
-          <!-- 3. Rich Text — H2 #1: Introduction -->
+          <!-- ✅ VALIDÉ — Rich Text -->
           <section id="introduction" class="content-section">
             <div class="rich-text">
               <h2>Introduction</h2>
-              <p>
-                Vous cherchez le {config.product.toLowerCase()} idéal ? Vous êtes au bon endroit. Dans ce guide complet, nous analysons en profondeur le {config.product.toLowerCase()} pour vous aider à prendre une décision éclairée.
-              </p>
-              <p>
-                Après des semaines de tests et d'analyses, voici notre verdict complet avec tous les détails que vous devez connaître avant d'acheter.
-              </p>
+              <p>Vous cherchez le {config.product.toLowerCase()} idéal ? Vous êtes au bon endroit.</p>
+              <p>Après des semaines de tests, voici notre verdict complet.</p>
             </div>
           </section>
 
-          <!-- 4. Rich Text — H2 #2: Composition -->
           <section id="composition" class="content-section">
             <div class="rich-text">
               <h2>Composition & Ingrédients</h2>
-              <p>
-                La composition du Lorem Supplement est l'un de ses principaux atouts. Voici les ingrédients clés qui font la différence :
-              </p>
-              <p>
-                Chaque ingrédient est dosé de manière optimale selon les études scientifiques les plus récentes. La formulation est 100% naturelle, sans additifs ni conservateurs artificiels.
-              </p>
+              <p>La composition est l'un de ses principaux atouts.</p>
+              <p>Formulation 100% naturelle, sans additifs.</p>
               <ul>
-                <li><strong>Vitamines B complexe</strong> — Pour l'énergie et le métabolisme</li>
-                <li><strong>Zinc</strong> — Soutien immunitaire et antioxydant naturel</li>
-                <li><strong>Magnésium</strong> — Réduction de la fatigue et du stress</li>
-                <li><strong>Extraits de plantes</strong> — Formule exclusive brevetée</li>
+                <li><strong>Vitamines B</strong> — Énergie et métabolisme</li>
+                <li><strong>Zinc</strong> — Soutien immunitaire</li>
+                <li><strong>Magnésium</strong> — Réduction fatigue</li>
               </ul>
             </div>
           </section>
 
-          <!-- 5. Image Block -->
+          <!-- ✅ VALIDÉ — Image Block -->
           <ImageBlock
             src="/banner-placeholder.jpg"
             alt="Photo produit"
             caption="Le Lorem Supplement en conditionnement d'origine."
           />
 
-          <!-- 6. ReviewPromoCard — Produit principal -->
+          <!-- 🔲 À VALIDER — ReviewPromoCard -->
           <ReviewPromoCard product={{
             name: topProduct.name,
             image: topProduct.image,
@@ -162,86 +154,13 @@ const sampleArticles = [
             affiliateLink: topProduct.affiliateLink,
           }} />
 
-          <!-- 7. Efficacité -->
-          <section id="efficacite" class="content-section">
-            <div class="rich-text">
-              <h2>Efficacité & Résultats</h2>
-              <p>
-                D'après notre test de 4 semaines et les retours de plus de 2 000 utilisateurs, les résultats sont convaincants :
-              </p>
-              <ul>
-                <li><strong>Semaine 1-2</strong> — Premiers effets sur l'énergie et le bien-être général</li>
-                <li><strong>Semaine 3-4</strong> — Résultats visibles sur les objectifs principaux</li>
-                <li><strong>Semaine 8+</strong> — Effets optimaux avec une cure continue</li>
-              </ul>
-              <p>
-                Note globale : <strong>8.7/10</strong> — Un des meilleurs scores de notre comparatif.
-              </p>
-            </div>
-          </section>
-
-          <!-- 8. Inner Note (highlight box — bg #f4f2ec) -->
+          <!-- 🔲 À VALIDER — InnerNote -->
           <InnerNote
             emoji="📌"
-            text="Pour des résultats optimaux, nous recommandons une cure d'au moins 8 semaines. N'oubliez pas d'utiliser le code promo <strong>LMC</strong> pour bénéficier de -10% sur votre commande."
+            text="Pour des résultats optimaux, cure de 8 semaines minimum. Code promo <strong>LMC</strong> pour -10%."
           />
 
-          <!-- 9. Prix -->
-          <section id="prix" class="content-section">
-            <div class="rich-text">
-              <h2>Prix & Offres</h2>
-              <p>
-                Le Lorem Supplement est positionné dans le segment premium du marché. Voici les différentes offres disponibles :
-              </p>
-              <ul>
-                <li><strong>1 boîte</strong> — 49,90 € au lieu de 69,90 € avec le code LMC</li>
-                <li><strong>3 boîtes</strong> — Remise supplémentaire de 10%</li>
-                <li><strong>6 boîtes</strong> — Meilleur tarif + livraison gratuite</li>
-              </ul>
-            </div>
-          </section>
-
-          <!-- 10. Inner Note (warning) -->
-          <InnerNote
-            emoji="⚠️"
-            text="La garantie satisfait ou remboursé de 60 jours offre une sécurité supplémentaire. Pensez à activer votre garantie dès réception du colis."
-          />
-
-          <!-- 11. Avis Clients -->
-          <section id="avis" class="content-section">
-            <div class="rich-text">
-              <h2>Avis Clients</h2>
-              <p>
-                Avec une note moyenne de 4.8/5 sur Trustpilot (plus de 2 300 avis), le Lorem Supplement jouit d'une excellente réputation.
-              </p>
-              <p>
-                Les points les plus appréciés : efficacité, rapidité de livraison, réactivité du service client.
-              </p>
-            </div>
-          </section>
-
-          <!-- 12. Inner Note (check) -->
-          <InnerNote
-            emoji="✅"
-            text="Le Lorem Supplement a été testé et validé par notre équipe. Nous recommandons ce produit sans hésitation."
-          />
-
-          <!-- 13. Avantages & Inconvénients -->
-          <section id="pros-cons" class="content-section">
-            <div class="rich-text">
-              <h2>Avantages & Inconvénients</h2>
-              <h3>Ce qu'on aime</h3>
-              <ul>
-                {config.pros.map((pro) => <li>{pro}</li>)}
-              </ul>
-              <h3>Ce qu'on aime moins</h3>
-              <ul>
-                {config.cons.map((con) => <li>{con}</li>)}
-              </ul>
-            </div>
-          </section>
-
-          <!-- 14. Comparison Table -->
+          <!-- 🔲 À VALIDER — ComparisonTable -->
           <ComparisonTable
             title="Notre classement"
             headers={[
@@ -258,22 +177,6 @@ const sampleArticles = [
               { cells: [4, 'Sit Amet Booster', '6,5/10', '39,90 €', '—'] },
             ]}
           />
-
-          <!-- 15. Conclusion -->
-          <section id="conclusion" class="content-section">
-            <div class="rich-text">
-              <h2>Conclusion</h2>
-              <p>
-                Après notre analyse complète, le Lorem Supplement s'impose comme le meilleur choix en 2026. Sa formulation premium, ses résultats prouvés et la garantie de 60 jours en font un investissement sûr.
-              </p>
-              <p>
-                N'oubliez pas d'utiliser le code <strong>LMC</strong> pour profiter de -10% sur votre commande.
-              </p>
-            </div>
-          </section>
-
-          <!-- 16. FAQ -->
-          <FaqAccordion items={config.faq} />
         </div>
 
         <!-- ═══ RIGHT COLUMN (sticky sidebar) ═══ -->
