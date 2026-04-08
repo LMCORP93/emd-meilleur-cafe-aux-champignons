@@ -12,57 +12,56 @@ interface Props {
 }
 
 const { siteName, logoSrc, navLinks, copyright } = Astro.props;
+
+// Legal links (static, always present)
+const legalLinks = [
+  { label: 'Politique de confidentialité', href: '/politique-de-confidentialite' },
+  { label: 'Mentions légales', href: '/mentions-legales' },
+  { label: 'Contact', href: '/contact' },
+];
 ---
 
 <footer class="footer-section">
-  <!-- Curve divider at top — white curves down into beige footer -->
-  <div class="footer-curve-top">
+  <!-- Curve divider — beige curves UP into white content above -->
+  <div class="footer-curve-top" aria-hidden="true">
     <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 L1440,0 L1440,40 Q720,80 0,40 Z" fill="#f4f2ec"/>
+      <path d="M0,80 L1440,80 L1440,40 Q720,0 0,40 Z" fill="#ffffff"/>
     </svg>
   </div>
 
   <!-- Main footer content -->
   <div class="footer-content">
-    <div class="footer-inner" style="max-width: 72rem;">
+    <div class="footer-inner">
       <div class="padding-global">
 
-        <!-- Nav links grid (horizontal row like Webflow) -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-          {navLinks.map((link) => (
-            <a
-              href={link.href}
-              class="text-text-grey hover:text-text-dark text-sm font-medium transition-colors duration-200 py-1"
-            >
-              {link.label}
-            </a>
-          ))}
+        <!-- Logo + description -->
+        <div class="footer-brand">
+          <a href="/" class="footer-logo-link">
+            <img src={logoSrc} alt={siteName} class="footer-logo" width="40" height="40" />
+          </a>
+          <p class="footer-tagline">Le guide complet pour faire le bon choix</p>
         </div>
 
-        <!-- Bottom sub-footer: logo + copyright + legal links -->
-        <div class="flex flex-col sm:flex-row items-center gap-4 pt-6 border-t border-black/10">
-          <a href="/" class="flex-shrink-0">
-            <img
-              src={logoSrc}
-              alt={siteName}
-              class="h-8 w-auto"
-              width="32"
-              height="32"
-            />
-          </a>
-          <p class="text-text-grey text-xs text-center sm:text-left">
-            {copyright}
-          </p>
-          <div class="flex items-center gap-4 sm:ml-auto">
-            <a href="/politique-de-confidentialite" class="text-text-grey hover:text-text-dark text-xs transition-colors duration-200">
-              Politique de confidentialité
-            </a>
-            <a href="/mentions-legales" class="text-text-grey hover:text-text-dark text-xs transition-colors duration-200">
-              Mentions légales
-            </a>
-            <a href="/contact" class="text-text-grey hover:text-text-dark text-xs transition-colors duration-200">
-              Contact
-            </a>
+        <!-- Navigation links (auto-populated from site pages) -->
+        <nav aria-label="Navigation du pied de page">
+          <div class="footer-links-grid">
+            {navLinks.map((link) => (
+              <a href={link.href} class="footer-link">
+                {link.label}
+              </a>
+            ))}
+          </div>
+        </nav>
+
+        <!-- Bottom sub-footer: copyright + legal links -->
+        <div class="footer-bottom">
+          <p class="footer-copyright">{copyright}</p>
+          <div class="footer-legal">
+            {legalLinks.map((link) => (
+              <a href={link.href} class="footer-legal-link">
+                {link.label}
+              </a>
+            ))}
           </div>
         </div>
 
@@ -76,22 +75,116 @@ const { siteName, logoSrc, navLinks, copyright } = Astro.props;
     position: relative;
     background-color: #f4f2ec;
   }
+
+  /* ── Curve: white on top, beige below ── */
   .footer-curve-top {
     width: 100%;
     height: 4rem;
-    background-color: #ffffff;
+    margin-top: -1px;
+    background-color: #f4f2ec;
   }
   .footer-curve-top svg {
     display: block;
     width: 100%;
     height: 100%;
   }
+
+  /* ── Content area ── */
   .footer-content {
-    padding-top: 0;
     padding-bottom: 2.5rem;
   }
   .footer-inner {
+    max-width: 72rem;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  /* ── Brand (logo + tagline) ── */
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+  .footer-logo-link {
+    display: flex;
+    flex-shrink: 0;
+  }
+  .footer-logo {
+    height: 2.5rem;
+    width: auto;
+    filter: brightness(0);
+    opacity: 0.8;
+  }
+  .footer-tagline {
+    margin: 0;
+    font-family: 'PT Sans', sans-serif;
+    font-size: clamp(0.8125rem, 0.8rem + 0.1vw, 0.875rem);
+    color: #555;
+    line-height: 1.4;
+  }
+
+  /* ── Links grid ── */
+  .footer-links-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .footer-link {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 500;
+    font-size: clamp(0.8125rem, 0.8rem + 0.1vw, 0.875rem);
+    color: #333;
+    text-decoration: none;
+    padding: 0.25rem 0;
+    transition: color 0.2s;
+  }
+  .footer-link:hover {
+    color: #ef7a1a;
+  }
+
+  /* ── Bottom bar ── */
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding-top: 1.5rem;
+  }
+
+  .footer-copyright {
+    margin: 0;
+    font-size: clamp(0.6875rem, 0.675rem + 0.1vw, 0.75rem);
+    color: #777;
+  }
+
+  .footer-legal {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .footer-legal-link {
+    font-size: clamp(0.6875rem, 0.675rem + 0.1vw, 0.75rem);
+    color: #777;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-legal-link:hover {
+    color: #242424;
+  }
+
+  @media (max-width: 767px) {
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .footer-legal {
+      gap: 0.75rem;
+    }
   }
 </style>

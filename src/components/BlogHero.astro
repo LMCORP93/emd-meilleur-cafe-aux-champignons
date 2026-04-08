@@ -201,7 +201,7 @@ const { title, description, author, authorAvatar, date, readingTime, bannerImage
   }
   .hero-cta-price {
     font-family: 'Archivo', sans-serif;
-    font-size: 1.25rem;
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.25rem);
     font-weight: 600;
     color: #242424;
   }
@@ -226,7 +226,7 @@ const { title, description, author, authorAvatar, date, readingTime, bannerImage
     font-size: 0.875rem;
     font-weight: 600;
     padding: 0.5rem 1.25rem;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     text-decoration: none;
     transition: background-color 0.2s;
     cursor: pointer;

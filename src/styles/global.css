@@ -231,9 +231,10 @@ html {
 .content-column {
   display: flex;
   flex-direction: column;
+  gap: 1.5rem;
 }
 .content-section {
-  margin-bottom: 2rem;
+  margin-bottom: 0;
 }
 
 /* ── Sidebar (sticky) ───────────────────────────────────────────── */
@@ -263,15 +264,16 @@ html {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* ── Review promo card grid ──────────────────────────────────────── */
+/* ── Review promo card grid (0.65fr / 1fr like Webflow) ─────────── */
 .review-grid-card {
   display: grid;
-  grid-template-columns: 14rem 1fr;
-  gap: 1.5rem;
+  grid-template-columns: 0.65fr 1fr;
   border-radius: 1rem;
   overflow: hidden;
   background: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+  width: 100%;
 }
 @media (max-width: 767px) {
   .review-grid-card {

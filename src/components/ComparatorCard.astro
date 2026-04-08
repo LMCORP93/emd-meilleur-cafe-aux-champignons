@@ -76,7 +76,7 @@ const chevronId = `chevron-${product.slug}`;
       </div>
 
       <!-- Product name -->
-      <h3 class="font-heading font-bold text-text-dark text-lg md:text-xl leading-snug mb-2">
+      <h3 class="font-heading font-bold text-text-dark text-h4 leading-snug mb-2">
         {product.name}
       </h3>
 
@@ -130,7 +130,7 @@ const chevronId = `chevron-${product.slug}`;
           href={product.affiliateLink}
           rel="nofollow sponsored"
           target="_blank"
-          class="cta-button inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-heading font-semibold text-sm px-6 py-2.5 rounded transition-colors flex-1"
+          class="cta-button inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-heading font-semibold text-sm px-6 py-2.5 transition-colors flex-1"
         >
           Visiter {product.brand}
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -253,7 +253,7 @@ const chevronId = `chevron-${product.slug}`;
 
 <style>
   .comparator-card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   }
 
   .comparator-card .cta-button:hover {
@@ -263,6 +263,7 @@ const chevronId = `chevron-${product.slug}`;
 
   .comparator-card .cta-button {
     transition: all 0.2s ease;
+    border-radius: 0.5rem;
   }
 
   .accordion-content:not(.hidden) {

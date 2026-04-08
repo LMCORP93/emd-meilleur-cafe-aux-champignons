@@ -90,6 +90,7 @@ const { logoSrc, promoCode, promoPercent, originalPrice, discountPrice, ctaLink,
     border: 1px solid #e0e0e0;
     border-radius: 1rem;
     padding: 1.5rem;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
   }
 
   /* Header */
@@ -128,7 +129,7 @@ const { logoSrc, promoCode, promoPercent, originalPrice, discountPrice, ctaLink,
   }
   .sidebar-cta-price-new {
     font-family: 'Archivo', sans-serif;
-    font-size: 1.5rem;
+    font-size: clamp(1.25rem, 1.1rem + 0.75vw, 1.75rem);
     font-weight: 700;
     color: #ef7a1a;
   }
@@ -155,7 +156,7 @@ const { logoSrc, promoCode, promoPercent, originalPrice, discountPrice, ctaLink,
     font-size: 0.875rem;
     font-weight: 600;
     padding: 0.625rem 1.5rem;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     text-decoration: none;
     transition: background-color 0.2s;
     cursor: pointer;

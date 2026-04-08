@@ -13,9 +13,9 @@ const { items } = Astro.props;
 
 <div class="toc-card">
   <!-- Header -->
-  <button class="toc-header" id="toc-trigger">
+  <button class="toc-header" id="toc-trigger" aria-expanded="true" aria-controls="toc-content">
     <span class="toc-title">Sommaire</span>
-    <svg class="toc-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <svg class="toc-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="m6 9 6 6 6-6" />
     </svg>
   </button>
@@ -56,6 +56,7 @@ const { items } = Astro.props;
       const isHidden = content.classList.contains('toc-hidden');
       content.classList.toggle('toc-hidden');
       chevron.classList.toggle('toc-chevron-up', !isHidden);
+      trigger.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
     });
   }
   initTocAccordion();

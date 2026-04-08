@@ -11,32 +11,30 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<section id="faq" class="padding-section-small">
-  <div class="container-medium padding-global">
-    <h2 class="mb-8">Questions Fréquentes</h2>
+<div class="faq-section">
+  <h2 class="faq-heading">Questions Fréquentes</h2>
 
-    <div class="max-w-content">
-      {items.map((item, i) => (
-        <div class="faq-item py-4 first:pt-0 last:pb-0">
-          <button
-            class="faq-trigger flex items-center justify-between w-full text-left gap-4 cursor-pointer"
-            data-target={`faq-answer-${i}`}
-          >
-            <span class="font-heading font-semibold text-text-dark text-sm md:text-base leading-snug">{item.question}</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-chevron transition-transform duration-300 shrink-0">
-              <path d="m6 9 6 6 6-6" />
-            </svg>
-          </button>
-          <div id={`faq-answer-${i}`} class="faq-content overflow-hidden transition-all duration-300" style="max-height: 0; opacity: 0;">
-            <div class="rich-text text-sm text-text-body leading-relaxed pt-3">
-              <p>{item.answer}</p>
-            </div>
-          </div>
+  {items.map((item, i) => (
+    <div class="faq-item">
+      <button
+        class="faq-trigger"
+        data-target={`faq-answer-${i}`}
+        aria-expanded="false"
+        aria-controls={`faq-answer-${i}`}
+      >
+        <span class="faq-question">{item.question}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-chevron" aria-hidden="true">
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </button>
+      <div id={`faq-answer-${i}`} class="faq-content" role="region" style="max-height: 0; opacity: 0;">
+        <div class="faq-answer">
+          <p>{item.answer}</p>
         </div>
-      ))}
+      </div>
     </div>
-  </div>
-</section>
+  ))}
+</div>
 
 <script>
   function initFaq() {
@@ -50,10 +48,9 @@ const { items } = Astro.props;
         const target = document.getElementById(targetId);
         if (!target) return;
 
-        // Check if this item is currently open
         const isOpen = target.style.maxHeight && target.style.maxHeight !== '0px';
 
-        // Close all others (only one open at a time)
+        // Close all others
         document.querySelectorAll('.faq-content').forEach((content) => {
           content.style.maxHeight = '0px';
           content.style.opacity = '0';
@@ -61,8 +58,10 @@ const { items } = Astro.props;
         document.querySelectorAll('.faq-chevron').forEach((chevron) => {
           (chevron as SVGElement).style.transform = 'rotate(0deg)';
         });
+        document.querySelectorAll('.faq-trigger').forEach((t) => {
+          t.setAttribute('aria-expanded', 'false');
+        });
 
-        // Toggle target
         if (!isOpen) {
           target.style.maxHeight = target.scrollHeight + 'px';
           target.style.opacity = '1';
@@ -70,6 +69,7 @@ const { items } = Astro.props;
           if (chevron) {
             (chevron as SVGElement).style.transform = 'rotate(180deg)';
           }
+          trigger.setAttribute('aria-expanded', 'true');
         }
       });
     });
@@ -77,3 +77,71 @@ const { items } = Astro.props;
 
   initFaq();
 </script>
+
+<style>
+  .faq-section {
+    width: 100%;
+  }
+
+  .faq-heading {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.375rem, 1.15rem + 1.1vw, 1.75rem);
+    color: #242424;
+    margin: 0 0 1.25rem;
+    line-height: 1.2;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid #e5e5e5;
+    padding: 1rem 0;
+  }
+  .faq-item:first-child {
+    padding-top: 0;
+  }
+  .faq-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .faq-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    text-align: left;
+    gap: 1rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  .faq-question {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 600;
+    font-size: clamp(0.8125rem, 0.8rem + 0.1vw, 0.875rem);
+    color: #242424;
+    line-height: 1.4;
+  }
+
+  .faq-chevron {
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+  }
+
+  .faq-content {
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .faq-answer {
+    padding-top: 0.75rem;
+    font-size: clamp(0.8125rem, 0.8rem + 0.1vw, 0.875rem);
+    color: #333;
+    line-height: 1.6;
+  }
+  .faq-answer p {
+    margin: 0;
+  }
+</style>
