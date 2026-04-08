@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://meilleur-lion-mane.com/sitemap-index.xml

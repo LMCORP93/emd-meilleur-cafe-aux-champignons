@@ -1,23 +1,67 @@
 ---
 ---
 
-<section class="padding-section-small">
-  <div class="container-medium padding-global">
-    <div class="bg-white rounded-xl shadow-card p-6 md:p-8 text-center max-w-content mx-auto">
-      <!-- Shield icon + heading -->
-      <div class="flex items-center justify-center gap-2 mb-4">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef7a1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
-        </svg>
-        <h3 class="font-heading font-bold text-text-dark text-lg mb-0">Nos critères éditoriaux</h3>
-      </div>
-
-      <p class="text-text-body text-sm leading-relaxed mb-4">
-        Chez LoremReview, nous nous engageons à fournir des analyses objectives et fiables. Chaque produit est testé selon des critères rigoureux incluant la composition, l'efficacité, le rapport qualité-prix et les retours clients.
-      </p>
-      <p class="text-text-grey text-sm leading-relaxed mb-0">
-        Notre équipe éditoriale met à jour régulièrement les comparatifs pour garantir des informations à jour et pertinentes. Nous ne recevons aucune rémunération pour modifier nos évaluations.
-      </p>
-    </div>
+<div class="editorial-box">
+  <!-- Header -->
+  <div class="editorial-header">
+    <svg class="editorial-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+    </svg>
+    <h3 class="editorial-heading">Nos critères éditoriaux</h3>
   </div>
-</section>
+
+  <!-- Body -->
+  <p class="editorial-text">
+    Chez LoremReview, nous nous engageons à fournir des analyses objectives et fiables. Chaque produit est testé selon des critères rigoureux incluant la composition, l'efficacité, le rapport qualité-prix et les retours clients.
+  </p>
+  <p class="editorial-text editorial-text-light">
+    Notre équipe éditoriale met à jour régulièrement les comparatifs pour garantir des informations à jour et pertinentes. Nous ne recevons aucune rémunération pour modifier nos évaluations.
+  </p>
+</div>
+
+<style>
+  .editorial-box {
+    background-color: #f4f2ec;
+    border-radius: 1rem;
+    padding: 1.25rem;
+    box-shadow: none;
+  }
+  @media (min-width: 768px) {
+    .editorial-box { padding: 1.5rem; }
+  }
+
+  .editorial-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .editorial-icon {
+    color: #ef7a1a;
+    flex-shrink: 0;
+  }
+
+  .editorial-heading {
+    font-family: 'Archivo', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    color: #242424;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .editorial-text {
+    font-size: clamp(0.8125rem, 0.8rem + 0.1vw, 0.875rem);
+    color: #333;
+    line-height: 1.6;
+    margin: 0 0 0.75rem;
+  }
+  .editorial-text:last-child {
+    margin-bottom: 0;
+  }
+
+  .editorial-text-light {
+    color: #777;
+  }
+</style>

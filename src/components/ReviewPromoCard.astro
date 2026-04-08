@@ -134,6 +134,9 @@ const { product } = Astro.props;
     .rpc-card {
       grid-template-columns: 1fr;
     }
+    .rpc-img-col {
+      max-height: 12rem;
+    }
   }
 
   /* ── Left: image — full bleed, compact ── */
@@ -271,6 +274,19 @@ const { product } = Astro.props;
     align-items: center;
     gap: 0.75rem;
     flex-wrap: wrap;
+  }
+  @media (max-width: 767px) {
+    .rpc-actions {
+      flex-direction: column;
+    }
+    .rpc-cta {
+      width: 100%;
+      justify-content: center;
+    }
+    .promo-code-btn {
+      width: 100%;
+      justify-content: center;
+    }
   }
 
   .rpc-cta {

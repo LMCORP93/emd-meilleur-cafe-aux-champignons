@@ -2,24 +2,29 @@
 interface Props {
   promoPercent: number;
   promoCode: string;
+  affiliateLink?: string;
 }
 
-const { promoPercent, promoCode } = Astro.props;
+const { promoPercent, promoCode, affiliateLink = '#' } = Astro.props;
 ---
 
-<div id="sticky-promo" class="fixed bottom-4 right-4 z-50 md:hidden">
+<div id="sticky-promo" class="sticky-promo-wrap">
   <div class="relative">
     <a
-      href="#"
-      class="flex items-center gap-2 bg-primary hover:bg-primary-dark text-white font-heading font-semibold text-sm px-5 py-3 shadow-lg transition-colors no-underline"
-      style="border-radius: 0.5rem;"
-      id="sticky-promo-link"
+      href={affiliateLink}
+      rel="nofollow sponsored"
+      target="_blank"
+      class="sticky-promo-link"
     >
-      {promoPercent}% OFF 🎁
+      <span class="sticky-promo-icon">🎁</span>
+      <span class="sticky-promo-text">-{promoPercent}% avec le code {promoCode}</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14" /><path d="m12 5 7 7-7 7" />
+      </svg>
     </a>
     <button
       id="sticky-promo-close"
-      class="absolute -top-2 -right-2 w-6 h-6 bg-white rounded-full shadow flex items-center justify-center cursor-pointer border-0"
+      class="sticky-promo-close"
       aria-label="Fermer"
     >
       <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#333" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
@@ -33,15 +38,25 @@ const { promoPercent, promoCode } = Astro.props;
   function initStickyPromo() {
     const promo = document.getElementById('sticky-promo') as HTMLElement | null;
     const closeBtn = document.getElementById('sticky-promo-close');
-    const link = document.getElementById('sticky-promo-link');
 
     if (!promo) return;
 
-    // Persist close via sessionStorage
     if (sessionStorage.getItem('emd-sticky-closed')) {
       promo.style.display = 'none';
       return;
     }
+
+    // Show after scrolling past hero
+    let shown = false;
+    const onScroll = () => {
+      if (shown) return;
+      if (window.scrollY > 400) {
+        promo.classList.add('visible');
+        shown = true;
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
 
     if (closeBtn) {
       closeBtn.addEventListener('click', (e) => {
@@ -55,3 +70,72 @@ const { promoPercent, promoCode } = Astro.props;
 
   initStickyPromo();
 </script>
+
+<style>
+  .sticky-promo-wrap {
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    z-index: 50;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+  }
+  .sticky-promo-wrap.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  @media (min-width: 768px) {
+    .sticky-promo-wrap { display: none !important; }
+  }
+
+  .sticky-promo-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: #ef7a1a;
+    color: #ffffff;
+    font-family: 'Archivo', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 0.875rem;
+    padding: 0.875rem 1.25rem;
+    border-radius: 0.75rem;
+    text-decoration: none;
+    white-space: nowrap;
+    box-shadow: 0 4px 20px rgba(239, 122, 26, 0.4);
+    transition: background-color 0.2s;
+  }
+  .sticky-promo-link:hover {
+    background-color: #d66a12;
+    color: #ffffff;
+  }
+
+  .sticky-promo-icon {
+    font-size: 1rem;
+  }
+
+  .sticky-promo-close {
+    position: absolute;
+    top: -0.5rem;
+    right: -0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+  }
+
+  .sticky-promo-text {
+    flex: 1;
+  }
+</style>

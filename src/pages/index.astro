@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import BlogHero from '@/components/BlogHero.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import FirstReview from '@/components/FirstReview.astro';
 import TableOfContents from '@/components/TableOfContents.astro';
 import ImageBlock from '@/components/ImageBlock.astro';
@@ -11,6 +12,7 @@ import FaqAccordion from '@/components/FaqAccordion.astro';
 import SidebarCTA from '@/components/SidebarCTA.astro';
 import ArticleGrid from '@/components/ArticleGrid.astro';
 import EditorialCriteria from '@/components/EditorialCriteria.astro';
+import StickyPromoButton from '@/components/StickyPromoButton.astro';
 import config from '@/data/site.config';
 
 const topProduct = config.products[0];
@@ -19,31 +21,47 @@ const sampleArticles = [
   {
     title: 'Les meilleurs compléments alimentaires en 2026',
     excerpt: 'Notre sélection des produits les plus efficaces pour votre bien-être quotidien.',
-    image: '/logo.svg',
+    image: 'https://cdn.prod.website-files.com/68c02c2c477fdd467e6e08a1/69634d74b3e93e5fd12d108d_1_8789ecf0-bcc9-4b45-b2f9-c8bfca54ab16_1000x1000_crop_center.webp',
     href: '/',
   },
   {
     title: 'Comment choisir un complément de qualité ?',
     excerpt: 'Les critères essentiels pour identifier un produit fiable et efficace.',
-    image: '/logo.svg',
+    image: 'https://cdn.prod.website-files.com/68c02c2c477fdd467e6e08a1/69634d74b3e93e5fd12d108d_1_8789ecf0-bcc9-4b45-b2f9-c8bfca54ab16_1000x1000_crop_center.webp',
     href: '/',
   },
   {
     title: 'Guide complet sur les vitamines essentielles',
     excerpt: 'Tout ce que vous devez savoir sur les vitamines et leurs bienfaits.',
-    image: '/logo.svg',
+    image: 'https://cdn.prod.website-files.com/68c02c2c477fdd467e6e08a1/69634d74b3e93e5fd12d108d_1_8789ecf0-bcc9-4b45-b2f9-c8bfca54ab16_1000x1000_crop_center.webp',
     href: '/',
   },
 ];
 ---
 
 <BaseLayout title={config.seo.title} description={config.seo.description} ogImage={config.seo.ogImage}>
-  <!-- JSON-LD -->
+  <!-- JSON-LD: BreadcrumbList -->
+  <script type="application/ld+json" slot="json-ld" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Accueil", "item": config.domain },
+      ...config.breadcrumbs.map((b, i) => ({
+        "@type": "ListItem",
+        "position": i + 2,
+        "name": b.label,
+        "item": `${config.domain}${b.href}`,
+      })),
+    ],
+  })} />
+
+  <!-- JSON-LD: Article + Review -->
   <script type="application/ld+json" slot="json-ld" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": config.seo.title,
     "description": config.seo.description,
+    "image": `${config.domain}${config.seo.ogImage}`,
     "author": {
       "@type": "Person",
       "name": config.author.name,
@@ -51,9 +69,45 @@ const sampleArticles = [
     "publisher": {
       "@type": "Organization",
       "name": config.siteName,
+      "logo": { "@type": "ImageObject", "url": `${config.domain}/logo.svg` },
     },
     "datePublished": "2026-01-15",
-    "dateModified": "2026-04-07",
+    "dateModified": "2026-04-08",
+    "mainEntityOfPage": { "@type": "WebPage", "@id": config.domain },
+    "review": {
+      "@type": "Review",
+      "itemReviewed": {
+        "@type": "Product",
+        "name": topProduct.name,
+        "image": topProduct.image,
+        "brand": { "@type": "Brand", "name": topProduct.brand },
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "EUR",
+          "price": topProduct.discountPrice.replace(/[^\d.,]/g, '').replace(',', '.'),
+          "availability": "https://schema.org/InStock",
+          "url": topProduct.affiliateLink,
+        },
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": topProduct.rating,
+        "bestRating": 10,
+        "worstRating": 0,
+      },
+      "author": { "@type": "Person", "name": config.author.name },
+    },
+  })} />
+
+  <!-- JSON-LD: FAQPage -->
+  <script type="application/ld+json" slot="json-ld" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": config.faq.map((f) => ({
+      "@type": "Question",
+      "name": f.question,
+      "acceptedAnswer": { "@type": "Answer", "text": f.answer },
+    })),
   })} />
 
   <!-- Blog Hero -->
@@ -74,10 +128,16 @@ const sampleArticles = [
       discountPrice: topProduct.discountPrice,
       affiliateLink: topProduct.affiliateLink,
     }}
+    trustpilotRating={topProduct.rating}
+    trustpilotCount={topProduct.reviewCount}
   />
 
-  <main class="padding-section-medium" style="background-color: #ffffff;">
+  <main class="padding-section-small md:padding-section-medium" style="background-color: #ffffff;">
     <div class="container-large padding-global">
+
+      <!-- Breadcrumbs -->
+      <Breadcrumbs items={config.breadcrumbs} />
+
       <div class="blog-grid">
 
         <!-- ═══ LEFT COLUMN (content) ═══ -->
@@ -180,6 +240,9 @@ const sampleArticles = [
 
           <!-- 🔲 À VALIDER — FAQ -->
           <FaqAccordion items={config.faq} />
+
+          <!-- Editorial Criteria -->
+          <EditorialCriteria />
         </div>
 
         <!-- ═══ RIGHT COLUMN (sticky sidebar) ═══ -->
@@ -206,6 +269,9 @@ const sampleArticles = [
   <!-- Article Grid -->
   <ArticleGrid articles={sampleArticles} />
 
-  <!-- Editorial Criteria -->
-  <EditorialCriteria />
+  <!-- Sticky Promo (mobile only) -->
+  <StickyPromoButton
+    promoPercent={topProduct.promoPercent}
+    promoCode={topProduct.promoCode}
+  />
 </BaseLayout>

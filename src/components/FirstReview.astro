@@ -105,9 +105,12 @@ const { tag, heading, paragraphs, assets, considerations, product } = Astro.prop
   .quick-summary-section {
     background-color: #f4f2ec;
     border-radius: 1rem;
-    padding: 2rem;
+    padding: 1.25rem;
     margin-bottom: 2rem;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    box-shadow: none;
+  }
+  @media (min-width: 768px) {
+    .quick-summary-section { padding: 2rem; }
   }
 
   .quick-summary-inner {

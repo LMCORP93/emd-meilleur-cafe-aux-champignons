@@ -196,8 +196,8 @@ html {
 /* ── Inner note box (moved to component scoped styles) ──────────── */
 
 /* ── Rich text content styling ────────────────────────────────────── */
-.rich-text h2 { margin-top: 2.5rem; margin-bottom: 1rem; }
-.rich-text h3 { margin-top: 2rem; margin-bottom: 0.75rem; font-weight: 600; }
+.rich-text h2 { margin-top: 2rem; margin-bottom: 0.75rem; }
+.rich-text h3 { margin-top: 1.5rem; margin-bottom: 0.5rem; font-weight: 600; }
 .rich-text p { margin-bottom: 0.75rem; line-height: 1.625; }
 .rich-text ul { list-style-type: disc; margin-bottom: 0.75rem; }
 .rich-text ul li { margin-bottom: 0.5rem; padding-left: 0.25rem; line-height: 1.5; }
@@ -207,6 +207,10 @@ html {
 .rich-text a { color: #ef7a1a; text-decoration: underline; }
 .rich-text > :first-child { margin-top: 0; }
 .rich-text > :last-child { margin-bottom: 0; }
+@media (min-width: 768px) {
+  .rich-text h2 { margin-top: 2.5rem; margin-bottom: 1rem; }
+  .rich-text h3 { margin-top: 2rem; margin-bottom: 0.75rem; }
+}
 
 /* ── Blog hero gradient ──────────────────────────────────────────── */
 .hero-blog-gradient {
@@ -224,8 +228,8 @@ html {
 /* ── Blog grid (content + sidebar) ───────────────────────────────── */
 .blog-grid {
   display: grid;
-  grid-template-columns: 2fr 0.5fr;
-  gap: 3rem;
+  grid-template-columns: 1fr;
+  gap: 2rem;
   align-items: start;
 }
 .content-column {
@@ -243,15 +247,16 @@ html {
   flex-direction: column;
 }
 .sidebar-sticky {
-  position: sticky;
-  top: 6rem;
+  position: static;
 }
-.sidebar-sticky-spacer {
-  height: 1.5rem;
-}
-@media (max-width: 991px) {
+@media (min-width: 992px) {
   .blog-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 2fr 0.5fr;
+    gap: 3rem;
+  }
+  .sidebar-sticky {
+    position: sticky;
+    top: 6rem;
   }
 }
 

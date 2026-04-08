@@ -44,6 +44,7 @@ export interface SiteConfig {
     description: string;
     ogImage: string;
   };
+  breadcrumbs: { label: string; href: string }[];
   quickSummary: {
     assets: string[];
     considerations: string[];
@@ -82,6 +83,11 @@ const config: SiteConfig = {
     description: 'Découvrez notre analyse complète du Lorem Supplement. Avantages, inconvénients, prix et code promo exclusif. Comparatif avec les meilleures alternatives.',
     ogImage: '/og-image.svg',
   },
+
+  breadcrumbs: [
+    { label: 'Compléments Alimentaires', href: '/complements-alimentaires' },
+    { label: 'Lorem Supplement', href: '/complements-alimentaires/lorem-supplement' },
+  ],
 
   quickSummary: {
     assets: [
