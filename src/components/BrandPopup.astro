@@ -145,8 +145,7 @@ const shortDesc = description.length > 100 ? description.slice(0, 97) + '...' : 
           if (textEl) {
             const original = textEl.textContent || '';
             textEl.textContent = '✓ Copié !';
-            textEl.style.color = '#00b67a';
-            setTimeout(() => { textEl.textContent = original; textEl.style.color = ''; }, 1500);
+            setTimeout(() => { textEl.textContent = original; }, 1500);
           }
         });
       });

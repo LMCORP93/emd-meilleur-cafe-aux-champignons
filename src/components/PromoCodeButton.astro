@@ -22,46 +22,32 @@ const { code, percent } = Astro.props;
 </button>
 
 <script>
-  function initPromoCopyButtons() {
-    document.querySelectorAll('.copy-promo-btn').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const code = (btn as HTMLElement).getAttribute('data-code') || '';
-        const textEl = btn.querySelector('.promo-code-text');
-
-        navigator.clipboard.writeText(code).then(() => {
-          if (textEl) {
-            const original = textEl.textContent || '';
-            textEl.textContent = '✓ Copié !';
-            textEl.style.color = '#00b67a';
-            setTimeout(() => {
-              textEl.textContent = original;
-              textEl.style.color = '';
-            }, 1500);
-          }
-        });
+  document.querySelectorAll('.copy-promo-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const code = (btn as HTMLElement).getAttribute('data-code') || '';
+      const textEl = btn.querySelector('.promo-code-text');
+      navigator.clipboard.writeText(code).then(() => {
+        if (textEl) {
+          const original = textEl.textContent || '';
+          textEl.textContent = '✓ Copié !';
+          setTimeout(() => { textEl.textContent = original; }, 1500);
+        }
       });
     });
-  }
-
-  initPromoCopyButtons();
+  });
 </script>
 
 <style>
-  /* PromoCodeButton-specific styles only (layout is in global .btn-dashed) */
   .promo-icon {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
   }
-  .promo-icon svg {
-    width: 16px;
-    height: 16px;
-  }
+  .promo-icon svg { width: 16px; height: 16px; }
   .promo-code-text {
     font-weight: 700;
     color: #242424;
-    transition: color 0.2s;
   }
   .promo-percent {
     font-weight: 700;

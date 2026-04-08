@@ -109,27 +109,3 @@ const {
     />
   </body>
 </html>
-
-<!-- Global: Copy promo code buttons -->
-<script>
-  document.querySelectorAll('.copy-promo-btn').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const code = (btn as HTMLElement).getAttribute('data-code') || '';
-      navigator.clipboard.writeText(code).then(() => {
-        // Show brief feedback
-        const existing = btn.parentElement?.querySelector('.copy-feedback');
-        if (existing) {
-          existing.textContent = '✓ Code copié !';
-          existing.classList.add('show');
-          setTimeout(() => existing.classList.remove('show'), 2000);
-        } else {
-          const fb = document.createElement('span');
-          fb.className = 'copy-feedback show';
-          fb.textContent = '✓ Code copié !';
-          btn.parentElement?.appendChild(fb);
-          setTimeout(() => fb.classList.remove('show'), 2000);
-        }
-      });
-    });
-  });
-</script>
