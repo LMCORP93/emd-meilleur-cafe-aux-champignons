@@ -15,82 +15,65 @@ interface Props {
 }
 
 const {
-  brand, brandLogo, productImage, productName, productType,
+  brand, brandLogo, productImage, productName,
   description, promoCode, promoPercent, originalPrice, discountPrice,
   affiliateLink,
 } = Astro.props;
 
-// Truncate description to 2 lines max
-const shortDesc = description.length > 120 ? description.slice(0, 117) + '...' : description;
+const shortDesc = description.length > 100 ? description.slice(0, 97) + '...' : description;
 ---
 
-<div id="brand-popup" class="brand-popup" role="dialog" aria-modal="true" aria-label="Offre exclusive">
-  <div id="popup-overlay" class="brand-popup-overlay"></div>
+<div id="brand-popup" class="bp" role="dialog" aria-modal="true" aria-label="Offre exclusive">
+  <div id="popup-overlay" class="bp-overlay"></div>
+  <div class="bp-card">
+    <button id="popup-close" class="bp-close" aria-label="Fermer">
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 6 6 18" /><path d="m6 6 12 12" />
+      </svg>
+    </button>
 
-  <div class="brand-popup-container">
-    <div class="brand-popup-card">
-      <!-- Close button -->
-      <button id="popup-close" class="brand-popup-close" aria-label="Fermer">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 6 6 18" /><path d="m6 6 12 12" />
-        </svg>
-      </button>
+    <div class="bp-inner">
+      <!-- Logo -->
+      <img src={brandLogo} alt={`Logo ${brand}`} class="bp-logo" width="120" height="120" />
 
-      <!-- Top: logo + tag inline -->
-      <div class="brand-popup-top">
-        <img src={brandLogo} alt={`Logo ${brand}`} class="brand-popup-logo" width="100" height="100" />
-        <span class="brand-popup-tag">Offre exclusive</span>
+      <!-- Tag -->
+      <span class="bp-tag">Offre exclusive</span>
+
+      <!-- Title -->
+      <h3 class="bp-title">{productName}</h3>
+
+      <!-- Desc -->
+      <p class="bp-desc">{shortDesc}</p>
+
+      <!-- Image -->
+      <img src={productImage} alt={productName} class="bp-img" loading="lazy" />
+
+      <!-- Price -->
+      <div class="bp-price">
+        <span class="bp-price-old">{originalPrice}</span>
+        <span class="bp-price-new">{discountPrice}</span>
       </div>
 
-      <div class="brand-popup-body">
-        <!-- Product name -->
-        <h3 class="brand-popup-title">{productName}</h3>
-
-        <!-- Description (2 lines max) -->
-        <p class="brand-popup-desc">{shortDesc}</p>
-
-        <!-- Product image (square, rounded) -->
-        <img src={productImage} alt={productName} class="brand-popup-image" loading="lazy" />
-
-        <!-- Price -->
-        <div class="brand-popup-price">
-          <span class="brand-popup-price-old">{originalPrice}</span>
-          <span class="brand-popup-price-new">{discountPrice}</span>
+      <!-- Buttons stacked -->
+      {promoCode && promoPercent > 0 && (
+        <div class="bp-btns">
+          <a href={affiliateLink} rel="nofollow sponsored" target="_blank" class="btn-solid" style="width:100%">
+            <span>Acheter maintenant</span>
+            <span class="btn-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </span>
+          </a>
+          <button id="popup-copy-btn" class="copy-promo-btn btn-dashed" data-code={promoCode} style="width:100%">
+            <span class="promo-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2m0 16H8V7h11z"></path>
+              </svg>
+            </span>
+            <span class="promo-code-text">{promoCode}</span>
+            <span class="promo-percent">-{promoPercent}%</span>
+          </button>
         </div>
-
-        <!-- Buttons row -->
-        {promoCode && promoPercent > 0 && (
-          <div class="brand-popup-buttons">
-            <!-- Copy promo button -->
-            <button
-              id="popup-copy-btn"
-              class="copy-promo-btn btn-dashed"
-              data-code={promoCode}
-            >
-              <span class="promo-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2m0 16H8V7h11z"></path>
-                </svg>
-              </span>
-              <span class="promo-code-text">{promoCode}</span>
-              <span class="promo-percent">-{promoPercent}%</span>
-            </button>
-
-            <!-- CTA -->
-            <a
-              href={affiliateLink}
-              rel="nofollow sponsored"
-              target="_blank"
-              class="btn-solid"
-            >
-              <span>Acheter maintenant</span>
-              <span class="btn-arrow">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-              </span>
-            </a>
-          </div>
-        )}
-      </div>
+      )}
     </div>
   </div>
 </div>
@@ -103,7 +86,6 @@ const shortDesc = description.length > 120 ? description.slice(0, 117) + '...' :
     const copyBtn = document.getElementById('popup-copy-btn') as HTMLElement | null;
 
     if (!popup) return;
-
     if (sessionStorage.getItem('emd-brand-popup-shown')) return;
 
     const timer = setTimeout(() => {
@@ -144,176 +126,82 @@ const shortDesc = description.length > 120 ? description.slice(0, 117) + '...' :
       });
     }
   }
-
   initBrandPopup();
 </script>
 
 <style>
-  /* ── Popup ── */
-  .brand-popup {
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .bp {
+    position: fixed; inset: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: center;
     padding: 1rem;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+    opacity: 0; visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
   }
-  .brand-popup.is-open {
-    opacity: 1;
-    visibility: visible;
+  .bp.is-open { opacity: 1; visibility: visible; }
+
+  .bp-overlay {
+    position: absolute; inset: 0;
+    background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);
   }
 
-  .brand-popup-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(4px);
-  }
-
-  .brand-popup-container {
+  .bp-card {
     position: relative;
-    width: 100%;
-    max-width: 380px;
+    width: 100%; max-width: 340px;
+    background: #fff; border-radius: 0.75rem;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
   }
 
-  .brand-popup-card {
-    position: relative;
-    background: #ffffff;
-    border-radius: 0.75rem;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
+  .bp-close {
+    position: absolute; top: 0.5rem; right: 0.5rem; z-index: 10;
+    width: 1.5rem; height: 1.5rem;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; background: #f0f0f0; border: none; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .bp-close:hover { background: #e0e0e0; }
+
+  .bp-inner {
+    padding: 1.5rem 1.25rem 1.25rem;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 0.5rem; text-align: center;
   }
 
-  /* ── Close ── */
-  .brand-popup-close {
-    position: absolute;
-    top: 0.625rem;
-    right: 0.625rem;
-    z-index: 10;
-    width: 1.75rem;
-    height: 1.75rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: #f4f4f4;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  .brand-popup-close:hover {
-    background: #e0e0e0;
+  .bp-logo {
+    width: 120px; height: 120px; object-fit: contain;
   }
 
-  /* ── Top: logo + tag ── */
-  .brand-popup-top {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.625rem;
-    padding-top: 1.75rem;
-  }
-  .brand-popup-logo {
-    width: 96px;
-    height: 96px;
-    object-fit: contain;
-  }
-  .brand-popup-tag {
-    display: inline-block;
-    background-color: #ef7a1a;
-    color: #fff;
-    font-family: 'Archivo', sans-serif;
-    font-weight: 700;
-    font-size: 0.6875rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 0.2rem 0.75rem;
-    border-radius: 999px;
+  .bp-tag {
+    background: #ef7a1a; color: #fff;
+    font-family: 'Archivo', sans-serif; font-weight: 700;
+    font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.04em;
+    padding: 0.15rem 0.625rem; border-radius: 999px;
   }
 
-  /* ── Body ── */
-  .brand-popup-body {
-    padding: 1rem 1.5rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-    text-align: center;
+  .bp-title {
+    font-family: 'Archivo', sans-serif; font-weight: 700;
+    font-size: 1.0625rem; color: #242424; margin: 0; line-height: 1.3;
   }
 
-  /* ── Title ── */
-  .brand-popup-title {
-    font-family: 'Archivo', sans-serif;
-    font-weight: 700;
-    font-size: 1.125rem;
-    color: #242424;
-    margin: 0;
-    line-height: 1.3;
+  .bp-desc {
+    font-size: 0.8125rem; color: #777; line-height: 1.5; margin: 0;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
   }
 
-  /* ── Description (2 lines) ── */
-  .brand-popup-desc {
-    font-size: 0.8125rem;
-    color: #777;
-    line-height: 1.5;
-    margin: 0;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+  .bp-img {
+    width: 120px; height: 120px; object-fit: contain; border-radius: 0.5rem;
   }
 
-  /* ── Product image ── */
-  .brand-popup-image {
-    width: 140px;
-    height: 140px;
-    object-fit: contain;
-    border-radius: 0.5rem;
+  .bp-price {
+    display: flex; align-items: baseline; gap: 0.5rem;
+  }
+  .bp-price-old { font-size: 0.8125rem; color: #999; text-decoration: line-through; }
+  .bp-price-new {
+    font-family: 'Archivo', sans-serif; font-weight: 800;
+    font-size: 1.25rem; color: #ef7a1a; line-height: 1;
   }
 
-  /* ── Price ── */
-  .brand-popup-price {
-    display: flex;
-    align-items: baseline;
-    gap: 0.5rem;
-  }
-  .brand-popup-price-old {
-    font-size: 0.8125rem;
-    color: #999;
-    text-decoration: line-through;
-  }
-  .brand-popup-price-new {
-    font-family: 'Archivo', sans-serif;
-    font-weight: 800;
-    font-size: 1.375rem;
-    color: #ef7a1a;
-    line-height: 1;
-  }
-
-  /* ── Buttons row ── */
-  .brand-popup-buttons {
-    display: flex;
-    align-items: center;
-    gap: 0.625rem;
-    width: 100%;
-    margin-top: 0.25rem;
-  }
-  @media (max-width: 380px) {
-    .brand-popup-buttons {
-      flex-direction: column;
-    }
-    .brand-popup-buttons .btn-solid,
-    .brand-popup-buttons .btn-dashed {
-      width: 100%;
-      justify-content: center;
-    }
-  }
-
-  .brand-popup-buttons .btn-solid {
-    flex: 1;
+  .bp-btns {
+    display: flex; flex-direction: column; gap: 0.5rem;
+    width: 100%; margin-top: 0.125rem;
   }
 </style>
