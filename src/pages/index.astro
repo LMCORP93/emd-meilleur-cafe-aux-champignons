@@ -103,10 +103,7 @@ const sampleArticles = [
             }}
           />
 
-          <!-- 2. Table of Contents -->
-          <TableOfContents items={config.tocItems} />
-
-          <!-- 3. Rich Text multi-sections (Introduction + Composition + Efficacité) -->
+          <!-- 2. Rich Text — H2 #1: Introduction -->
           <section id="introduction" class="content-section">
             <div class="rich-text">
               <h2>Introduction</h2>
@@ -119,19 +116,15 @@ const sampleArticles = [
             </div>
           </section>
 
-          <!-- 4. Image Block -->
-          <ImageBlock
-            src="/banner-placeholder.jpg"
-            alt="Photo produit"
-            caption="Le Lorem Supplement en conditionnement d'origine."
-          />
-
-          <!-- 5. Composition -->
+          <!-- 3. Rich Text — H2 #2: Composition -->
           <section id="composition" class="content-section">
             <div class="rich-text">
               <h2>Composition & Ingrédients</h2>
               <p>
                 La composition du Lorem Supplement est l'un de ses principaux atouts. Voici les ingrédients clés qui font la différence :
+              </p>
+              <p>
+                Chaque ingrédient est dosé de manière optimale selon les études scientifiques les plus récentes. La formulation est 100% naturelle, sans additifs ni conservateurs artificiels.
               </p>
               <ul>
                 <li><strong>Vitamines B complexe</strong> — Pour l'énergie et le métabolisme</li>
@@ -141,6 +134,16 @@ const sampleArticles = [
               </ul>
             </div>
           </section>
+
+          <!-- 4. Image Block -->
+          <ImageBlock
+            src="/banner-placeholder.jpg"
+            alt="Photo produit"
+            caption="Le Lorem Supplement en conditionnement d'origine."
+          />
+
+          <!-- 5. Table of Contents -->
+          <TableOfContents items={config.tocItems} />
 
           <!-- 6. ReviewPromoCard — Produit principal -->
           <ReviewPromoCard product={{
