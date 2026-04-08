@@ -103,7 +103,12 @@ const sampleArticles = [
             }}
           />
 
-          <!-- 2. Rich Text — H2 #1: Introduction -->
+          <!-- 2. Table of Contents -->
+          <TableOfContents items={config.tocItems} />
+
+          <!-- ═══ TEMPLATE ELEMENTS — À valider un par un ═══ -->
+
+          <!-- 3. Rich Text — H2 #1: Introduction -->
           <section id="introduction" class="content-section">
             <div class="rich-text">
               <h2>Introduction</h2>
@@ -116,7 +121,7 @@ const sampleArticles = [
             </div>
           </section>
 
-          <!-- 3. Rich Text — H2 #2: Composition -->
+          <!-- 4. Rich Text — H2 #2: Composition -->
           <section id="composition" class="content-section">
             <div class="rich-text">
               <h2>Composition & Ingrédients</h2>
@@ -135,15 +140,12 @@ const sampleArticles = [
             </div>
           </section>
 
-          <!-- 4. Image Block -->
+          <!-- 5. Image Block -->
           <ImageBlock
             src="/banner-placeholder.jpg"
             alt="Photo produit"
             caption="Le Lorem Supplement en conditionnement d'origine."
           />
-
-          <!-- 5. Table of Contents -->
-          <TableOfContents items={config.tocItems} />
 
           <!-- 6. ReviewPromoCard — Produit principal -->
           <ReviewPromoCard product={{
