@@ -28,6 +28,7 @@ export interface SiteConfig {
   brand: string;
   product: string;
   productCategory: string;
+  productFormat: string;
   tagline: string;
   affiliateLink: string;
   promoCode: string;
@@ -64,6 +65,7 @@ const config: SiteConfig = {
   brand: 'Lorem Brand',
   product: 'Lorem Supplement',
   productCategory: 'Compléments Alimentaires',
+  productFormat: 'Poudre',
   tagline: 'Le guide complet pour faire le bon choix',
 
   affiliateLink: 'https://example.com/go',

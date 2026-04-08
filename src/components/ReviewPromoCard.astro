@@ -7,6 +7,7 @@ interface Product {
   image: string;
   rating: number;
   productType: string;
+  productCategory: string;
   origin: string;
   availability: string;
   shipping?: string;
@@ -51,11 +52,11 @@ const { product } = Astro.props;
 
     <!-- Info rows -->
     <div class="rpc-info">
-      <!-- Type -->
+      <!-- Type de complément -->
       <div class="rpc-info-row">
-        <svg class="rpc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 17 3.5s0 4-3 7"/><path d="M5.2 5.2C7 3 10 2 13 2"/></svg>
-        <span class="rpc-label">Type:</span>
-        <span class="rpc-value">{product.productType}</span>
+        <svg class="rpc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c-4.97 0-9 3.13-9 7s4.03 7 9 7 9-3.13 9-7-4.03-7-9-7z"/><path d="M12 3c-1.66 0-3 1.12-3 2.5S10.34 8 12 8s3-1.12 3-2.5S13.66 3 12 3z"/><path d="M9 17v2a3 3 0 0 0 6 0v-2"/><path d="M12 17v5"/></svg>
+        <span class="rpc-label">Type de complément :</span>
+        <span class="rpc-value">{product.productCategory || product.productType}</span>
       </div>
       <!-- Brand Origin -->
       <div class="rpc-info-row">
@@ -96,9 +97,9 @@ const { product } = Astro.props;
         href={product.affiliateLink}
         rel="nofollow sponsored"
         target="_blank"
-        class="rpc-cta"
+        class="btn-solid rpc-cta"
       >
-        Acheter maintenant
+        <span>Acheter maintenant</span>
         <span class="rpc-cta-arrow">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </span>
@@ -279,36 +280,11 @@ const { product } = Astro.props;
     .rpc-actions {
       flex-direction: column;
     }
-    .rpc-cta {
+    .rpc-actions .btn-solid,
+    .rpc-actions .btn-dashed {
       width: 100%;
       justify-content: center;
     }
-    .promo-code-btn {
-      width: 100%;
-      justify-content: center;
-    }
-  }
-
-  .rpc-cta {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    background-color: #ef7a1a;
-    color: #ffffff;
-    font-family: 'Archivo', sans-serif;
-    font-weight: 600;
-    font-size: 0.875rem;
-    padding: 0.75rem 1.75rem;
-    border-radius: 0.5rem;
-    text-decoration: none;
-    transition: background-color 0.2s ease, transform 0.15s ease;
-    white-space: nowrap;
-  }
-
-  .rpc-cta:hover {
-    background-color: #d66a12;
-    transform: translateY(-1px);
   }
 
   .rpc-cta-arrow {

@@ -286,6 +286,75 @@ html {
   }
 }
 
+/* ── Buttons: 2 global classes ────────────────────────────────────── */
+/* .btn-solid — primary CTA (filled orange) */
+.btn-solid {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: #ef7a1a;
+  color: #ffffff;
+  font-family: 'Archivo', sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.625rem 1.5rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  line-height: 1.2;
+  height: 2.5rem;
+  box-sizing: border-box;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+.btn-solid:hover {
+  background-color: #d66a12;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(239, 122, 26, 0.35);
+  color: #ffffff;
+}
+.btn-solid:active {
+  background-color: #b85a0e;
+  transform: translateY(0);
+}
+.btn-solid span {
+  line-height: 1.2;
+}
+
+/* .btn-dashed — promo code (dashed outline) */
+.btn-dashed {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1.25rem;
+  border: 2px dashed #ef7a1a;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: #ef7a1a;
+  cursor: pointer;
+  font-family: 'Archivo', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.2;
+  height: 2.25rem;
+  box-sizing: border-box;
+  transition: background-color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+.btn-dashed span {
+  line-height: 1.2;
+}
+.btn-dashed:hover {
+  background-color: rgba(239, 122, 26, 0.06);
+  border-color: #ff8c2e;
+}
+.btn-dashed:active {
+  background-color: rgba(239, 122, 26, 0.12);
+}
+
 /* ── Copy feedback ───────────────────────────────────────────────── */
 .copy-feedback {
   font-size: 0.75rem;

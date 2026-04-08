@@ -8,9 +8,8 @@ const { code, percent } = Astro.props;
 ---
 
 <button
-  class="copy-promo-btn promo-code-btn"
+  class="copy-promo-btn btn-dashed"
   data-code={code}
-  data-code-text={code}
   type="button"
 >
   <span class="promo-icon">
@@ -48,36 +47,7 @@ const { code, percent } = Astro.props;
 </script>
 
 <style>
-  .promo-code-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.4rem;
-    padding: 0.5rem 1.25rem;
-    border: 2px dashed #ef7a1a;
-    border-radius: 0.5rem;
-    background: transparent;
-    color: #ef7a1a;
-    cursor: pointer;
-    font-family: 'Archivo', sans-serif;
-    font-size: 0.875rem;
-    font-weight: 600;
-    line-height: 1.2;
-    height: 2.25rem;
-    box-sizing: border-box;
-    transition: background-color 0.2s, border-color 0.2s;
-    white-space: nowrap;
-  }
-  .promo-code-btn span {
-    line-height: 1.2;
-  }
-  .promo-code-btn:hover {
-    background-color: rgba(239, 122, 26, 0.06);
-    border-color: #ff8c2e;
-  }
-  .promo-code-btn:active {
-    background-color: rgba(239, 122, 26, 0.12);
-  }
+  /* PromoCodeButton-specific styles only (layout is in global .btn-dashed) */
   .promo-icon {
     display: flex;
     align-items: center;
