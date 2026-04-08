@@ -75,11 +75,8 @@ const { title, description, author, authorAvatar, date, readingTime, bannerImage
             class="btn-solid"
           >
             <span>Acheter maintenant</span>
-            <span class="hero-shop-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M11.999 1.993c-5.514.001-10 4.487-10 10.001s4.486 10 10.001 10c5.513 0 9.999-4.486 10-10s-4.486-10-10.001-10.001M12 19.994c-4.412 0-8.001-3.589-8.001-8s3.589-8 8-8.001C16.411 3.994 20 7.583 20 11.994c-.001 4.411-3.59 8-8 8"></path>
-                <path fill="currentColor" d="M12 10.994H8v2h4V16l4.005-4.005L12 7.991z"></path>
-              </svg>
+            <span class="btn-arrow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </span>
           </a>
         </div>
@@ -245,14 +242,6 @@ const { title, description, author, authorAvatar, date, readingTime, bannerImage
   }
   @media (min-width: 768px) {
     .hero-buttons { gap: 1rem; margin-bottom: 2rem; }
-  }
-
-  .hero-shop-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.25rem;
-    height: 1.25rem;
   }
 
   /* Author row */
