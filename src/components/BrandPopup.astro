@@ -17,39 +17,40 @@ interface Props {
 const {
   brand, brandLogo, productImage, productName, productType,
   description, promoCode, promoPercent, originalPrice, discountPrice,
-  affiliateLink, rating,
+  affiliateLink,
 } = Astro.props;
+
+// Truncate description to 2 lines max
+const shortDesc = description.length > 120 ? description.slice(0, 117) + '...' : description;
 ---
 
 <div id="brand-popup" class="brand-popup" role="dialog" aria-modal="true" aria-label="Offre exclusive">
-  <!-- Overlay -->
   <div id="popup-overlay" class="brand-popup-overlay"></div>
 
-  <!-- Modal Content -->
   <div class="brand-popup-container">
     <div class="brand-popup-card">
       <!-- Close button -->
       <button id="popup-close" class="brand-popup-close" aria-label="Fermer">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#242424" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M18 6 6 18" /><path d="m6 6 12 12" />
         </svg>
       </button>
 
-      <div class="brand-popup-body">
-        <!-- Top: brand + tag -->
-        <div class="brand-popup-header">
-          <img src={brandLogo} alt={`Logo ${brand}`} class="brand-popup-logo" width="80" height="80" />
-          <span class="brand-popup-tag">Offre exclusive</span>
-        </div>
+      <!-- Top: logo + tag inline -->
+      <div class="brand-popup-top">
+        <img src={brandLogo} alt={`Logo ${brand}`} class="brand-popup-logo" width="100" height="100" />
+        <span class="brand-popup-tag">Offre exclusive</span>
+      </div>
 
-        <!-- Product name + description -->
+      <div class="brand-popup-body">
+        <!-- Product name -->
         <h3 class="brand-popup-title">{productName}</h3>
-        <p class="brand-popup-desc">{description}</p>
+
+        <!-- Description (2 lines max) -->
+        <p class="brand-popup-desc">{shortDesc}</p>
 
         <!-- Product image (square, rounded) -->
-        <div class="brand-popup-image-wrap">
-          <img src={productImage} alt={productName} class="brand-popup-image" loading="lazy" />
-        </div>
+        <img src={productImage} alt={productName} class="brand-popup-image" loading="lazy" />
 
         <!-- Price -->
         <div class="brand-popup-price">
@@ -57,36 +58,38 @@ const {
           <span class="brand-popup-price-new">{discountPrice}</span>
         </div>
 
-        <!-- Promo code -->
+        <!-- Buttons row -->
         {promoCode && promoPercent > 0 && (
-          <div class="brand-popup-promo">
-            <div class="brand-popup-promo-row">
-              <span class="brand-popup-promo-label">Code promo :</span>
-              <button
-                id="popup-copy-btn"
-                class="copy-promo-btn brand-popup-copy"
-                data-code={promoCode}
-              >
-                <span class="promo-code-text">{promoCode}</span>
-                <span class="promo-percent">-{promoPercent}%</span>
-              </button>
-            </div>
-            <p id="popup-copy-feedback" class="copy-feedback">✓ Code copié !</p>
+          <div class="brand-popup-buttons">
+            <!-- Copy promo button -->
+            <button
+              id="popup-copy-btn"
+              class="copy-promo-btn btn-dashed"
+              data-code={promoCode}
+            >
+              <span class="promo-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2m0 16H8V7h11z"></path>
+                </svg>
+              </span>
+              <span class="promo-code-text">{promoCode}</span>
+              <span class="promo-percent">-{promoPercent}%</span>
+            </button>
+
+            <!-- CTA -->
+            <a
+              href={affiliateLink}
+              rel="nofollow sponsored"
+              target="_blank"
+              class="btn-solid"
+            >
+              <span>Acheter maintenant</span>
+              <span class="btn-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </span>
+            </a>
           </div>
         )}
-
-        <!-- CTA Button -->
-        <a
-          href={affiliateLink}
-          rel="nofollow sponsored"
-          target="_blank"
-          class="btn-solid brand-popup-cta"
-        >
-          <span>Profiter de l'offre</span>
-          <span class="btn-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </span>
-        </a>
       </div>
     </div>
   </div>
@@ -98,14 +101,11 @@ const {
     const overlay = document.getElementById('popup-overlay');
     const closeBtn = document.getElementById('popup-close');
     const copyBtn = document.getElementById('popup-copy-btn') as HTMLElement | null;
-    const feedback = document.getElementById('popup-copy-feedback');
 
     if (!popup) return;
 
-    // Only once per session
     if (sessionStorage.getItem('emd-brand-popup-shown')) return;
 
-    // Show after 7s delay
     const timer = setTimeout(() => {
       popup.classList.add('is-open');
       document.body.style.overflow = 'hidden';
@@ -129,7 +129,6 @@ const {
     };
     document.addEventListener('keydown', escHandler);
 
-    // Copy promo code
     if (copyBtn) {
       copyBtn.addEventListener('click', () => {
         const code = copyBtn.getAttribute('data-code') || '';
@@ -150,7 +149,7 @@ const {
 </script>
 
 <style>
-  /* ── Popup hidden by default ── */
+  /* ── Popup ── */
   .brand-popup {
     position: fixed;
     inset: 0;
@@ -168,7 +167,6 @@ const {
     visibility: visible;
   }
 
-  /* ── Overlay ── */
   .brand-popup-overlay {
     position: absolute;
     inset: 0;
@@ -176,32 +174,28 @@ const {
     backdrop-filter: blur(4px);
   }
 
-  /* ── Container ── */
   .brand-popup-container {
     position: relative;
     width: 100%;
-    max-width: 440px;
-    max-height: 90vh;
-    overflow-y: auto;
+    max-width: 380px;
   }
 
-  /* ── Card ── */
   .brand-popup-card {
     position: relative;
     background: #ffffff;
-    border-radius: 1rem;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+    border-radius: 0.75rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
     overflow: hidden;
   }
 
-  /* ── Close button ── */
+  /* ── Close ── */
   .brand-popup-close {
     position: absolute;
-    top: 0.75rem;
-    right: 0.75rem;
+    top: 0.625rem;
+    right: 0.625rem;
     z-index: 10;
-    width: 2rem;
-    height: 2rem;
+    width: 1.75rem;
+    height: 1.75rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -215,29 +209,17 @@ const {
     background: #e0e0e0;
   }
 
-  /* ── Body ── */
-  .brand-popup-body {
-    padding: 2rem;
+  /* ── Top: logo + tag ── */
+  .brand-popup-top {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
-    text-align: center;
-  }
-  @media (min-width: 768px) {
-    .brand-popup-body { padding: 2.5rem; gap: 1.25rem; }
-  }
-
-  /* ── Header: logo + tag ── */
-  .brand-popup-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
+    gap: 0.625rem;
+    padding-top: 1.75rem;
   }
   .brand-popup-logo {
-    width: 64px;
-    height: 64px;
+    width: 96px;
+    height: 96px;
     object-fit: contain;
   }
   .brand-popup-tag {
@@ -246,40 +228,49 @@ const {
     color: #fff;
     font-family: 'Archivo', sans-serif;
     font-weight: 700;
-    font-size: 0.75rem;
+    font-size: 0.6875rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    padding: 0.25rem 0.75rem;
+    padding: 0.2rem 0.75rem;
     border-radius: 999px;
+  }
+
+  /* ── Body ── */
+  .brand-popup-body {
+    padding: 1rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: center;
   }
 
   /* ── Title ── */
   .brand-popup-title {
     font-family: 'Archivo', sans-serif;
     font-weight: 700;
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     color: #242424;
     margin: 0;
     line-height: 1.3;
   }
 
-  /* ── Description ── */
+  /* ── Description (2 lines) ── */
   .brand-popup-desc {
-    font-size: 0.875rem;
-    color: #595b61;
-    line-height: 1.6;
+    font-size: 0.8125rem;
+    color: #777;
+    line-height: 1.5;
     margin: 0;
-    max-width: 360px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
-  /* ── Product image (square, rounded) ── */
-  .brand-popup-image-wrap {
-    width: 100%;
-    max-width: 200px;
-  }
+  /* ── Product image ── */
   .brand-popup-image {
-    width: 100%;
-    aspect-ratio: 1;
+    width: 140px;
+    height: 140px;
     object-fit: contain;
     border-radius: 0.5rem;
   }
@@ -291,40 +282,38 @@ const {
     gap: 0.5rem;
   }
   .brand-popup-price-old {
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
     color: #999;
     text-decoration: line-through;
   }
   .brand-popup-price-new {
     font-family: 'Archivo', sans-serif;
     font-weight: 800;
-    font-size: 1.5rem;
+    font-size: 1.375rem;
     color: #ef7a1a;
     line-height: 1;
   }
 
-  /* ── Promo ── */
-  .brand-popup-promo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.25rem;
-  }
-  .brand-popup-promo-row {
+  /* ── Buttons row ── */
+  .brand-popup-buttons {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.625rem;
+    width: 100%;
+    margin-top: 0.25rem;
   }
-  .brand-popup-promo-label {
-    font-size: 0.8125rem;
-    color: #777;
+  @media (max-width: 380px) {
+    .brand-popup-buttons {
+      flex-direction: column;
+    }
+    .brand-popup-buttons .btn-solid,
+    .brand-popup-buttons .btn-dashed {
+      width: 100%;
+      justify-content: center;
+    }
   }
 
-  /* ── CTA ── */
-  .brand-popup-cta {
-    width: 100%;
-    padding: 0.875rem 2rem;
-    font-size: 1rem;
-    text-decoration: none;
+  .brand-popup-buttons .btn-solid {
+    flex: 1;
   }
 </style>
