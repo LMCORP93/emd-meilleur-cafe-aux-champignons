@@ -1,10 +1,8 @@
 ---
 interface Props {
   brand: string;
-  brandLogo: string;
   productImage: string;
   productName: string;
-  productType: string;
   description: string;
   promoCode: string;
   promoPercent: number;
@@ -15,7 +13,7 @@ interface Props {
 }
 
 const {
-  brand, brandLogo, productImage, productName,
+  brand, productImage, productName,
   description, promoCode, promoPercent, originalPrice, discountPrice,
   affiliateLink,
 } = Astro.props;
@@ -33,8 +31,8 @@ const shortDesc = description.length > 100 ? description.slice(0, 97) + '...' : 
     </button>
 
     <div class="bp-inner">
-      <!-- Logo -->
-      <img src={brandLogo} alt={`Logo ${brand}`} class="bp-logo" width="120" height="120" />
+      <!-- Product image — hero -->
+      <img src={productImage} alt={productName} class="bp-img" loading="lazy" />
 
       <!-- Tag -->
       <span class="bp-tag">Offre exclusive</span>
@@ -44,9 +42,6 @@ const shortDesc = description.length > 100 ? description.slice(0, 97) + '...' : 
 
       <!-- Desc -->
       <p class="bp-desc">{shortDesc}</p>
-
-      <!-- Image -->
-      <img src={productImage} alt={productName} class="bp-img" loading="lazy" />
 
       <!-- Price -->
       <div class="bp-price">
@@ -78,28 +73,58 @@ const shortDesc = description.length > 100 ? description.slice(0, 97) + '...' : 
   </div>
 </div>
 
+<!-- Floating button to open popup -->
+<button id="popup-trigger" class="bp-trigger" aria-label="Voir l'offre exclusive">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+    <line x1="7" y1="7" x2="7.01" y2="7"/>
+  </svg>
+  <span class="bp-trigger-text">-{promoPercent}% {promoCode}</span>
+</button>
+
 <script>
   function initBrandPopup() {
     const popup = document.getElementById('brand-popup') as HTMLElement | null;
     const overlay = document.getElementById('popup-overlay');
     const closeBtn = document.getElementById('popup-close');
     const copyBtn = document.getElementById('popup-copy-btn') as HTMLElement | null;
+    const trigger = document.getElementById('popup-trigger');
 
     if (!popup) return;
-    if (sessionStorage.getItem('emd-brand-popup-shown')) return;
 
-    const timer = setTimeout(() => {
+    let autoTimer: ReturnType<typeof setTimeout> | null = null;
+
+    // Only auto-show once per session
+    const autoShow = () => {
+      if (sessionStorage.getItem('emd-brand-popup-shown')) return;
+      autoTimer = setTimeout(() => {
+        openPopup();
+        sessionStorage.setItem('emd-brand-popup-shown', 'true');
+      }, 7000);
+    };
+
+    const openPopup = () => {
       popup.classList.add('is-open');
       document.body.style.overflow = 'hidden';
-      sessionStorage.setItem('emd-brand-popup-shown', 'true');
-    }, 7000);
+      // Hide trigger when popup is open
+      if (trigger) trigger.style.display = 'none';
+    };
 
     const closePopup = () => {
       popup.classList.remove('is-open');
       document.body.style.overflow = '';
-      clearTimeout(timer);
+      if (autoTimer) clearTimeout(autoTimer);
+      // Show trigger again after closing
+      if (trigger) trigger.style.display = '';
     };
 
+    // Auto show after 7s
+    autoShow();
+
+    // Manual open from floating button
+    if (trigger) trigger.addEventListener('click', openPopup);
+
+    // Close handlers
     if (overlay) overlay.addEventListener('click', closePopup);
     if (closeBtn) closeBtn.addEventListener('click', closePopup);
 
@@ -111,6 +136,7 @@ const shortDesc = description.length > 100 ? description.slice(0, 97) + '...' : 
     };
     document.addEventListener('keydown', escHandler);
 
+    // Copy promo code
     if (copyBtn) {
       copyBtn.addEventListener('click', () => {
         const code = copyBtn.getAttribute('data-code') || '';
@@ -130,6 +156,7 @@ const shortDesc = description.length > 100 ? description.slice(0, 97) + '...' : 
 </script>
 
 <style>
+  /* ── Popup ── */
   .bp {
     position: fixed; inset: 0; z-index: 100;
     display: flex; align-items: center; justify-content: center;
@@ -161,13 +188,14 @@ const shortDesc = description.length > 100 ? description.slice(0, 97) + '...' : 
   .bp-close:hover { background: #e0e0e0; }
 
   .bp-inner {
-    padding: 1.5rem 1.25rem 1.25rem;
+    padding: 1.25rem;
     display: flex; flex-direction: column; align-items: center;
     gap: 0.5rem; text-align: center;
   }
 
-  .bp-logo {
-    width: 120px; height: 120px; object-fit: contain;
+  /* ── Product image (big) ── */
+  .bp-img {
+    width: 160px; height: 160px; object-fit: contain; border-radius: 0.5rem;
   }
 
   .bp-tag {
@@ -187,13 +215,7 @@ const shortDesc = description.length > 100 ? description.slice(0, 97) + '...' : 
     display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
   }
 
-  .bp-img {
-    width: 120px; height: 120px; object-fit: contain; border-radius: 0.5rem;
-  }
-
-  .bp-price {
-    display: flex; align-items: baseline; gap: 0.5rem;
-  }
+  .bp-price { display: flex; align-items: baseline; gap: 0.5rem; }
   .bp-price-old { font-size: 0.8125rem; color: #999; text-decoration: line-through; }
   .bp-price-new {
     font-family: 'Archivo', sans-serif; font-weight: 800;
@@ -203,5 +225,37 @@ const shortDesc = description.length > 100 ? description.slice(0, 97) + '...' : 
   .bp-btns {
     display: flex; flex-direction: column; gap: 0.5rem;
     width: 100%; margin-top: 0.125rem;
+  }
+
+  /* ── Floating trigger button (bottom-right) ── */
+  .bp-trigger {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 50;
+    display: flex; align-items: center; gap: 0.5rem;
+    background: #ef7a1a; color: #fff;
+    font-family: 'Archivo', sans-serif; font-weight: 700;
+    font-size: 0.8125rem;
+    padding: 0.75rem 1rem;
+    border-radius: 2rem;
+    border: none; cursor: pointer;
+    box-shadow: 0 4px 16px rgba(239, 122, 26, 0.4);
+    transition: background 0.2s, transform 0.2s;
+    white-space: nowrap;
+  }
+  .bp-trigger:hover {
+    background: #d66a12;
+    transform: translateY(-2px);
+  }
+  .bp-trigger svg { flex-shrink: 0; }
+
+  @media (max-width: 767px) {
+    .bp-trigger {
+      bottom: 5rem; /* above sticky promo */
+      right: 1rem;
+      font-size: 0.75rem;
+      padding: 0.625rem 0.875rem;
+    }
   }
 </style>
