@@ -58,16 +58,16 @@ const { product } = Astro.props;
         <span class="rpc-label">Type de complément :</span>
         <span class="rpc-value">{product.productCategory || product.productType}</span>
       </div>
-      <!-- Brand Origin -->
+      <!-- Origine -->
       <div class="rpc-info-row">
         <svg class="rpc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-        <span class="rpc-label">Brand Origin:</span>
+        <span class="rpc-label">Origine :</span>
         <span class="rpc-value">{product.originFlag || '🇫🇷'} {product.origin.replace(/^🇫🇷\s*/, '')}</span>
       </div>
-      <!-- Shipping -->
+      <!-- Livraison -->
       <div class="rpc-info-row">
         <svg class="rpc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
-        <span class="rpc-label">Shipping:</span>
+        <span class="rpc-label">Livraison :</span>
         <span class="rpc-value">{product.shipping || 'France'}</span>
       </div>
       <!-- Promo -->
@@ -75,7 +75,7 @@ const { product } = Astro.props;
         <div class="rpc-info-row">
           <svg class="rpc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
           <span class="rpc-label">-{product.promoPercent}%</span>
-          <span class="rpc-label rpc-label-light">on your first order with the code:</span>
+          <span class="rpc-label rpc-label-light">sur votre première commande avec le code :</span>
           <span class="rpc-value">{product.promoCode}</span>
         </div>
       )}
@@ -83,7 +83,7 @@ const { product } = Astro.props;
 
     <!-- Price -->
     <div class="rpc-price">
-      <span class="rpc-price-label">Starting at:</span>
+      <span class="rpc-price-label">À partir de :</span>
       <span class="rpc-price-old">{product.originalPrice}</span>
       <span class="rpc-price-new">{product.discountPrice}</span>
     </div>
@@ -309,7 +309,7 @@ const { product } = Astro.props;
     gap: 0.5rem;
     font-size: 0.75rem;
     color: #111;
-    font-weight: 500;
+    font-weight: 700;
     margin: 0;
   }
 </style>
