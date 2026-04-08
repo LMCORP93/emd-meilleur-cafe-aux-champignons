@@ -119,6 +119,7 @@ const sampleArticles = [
     date="15 Janvier 2026"
     readingTime="10 min de lecture"
     bannerImage="/banner-placeholder.jpg"
+    breadcrumbs={config.breadcrumbs}
     product={{
       name: topProduct.name,
       image: topProduct.image,
@@ -133,8 +134,7 @@ const sampleArticles = [
   <main class="padding-section-small md:padding-section-medium" style="background-color: #ffffff;">
     <div class="container-large padding-global">
 
-      <!-- Breadcrumbs -->
-      <Breadcrumbs items={config.breadcrumbs} />
+      <!-- Breadcrumbs — now inside BlogHero -->
 
       <div class="blog-grid">
 

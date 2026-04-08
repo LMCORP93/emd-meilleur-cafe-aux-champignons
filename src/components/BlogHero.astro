@@ -1,5 +1,6 @@
 ---
 import PromoCodeButton from './PromoCodeButton.astro';
+import Breadcrumbs from './Breadcrumbs.astro';
 
 interface HeroProduct {
   name: string;
@@ -19,10 +20,11 @@ interface Props {
   date: string;
   readingTime: string;
   bannerImage: string;
+  breadcrumbs?: { label: string; href: string }[];
   product?: HeroProduct;
 }
 
-const { title, description, author, authorAvatar, date, readingTime, bannerImage, product } = Astro.props;
+const { title, description, author, authorAvatar, date, readingTime, bannerImage, breadcrumbs, product } = Astro.props;
 ---
 
 <section class="hero-section">
@@ -32,6 +34,13 @@ const { title, description, author, authorAvatar, date, readingTime, bannerImage
 
   <div class="hero-content">
     <div class="hero-inner" style="max-width: 72rem;">
+
+      <!-- Breadcrumbs -->
+      {breadcrumbs && breadcrumbs.length > 0 && (
+        <div class="hero-breadcrumbs">
+          <Breadcrumbs items={breadcrumbs} />
+        </div>
+      )}
 
       <!-- H1 title -->
       <h1 class="hero-title">
@@ -175,6 +184,13 @@ const { title, description, author, authorAvatar, date, readingTime, bannerImage
   }
   @media (max-width: 479px) {
     .hero-inner { padding-left: 1rem; padding-right: 1rem; }
+  }
+
+  .hero-breadcrumbs {
+    margin-bottom: 1rem;
+  }
+  @media (min-width: 768px) {
+    .hero-breadcrumbs { margin-bottom: 1.5rem; }
   }
 
   .hero-title {
