@@ -1,6 +1,5 @@
 ---
 import PromoCodeButton from './PromoCodeButton.astro';
-import Breadcrumbs from './Breadcrumbs.astro';
 
 interface HeroProduct {
   name: string;
@@ -27,269 +26,228 @@ interface Props {
 const { title, description, author, authorAvatar, date, readingTime, bannerImage, breadcrumbs, product } = Astro.props;
 ---
 
-<section class="hero-section">
-  <!-- Decorative circles (top-right, overlapping navbar) -->
-  <div class="circle _1"></div>
-  <div class="circle _2"></div>
+<!-- Blog Hero — dark (#222) background, white text, review page header -->
+<section class="blog_hero">
+  <!-- blog_hero-wrapper-title -->
+  <div class="blog_hero-wrapper-title">
 
-  <div class="hero-content">
-    <div class="hero-inner" style="max-width: 72rem;">
+    <!-- Breadcrumbs (breadcrumb / breadcrumb_link) -->
+    {breadcrumbs && breadcrumbs.length > 0 && (
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="/" class="breadcrumb_link">Accueil</a>
+        {breadcrumbs.map((crumb, i) => (
+          <Fragment>
+            <span class="text-white/40 text-xs">/</span>
+            {i === breadcrumbs.length - 1 ? (
+              <span class="breadcrumb_link !no-underline !font-semibold">{crumb.label}</span>
+            ) : (
+              <a href={crumb.href} class="breadcrumb_link">{crumb.label}</a>
+            )}
+          </Fragment>
+        ))}
+      </nav>
+    )}
 
-      <!-- Breadcrumbs -->
-      {breadcrumbs && breadcrumbs.length > 0 && (
-        <div class="hero-breadcrumbs">
-          <Breadcrumbs items={breadcrumbs} />
-        </div>
-      )}
+    <!-- H1 Title -->
+    <h1 class="text-h1 text-white max-w-[56rem]">{title}</h1>
 
-      <!-- H1 title -->
-      <h1 class="hero-title">
-        {title}
-      </h1>
+    <!-- Description -->
+    <p class="text-white/80 text-paragraph leading-[1.6] max-w-[45rem]">{description}</p>
 
-      <!-- Description -->
-      <p class="hero-description">
-        {description}
-      </p>
-
-      <!-- CTA text (price row) -->
-      {product && (
-        <div class="hero-cta-text">
-          <span class="hero-cta-label">À partir de :</span>
-          <span class="compare-at-price-text">{product.originalPrice}</span>
-          <span class="hero-cta-price">{product.discountPrice}</span>
-          <span class="hero-cta-label">sur votre première commande avec le code :</span>
-        </div>
-      )}
-
-      <!-- Buttons row — side by side -->
-      {product && (
-        <div class="hero-buttons">
-          {product.promoCode && product.promoPercent > 0 && (
-            <PromoCodeButton code={product.promoCode} percent={`${product.promoPercent}%`} />
-          )}
-          <a
-            href={product.affiliateLink}
-            rel="nofollow sponsored"
-            target="_blank"
-            class="btn-solid"
-          >
-            <span>Acheter maintenant</span>
-            <span class="btn-arrow">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </span>
-          </a>
-        </div>
-      )}
-
-      <!-- Author row -->
-      <div class="hero-author-row">
-        <div class="hero-author-item">
-          <img
-            src={authorAvatar}
-            alt={author}
-            class="hero-author-avatar"
-            width="32"
-            height="32"
-            loading="eager"
-          />
-          <span class="hero-author-text">Rédigé par {author}</span>
-        </div>
-        <div class="hero-author-item">
-          <span class="hero-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="m14.363 5.652l1.48-1.48a2 2 0 0 1 2.829 0l1.414 1.414a2 2 0 0 1 0 2.828l-1.48 1.48m-4.243-4.242l-9.616 9.615a2 2 0 0 0-.578 1.238l-.242 2.74a1 1 0 0 0 1.084 1.085l2.74-.242a2 2 0 0 0 1.24-.578l9.615-9.616m-4.243-4.242l4.243 4.242"></path>
-            </svg>
-          </span>
-          <span class="hero-author-text">Publié le {date}</span>
-        </div>
-        <div class="hero-author-item">
-          <span class="hero-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0a9 9 0 0 1 18 0"></path>
-            </svg>
-          </span>
-          <span class="hero-author-text">{readingTime}</span>
-        </div>
+    <!-- Price block: compare-at + discount + promo tag -->
+    {product && (
+      <div class="flex flex-wrap items-baseline gap-2">
+        <span class="compare-at-price-text">{product.originalPrice}</span>
+        <span class="price-text">{product.discountPrice}</span>
+        {product.promoCode && product.promoPercent > 0 && (
+          <span class="review_tag">Code : {product.promoCode}</span>
+        )}
       </div>
+    )}
 
-      <!-- Banner image -->
-      {bannerImage && (
+    <!-- Promo code copy button -->
+    {product && product.promoCode && (
+      <PromoCodeButton code={product.promoCode} percent={`${product.promoPercent}%`} />
+    )}
+
+    <!-- Author info row (hero_wrapper-author) -->
+    <div class="hero_wrapper-author">
+      <!-- Avatar + Name (hero_wrapper-img-name) -->
+      <div class="hero_wrapper-img-name">
         <img
-          src={bannerImage}
-          alt="Bannière"
-          class="hero-banner"
-          style="max-width: 1024px;"
+          src={authorAvatar}
+          alt={author}
+          class="profil-img"
+          width="32"
+          height="32"
           loading="eager"
         />
-      )}
+        <span class="text-white text-sm">Rédigé par {author}</span>
+      </div>
 
+      <!-- Date -->
+      <div class="hero_wrapper-img-name">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-white/70 shrink-0">
+          <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+          <line x1="16" x2="16" y1="2" y2="6"/>
+          <line x1="8" x2="8" y1="2" y2="6"/>
+          <line x1="3" x2="21" y1="10" y2="10"/>
+        </svg>
+        <span class="text-white/70 text-sm">{date}</span>
+      </div>
+
+      <!-- Reading time -->
+      <div class="hero_wrapper-img-name">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-white/70 shrink-0">
+          <path d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0a9 9 0 0 1 18 0"/>
+        </svg>
+        <span class="text-white/70 text-sm">{readingTime}</span>
+      </div>
     </div>
   </div>
 
-  <!-- Bottom curve divider — beige background curves down into white -->
-  <div class="hero-curve-bottom">
-    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,0 L0,40 Q720,80 1440,40 L1440,0 Z" fill="#f4f2ec"/>
-    </svg>
-  </div>
+  <!-- Banner image (blog_img) -->
+  {bannerImage && (
+    <div class="blog_hero-img-wrapper">
+      <img
+        src={bannerImage}
+        alt="Bannière"
+        class="blog_img"
+        loading="eager"
+      />
+    </div>
+  )}
 </section>
 
 <style>
-  .hero-curve-bottom {
-    width: 100%;
-    height: 3rem;
-    background-color: #ffffff;
-    margin-top: 1.5rem;
-  }
-  @media (min-width: 768px) {
-    .hero-curve-bottom { height: 4rem; margin-top: 2rem; }
-  }
-  .hero-curve-bottom svg {
-    display: block;
-    width: 100%;
-    height: 100%;
+  /* ── Outer section ─────────────────────────────────── */
+  .blog_hero {
+    background-color: #222;
   }
 
-  .hero-section {
-    position: relative;
-    background-color: #f4f2ec;
-    z-index: 1;
-    padding-top: 1.5rem;
+  /* ── blog_hero-wrapper-title ───────────────────────── */
+  .blog_hero-wrapper-title {
+    gap: 1.5rem;
+    color: white;
+    text-align: left;
+    flex-flow: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-left: 3.5rem;
+    margin-right: 3.5rem;
+    padding-top: 3rem;
+    padding-bottom: 1.5rem;
+    display: flex;
   }
-  .hero-content {
-    padding-top: 2.5rem;
-    padding-bottom: 0;
-    position: relative;
-    z-index: 1;
-  }
-  @media (min-width: 768px) {
-    .hero-section { padding-top: 3rem; }
-    .hero-content { padding-top: 4rem; }
-  }
-  .hero-inner {
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 3rem;
-    padding-right: 3rem;
-  }
+  /* Responsive padding shrink */
   @media (max-width: 991px) {
-    .hero-inner { padding-left: 2rem; padding-right: 2rem; }
+    .blog_hero-wrapper-title {
+      margin-left: 1.5rem;
+      margin-right: 1.5rem;
+    }
   }
   @media (max-width: 767px) {
-    .hero-inner { padding-left: 1.25rem; padding-right: 1.25rem; }
-  }
-  @media (max-width: 479px) {
-    .hero-inner { padding-left: 1rem; padding-right: 1rem; }
-  }
-
-  .hero-breadcrumbs {
-    margin-bottom: 0.5rem;
+    .blog_hero-wrapper-title {
+      margin-left: 1.25rem;
+      margin-right: 1.25rem;
+    }
   }
 
-  .hero-title {
-    font-family: 'Archivo', sans-serif;
-    font-weight: 700;
-    color: #242424;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    max-width: 56rem;
-    margin-bottom: 1rem;
+  /* ── Banner image wrapper ──────────────────────────── */
+  .blog_hero-img-wrapper {
+    margin-left: 3.5rem;
+    margin-right: 3.5rem;
+    padding-bottom: 2rem;
+  }
+  @media (max-width: 991px) {
+    .blog_hero-img-wrapper {
+      margin-left: 1.5rem;
+      margin-right: 1.5rem;
+    }
+  }
+  @media (max-width: 767px) {
+    .blog_hero-img-wrapper {
+      margin-left: 1.25rem;
+      margin-right: 1.25rem;
+    }
   }
 
-  .hero-description {
-    color: #595b61;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-    max-width: 45rem;
-  }
-  @media (min-width: 768px) {
-    .hero-description { margin-bottom: 2rem; }
-  }
-
-  /* CTA text row */
-  .hero-cta-text {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-  }
-  .hero-cta-label {
-    font-size: 0.8125rem;
-    color: #595b61;
-  }
-  @media (min-width: 768px) {
-    .hero-cta-label { font-size: 0.875rem; }
-  }
-  .hero-cta-price {
-    font-family: 'Archivo', sans-serif;
-    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.25rem);
-    font-weight: 600;
-    color: #242424;
-  }
-
-  /* Buttons — side by side, same shape */
-  .hero-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-  }
-  @media (min-width: 768px) {
-    .hero-buttons { gap: 1rem; margin-bottom: 2rem; }
-  }
-
-  /* Author row */
-  .hero-author-row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-  }
-  @media (min-width: 768px) {
-    .hero-author-row { gap: 1rem; margin-bottom: 2rem; }
-  }
-  .hero-author-item {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-  }
-  .hero-author-avatar {
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1px solid white;
-  }
-  .hero-author-text {
-    font-size: 0.8125rem;
-    color: #595b61;
-  }
-  @media (min-width: 768px) {
-    .hero-author-text { font-size: 0.875rem; }
-  }
-
-  .hero-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 1rem;
-    height: 1rem;
-    color: #595b61;
-  }
-
-  /* Banner */
-  .hero-banner {
+  /* ── blog_img ──────────────────────────────────────── */
+  .blog_img {
+    border-radius: 16px;
     width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 12px;
-    margin-bottom: 1.5rem;
+    display: block;
   }
-  @media (min-width: 768px) {
-    .hero-banner { border-radius: 16px; margin-bottom: 2rem; }
+
+  /* ── hero_wrapper-author ───────────────────────────── */
+  .hero_wrapper-author {
+    gap: 1rem;
+    color: black;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+  /* Mobile: flex-column */
+  @media (max-width: 767px) {
+    .hero_wrapper-author {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+    }
+  }
+
+  /* ── hero_wrapper-img-name ─────────────────────────── */
+  .hero_wrapper-img-name {
+    gap: 0.5rem;
+    justify-content: flex-start;
+    align-items: center;
+    display: flex;
+  }
+
+  /* ── profil-img ────────────────────────────────────── */
+  .profil-img {
+    border-radius: 999px;
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+  }
+
+  /* ── compare-at-price-text ─────────────────────────── */
+  .compare-at-price-text {
+    color: rgba(255, 255, 255, 0.4);
+    text-decoration: line-through;
+    font-size: 0.875rem;
+  }
+
+  /* ── price-text ────────────────────────────────────── */
+  .price-text {
+    color: white;
+    font-weight: 700;
+    line-height: 1;
+    font-size: 1.125rem;
+  }
+
+  /* ── review_tag ────────────────────────────────────── */
+  .review_tag {
+    background-color: #ef7a1a;
+    color: #f2f2f2;
+    border-radius: 999px;
+    padding: 0.25rem 0.5rem;
+    font-weight: 600;
+    font-size: 0.8125rem;
+  }
+
+  /* ── breadcrumb ────────────────────────────────────── */
+  .breadcrumb {
+    gap: 4px;
+    display: flex;
+  }
+  .breadcrumb_link {
+    color: white;
+    font-size: 12px;
+    text-decoration: underline;
+  }
+  .breadcrumb_link:hover {
+    color: #ef7a1a;
   }
 </style>
