@@ -11,157 +11,122 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<div class="toc-card">
-  <!-- Header -->
-  <button class="toc-header" id="toc-trigger" aria-expanded="true" aria-controls="toc-content">
-    <span class="toc-title">Sommaire</span>
-    <svg class="toc-chevron" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#777" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<div class="summary_wrapper">
+  <!-- Toggle header -->
+  <div class="summary_title-wrapper" id="toc-trigger" role="button" tabindex="0" aria-expanded="true" aria-controls="toc-links">
+    <div class="summary_wrapper-title">
+      <span class="summary_heading">Contents</span>
+    </div>
+    <svg class="summary_chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
       <path d="m6 9 6 6 6-6" />
     </svg>
-  </button>
+  </div>
 
-  <!-- Content -->
-  <div class="toc-content" id="toc-content">
-    <div class="toc-list">
-      {items.map((item, i) => (
-        <a
-          href={`#${item.id}`}
-          class="toc-item"
-          onclick={`event.preventDefault(); document.querySelector('#${item.id}')?.scrollIntoView({behavior:'smooth'});`}
-        >
-          <!-- Timeline dot + connector -->
-          <div class="toc-timeline">
-            <div class={`toc-dot ${i === 0 ? 'toc-dot-active' : ''}`}></div>
-            {i < items.length - 1 && (
-              <div class={`toc-connector ${i === 0 ? 'toc-connector-active' : ''}`}></div>
-            )}
-          </div>
-          <!-- Label -->
-          <span class={`toc-label ${i === 0 ? 'toc-label-active' : ''}`}>{item.label}</span>
-        </a>
-      ))}
-    </div>
+  <!-- Links list -->
+  <div class="summary_wrapper-title-links" id="toc-links">
+    {items.map((item) => (
+      <a
+        href={`#${item.id}`}
+        class="summary_text-link"
+        onclick={`event.preventDefault(); document.querySelector('#${item.id}')?.scrollIntoView({behavior:'smooth'});`}
+      >
+        {item.label}
+      </a>
+    ))}
   </div>
 </div>
 
 <script>
-  function initTocAccordion() {
+  function initTocToggle() {
     const trigger = document.getElementById('toc-trigger');
     if (!trigger) return;
-    const content = document.getElementById('toc-content');
-    const chevron = trigger.querySelector('.toc-chevron');
-    if (!content || !chevron) return;
+    const links = document.getElementById('toc-links');
+    const chevron = trigger.querySelector('.summary_chevron');
+    if (!links || !chevron) return;
 
-    trigger.addEventListener('click', () => {
-      const isHidden = content.classList.contains('toc-hidden');
-      content.classList.toggle('toc-hidden');
-      chevron.classList.toggle('toc-chevron-up', !isHidden);
-      trigger.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+    function toggle() {
+      const isHidden = links.classList.toggle('summary_hidden');
+      chevron.classList.toggle('summary_chevron-up', isHidden);
+      trigger.setAttribute('aria-expanded', isHidden ? 'false' : 'true');
+    }
+
+    trigger.addEventListener('click', toggle);
+    trigger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggle();
+      }
     });
   }
-  initTocAccordion();
+  initTocToggle();
 </script>
 
 <style>
-  .toc-card {
-    background: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 1rem;
-    overflow: hidden;
+  .summary_wrapper {
     margin-bottom: 2rem;
   }
 
-  /* Header */
-  .toc-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding: 1rem 1.25rem;
+  /* Header / toggle */
+  .summary_title-wrapper {
+    gap: .5rem;
     cursor: pointer;
-    border: none;
-    background: none;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    margin-bottom: .5rem;
   }
-  .toc-title {
+
+  .summary_wrapper-title {
+    gap: 6px;
+    justify-content: flex-start;
+    align-items: center;
+    display: flex;
+  }
+
+  .summary_heading {
     font-family: 'Archivo', sans-serif;
     font-weight: 700;
-    font-size: clamp(1.125rem, 1rem + 0.6vw, 1.375rem);
+    font-size: 14px;
     color: #242424;
-    margin: 0;
     line-height: 1.3;
   }
-  .toc-chevron {
+
+  .summary_chevron {
     transition: transform 0.2s ease;
+    color: #999;
     flex-shrink: 0;
   }
-  .toc-chevron.toc-chevron-up {
+  .summary_chevron.summary_chevron-up {
     transform: rotate(180deg);
   }
 
-  /* Content */
-  .toc-content {
-    padding: 0 1.25rem 1.25rem;
-    transition: all 0.2s ease;
-  }
-  .toc-content.toc-hidden {
-    display: none;
-  }
-
-  .toc-list {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .toc-item {
-    display: flex;
+  /* Links list */
+  .summary_wrapper-title-links {
+    gap: .75rem;
+    flex-flow: column;
+    justify-content: flex-start;
     align-items: flex-start;
-    gap: 0.75rem;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .toc-item:hover .toc-label {
-    color: #ef7a1a;
-  }
-
-  /* Timeline */
-  .toc-timeline {
+    max-height: 13rem;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-shrink: 0;
-    padding-top: 0.3rem;
+    overflow: auto;
+    transition: max-height 0.25s ease, opacity 0.25s ease;
   }
-  .toc-dot {
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 50%;
-    background: #ffffff;
-    border: 1.5px solid #e0e0e0;
-    flex-shrink: 0;
-  }
-  .toc-dot-active {
-    background: #ef7a1a;
-    border-color: #ef7a1a;
-  }
-  .toc-connector {
-    width: 0;
-    height: 1rem;
-    border-left: 1px dashed #e0e0e0;
-    margin-top: 0.25rem;
-  }
-  .toc-connector-active {
-    border-left: 1px solid #ef7a1a;
+  .summary_wrapper-title-links.summary_hidden {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
   }
 
-  /* Label */
-  .toc-label {
-    font-size: clamp(0.8125rem, 0.8rem + 0.1vw, 0.875rem);
-    color: #333;
-    line-height: 1.4;
-    transition: color 0.2s;
+  /* Individual link */
+  .summary_text-link {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 12px;
+    text-decoration: none;
+    line-height: 1.5;
+    transition: color 0.15s ease;
   }
-  .toc-label-active {
-    color: #242424;
-    font-weight: 600;
+  .summary_text-link:hover {
+    color: #fee050;
+    text-decoration: underline;
   }
 </style>

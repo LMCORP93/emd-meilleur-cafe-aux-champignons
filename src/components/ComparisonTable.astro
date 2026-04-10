@@ -21,30 +21,25 @@ const { title, headers, rows } = Astro.props;
 <div class="comparison-table-wrapper">
   {title && <h3 class="comparison-table-title">{title}</h3>}
 
-  <div class="comparison-table-scroll">
-    <table class="comparison-table">
-      <thead>
-        <tr>
-          {headers.map((h) => (
-            <th class={`comparison-table-th comparison-table-th--${h.align || 'left'}`}>
-              {h.label}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map((row, i) => (
-          <tr class={`comparison-table-row ${row.highlight ? 'comparison-table-row--highlight' : ''}`}>
-            {row.cells.map((cell, j) => (
-              <td class={`comparison-table-td comparison-table-td--${headers[j]?.align || 'left'}`}>
-                {cell}
-              </td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+  <!-- Header row -->
+  <div class="table_grid table_grid--header">
+    {headers.map((h, i) => (
+      <div class={`table_grid-col ${i === 0 ? 'table_grid-col-left' : 'table_grid-col-right'} table_grid-col--header`}>
+        {h.label}
+      </div>
+    ))}
   </div>
+
+  <!-- Data rows -->
+  {rows.map((row) => (
+    <div class={`table_grid ${row.highlight ? 'table_grid--highlight' : ''}`}>
+      {row.cells.map((cell, j) => (
+        <div class={`table_grid-col ${j === 0 ? 'table_grid-col-left' : 'table_grid-col-right'}`}>
+          {cell}
+        </div>
+      ))}
+    </div>
+  ))}
 </div>
 
 <style>
@@ -60,59 +55,57 @@ const { title, headers, rows } = Astro.props;
     margin: 0 0 1rem;
   }
 
-  .comparison-table-scroll {
-    overflow-x: auto;
-    border-radius: 1rem;
-    border: 1px solid #e0e0e0;
+  /* Grid row */
+  .table_grid {
+    border-bottom: 1px solid #e0e0e0;
+    grid-template-columns: 2fr .6fr;
+    display: grid;
+  }
+  .table_grid:last-child {
+    border-bottom: none;
   }
 
-  .comparison-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: clamp(0.8125rem, 0.8rem + 0.1vw, 0.875rem);
+  /* Header row */
+  .table_grid--header {
+    background-color: #f8f8f8;
   }
-
-  .comparison-table-th {
+  .table_grid-col--header {
     font-family: 'Archivo', sans-serif;
     font-weight: 700;
     font-size: clamp(0.6875rem, 0.675rem + 0.1vw, 0.75rem);
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: #777;
-    padding: 0.625rem 0.75rem;
-    border-bottom: 1px solid #e0e0e0;
-    background-color: #f8f8f8;
     white-space: nowrap;
   }
-  .comparison-table-th--left { text-align: left; }
-  .comparison-table-th--center { text-align: center; }
 
-  .comparison-table-row {
-    border-bottom: 1px solid #e0e0e0;
-    transition: background-color 0.15s;
-  }
-  .comparison-table-row:last-child {
-    border-bottom: none;
-  }
-  .comparison-table-row:hover {
-    background-color: #fafafa;
-  }
-  .comparison-table-row--highlight {
-    background-color: rgba(239, 122, 26, 0.04);
-  }
-  .comparison-table-row--highlight:hover {
-    background-color: rgba(239, 122, 26, 0.08);
+  /* Highlight row */
+  .table_grid--highlight {
+    background-color: rgba(254, 224, 80, 0.06);
   }
 
-  .comparison-table-td {
-    padding: 0.625rem 0.75rem;
-    color: #333;
-    line-height: 1.5;
-    vertical-align: middle;
-  }
-  .comparison-table-td--center { text-align: center; }
-  .comparison-table-td--left:first-child {
+  /* Left column */
+  .table_grid-col-left {
+    gap: .5rem;
+    flex-flow: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: .625rem 1rem;
+    display: flex;
     font-weight: 600;
     color: #242424;
+    font-size: clamp(0.8125rem, 0.8rem + 0.1vw, 0.875rem);
+    line-height: 1.5;
+  }
+
+  /* Right column */
+  .table_grid-col-right {
+    justify-content: flex-start;
+    align-items: center;
+    padding: .625rem 1rem;
+    display: flex;
+    color: #333;
+    font-size: clamp(0.8125rem, 0.8rem + 0.1vw, 0.875rem);
+    line-height: 1.5;
   }
 </style>
