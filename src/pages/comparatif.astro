@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import BlogHero from '@/components/BlogHero.astro';
-import FirstReview from '@/components/FirstReview.astro';
 import TableOfContents from '@/components/TableOfContents.astro';
 import ComparatorCard from '@/components/ComparatorCard.astro';
 import SidebarCTA from '@/components/SidebarCTA.astro';
@@ -36,6 +35,36 @@ const sampleArticles = [
   title={`Comparatif ${config.productCategory} 2026 — ${config.siteName}`}
   description={`Découvrez notre comparatif complet des meilleurs ${config.productCategory}. Tests, avis et codes promo exclusifs.`}
 >
+  <!-- JSON-LD: ItemList -->
+  <script type="application/ld+json" slot="json-ld" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": config.products.map((p, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "item": {
+        "@type": "Product",
+        "name": p.name,
+        "image": p.image,
+        "brand": { "@type": "Brand", "name": p.brand },
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "EUR",
+          "price": p.discountPrice.replace(/[^\d.,]/g, '').replace(',', '.'),
+          "availability": "https://schema.org/InStock",
+          "url": p.affiliateLink,
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": p.rating,
+          "bestRating": 10,
+          "reviewCount": p.reviewCount,
+        },
+      },
+    })),
+  })} />
+
+  <!-- Blog Hero -->
   <BlogHero
     title={`Comparatif ${config.productCategory} 2026`}
     description="Découvrez le classement des meilleurs produits. Notre analyse détaillée vous aide à faire le bon choix."
@@ -44,57 +73,75 @@ const sampleArticles = [
     date="15 Janvier 2026"
     readingTime="12 min de lecture"
     bannerImage="/banner-placeholder.jpg"
+    breadcrumbs={[
+      { label: 'Accueil', href: '/' },
+      { label: 'Comparatif', href: '/comparatif' },
+    ]}
+    product={{
+      name: topProduct.name,
+      image: topProduct.image,
+      promoCode: topProduct.promoCode,
+      promoPercent: topProduct.promoPercent,
+      originalPrice: topProduct.originalPrice,
+      discountPrice: topProduct.discountPrice,
+      affiliateLink: topProduct.affiliateLink,
+    }}
   />
 
-  <main class="padding-section-medium">
+  <main style="background-color: #ffffff;">
     <div class="container-medium padding-global">
-      <!-- Blog grid: content + sidebar -->
-      <div class="blog-grid">
-        <!-- Content area -->
-        <div>
-          <!-- Intro -->
-          <section id="introduction" class="mb-8">
-            <div class="rich-text">
-              <h2 id="introduction-title" class="font-heading font-bold text-2xl text-text-dark mb-4">Notre comparatif {config.productCategory}</h2>
-              <p class="text-text-body leading-relaxed">
-                Vous recherchez le meilleur {config.product.toLowerCase()} du marché ? Notre équipe a testé et analysé les produits les plus populaires pour vous aider à choisir. Découvrez notre classement complet avec nos recommandations personnalisées.
-              </p>
-            </div>
-          </section>
+      <div class="padding-section-medium">
+        <div class="blog-grid">
 
-          <!-- Comparator Cards -->
-          <section id="comparatif-section" class="mb-8">
-            <h2 class="font-heading font-bold text-2xl text-text-dark mb-6">Classement</h2>
-            <div class="space-y-8">
-              {config.products.map((product) => (
-                <ComparatorCard product={product} />
-              ))}
-            </div>
-          </section>
-        </div>
+          <!-- ═══ LEFT COLUMN (cards) ═══ -->
+          <div class="content-column">
 
-        <!-- Sidebar -->
-        <div>
-          <!-- Table of Contents -->
-          <div class="mb-6">
+            <!-- Intro -->
+            <section id="introduction" class="mb-8">
+              <div class="rich-text">
+                <h2>Notre comparatif {config.productCategory}</h2>
+                <p>
+                  Vous recherchez le meilleur {config.product.toLowerCase()} du marché ? Notre équipe a testé et analysé les produits les plus populaires pour vous aider à choisir. Découvrez notre classement complet avec nos recommandations personnalisées.
+                </p>
+              </div>
+            </section>
+
+            <!-- Table of Contents -->
             <TableOfContents items={[
               { id: 'introduction', label: 'Introduction' },
-              { id: 'comparatif-section', label: 'Classement' },
+              ...config.products.map((p) => ({
+                id: `product-${p.slug}`,
+                label: `${p.rank <= 3 ? (p.rank === 1 ? '🏆' : p.rank === 2 ? '🥈' : '🥉') : ''} Top ${p.rank} — ${p.brand}`,
+              })),
             ]} />
+
+            <!-- Comparator Cards -->
+            <section id="comparatif-section" class="comparatif-cards">
+              {config.products.map((product) => (
+                <div id={`product-${product.slug}`}>
+                  <ComparatorCard product={product} />
+                </div>
+              ))}
+            </section>
           </div>
 
-          <!-- Sticky CTA -->
-          <SidebarCTA
-            logoSrc="/logo.svg"
-            promoCode={topProduct.promoCode}
-            promoPercent={topProduct.promoPercent}
-            originalPrice={topProduct.originalPrice}
-            discountPrice={topProduct.discountPrice}
-            ctaLink={topProduct.affiliateLink}
-            heroImage={topProduct.image}
-            rating={topProduct.rating}
-            reviewCount={topProduct.reviewCount}
-          />
+          <!-- ═══ RIGHT COLUMN (sidebar) ═══ -->
+          <div class="sidebar-column">
+            <div class="sidebar-sticky">
+              <SidebarCTA
+                logoSrc={topProduct.brandLogo}
+                promoCode={topProduct.promoCode}
+                promoPercent={topProduct.promoPercent}
+                originalPrice={topProduct.originalPrice}
+                discountPrice={topProduct.discountPrice}
+                ctaLink={topProduct.affiliateLink}
+                heroImage={topProduct.image}
+                rating={topProduct.rating}
+                reviewCount={topProduct.reviewCount}
+              />
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -103,3 +150,11 @@ const sampleArticles = [
   <!-- Article Grid -->
   <ArticleGrid articles={sampleArticles} />
 </BaseLayout>
+
+<style>
+  .comparatif-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+</style>
