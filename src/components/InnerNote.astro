@@ -2,37 +2,20 @@
 interface Props {
   text: string;
   emoji?: string;
+  variant?: 'default' | 'transparent';
 }
 
-const { text, emoji = '📌' } = Astro.props;
+const { text, emoji = '📌', variant = 'default' } = Astro.props;
 ---
 
-<div class="inner-note">
-  <p class="inner-note-text">
-    <span class="inner-note-emoji">{emoji}</span>
+<div class:list={[
+  'flex flex-col justify-start items-start gap-4 p-6 rounded-card',
+  variant === 'transparent'
+    ? 'bg-transparent pt-0 pb-0'
+    : 'bg-grey-bg',
+]}>
+  <p class="m-0 text-[0.9375rem] leading-[1.625] text-[#2d2d2d]">
+    <span class="mr-2">{emoji}</span>
     <Fragment set:html={text} />
   </p>
 </div>
-
-<style>
-  .inner-note {
-    background-color: #f4f2ec;
-    border-radius: 1rem;
-    padding: 1rem 1.25rem;
-    box-shadow: none;
-  }
-  @media (min-width: 768px) {
-    .inner-note { padding: 1.25rem 1.5rem; }
-  }
-
-  .inner-note-text {
-    margin: 0;
-    font-size: 0.9375rem;
-    line-height: 1.625;
-    color: #2d2d2d;
-  }
-
-  .inner-note-emoji {
-    margin-right: 0.5rem;
-  }
-</style>

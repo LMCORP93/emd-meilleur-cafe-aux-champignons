@@ -1,6 +1,4 @@
 ---
-import PromoCodeButton from './PromoCodeButton.astro';
-
 interface Props {
   logoSrc: string;
   promoCode: string;
@@ -16,209 +14,74 @@ interface Props {
 const { logoSrc, promoCode, promoPercent, originalPrice, discountPrice, ctaLink, heroImage, rating, reviewCount } = Astro.props;
 ---
 
-<div class="sidebar-cta">
-  <!-- Logo + heading -->
-  <div class="sidebar-cta-header">
-    <img
-      src={logoSrc}
-      alt="Logo"
-      class="sidebar-cta-logo"
-      loading="lazy"
-    />
-    <h4 class="sidebar-cta-heading">
-      Profitez de -{promoPercent}% sur votre commande 👇
-    </h4>
-  </div>
-
-  <!-- Pricing -->
-  <div class="sidebar-cta-pricing">
-    <span class="sidebar-cta-price-old">{originalPrice}</span>
-    <span class="sidebar-cta-price-new">{discountPrice}</span>
-  </div>
-
-  <!-- Promo code + CTA -->
-  <div class="sidebar-cta-actions">
-    <div class="sidebar-cta-promo-wrap">
-      <PromoCodeButton code={promoCode} percent={`${promoPercent}%`} />
-    </div>
-    <a
-      href={ctaLink}
-      rel="nofollow sponsored"
-      target="_blank"
-      class="sidebar-cta-btn"
-    >
-      Acheter maintenant
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M5 12h14" />
-        <path d="m12 5 7 7-7 7" />
-      </svg>
-    </a>
-  </div>
-
-  <!-- Verified text -->
-  <p class="sidebar-cta-verified">
-    ✅ Code vérifié et valide pour 2026
-  </p>
-
-  <!-- Product image -->
-  <div class="sidebar-cta-image">
+<div class="cta_component flex flex-col gap-4 rounded-card text-center bg-white p-4 sticky top-8 shadow-cta-card">
+  <!-- Product image at top -->
+  <div class="rounded-xl overflow-hidden bg-grey-bg">
     <img
       src={heroImage}
       alt="Product"
       loading="lazy"
+      class="w-full h-auto object-cover block"
     />
   </div>
 
-  <!-- Trustpilot stars + rating -->
-  <div class="sidebar-cta-trustpilot">
-    <div class="sidebar-cta-stars">
-      {[1, 2, 3, 4, 5].map(() => (
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#00b67a" stroke="#00b67a" stroke-width="0.5" class="sidebar-cta-star">
-          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-        </svg>
-      ))}
-    </div>
-    <p class="sidebar-cta-reviews">
-      +{reviewCount.toLocaleString('fr-FR')} avis Trustpilot vérifiés
-    </p>
+  <!-- Star rating (orange stars) -->
+  <div class="flex justify-center items-center gap-0.5">
+    {Array.from({ length: 5 }).map((_, i) => (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill={i < Math.round(rating) ? '#ef7a1a' : '#e0e0e0'}
+        stroke={i < Math.round(rating) ? '#ef7a1a' : '#e0e0e0'}
+        stroke-width="0.5"
+        class="star w-[1.6rem] h-[1.6rem]"
+      >
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+      </svg>
+    ))}
   </div>
+  <p class="text-[0.8125rem] text-[#333] m-0 -mt-2">{reviewCount.toLocaleString('fr-FR')} avis vérifiés</p>
+
+  <!-- Promo code badge with orange background -->
+  <div class="flex justify-center">
+    <span class="review_tag bg-orange text-[#f2f2f2] rounded-button py-1 px-2 font-semibold text-sm">
+      Code : {promoCode} → -{promoPercent}%
+    </span>
+  </div>
+
+  <!-- Price: original (strikethrough) + discount (orange, bold) -->
+  <div class="flex items-baseline justify-center gap-3">
+    <span class="compare-at-price-text text-text-muted line-through text-sm">{originalPrice}</span>
+    <span class="text-orange font-bold text-2xl leading-none">{discountPrice}</span>
+  </div>
+
+  <!-- Big orange 'Claim Offer' button (rounded pill) -->
+  <a
+    href={ctaLink}
+    rel="nofollow sponsored"
+    target="_blank"
+    class="flex items-center justify-center gap-2 bg-orange text-white font-primary text-sm font-semibold py-2.5 px-6 rounded-button no-underline transition-colors duration-200 cursor-pointer border-none w-full hover:bg-[#ff8c2e] hover:text-white active:bg-[#d66a12]"
+  >
+    Profitez de l'offre
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 12h14" />
+      <path d="m12 5 7 7-7 7" />
+    </svg>
+  </a>
+
+  <!-- Verification badge at bottom (green checkmark + text) -->
+  <p class="text-xs text-[#00b67a] m-0 flex items-center justify-center gap-1">
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#00b67a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+      <polyline points="22 4 12 14.01 9 11.01" />
+    </svg>
+    Code vérifié et valide pour 2026
+  </p>
 </div>
 
 <style>
-  .sidebar-cta {
-    background: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 1rem;
-    padding: 1.25rem;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-  }
-  @media (min-width: 768px) {
-    .sidebar-cta { padding: 1.5rem; }
-  }
-
-  /* Header */
-  .sidebar-cta-header {
-    text-align: center;
-    margin-bottom: 1.25rem;
-  }
-  .sidebar-cta-logo {
-    width: 4rem;
-    height: 4rem;
-    object-fit: contain;
-    margin: 0 auto 0.75rem;
-    display: block;
-  }
-  .sidebar-cta-heading {
-    font-family: 'Archivo', sans-serif;
-    font-weight: 700;
-    font-size: 0.9375rem;
-    color: #242424;
-    margin: 0;
-    line-height: 1.4;
-  }
-
-  /* Pricing */
-  .sidebar-cta-pricing {
-    display: flex;
-    align-items: baseline;
-    justify-content: center;
-    gap: 0.75rem;
-    margin-bottom: 1.25rem;
-  }
-  .sidebar-cta-price-old {
-    text-decoration: line-through;
-    color: #777;
-    font-size: 0.875rem;
-  }
-  .sidebar-cta-price-new {
-    font-family: 'Archivo', sans-serif;
-    font-size: clamp(1.25rem, 1.1rem + 0.75vw, 1.75rem);
-    font-weight: 700;
-    color: #ef7a1a;
-  }
-
-  /* Actions */
-  .sidebar-cta-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 1rem;
-  }
-  .sidebar-cta-promo-wrap {
-    display: flex;
-    justify-content: center;
-  }
-  .sidebar-cta-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    background-color: #ef7a1a;
-    color: #fff;
-    font-family: 'Archivo', sans-serif;
-    font-size: 0.875rem;
-    font-weight: 600;
-    padding: 0.625rem 1.5rem;
-    border-radius: 0.5rem;
-    text-decoration: none;
-    transition: background-color 0.2s;
-    cursor: pointer;
-    border: none;
-    width: 100%;
-  }
-  .sidebar-cta-btn:hover {
-    background-color: #ff8c2e;
-    color: #fff;
-  }
-  .sidebar-cta-btn:active {
-    background-color: #d66a12;
-  }
-
-  /* Verified */
-  .sidebar-cta-verified {
-    text-align: center;
-    font-size: 0.75rem;
-    color: #00b67a;
-    margin: 0 0 1.25rem;
-  }
-
-  /* Image */
-  .sidebar-cta-image {
-    background-color: #f4f2ec;
-    border-radius: 0.75rem;
-    overflow: hidden;
-    margin-bottom: 1.25rem;
-  }
-  .sidebar-cta-image img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    display: block;
-  }
-
-  /* Trustpilot */
-  .sidebar-cta-trustpilot {
-    text-align: center;
-  }
-  .sidebar-cta-stars {
-    display: flex;
-    justify-content: center;
-    gap: 0.125rem;
-    margin-bottom: 0.5rem;
-  }
-  .sidebar-cta-star {
-    width: 1rem;
-    height: 1rem;
-  }
-  .sidebar-cta-reviews {
-    font-size: 0.8125rem;
-    color: #333;
-    margin: 0;
-  }
-
-  /* Mobile: show at bottom of content */
   @media (max-width: 991px) {
-    .sidebar-cta {
+    .cta_component {
       position: static;
     }
   }

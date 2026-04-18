@@ -29,12 +29,12 @@ const { promoCode, promoPercent, ctaLink, heroImage } = Astro.props;
 
       <div class="p-6 md:p-8 text-center">
         <!-- Orange tag -->
-        <div class="inline-block bg-primary text-white font-heading font-bold text-sm px-3 py-1 rounded-full mb-4">
+        <div class="inline-block bg-primary text-white font-primary font-bold text-sm px-3 py-1 rounded-full mb-4">
           -{promoPercent}%
         </div>
 
         <!-- Heading -->
-        <h3 class="font-heading font-bold text-xl md:text-2xl text-text-dark mb-2">
+        <h3 class="font-primary font-bold text-xl md:text-2xl text-text-dark mb-2">
           Votre offre exclusive vous attend !
         </h3>
         <p class="text-text-grey text-sm mb-6 leading-relaxed">
@@ -63,7 +63,7 @@ const { promoCode, promoPercent, ctaLink, heroImage } = Astro.props;
           href={ctaLink}
           rel="nofollow sponsored"
           target="_blank"
-          class="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-heading font-semibold text-base px-8 py-3 w-full mb-6 transition-colors no-underline"
+          class="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-dark text-white font-primary font-semibold text-base px-8 py-3 w-full mb-6 transition-colors no-underline"
           style="border-radius: 0.5rem;"
         >
           Profiter de l'offre

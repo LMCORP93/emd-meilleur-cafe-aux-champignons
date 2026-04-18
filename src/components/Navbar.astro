@@ -15,207 +15,169 @@ interface Props {
 const { siteName, logoSrc, navLinks, ctaText, ctaLink } = Astro.props;
 ---
 
+<!-- ═══ navbar_component ═══
+  Webflow: z-999, bg #f4f2ec, flex, justify-between, items-center, w-full, py-12px, position static → sticky for scroll-shadow
+-->
 <header
   id="navbar"
-  class="navbar fixed top-0 left-0 right-0 z-50 transition-shadow duration-300"
-  style="background-color: #f4f2ec;"
+  class="sticky top-0 z-[999] w-full bg-grey-bg py-3 transition-shadow duration-300"
 >
-  <div class="navbar-inner mx-auto flex h-[80px] items-center justify-between px-[40px] max-lg:px-6 max-md:h-[72px] max-md:px-5" style="max-width: 72rem;">
-    <!-- Logo (left, no text) -->
+  <!-- ═══ navbar_container-v2 ═══
+    Webflow: w-full, max-w-1968px, px-24px; @media ≤767px: px-1.25rem
+  -->
+  <div class="mx-auto flex w-full max-w-[1968px] items-center justify-between px-6 max-[767px]:px-5">
+    <!-- ═══ nav_wrapper-logo ═══ -->
     <a href="/" class="flex shrink-0 items-center">
-      <img src={logoSrc} alt={siteName} class="h-[40px] w-auto max-md:h-[32px]" />
+      <!-- ═══ nav_logo: height ~40px, width auto ═══ -->
+      <img src={logoSrc} alt={siteName} class="h-10 w-auto" />
     </a>
 
-    <!-- Desktop Nav Links (centered) -->
-    <nav class="hidden items-center gap-8 lg:flex">
-      {navLinks.map((link) => (
-        <a
-          href={link.href}
-          class="nav-link font-heading text-[16px] font-medium leading-none text-[#595b61] transition-colors duration-200 hover:text-text-dark"
-        >
-          {link.label}
-        </a>
-      ))}
-    </nav>
+    <!-- ═══ navbar_menu-content-wrapper (desktop only) ═══
+      Webflow: gap-64px, flex, justify-between, items-center
+      Hidden below 991px via Webflow responsive override
+    -->
+    <div class="flex items-center justify-between gap-16 max-[991px]:hidden">
+      <!-- ═══ navbar_menu-content ═══
+        Webflow: gap-64px, flex, justify-start, items-center
+      -->
+      <nav class="flex items-center justify-start gap-16">
+        {navLinks.map((link) => (
+          /* ═══ navbar_menu-item ═══ Webflow: gap-12px, flex, justify-start, items-center */
+          <a
+            href={link.href}
+            class="font-primary text-sm text-[#595b61] no-underline transition-colors duration-200 hover:text-black"
+          >
+            {link.label}
+          </a>
+        ))}
+      </nav>
 
-    <!-- Desktop CTA Button (right) -->
-    <a
-      href={ctaLink}
-      rel="nofollow sponsored"
-      target="_blank"
-      class="cta-btn hidden items-center gap-2 lg:inline-flex"
-    >
-      <span>{ctaText}</span>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="shrink-0"
+      <!-- ═══ CTA Button — orange rounded pill ═══ -->
+      <a
+        href={ctaLink}
+        rel="nofollow sponsored"
+        target="_blank"
+        class="inline-flex shrink-0 items-center gap-2 rounded-button bg-orange px-5 py-2.5 font-primary text-sm font-bold leading-none text-white no-underline transition-all duration-200 hover:bg-[#d66a12] hover:-translate-y-px"
       >
-        <path d="M5 12h14" />
-        <path d="m12 5 7 7-7 7" />
-      </svg>
-    </a>
+        <span>{ctaText}</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="shrink-0"
+        >
+          <path d="M5 12h14" />
+          <path d="m12 5 7 7-7 7" />
+        </svg>
+      </a>
+    </div>
 
-    <!-- Mobile Hamburger -->
+    <!-- ═══ hamburger-menu (mobile only, hidden on desktop ≥991px) ═══ -->
     <button
       id="mobile-menu-btn"
-      class="flex flex-col items-center justify-center gap-[6px] lg:hidden"
+      class="hidden max-[991px]:flex flex-col items-center justify-center gap-1.5"
       aria-label="Ouvrir le menu"
       aria-expanded="false"
     >
-      <span class="hamburger-bar block h-[2px] w-[24px] origin-center bg-text-dark transition-all duration-300"></span>
-      <span class="hamburger-bar block h-[2px] w-[24px] bg-text-dark transition-all duration-300"></span>
-      <span class="hamburger-bar block h-[2px] w-[24px] origin-center bg-text-dark transition-all duration-300"></span>
+      <span class="hamburger-bar block h-[2px] w-6 origin-center bg-black transition-all duration-300"></span>
+      <span class="hamburger-bar block h-[2px] w-6 bg-black transition-all duration-300"></span>
+      <span class="hamburger-bar block h-[2px] w-6 origin-center bg-black transition-all duration-300"></span>
     </button>
-  </div>
-
-  <!-- Thin grey separator -->
-  <div class="h-px w-full" style="background-color: rgba(0,0,0,0.1);"></div>
-
-  <!-- Mobile Menu Overlay (full-screen) -->
-  <div
-    id="mobile-menu"
-    class="mobile-overlay fixed inset-0 z-[-1] flex flex-col items-center justify-center gap-10 opacity-0 transition-all duration-300 lg:hidden"
-    style="background-color: #f4f2ec;"
-  >
-    <button
-      id="mobile-menu-close"
-      class="absolute right-5 top-[22px] flex h-10 w-10 items-center justify-center"
-      aria-label="Fermer le menu"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="#242424"
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <path d="M18 6 6 18" />
-        <path d="m6 6 12 12" />
-      </svg>
-    </button>
-
-    <nav class="flex flex-col items-center gap-7">
-      {navLinks.map((link) => (
-        <a
-          href={link.href}
-          class="mobile-link font-heading text-[28px] font-semibold leading-tight text-text-dark transition-colors duration-200 hover:text-primary"
-        >
-          {link.label}
-        </a>
-      ))}
-    </nav>
-
-    <a
-      href={ctaLink}
-      rel="nofollow sponsored"
-      target="_blank"
-      class="cta-btn-mobile mt-2 inline-flex items-center gap-2.5"
-    >
-      <span>{ctaText}</span>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="shrink-0"
-      >
-        <path d="M5 12h14" />
-        <path d="m12 5 7 7-7 7" />
-      </svg>
-    </a>
   </div>
 </header>
 
-<!-- Spacer to offset fixed navbar -->
-<div class="navbar-spacer"></div>
+<!-- ═══ Mobile Menu Overlay (slides in from right) ═══ -->
+<div
+  id="mobile-menu"
+  class="mobile-overlay fixed inset-0 z-[9999] flex flex-col items-center justify-center gap-10 bg-grey-bg transition-all duration-300"
+>
+  <!-- Close button -->
+  <button
+    id="mobile-menu-close"
+    class="absolute right-5 top-5 flex h-10 w-10 items-center justify-center"
+    aria-label="Fermer le menu"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="black"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M18 6 6 18" />
+      <path d="m6 6 12 12" />
+    </svg>
+  </button>
+
+  <!-- Mobile nav links -->
+  <nav class="flex flex-col items-center gap-7">
+    {navLinks.map((link) => (
+      <a
+        href={link.href}
+        class="font-primary text-[28px] font-semibold leading-tight text-black transition-colors duration-200 hover:text-orange"
+      >
+        {link.label}
+      </a>
+    ))}
+  </nav>
+
+  <!-- Mobile CTA Button -->
+  <a
+    href={ctaLink}
+    rel="nofollow sponsored"
+    target="_blank"
+    class="mt-2 inline-flex items-center gap-2.5 rounded-button bg-orange px-8 py-4 font-primary text-lg font-bold leading-none text-white no-underline transition-all duration-200 hover:bg-[#d66a12]"
+  >
+    <span>{ctaText}</span>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="shrink-0"
+    >
+      <path d="M5 12h14" />
+      <path d="m12 5 7 7-7 7" />
+    </svg>
+  </a>
+</div>
 
 <style>
-  /* ── Navbar dimensions ── */
-  .navbar-spacer {
-    height: calc(80px + 1px);
-  }
-  @media (max-width: 767px) {
-    .navbar-spacer {
-      height: calc(72px + 1px);
-    }
-  }
-
-  /* ── Navbar shadow on scroll ── */
-  .navbar.scrolled {
+  /* ── Navbar scroll shadow ── */
+  #navbar.scrolled {
     box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1);
   }
 
-  /* ── Desktop CTA button ── */
-  .cta-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background-color: #ef7a1a;
-    color: #ffffff;
-    font-family: 'Archivo', system-ui, sans-serif;
-    font-weight: 700;
-    font-size: 0.875rem;
-    line-height: 1;
-    padding: 0.8125rem 1.625rem;
-    border-radius: 0.5rem;
-    letter-spacing: 0.01em;
-    transition: background-color 0.2s ease, transform 0.2s ease;
-    text-decoration: none;
-    white-space: nowrap;
+  /* ── Mobile overlay — closed (slides out to right) ── */
+  .mobile-overlay {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(100%);
   }
 
-  .cta-btn:hover {
-    background-color: #d66a12;
-    transform: translateY(-1px);
-  }
-
-  /* ── Mobile CTA button ── */
-  .cta-btn-mobile {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.625rem;
-    background-color: #ef7a1a;
-    color: #ffffff;
-    font-family: 'Archivo', system-ui, sans-serif;
-    font-weight: 700;
-    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
-    line-height: 1;
-    padding: 1rem 2rem;
-    border-radius: 0.5rem;
-    letter-spacing: 0.01em;
-    transition: background-color 0.2s ease;
-    text-decoration: none;
-    white-space: nowrap;
-  }
-
-  .cta-btn-mobile:hover {
-    background-color: #d66a12;
-  }
-
-  /* ── Mobile menu open state ── */
+  /* ── Mobile overlay — open (slides in) ── */
   .mobile-overlay.open {
     opacity: 1;
-    z-index: 60;
+    pointer-events: auto;
+    transform: translateX(0);
   }
 
-  /* ── Hamburger → X animation ── */
+  /* ── Hamburger → X morph animation ── */
   .hamburger-bar.active:nth-child(1) {
     transform: translateY(8px) rotate(45deg);
   }
@@ -234,17 +196,13 @@ const { siteName, logoSrc, navLinks, ctaText, ctaLink } = Astro.props;
   const navbar = document.getElementById('navbar');
   if (navbar) {
     const onScroll = () => {
-      if (window.scrollY > 10) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
+      navbar.classList.toggle('scrolled', window.scrollY > 10);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
   }
 
-  // ── Mobile menu ──
+  // ── Mobile menu toggle ──
   const btn = document.getElementById('mobile-menu-btn');
   const menu = document.getElementById('mobile-menu');
   const closeBtn = document.getElementById('mobile-menu-close');
@@ -266,8 +224,7 @@ const { siteName, logoSrc, navLinks, ctaText, ctaLink } = Astro.props;
     };
 
     btn.addEventListener('click', () => {
-      const isOpen = menu.classList.contains('open');
-      isOpen ? closeMenu() : openMenu();
+      menu.classList.contains('open') ? closeMenu() : openMenu();
     });
 
     closeBtn.addEventListener('click', closeMenu);
