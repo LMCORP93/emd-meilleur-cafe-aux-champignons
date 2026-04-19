@@ -70,7 +70,7 @@ export default {
       // ── Border Radius (Webflow token values) ────────────────────────
       borderRadius: {
         'card': '16px',
-        'button': '999px',
+        'button': '8px',
         'subtle': '2px',
       },
 

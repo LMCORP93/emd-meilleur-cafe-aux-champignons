@@ -148,8 +148,11 @@ const { title, description, author, authorAvatar, date, readingTime, bannerImage
     flex-flow: column;
     justify-content: center;
     align-items: flex-start;
-    margin-left: 3.5rem;
-    margin-right: 3.5rem;
+    max-width: 72rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 3rem;
+    padding-right: 3rem;
     padding-top: 3rem;
     padding-bottom: 1.5rem;
     display: flex;
@@ -157,33 +160,48 @@ const { title, description, author, authorAvatar, date, readingTime, bannerImage
   /* Responsive padding shrink */
   @media (max-width: 991px) {
     .blog_hero-wrapper-title {
-      margin-left: 1.5rem;
-      margin-right: 1.5rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
     }
   }
   @media (max-width: 767px) {
     .blog_hero-wrapper-title {
-      margin-left: 1.25rem;
-      margin-right: 1.25rem;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+  }
+  @media (max-width: 479px) {
+    .blog_hero-wrapper-title {
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
   }
 
   /* ── Banner image wrapper ──────────────────────────── */
   .blog_hero-img-wrapper {
-    margin-left: 3.5rem;
-    margin-right: 3.5rem;
+    max-width: 72rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 3rem;
+    padding-right: 3rem;
     padding-bottom: 2rem;
   }
   @media (max-width: 991px) {
     .blog_hero-img-wrapper {
-      margin-left: 1.5rem;
-      margin-right: 1.5rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
     }
   }
   @media (max-width: 767px) {
     .blog_hero-img-wrapper {
-      margin-left: 1.25rem;
-      margin-right: 1.25rem;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+  }
+  @media (max-width: 479px) {
+    .blog_hero-img-wrapper {
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
   }
 
@@ -253,7 +271,7 @@ const { title, description, author, authorAvatar, date, readingTime, bannerImage
   .review_tag {
     background-color: #ef7a1a;
     color: #f2f2f2;
-    border-radius: 999px;
+    border-radius: 6px;
     padding: 0.25rem 0.5rem;
     font-weight: 600;
     font-size: 0.8125rem;
@@ -287,7 +305,7 @@ const { title, description, author, authorAvatar, date, readingTime, bannerImage
     font-weight: 600;
     font-size: 0.875rem;
     padding: 0.6rem 1.25rem;
-    border-radius: 999px;
+    border-radius: 8px;
     text-decoration: none;
     transition: background-color 0.2s ease, transform 0.15s ease;
     white-space: nowrap;
