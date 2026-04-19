@@ -3,7 +3,6 @@ import '@/styles/global.css';
 import Navbar from '@/components/Navbar.astro';
 import Footer from '@/components/Footer.astro';
 import BrandPopup from '@/components/BrandPopup.astro';
-import StickyPromoButton from '@/components/StickyPromoButton.astro';
 import config from '@/data/site.config';
 
 interface Props {
@@ -47,7 +46,7 @@ const {
     <meta name="twitter:image" content={`${config.domain}${ogImage}`} />
     <meta name="twitter:image:alt" content={title} />
 
-    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -96,7 +95,6 @@ const {
       rating={config.products[0].rating}
     />
 
-    <StickyPromoButton promoPercent={config.products[0].promoPercent} promoCode={config.products[0].promoCode} affiliateLink={config.products[0].affiliateLink} />
     <Footer
       siteName={config.siteName}
       logoSrc="/logo.svg"
@@ -105,7 +103,7 @@ const {
         { label: 'Comparatif', href: '/comparatif' },
         { label: 'Blog', href: '/' },
       ]}
-      copyright="© 2026 LoremReview. Tous droits réservés."
+      copyright="© 2026 Le Meilleur Complement. Tous droits réservés."
     />
   </body>
 </html>

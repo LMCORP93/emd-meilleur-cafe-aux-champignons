@@ -4,36 +4,50 @@ import BlogHero from '@/components/BlogHero.astro';
 import TableOfContents from '@/components/TableOfContents.astro';
 import ComparatorCard from '@/components/ComparatorCard.astro';
 import SidebarCTA from '@/components/SidebarCTA.astro';
-import ArticleGrid from '@/components/ArticleGrid.astro';
+import FAQSection from '@/components/FAQSection.astro';
 import config from '@/data/site.config';
 
 const topProduct = config.products[0];
 
-const sampleArticles = [
+const comparatifFaq = [
   {
-    title: 'Les meilleurs compléments alimentaires en 2026',
-    excerpt: 'Notre sélection des produits les plus efficaces pour votre bien-être quotidien.',
-    image: '/logo.svg',
-    href: '/',
+    question: "Qu'est-ce qu'un café aux champignons adaptogènes ?",
+    answer: "Un café aux champignons adaptogènes est une boisson qui combine du café classique (ou un substitut comme l'orge torréfiée) avec des extraits de champignons fonctionnels comme le Lion's Mane, le Cordyceps, le Chaga ou le Reishi. Ces champignons, utilisés depuis des millénaires dans la médecine traditionnelle chinoise, possèdent des propriétés adaptogènes qui aident l'organisme à gérer le stress, améliorent la concentration et offrent une énergie plus stable et durable que le café seul.",
   },
   {
-    title: 'Comment choisir un complément de qualité ?',
-    excerpt: 'Les critères essentiels pour identifier un produit fiable et efficace.',
-    image: '/logo.svg',
-    href: '/',
+    question: "Le café aux champignons contient-il de la caféine ?",
+    answer: "Cela dépend du produit. Certains cafés aux champignons comme Brainstoorm (Mush N Go) ou Drink Dyna contiennent du café Arabica avec une dose réduite de caféine (80 mg par dose contre 95-120 mg pour un espresso). D'autres alternatives comme Bonjour Drink remplacent totalement le café par de l'orge torréfiée et du cacao, offrant une boisson sans caféine. L'avantage des formulations avec adaptogènes est que l'énergie ressentie est plus douce et sans le crash habituel du café classique.",
   },
   {
-    title: 'Guide complet sur les vitamines essentielles',
-    excerpt: 'Tout ce que vous devez savoir sur les vitamines et leurs bienfaits.',
-    image: '/logo.svg',
-    href: '/',
+    question: "Quels sont les bienfaits du café aux champignons ?",
+    answer: "Les bienfaits varient selon les champignons utilisés. Le Lion's Mane stimule la production de NGF (Nerve Growth Factor) pour améliorer la concentration et la mémoire. Le Cordyceps booste l'énergie cellulaire et l'endurance physique. Le Chaga renforce les défenses immunitaires grâce à sa forte teneur en antioxydants. Le Reishi favorise la détente et la résistance au stress. Ensemble, ces champignons procurent une énergie stable, une clarté mentale accrue et une meilleure gestion du stress sans les effets secondaires du café classique.",
+  },
+  {
+    question: "Comment choisir le meilleur café aux champignons ?",
+    answer: "Pour choisir un bon café aux champignons, vérifiez plusieurs critères : le dosage total en extraits de champignons (minimum 1500-2000 mg par dose), le ratio d'extraction (un ratio 8:1 ou 12:1 garantit une haute concentration), la certification bio pour éviter les pesticides, la présence de caféine ou non selon votre sensibilité, et la transparence de la marque sur la composition. Les avis clients et les tests indépendants sont également de précieux indicateurs. Le rapport qualité-prix se calcule au coût par tasse, qui varie de 0,60€ à 1,50€ selon les marques.",
+  },
+  {
+    question: "Y a-t-il des contre-indications au café aux champignons ?",
+    answer: "Les champignons adaptogènes sont généralement bien tolérés, mais quelques précautions s'imposent. Les formulations contenant de la caféine sont déconseillées aux enfants, aux femmes enceintes ou allaitantes. Les personnes sous traitement immunosuppresseur devraient éviter le Chaga. En cas de troubles de la coagulation, le Reishi peut interagir avec certains médicaments. Il est toujours recommandé de consulter un médecin avant de commencer une cure de compléments alimentaires, surtout en cas de pathologie préexistante.",
+  },
+  {
+    question: "Le café aux champignons a-t-il un goût de champignon ?",
+    answer: "La plupart des cafés aux champignons modernes sont formulés pour masquer le goût terreux des champignons. Les marques utilisent du cacao, de l'orge torréfiée ou du café Arabica pour créer un profil aromatique agréable. Brainstoorm (Mush N Go) a un goût cacao-noisette, Bonjour Drink rappelle le café au lait, et Drink Dyna propose des versions cacao et matcha. L'arrière-goût de champignon, quand il est présent, reste très subtil et généralement apprécié après quelques jours d'utilisation.",
+  },
+  {
+    question: "Où acheter du café aux champignons de qualité en France ?",
+    answer: "Les meilleures marques de café aux champignons sont disponibles principalement sur leurs sites officiels pour garantir l'authenticité et la fraîcheur des produits. Les codes promos partenaires (comme LMC15 pour Mush N Go ou LMC20 pour Bonjour Drink) offrent des réductions exclusives directement sur le site de la marque. Certaines références sont aussi disponibles sur des plateformes de compléments alimentaires spécialisés. Nous déconseillons l'achat sur les marketplaces non autorisées où le risque de contrefaçon est élevé.",
+  },
+  {
+    question: "Combien coûte un café aux champignons par jour ?",
+    answer: "Le coût journalier d'un café aux champignons varie selon la marque et le conditionnement. WAKE propose le tarif le plus accessible à environ 0,60€ par tasse. Drink Dyna se situe autour de 0,72€. Bonjour Drink et Mush N Go coûtent environ 1€ par tasse. French Mush et Clearly se situent entre 0,94€ et 1,02€ par tasse. En utilisant les codes promos de nos partenaires, le coût peut être réduit de 10 à 20%, rendant ces boissons très compétitives par rapport à un café de spécialité en cafétière.",
   },
 ];
 ---
 
 <BaseLayout
-  title={`Comparatif ${config.productCategory} 2026 — ${config.siteName}`}
-  description={`Découvrez notre comparatif complet des meilleurs ${config.productCategory}. Tests, avis et codes promo exclusifs.`}
+  title="Meilleur Café aux Champignons 2026 — Comparatif Top 6"
+  description="Découvrez notre comparatif des meilleurs cafés aux champignons adaptogènes en 2026. Tests, avis, composition et codes promo exclusifs pour -20%."
 >
   <!-- JSON-LD: ItemList -->
   <script type="application/ld+json" slot="json-ld" set:html={JSON.stringify({
@@ -66,13 +80,12 @@ const sampleArticles = [
 
   <!-- Blog Hero -->
   <BlogHero
-    title={`Comparatif ${config.productCategory} 2026`}
-    description="Découvrez le classement des meilleurs produits. Notre analyse détaillée vous aide à faire le bon choix."
+    title="Meilleur Café aux Champignons 2026 — Top 6"
+    description="Notre sélection des meilleurs cafés aux champignons adaptogènes testés et comparés. Classement, avis détaillés et codes promo exclusifs."
     author={config.author.name}
     authorAvatar={config.author.avatar}
-    date="15 Janvier 2026"
-    readingTime="12 min de lecture"
-    bannerImage="/banner-placeholder.jpg"
+    date="18 Avril 2026"
+    readingTime="15 min de lecture"
     breadcrumbs={[
       { label: 'Accueil', href: '/' },
       { label: 'Comparatif', href: '/comparatif' },
@@ -93,15 +106,21 @@ const sampleArticles = [
       <div class="padding-section-medium">
         <div class="blog-grid">
 
-          <!-- ═══ LEFT COLUMN (cards) ═══ -->
+          <!-- ═══ LEFT COLUMN (content) ═══ -->
           <div class="content-column">
 
             <!-- Intro -->
             <section id="introduction" class="mb-8">
               <div class="rich-text">
-                <h2>Notre comparatif {config.productCategory}</h2>
+                <h2>Notre comparatif cafés aux champignons 2026</h2>
                 <p>
-                  Vous recherchez le meilleur {config.product.toLowerCase()} du marché ? Notre équipe a testé et analysé les produits les plus populaires pour vous aider à choisir. Découvrez notre classement complet avec nos recommandations personnalisées.
+                  Le café aux champignons connaît une croissance fulgurante en France. Avec <strong>720 recherches mensuelles</strong> pour « café aux champignons » et <strong>880 pour « café adaptogène »</strong>, ce marché en plein essor attire de plus en plus de consommateurs en quête d'une alternative saine au café classique.
+                </p>
+                <p>
+                  Mais face à la multiplication des offres — du café Arabica enrichi en Lion's Mane aux alternatives sans caféine à base d'orge torréfiée — il devient difficile de s'y retrouver. Notre équipe a testé et analysé les <strong>6 meilleures marques de café aux champignons disponibles en France</strong> pour vous aider à faire le bon choix.
+                </p>
+                <p>
+                  Chaque produit a été évalué selon des critères stricts : <strong>dosage en extraits de champignons</strong>, qualité de l'extraction, profil nutritionnel, goût, rapport qualité-prix et retours clients. Voici notre classement définitif pour 2026.
                 </p>
               </div>
             </section>
@@ -111,8 +130,10 @@ const sampleArticles = [
               { id: 'introduction', label: 'Introduction' },
               ...config.products.map((p) => ({
                 id: `product-${p.slug}`,
-                label: `${p.rank <= 3 ? (p.rank === 1 ? '🏆' : p.rank === 2 ? '🥈' : '🥉') : ''} Top ${p.rank} — ${p.brand}`,
+                label: `${p.rank <= 3 ? (p.rank === 1 ? '🏆' : p.rank === 2 ? '🥈' : '🥉') : ''} ${p.rank}. ${p.brand}`,
               })),
+              { id: 'guide', label: 'Guide d\'achat' },
+              { id: 'faq', label: 'Questions fréquentes' },
             ]} />
 
             <!-- Comparator Cards -->
@@ -123,6 +144,54 @@ const sampleArticles = [
                 </div>
               ))}
             </section>
+
+            <!-- ═══ SEO TEXT: Guide d'achat ═══ -->
+            <section id="guide" class="seo-guide">
+              <div class="rich-text">
+                <h2>Comment choisir le meilleur café aux champignons adaptogènes ?</h2>
+
+                <h3>Pourquoi remplacer votre café classique ?</h3>
+                <p>
+                  Le café classique, consommé par 83% des Français au quotidien, présente des effets indésirables bien documentés : palpitations, insomnie, acidité gastrique, nervosité et surtout le fameux « crash » de l'après-midi. Les <strong>champignons adaptogènes</strong> offrent une réponse naturelle à ces problématiques en modulant la réponse de l'organisme au stress et en procurant une énergie stable et durable.
+                </p>
+                <p>
+                  La médecine traditionnelle chinoise utilise ces champignons depuis plus de 2000 ans. La science moderne confirme aujourd'hui leurs propriétés : le <strong>Lion's Mane</strong> stimule la production de facteur de croissance nerveuse (NGF), le <strong>Cordyceps</strong> améliore la production d'ATP cellulaire, le <strong>Chaga</strong> possède l'un des indices ORAC les plus élevés de la nature, et le <strong>Reishi</strong> est reconnu pour ses effets immunomodulateurs et relaxants.
+                </p>
+
+                <h3>Les critères essentiels pour bien choisir</h3>
+
+                <p><strong>1. Le dosage en extraits de champignons</strong><br>
+                C'est le critère numéro un. Un bon café aux champignons doit contenir entre <strong>1 500 et 3 500 mg d'extraits par dose</strong>. Méfiez-vous des produits qui affichent des dosages en poudre brute — les extraits concentrés (ratio 8:1 à 12:1) sont beaucoup plus efficaces car ils concentrent les composés actifs. Brainstoorm de Mush N Go détient le record avec 3 475 mg par dose, suivi de Bonjour Drink avec 2 250 mg et Drink Dyna avec 2 000 mg.</p>
+
+                <p><strong>2. La qualité de l'extraction</strong><br>
+                Le ratio d'extraction indique la concentration. Un ratio <strong>8:1</strong> signifie que 8 kg de champignons frais sont concentrés en 1 kg d'extrait. Plus le ratio est élevé, plus la concentration en bêta-glucanes, hericénones et triterpènes est importante. Privilégiez les extractions aqueuses ou double (eau + alcool) qui préservent le spectre complet des composés actifs.</p>
+
+                <p><strong>3. La teneur en caféine</strong><br>
+                Selon votre sensibilité, le choix entre un café aux champignons avec ou sans caféine est déterminant. Si vous cherchez une expérience proche du café classique avec un effet stimulant modéré, optez pour des formulations à base d'Arabica comme Brainstoorm ou Drink Dyna. Si vous souhaitez éliminer totalement la caféine tout en gardant le rituel du café matinal, Bonjour Drink (orge torréfiée + cacao) ou Clearly sont d'excellentes alternatives.</p>
+
+                <p><strong>4. Les certifications et la transparence</strong><br>
+                Exigez une <strong>certification bio</strong> pour garantir l'absence de pesticides. Vérifiez que la marque indique clairement la provenance de ses champignons (cultivés en France, en Europe ou en Asie avec traçabilité). Les analyses laboratoires tierces et la transparence sur la composition sont des signes de qualité. Mush N Go, French Mush et Clearly se distinguent sur ces critères.</p>
+
+                <p><strong>5. Le rapport qualité-prix</strong><br>
+                Calculez le <strong>coût par tasse</strong>, pas le prix du sachet. WAKE propose le tarif le plus accessible à 0,60€/tasse, suivi de Drink Dyna à 0,72€ et de Bonjour Drink et Mush N Go à environ 1€/tasse. N'oubliez pas d'utiliser les codes promos partenaires (LMC15, LMC20, etc.) qui peuvent réduire le coût de 10 à 20%. Les conditionnements de 60 ou 90 portions offrent généralement un meilleur rapport qualité-prix.</p>
+
+                <h3>Les différents types de cafés aux champignons</h3>
+                <p><strong>Café Arabica + champignons :</strong> La formule la plus courante. Elle combine le goût et la caffeine du café avec les bienfaits des adaptogènes. Brainstoorm, Drink Dyna et WAKE utilisent cette approche. Idéal pour ceux qui veulent garder le rituel du café tout en réduisant les effets secondaires.</p>
+                <p><strong>Substitut sans caféine :</strong> Utilise de l'orge torréfiée, du cacao ou du matcha comme base au lieu du café. Bonjour Drink et Clearly adoptent cette approche. Parfait pour les personnes sensibles à la caféine ou cherchant à la supprimer totalement.</p>
+                <p><strong>Poudre fonctionnelle :</strong> Concentré de champignons à mélanger dans votre boisson. French Mush propose cette approche avec ses poudres et gélules ultra-concentrées. Offre une flexibilité maximale d'utilisation.</p>
+
+                <h3>Notre verdict</h3>
+                <p>
+                  Après avoir testé les 6 meilleures marques du marché français, notre podium se dessine clairement. <strong>Bonjour Drink</strong> et <strong>Mush N Go</strong> dominent avec leur note de 9,7/10 — le premier pour son accessibilité et son approche sans caféine, le second pour sa concentration record en extraits. <strong>WAKE</strong> complète le podium avec le meilleur rapport qualité-prix à 17,95€. Que vous soyez un amateur de café en quête d'une alternative plus saine ou un néophyte curieux des bienfaits des adaptogènes, il existe un café aux champignons adapté à votre profil et votre budget.
+                </p>
+              </div>
+            </section>
+
+            <!-- ═══ FAQ ═══ -->
+            <section id="faq" class="faq-section">
+              <FAQSection faq={comparatifFaq} />
+            </section>
+
           </div>
 
           <!-- ═══ RIGHT COLUMN (sidebar) ═══ -->
@@ -146,9 +215,6 @@ const sampleArticles = [
       </div>
     </div>
   </main>
-
-  <!-- Article Grid -->
-  <ArticleGrid articles={sampleArticles} />
 </BaseLayout>
 
 <style>
@@ -156,5 +222,35 @@ const sampleArticles = [
     display: flex;
     flex-direction: column;
     gap: 2rem;
+  }
+
+  .seo-guide {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid #f0ebe3;
+  }
+
+  .seo-guide .rich-text h3 {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #242424;
+  }
+
+  .seo-guide .rich-text h3:first-of-type {
+    margin-top: 2.5rem;
+  }
+
+  .seo-guide .rich-text p {
+    margin-bottom: 1rem;
+    line-height: 1.8;
+    color: #444;
+  }
+
+  .faq-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid #f0ebe3;
   }
 </style>
