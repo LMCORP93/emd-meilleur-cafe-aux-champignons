@@ -3,6 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import BlogHero from '@/components/BlogHero.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import FirstReview from '@/components/FirstReview.astro';
+import ContentImage from '@/components/ContentImage.astro';
 import TableOfContents from '@/components/TableOfContents.astro';
 import ImageBlock from '@/components/ImageBlock.astro';
 import ComparisonTable from '@/components/ComparisonTable.astro';
@@ -118,7 +119,7 @@ const sampleArticles = [
     authorAvatar={config.author.avatar}
     date="18 Avril 2026"
     readingTime="17 min de lecture"
-    bannerImage={topProduct.image}
+    bannerImage="/images/content/fal-hero.webp"
     breadcrumbs={config.breadcrumbs}
     product={{
       name: topProduct.name,
@@ -185,6 +186,12 @@ const sampleArticles = [
               <p>Sur le plan des certifications, tous les extraits sont issus des <strong>corps fructifères</strong> (la partie la plus concentrée en principes actifs), certifiés bio, sans OGM, vegan et sans gluten. Les analyses sont réalisées par des laboratoires indépendants français. Mush N Go affiche un Trustpilot de <strong>9,7/10</strong> avec plus de 170 avis vérifiés, ce qui est exceptionnel pour une marque de niche.</p>
               <p>Un point notable : la marque vend exclusivement en ligne sur son site officiel. Pas de marketplace, pas de revente en parapharmacie. Cela garantit la fraîcheur du produit mais peut être frustrant si vous préférez acheter en magasin physique.</p>
             </div>
+
+            <ContentImage
+              src="/images/content/fal-marque.webp"
+              alt="Laboratoire de production Mush N Go en France - extraits de champignons adaptogènes"
+              caption="Les extraits de champignons sont traités dans un laboratoire français avec des contrôles qualité stricts"
+            />
           </section>
 
           <!-- SECTION: Composition détaillée -->
@@ -279,6 +286,12 @@ const sampleArticles = [
               <h3>Semaine 3 : les effets cumulatifs</h3>
               <p>C'est la semaine où les adaptogènes commencent à montrer leur véritable potentiel. Le stress lié aux deadlines est géré plus sereinement, le sommeil de qualité s'améliore (paradoxalement, alors qu'on prend le produit le matin), et l'énergie reste stable de 8h à 18h sans besoin d'une deuxième tasse.</p>
 
+              <ContentImage
+                src="/images/content/fal-test.webp"
+                alt="Test Brainstoorm 30 jours - préparation quotidienne du café aux champignons adaptogènes"
+                caption="Notre protocole de test : une dose de 8g chaque matin dans 200ml d'eau chaude"
+              />
+
               <h3>Semaine 4 : le verdict du terrain</h3>
               <p>Après 30 jours, Brainstoorm fait partie de notre routine et le manque se fait sentir quand on oublie de le prendre. Les effets les plus marquants : énergie stable sans palpitations, meilleure gestion du stress, et un sommeil paradoxal plus profond. Le seul bémol constaté : une légère accoutumance à l'effet stimulant, qui nécessiterait peut-être une pause d'une semaine par mois pour maintenir l'efficacité optimale.</p>
 
@@ -366,6 +379,13 @@ const sampleArticles = [
 
           <!-- SECTION: Notre verdict -->
           <section id="verdict" class="content-section">
+
+            <ContentImage
+              src="/images/content/fal-verdict.webp"
+              alt="Verdict Mush N Go Brainstoorm - comparatif des meilleurs cafés adaptogènes 2026"
+              caption="Brainstoorm se démarque par sa concentration en actifs (3475 mg) et son extraction 12:1"
+            />
+
             <div class="rich-text">
               <h2>Notre verdict : Mush N Go mérite-t-il sa note de 9,7/10 ?</h2>
               <p>Après 30 jours d'utilisation, une analyse approfondie de la composition et un examen des avis clients, voici notre évaluation finale.</p>
