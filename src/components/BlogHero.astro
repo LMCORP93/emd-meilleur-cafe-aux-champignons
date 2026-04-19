@@ -65,9 +65,24 @@ const { title, description, author, authorAvatar, date, readingTime, bannerImage
       </div>
     )}
 
-    <!-- Promo code copy button -->
-    {product && product.promoCode && (
-      <PromoCodeButton code={product.promoCode} percent={`${product.promoPercent}%`} />
+    <!-- CTA buttons: promo code + visit site -->
+    {product && (
+      <div class="hero-cta-row">
+        <PromoCodeButton code={product.promoCode} percent={`${product.promoPercent}%`} />
+        <a
+          href={product.affiliateLink}
+          target="_blank"
+          rel="nofollow sponsored"
+          class="hero-visit-btn"
+        >
+          Visiter le site
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" x2="21" y1="14" y2="3"/>
+          </svg>
+        </a>
+      </div>
     )}
 
     <!-- Author info row (hero_wrapper-author) -->
@@ -176,7 +191,14 @@ const { title, description, author, authorAvatar, date, readingTime, bannerImage
   .blog_img {
     border-radius: 16px;
     width: 100%;
+    max-height: 320px;
+    object-fit: cover;
     display: block;
+  }
+  @media (max-width: 767px) {
+    .blog_img {
+      max-height: 200px;
+    }
   }
 
   /* ── hero_wrapper-author ───────────────────────────── */
@@ -235,6 +257,48 @@ const { title, description, author, authorAvatar, date, readingTime, bannerImage
     padding: 0.25rem 0.5rem;
     font-weight: 600;
     font-size: 0.8125rem;
+  }
+
+  /* ── hero-cta-row ──────────────────────────────────── */
+  .hero-cta-row {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  @media (max-width: 767px) {
+    .hero-cta-row {
+      width: 100%;
+    }
+    .hero-cta-row .btn-dashed,
+    .hero-cta-row .hero-visit-btn {
+      flex: 1;
+      justify-content: center;
+      min-width: 0;
+    }
+  }
+  /* ── hero-visit-btn ───────────────────────────────── */
+  .hero-visit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #ef7a1a;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0.6rem 1.25rem;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+    white-space: nowrap;
+  }
+  .hero-visit-btn:hover {
+    background-color: #d96b10;
+    transform: translateY(-1px);
+    color: #ffffff;
+  }
+  .hero-visit-btn svg {
+    flex-shrink: 0;
   }
 
   /* ── breadcrumb ────────────────────────────────────── */
