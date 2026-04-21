@@ -70,8 +70,8 @@ const config: SiteConfig = {
 
   affiliateLink: 'https://taap.it/mushngo-brainstorm',
   promoCode: 'LMC15',
-  originalPrice: '39,90 €',
-  discountPrice: '33,90 €',
+  originalPrice: '29,90 €',
+  discountPrice: '25,42 €',
   rating: 9.7,
 
   author: {
@@ -81,8 +81,8 @@ const config: SiteConfig = {
   },
 
   seo: {
-    title: 'Mush N Go Avis - Test Complet Brainstoorm',
-    description: 'Mush N Go avis complet : notre test de 30 jours du Brainstoorm, café aux champignons adaptogènes. Composition, efficacité, prix et code promo -15% LMC15.',
+    title: 'Mush N Go Avis 2026 : Test du Brainstoorm (6 250 mg) -15%',
+    description: 'Mush N Go avis après 30 jours de test : Brainstoorm, le café aux champignons le plus dosé de France (6 250 mg d\'actifs). Composition, prix, code LMC15.',
     ogImage: 'https://cdn.prod.website-files.com/68c02c2c477fdd467e6e08a1/69634d74b3e93e5fd12d108d_1_8789ecf0-bcc9-4b45-b2f9-c8bfca54ab16_1000x1000_crop_center.webp',
   },
 
@@ -93,57 +93,57 @@ const config: SiteConfig = {
 
   quickSummary: {
     assets: [
-      'Formule ultra-concentrée à 3475 mg de principes actifs par dose',
-      'Extraction 12:1 des champignons pour une biodisponibilité maximale',
-      'Café bio extrait au CO2 avec seulement 80 mg de caféine',
-      'Certifié bio, vegan, sans gluten, sans OGM',
-      'Code promo LMC15 pour -15% sur le site officiel',
+      'Formule ultra-concentrée à 6 250 mg d\'actifs par tasse — le café aux champignons le plus dosé de France',
+      '2 708 mg de fibres d\'Acacia prébiotique — unique sur le marché : performance cognitive + confort digestif',
+      'NewCaff® : caféine brevetée à libération prolongée (20 mg) — énergie stable 6-8h sans pic ni crash',
+      'Pochon de 240g (30 tasses) — le plus gros format du marché, vegan, sans OGM, sans gluten, 11,84 kcal/portion',
+      'Fabriqué en France dans un laboratoire certifié en Bretagne, testé en laboratoire indépendant',
+      'Code LMC15 = -15% sur tout le site, cumulable avec l\'abonnement -30% (0,99 €/tasse) + garantie 60 jours',
     ],
     considerations: [
-      'Disponible uniquement sur le site officiel en ligne',
-      'Ruptures de stock fréquentes en raison de la demande élevée',
-      'Le goût cacao peut déplaire aux amateurs de café classique',
+      'Disponible uniquement en ligne sur mushngo.com (pas encore en boutique physique)',
+      'Seulement 2 saveurs disponibles pour l\'instant : Choco-noisette et Coffee',
     ],
   },
 
   pros: [
-    'Formule ultra-concentrée 3475 mg de principes actifs par dose de 8 g',
-    'Excellente tolérance digestive, pas d\'acidité ni de palpitations',
-    'Goût cacao-noisette agréable, sans arrière-goût de champignon',
-    'Effets perceptibles rapidement dès les premières prises',
-    'Fabrication française, bio, vegan, sans gluten, sans OGM',
+    'Dosage exceptionnel : 6 250 mg d\'actifs par tasse, 3 000 mg de champignons à dose clinique',
+    'NewCaff® brevetée : caféine à libération prolongée, énergie stable 6-8h sans crash',
+    'Tolérance digestive : fibres d\'Acacia prébiotiques, pas d\'acidité ni de reflux',
+    'Transparence totale : marque française, labo certifié Bretagne, corps fructifères, analyses indépendantes',
+    'Efficacité réelle : effets perceptibles dès la 2ᵉ semaine, renforcés par l\'accumulation',
   ],
 
   cons: [
-    'Disponible uniquement en ligne sur le site officiel',
-    'Ruptures de stock fréquentes dues à la forte demande',
-    'Goût trop chocolaté pour certains amateurs de café pur',
+    'Seulement 2 saveurs pour l\'instant (Choco-noisette et Coffee)',
+    'Ruptures ponctuelles sur Choco-noisette en période de forte demande',
+    'Disponible uniquement en ligne — pas en boutique physique ni parapharmacie',
   ],
 
   faq: [
     {
       question: 'Quels sont les ingrédients de Brainstoorm Mush N Go ?',
-      answer: 'Brainstoorm contient Lion\'s Mane (1000 mg), Cordyceps (1000 mg), Chaga (1000 mg), Maca (250 mg), Ashwagandha (200 mg), Rhodiola (25 mg), café bio extrait au CO2 (80 mg de caféine) et cacao cru (1307 mg). Chaque dose de 8 g contient 3475 mg de principes actifs extraits au ratio 12:1.',
+      answer: 'Brainstoorm contient 6 250 mg d\'ingrédients actifs par dose de 8 g : Maca (3 000 mg), fibres d\'Acacia (2 708 mg), Cacao (1 400 mg), Lion\'s Mane (1 000 mg), Cordyceps (1 000 mg), Chaga (1 000 mg), Ashwagandha (200 mg), Rhodiola (25 mg) et NewCaff® caféine brevetée (20 mg). Les trois champignons principaux sont dosés à dose clinique (1 000 mg chacun).',
     },
     {
       question: 'Au bout de combien de temps voit-on les résultats avec Brainstoorm ?',
-      answer: 'Les premiers effets se ressentent généralement dès la première tasse grâce à la caféine combinée aux adaptogènes. Pour des bénéfices cognitifs durables (concentration, mémoire), un usage régulier de 2 à 4 semaines est nécessaire. Les effets maximaux sur la clarté mentale et la résistance au stress se manifestent après 30 jours de cure continue.',
+      answer: 'Les premiers effets se ressentent dès la première tasse grâce à la NewCaff® à libération prolongée. Pour des bénéfices cognitifs durables (concentration, mémoire, gestion du stress), un usage régulier de 2 à 4 semaines est nécessaire. Les effets maximaux sur la clarté mentale se manifestent après 30 jours de cure continue, les adaptogènes fonctionnant par accumulation.',
     },
     {
       question: 'Y a-t-il des effets secondaires avec le café aux champignons Mush N Go ?',
-      answer: 'Brainstoorm est bien toléré par la grande majorité des utilisateurs. Sa formulation inclut du café bio avec seulement 80 mg de caféine par dose (contre 95-120 mg pour un espresso classique), ce qui limite les risques de palpitations ou de nervosité. Les champignons adaptogènes sont reconnus pour leur excellente tolérance digestive. En cas de sensibilité aux champignons ou à la caféine, il est recommandé de commencer par une demi-dose.',
+      answer: 'Brainstoorm est bien toléré par la grande majorité des utilisateurs. Sa formulation inclut la NewCaff® avec seulement 20 mg de caféine par tasse (contre 95-120 mg pour un espresso classique), ce qui limite les risques de palpitations. Les 2 708 mg de fibres d\'Acacia prébiotiques soutiennent le confort digestif et contrerent l\'acidité gastrique. En cas de sensibilité, commencez par une demi-dose (4 g) pendant 3-4 jours.',
     },
     {
       question: 'Comment utiliser le code promo LMC15 pour Mush N Go ?',
-      answer: 'Entrez le code LMC15 lors de votre commande sur le site officiel mushngo.fr. La réduction de 15% sera appliquée automatiquement à votre panier. Ce code est valable sur toutes les tailles de conditionnement (30, 60 ou 90 portions) tant que l\'offre est active sur notre page.',
+      answer: 'Entrez le code LMC15 lors de votre commande sur le site officiel mushngo.com. La réduction de 15% sera appliquée automatiquement à votre panier. Le code est cumulable avec l\'abonnement -30%, ce qui descend à 0,59 €/tasse sur la première commande. Garantie satisfait ou remboursé 60 jours même si le pochon est entamé.',
     },
     {
       question: 'Où acheter Brainstoorm de Mush N Go au meilleur prix ?',
-      answer: 'Brainstoorm est disponible exclusivement sur le site officiel mushngo.fr. C\'est le seul canal de distribution autorisé par la marque, ce qui garantit l\'authenticité du produit et les meilleures conditions de prix. Utilisez le code LMC15 pour bénéficier de -15% supplémentaires. Les formats de 60 et 90 portions offrent le meilleur rapport qualité-prix par dose.',
+      answer: 'Brainstoorm est disponible exclusivement sur le site officiel mushngo.com en pochon de 240g (30 portions). C\'est le seul canal de distribution autorisé par la marque. Le meilleur rapport qualité-prix est l\'abonnement mensuel à 20,93 € (0,70 €/tasse). Avec le code LMC15 cumulé à l\'abonnement, on descend à 0,59 €/tasse — le meilleur coût/mg d\'actifs du marché.',
     },
     {
       question: 'Brainstoorm est-il adapté aux personnes sensibles à la caféine ?',
-      answer: 'Avec seulement 80 mg de caféine par dose (extrait au CO2), Brainstoorm contient sensiblement moins de caféine qu\'un espresso classique (95-120 mg). Les adaptogènes comme l\'Ashwagandha et la Rhodiola modèrent l\'effet de la caféine, procurant une énergie stable sans le pic ni le crash. Néanmoins, il est déconseillé aux enfants, aux femmes enceintes ou allaitantes, et aux personnes suivant un traitement médical sans avis médical.',
+      answer: 'Brainstoorm ne contient que 20 mg de caféine par tasse via NewCaff® (contre 95-120 mg pour un espresso), ce qui le rend accessible à la majorité des personnes sensibles. Les adaptogènes (Ashwagandha, Rhodiola) modèrent encore plus l\'effet de la caféine. Si vous êtes très sensible, commencez par une demi-dose (4 g) pendant 3-4 jours avant de passer à la dose complète.',
     },
   ],
 
@@ -155,6 +155,7 @@ const config: SiteConfig = {
     { id: 'test-30-jours', label: 'Notre test 30 jours' },
     { id: 'avis-clients', label: 'Avis clients' },
     { id: 'prix', label: 'Prix et offres' },
+    { id: 'ne-convient-pas', label: 'À qui ça ne convient pas' },
     { id: 'verdict', label: 'Notre verdict' },
   ],
 
@@ -170,25 +171,25 @@ const config: SiteConfig = {
       reviewCount: 170,
       promoCode: 'LMC15',
       promoPercent: 15,
-      originalPrice: '39,90 €',
-      discountPrice: '33,90 €',
+      originalPrice: '29,90 €',
+      discountPrice: '25,42 €',
       affiliateLink: 'https://taap.it/mushngo-brainstorm',
       origin: '🇫🇷 France',
       availability: 'En stock',
-      productType: 'Poudre',
+      productType: 'Poudre (240g — 30 portions)',
       pros: [
-        'Formule ultra-concentrée : 3475 mg de principes actifs par portion de 8 g',
-        'Extraction 12:1 des champignons pour une biodisponibilité maximale',
-        'Café bio extrait au CO2 avec seulement 80 mg de caféine',
-        'Certifié bio, vegan, sans gluten, sans OGM',
-        'Trustpilot 9,7/10 avec plus de 170 avis vérifiés',
+        '6 250 mg d\'actifs par tasse — le café aux champignons le plus dosé de France',
+        '2 708 mg de fibres d\'Acacia prébiotique — unique sur le marché',
+        'NewCaff® brevetée : 20 mg caféine à libération prolongée, énergie 6-8h sans crash',
+        'Fabriqué en France, labo certifié Bretagne, bio, vegan, sans gluten, sans OGM',
+        'Trustpilot 4,8/5 avec plus de 170 avis vérifiés',
       ],
       cons: [
-        'Disponible uniquement en ligne sur le site officiel',
-        'Ruptures de stock fréquentes dues à la forte demande',
-        'Goût cacao-noisette qui peut déplaire aux puristes du café',
+        'Disponible uniquement en ligne sur mushngo.com',
+        'Seulement 2 saveurs : Choco-noisette et Coffee',
+        'Ruptures ponctuelles en période de forte demande',
       ],
-      description: 'Mush N Go révolutionne la consommation de champignons adaptogènes avec une approche résolument moderne et pratique. Brainstoorm est un café aux champignons ultra-concentré à 3475 mg de principes actifs par dose (Lion\'s Mane, Cordyceps, Chaga, Maca, Ashwagandha, Rhodiola). Formule extraite au ratio 12:1, café bio CO2, fabrication française, certifiée bio, vegan et sans gluten. Trustpilot 9,7/10.',
+      description: 'Brainstoorm de Mush N Go est le café aux champignons adaptogènes le plus concentré de France avec 6 250 mg d\'actifs par tasse. Formule à 8 actifs synergiques : Lion\'s Mane, Cordyceps, Chaga (1 000 mg chacun à dose clinique), Maca (3 000 mg), fibres d\'Acacia (2 708 mg), Ashwagandha, Rhodiola, Cacao et NewCaff® brevetée. Fabrication française en Bretagne. Trustpilot 4,8/5.',
     },
     {
       rank: 2,
@@ -279,7 +280,7 @@ const config: SiteConfig = {
       cons: [
         'Gamme de saveurs peut être déroutante au premier abord',
         'Caféine présente (Arabica) — déconseillé aux sensibles',
-        'Moins concentré en champignons que Mush N Go (2000 mg vs 3475 mg)',
+        'Moins concentré en actifs que Mush N Go (2000 mg vs 6 250 mg)',
       ],
       description: 'Dyna réinvente le rituel matinal avec son Super Coffee, une fusion intelligente entre café Arabica premium et adaptogènes. Cette formule instantanée offre une énergie stable et une concentration décuplée sans le crash habituel. Elle combine 2000 mg d\'extraits concentrés de Lion\'s Mane et d\'Ashwagandha KSM-66. Formules disponibles en versions cacao, malt et matcha pour varier les rituels. Pack découverte trio à 24€.',
     },

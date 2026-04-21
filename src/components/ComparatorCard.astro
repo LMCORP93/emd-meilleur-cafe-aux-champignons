@@ -275,6 +275,12 @@ const chevronId = `chevron-${product.slug}`;
     .cc-main {
       flex-direction: row;
     }
+    .cc-main .cc-img-col {
+      flex: 1;
+    }
+    .cc-main .cc-content {
+      flex: 2;
+    }
   }
 
   /* ── Image column ── */
@@ -284,29 +290,27 @@ const chevronId = `chevron-${product.slug}`;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
     min-height: 200px;
     overflow: hidden;
   }
   @media (min-width: 768px) {
     .cc-img-col {
-      width: 280px;
-      min-width: 280px;
+      width: 1fr;
+      min-width: 0;
+      padding: 0;
+      min-height: 100%;
     }
   }
   @media (max-width: 767px) {
     .cc-img-col {
       max-height: 220px;
-      padding: 1.5rem;
     }
   }
 
   .cc-img {
-    width: auto;
-    height: auto;
-    max-height: 200px;
-    max-width: 200px;
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     display: block;
   }
 
@@ -321,8 +325,8 @@ const chevronId = `chevron-${product.slug}`;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
   }
   .cc-badge-img {
-    width: 40px;
-    height: 40px;
+    width: 56px;
+    height: 56px;
     object-fit: contain;
     display: block;
   }
@@ -476,7 +480,7 @@ const chevronId = `chevron-${product.slug}`;
   .cc-price-new {
     font-family: 'Archivo', sans-serif;
     font-weight: 800;
-    font-size: clamp(1.25rem, 1.1rem + 0.75vw, 1.75rem);
+    font-size: clamp(1.1rem, 1rem + 0.5vw, 1.5rem);
     color: #242424;
     line-height: 1;
   }
@@ -504,9 +508,17 @@ const chevronId = `chevron-${product.slug}`;
     display: inline-flex;
     align-items: center;
     gap: 0.25rem;
+    background: #ef7a1a;
+    color: #ffffff !important;
+    border: none;
+  }
+  .cc-cta:hover {
+    background: #ff8c2e;
+    color: #ffffff !important;
   }
   .cc-cta-brand {
     font-weight: 400;
+    color: #ffffff !important;
   }
   .cc-cta-arrow {
     width: 16px;
@@ -671,20 +683,19 @@ const chevronId = `chevron-${product.slug}`;
     justify-content: center;
     gap: 0.25rem;
     width: 100%;
-    background: #ffffff;
-    color: #242424;
-    border: 1px solid #e0e0e0;
+    background: #ef7a1a;
+    color: #ffffff;
+    border: none;
     font-family: 'Archivo', sans-serif;
     font-weight: 600;
     font-size: 0.875rem;
     padding: 0.75rem 1.5rem;
     border-radius: 0.5rem;
     text-decoration: none;
-    transition: background 0.2s, border-color 0.2s;
+    transition: background 0.2s;
   }
   .cc-footer-btn:hover {
-    background: #f4f2ec;
-    border-color: #ccc;
-    color: #242424;
+    background: #ff8c2e;
+    color: #ffffff;
   }
 </style>

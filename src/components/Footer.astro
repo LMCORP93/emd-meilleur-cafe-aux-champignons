@@ -27,30 +27,15 @@ const {
   year = new Date().getFullYear(),
 } = Astro.props;
 
-// Build columns: if explicit columns are provided, use them.
-// Otherwise auto-generate from navLinks (split into 3 cols for cols 2–4).
-let footerColumns: FooterColumn[];
+// Blog guide links (placeholder for future articles)
+const guideLinks: NavLink[] = [
+  // { label: 'Guide des compléments alimentaires', href: '/guides/complements-alimentaires' },
+  // { label: 'Bienfaits des adaptogènes', href: '/guides/adaptogenes' },
+  // { label: 'Comparatif des cafés fonctionnels', href: '/guides/cafes-fonctionnels' },
+];
 
-if (columns && columns.length > 0) {
-  footerColumns = columns;
-} else if (navLinks.length > 0) {
-  // Distribute navLinks across 3 columns
-  const colCount = 3;
-  const perCol = Math.ceil(navLinks.length / colCount);
-  footerColumns = Array.from({ length: colCount }, (_, i) => ({
-    title: i === 0 ? 'Navigation' : i === 1 ? 'Liens' : 'Plus',
-    links: navLinks.slice(i * perCol, (i + 1) * perCol),
-  }));
-} else {
-  footerColumns = [
-    { title: 'Navigation', links: [] },
-    { title: 'Liens', links: [] },
-    { title: 'Plus', links: [] },
-  ];
-}
-
-// Legal links (static, always present)
-const legalLinks = [
+// Legal / information links
+const infoLinks: NavLink[] = [
   { label: 'Politique de confidentialité', href: '/politique-de-confidentialite' },
   { label: 'Mentions légales', href: '/mentions-legales' },
   { label: 'Contact', href: '/contact' },
@@ -59,42 +44,47 @@ const legalLinks = [
 
 <footer class="footer">
   <div class="footer_container">
-    <!-- 4-column grid -->
+    <!-- 3-column grid -->
     <div class="footer_grid">
 
       <!-- Column 1: Logo only -->
-      <div class="footer_colonne">
+      <div class="footer_colonne footer_colonne--logo">
         <a href="/" class="footer_logo-link">
-          <img src={logoSrc} alt={siteName} class="footer_logo" width="40" height="40" />
+          <img src={logoSrc} alt={siteName} class="footer_logo" />
         </a>
       </div>
 
-      <!-- Columns 2–4: Navigation links -->
-      {footerColumns.map((col) => (
-        <div class="footer_colonne">
-          <div class="footer_col-title">{col.title}</div>
-          <div class="footer_wrapper-links">
-            {col.links.map((link) => (
-              <a href={link.href} class="footer_link">
-                {link.label}
-              </a>
-            ))}
-          </div>
+      <!-- Column 2: Nos Guides -->
+      <div class="footer_colonne">
+        <div class="footer_col-title">Nos Guides</div>
+        <div class="footer_wrapper-links">
+          {guideLinks.length > 0 ? guideLinks.map((link) => (
+            <a href={link.href} class="footer_link">
+              {link.label}
+            </a>
+          )) : (
+            <span class="footer_link--placeholder">Bientôt disponible…</span>
+          )}
         </div>
-      ))}
+      </div>
+
+      <!-- Column 3: Informations -->
+      <div class="footer_colonne">
+        <div class="footer_col-title">Informations</div>
+        <div class="footer_wrapper-links">
+          {infoLinks.map((link) => (
+            <a href={link.href} class="footer_link">
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </div>
 
     </div>
 
-    <!-- Bottom sub-footer: copyright + legal links -->
+    <!-- Bottom sub-footer: copyright -->
     <div class="footer_sub">
-      <p class="footer_copyright">{copyright}</p>
-      <div class="footer_legal">
-        {legalLinks.map((link) => (
-          <a href={link.href} class="footer_link footer_link--legal">
-            {link.label}
-          </a>
-        ))}
-      </div>
+      <p class="footer_copyright">© {year} {copyright}</p>
     </div>
   </div>
 </footer>
@@ -114,11 +104,11 @@ const legalLinks = [
     margin-right: auto;
   }
 
-  /* ── 4-column grid ── */
+  /* ── 3-column grid ── */
   .footer_grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 1rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2rem;
   }
 
   /* ── Column ── */
@@ -129,37 +119,37 @@ const legalLinks = [
     align-items: center;
     gap: 1rem;
     text-align: center;
+    align-self: start;
+  }
+
+  .footer_colonne--logo {
+    align-items: flex-start;
+    gap: 0.75rem;
   }
 
   /* ── Logo link ── */
   .footer_logo-link {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
     text-decoration: none;
   }
 
   .footer_logo {
-    width: 3.5rem;
-    height: 3.5rem;
+    width: 8rem;
+    height: 8rem;
     object-fit: contain;
   }
 
   @media (max-width: 767px) {
     .footer_logo {
-      width: 5rem;
-      height: 5rem;
+      width: 9rem;
+      height: 9rem;
     }
-  }
-
-  .footer_site-name {
-    font-size: 1.125rem;
-    font-weight: 600;
-    color: #242424;
   }
 
   /* ── Column title ── */
   .footer_col-title {
+    font-family: 'Archivo', sans-serif;
     font-size: 0.875rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -188,6 +178,12 @@ const legalLinks = [
     color: #ef7a1a;
   }
 
+  .footer_link--placeholder {
+    font-size: 14px;
+    color: #999;
+    font-style: italic;
+  }
+
   /* ── Sub footer ── */
   .footer_sub {
     margin-top: 2.5rem;
@@ -195,8 +191,7 @@ const legalLinks = [
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    justify-content: center;
     gap: 0.75rem;
   }
 
@@ -207,25 +202,13 @@ const legalLinks = [
     opacity: 0.6;
   }
 
-  .footer_legal {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .footer_link--legal {
-    font-size: 12px;
-    opacity: 0.6;
-    color: #555;
-  }
-  .footer_link--legal:hover {
-    opacity: 0.8;
-  }
-
   /* ── Responsive: tablet (≤991px) → 2 columns ── */
   @media (max-width: 991px) {
     .footer_grid {
       grid-template-columns: 1fr 1fr;
+    }
+    .footer_colonne:last-child {
+      grid-column: 1 / -1;
     }
   }
 
@@ -240,6 +223,10 @@ const legalLinks = [
       text-align: left;
       justify-content: flex-start;
       align-items: flex-start;
+    }
+
+    .footer_colonne--logo {
+      align-items: center;
     }
 
     .footer_sub {

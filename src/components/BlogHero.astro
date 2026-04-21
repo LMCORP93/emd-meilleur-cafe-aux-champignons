@@ -132,12 +132,17 @@ const { title, description, author, authorAvatar, date, readingTime, bannerImage
       />
     </div>
   )}
+
 </section>
+
+<!-- Smooth curve transition: beige dome into white content -->
+<div class="hero-curve"></div>
 
 <style>
   /* ── Outer section ─────────────────────────────────── */
   .blog_hero {
     background-color: #f4f2ec;
+    position: relative;
   }
 
   /* ── blog_hero-wrapper-title ───────────────────────── */
@@ -184,7 +189,7 @@ const { title, description, author, authorAvatar, date, readingTime, bannerImage
     margin-right: auto;
     padding-left: 3rem;
     padding-right: 3rem;
-    padding-bottom: 2rem;
+    padding-bottom: 3rem;
   }
   @media (max-width: 991px) {
     .blog_hero-img-wrapper {
@@ -331,5 +336,13 @@ const { title, description, author, authorAvatar, date, readingTime, bannerImage
   }
   .breadcrumb_link:hover {
     color: #ef7a1a;
+  }
+
+  /* ── Hero curve (beige dome into white) ──────────── */
+  .hero-curve {
+    background-color: #f4f2ec;
+    height: 4rem;
+    border-radius: 0 0 50% 50% / 0 0 100% 100%;
+    margin-top: -1px;
   }
 </style>

@@ -36,11 +36,11 @@ const { siteName, logoSrc, navLinks, ctaText, ctaLink } = Astro.props;
       Webflow: gap-64px, flex, justify-between, items-center
       Hidden below 991px via Webflow responsive override
     -->
-    <div class="flex items-center justify-between gap-16 max-[991px]:hidden">
+    <div class="flex items-center justify-between gap-4 max-[991px]:hidden">
       <!-- ═══ navbar_menu-content ═══
         Webflow: gap-64px, flex, justify-start, items-center
       -->
-      <nav class="flex items-center justify-start gap-16">
+      <nav class="flex items-center justify-start gap-4">
         {navLinks.map((link) => (
           /* ═══ navbar_menu-item ═══ Webflow: gap-12px, flex, justify-start, items-center */
           <a
