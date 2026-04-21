@@ -16,6 +16,13 @@ const {
   description = config.seo.description,
   ogImage = config.seo.ogImage,
 } = Astro.props;
+
+// Auto-generate nav links from pages config (max 3 words each)
+const navLinks = config.pages.map(p => ({ label: p.label, href: p.slug }));
+const footerLinks = [
+  { label: 'Accueil', href: '/' },
+  ...config.pages.map(p => ({ label: p.label, href: p.slug })),
+];
 ---
 
 <!DOCTYPE html>
@@ -71,10 +78,7 @@ const {
     <Navbar
       siteName={config.siteName}
       logoSrc="/logo.svg"
-      navLinks={[
-        { label: 'Comparatif', href: '/comparatif' },
-        { label: 'Blog', href: '/' },
-      ]}
+      navLinks={navLinks}
       ctaText="Acheter"
       ctaLink={config.products[0].affiliateLink}
     />
@@ -98,11 +102,7 @@ const {
     <Footer
       siteName={config.siteName}
       logoSrc="/logo.svg"
-      navLinks={[
-        { label: 'Accueil', href: '/' },
-        { label: 'Comparatif', href: '/comparatif' },
-        { label: 'Blog', href: '/' },
-      ]}
+      navLinks={footerLinks}
       copyright="© 2026 Tout droits réservés - Les avis de Tim"
     />
   </body>

@@ -55,6 +55,7 @@ export interface SiteConfig {
   faq: { question: string; answer: string }[];
   products: Product[];
   tocItems: { id: string; label: string }[];
+  pages: { type: 'comparatif' | 'blog'; label: string; slug: string }[];
 }
 
 // ── Config ─────────────────────────────────────────────────────────────
@@ -346,6 +347,10 @@ const config: SiteConfig = {
       ],
       description: 'Clearly est une marque néerlandaise certifiée BIO qui place la qualité au rang #1. Fondée par des passionnés confrontés au brouillard mental, à la fatigue chronique et aux ballonnements, la marque a créé une formule qui combine champignons adaptogènes et superaliments pour l\'énergie, la clarté mentale et la digestion. Ingrédients sourcés chez les meilleurs producteurs mondiaux, production contrôlée aux Pays-Bas, transparence totale sur la composition.',
     },
+  ],
+
+  pages: [
+    { type: 'blog', label: 'Avis Mush N Go', slug: '/' },
   ],
 };
 
