@@ -44,17 +44,10 @@ const infoLinks: NavLink[] = [
 
 <footer class="footer">
   <div class="footer_container">
-    <!-- 3-column grid -->
+    <!-- 2-column grid: links only -->
     <div class="footer_grid">
 
-      <!-- Column 1: Logo only -->
-      <div class="footer_colonne footer_colonne--logo">
-        <a href="/" class="footer_logo-link">
-          <img src={logoSrc} alt={siteName} class="footer_logo" />
-        </a>
-      </div>
-
-      <!-- Column 2: Nos Guides -->
+      <!-- Column 1: Nos Guides -->
       <div class="footer_colonne">
         <div class="footer_col-title">Nos Guides</div>
         <div class="footer_wrapper-links">
@@ -68,7 +61,7 @@ const infoLinks: NavLink[] = [
         </div>
       </div>
 
-      <!-- Column 3: Informations -->
+      <!-- Column 2: Informations -->
       <div class="footer_colonne">
         <div class="footer_col-title">Informations</div>
         <div class="footer_wrapper-links">
@@ -82,8 +75,11 @@ const infoLinks: NavLink[] = [
 
     </div>
 
-    <!-- Bottom sub-footer: copyright -->
+    <!-- Bottom sub-footer: logo + copyright aligned on same row -->
     <div class="footer_sub">
+      <a href="/" class="footer_logo-link">
+        <img src={logoSrc} alt={siteName} class="footer_logo" />
+      </a>
       <p class="footer_copyright">© {year} {copyright}</p>
     </div>
   </div>
@@ -104,10 +100,10 @@ const infoLinks: NavLink[] = [
     margin-right: auto;
   }
 
-  /* ── 3-column grid ── */
+  /* ── 2-column grid ── */
   .footer_grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 2rem;
   }
 
@@ -116,35 +112,10 @@ const infoLinks: NavLink[] = [
     display: flex;
     flex-flow: column;
     justify-content: flex-start;
-    align-items: center;
-    gap: 1rem;
-    text-align: center;
-    align-self: start;
-  }
-
-  .footer_colonne--logo {
     align-items: flex-start;
-    gap: 0.75rem;
-  }
-
-  /* ── Logo link ── */
-  .footer_logo-link {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-  }
-
-  .footer_logo {
-    width: 8rem;
-    height: 8rem;
-    object-fit: contain;
-  }
-
-  @media (max-width: 767px) {
-    .footer_logo {
-      width: 9rem;
-      height: 9rem;
-    }
+    gap: 1rem;
+    text-align: left;
+    align-self: start;
   }
 
   /* ── Column title ── */
@@ -184,15 +155,28 @@ const infoLinks: NavLink[] = [
     font-style: italic;
   }
 
-  /* ── Sub footer ── */
+  /* ── Sub footer: logo + copyright on same line ── */
   .footer_sub {
     margin-top: 2.5rem;
     padding-top: 1.5rem;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  /* ── Logo link ── */
+  .footer_logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .footer_logo {
+    width: 3rem;
+    height: 3rem;
+    object-fit: contain;
   }
 
   .footer_copyright {
@@ -200,16 +184,6 @@ const infoLinks: NavLink[] = [
     font-size: 12px;
     color: #555;
     opacity: 0.6;
-  }
-
-  /* ── Responsive: tablet (≤991px) → 2 columns ── */
-  @media (max-width: 991px) {
-    .footer_grid {
-      grid-template-columns: 1fr 1fr;
-    }
-    .footer_colonne:last-child {
-      grid-column: 1 / -1;
-    }
   }
 
   /* ── Responsive: mobile (≤767px) → flex column ── */
@@ -225,13 +199,15 @@ const infoLinks: NavLink[] = [
       align-items: flex-start;
     }
 
-    .footer_colonne--logo {
-      align-items: center;
-    }
-
     .footer_sub {
       flex-direction: column;
       align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .footer_logo {
+      width: 3.5rem;
+      height: 3.5rem;
     }
   }
 </style>
