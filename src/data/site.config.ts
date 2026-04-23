@@ -61,18 +61,18 @@ export interface SiteConfig {
 // ── Config ─────────────────────────────────────────────────────────────
 
 const config: SiteConfig = {
-  domain: 'https://emeilleurcomplement.fr',
-  siteName: 'Le Meilleur Complement',
-  brand: 'Mush N Go',
-  product: 'Brainstoorm',
+  domain: 'https://meilleur-cafe-aux-champignons.com',
+  siteName: 'Meilleur Café aux Champignons',
+  brand: 'Bonjour Drink',
+  product: 'Comparatif 2026',
   productCategory: 'Champignons Adaptogènes',
   productFormat: 'Poudre',
-  tagline: 'Test complet et honnête de Brainstoorm',
+  tagline: 'Comparatif honnête des meilleurs cafés aux champignons',
 
-  affiliateLink: 'https://taap.it/mushngo-brainstorm',
-  promoCode: 'LMC15',
-  originalPrice: '29,90 €',
-  discountPrice: '25,42 €',
+  affiliateLink: 'https://taap.it/bonjour-drink-lmc',
+  promoCode: 'LMC20',
+  originalPrice: '39,00 €',
+  discountPrice: '31,20 €',
   rating: 9.7,
 
   author: {
@@ -82,14 +82,13 @@ const config: SiteConfig = {
   },
 
   seo: {
-    title: 'Mush N Go Avis 2026 : Test du Brainstoorm (6 250 mg) -15%',
+    title: 'Meilleur Café aux Champignons 2026 : comparatif Top 6',
     description: 'Mush N Go avis après 30 jours de test : Brainstoorm, le café aux champignons le plus dosé de France (6 250 mg d\'actifs). Composition, prix, code LMC15.',
-    ogImage: 'https://cdn.prod.website-files.com/68c02c2c477fdd467e6e08a1/69634d74b3e93e5fd12d108d_1_8789ecf0-bcc9-4b45-b2f9-c8bfca54ab16_1000x1000_crop_center.webp',
+    ogImage: '/images/content/emd-cafe-champignons-banner.webp',
   },
 
   breadcrumbs: [
-    { label: 'Champignons Adaptogènes', href: '/champignons-adaptogenes' },
-    { label: 'Mush N Go', href: '/champignons-adaptogenes/mush-n-go' },
+    { label: 'Comparatif', href: '/' },
   ],
 
   quickSummary: {
@@ -163,37 +162,6 @@ const config: SiteConfig = {
   products: [
     {
       rank: 1,
-      name: 'Brainstoorm - Mush N Go',
-      brand: 'Mush N Go',
-      slug: 'brainstoorm-mush-n-go',
-      image: 'https://cdn.prod.website-files.com/68c02c2c477fdd467e6e08a1/69634d74b3e93e5fd12d108d_1_8789ecf0-bcc9-4b45-b2f9-c8bfca54ab16_1000x1000_crop_center.webp',
-      brandLogo: 'https://cdn.prod.website-files.com/68c02c2c477fdd467e6e08a1/68dd03c74aa741ba6fbc75d7_Logo%20mush%20n%20go.svg',
-      rating: 9.7,
-      reviewCount: 170,
-      promoCode: 'LMC15',
-      promoPercent: 15,
-      originalPrice: '29,90 €',
-      discountPrice: '25,42 €',
-      affiliateLink: 'https://taap.it/mushngo-brainstorm',
-      origin: '🇫🇷 France',
-      availability: 'En stock',
-      productType: 'Poudre (240g — 30 portions)',
-      pros: [
-        '6 250 mg d\'actifs par tasse — le café aux champignons le plus dosé de France',
-        '2 708 mg de fibres d\'Acacia prébiotique — unique sur le marché',
-        'NewCaff® brevetée : 20 mg caféine à libération prolongée, énergie 6-8h sans crash',
-        'Fabriqué en France, labo certifié Bretagne, bio, vegan, sans gluten, sans OGM',
-        'Trustpilot 4,8/5 avec plus de 170 avis vérifiés',
-      ],
-      cons: [
-        'Disponible uniquement en ligne sur mushngo.com',
-        'Seulement 2 saveurs : Choco-noisette et Coffee',
-        'Ruptures ponctuelles en période de forte demande',
-      ],
-      description: 'Brainstoorm de Mush N Go est le café aux champignons adaptogènes le plus concentré de France avec 6 250 mg d\'actifs par tasse. Formule à 8 actifs synergiques : Lion\'s Mane, Cordyceps, Chaga (1 000 mg chacun à dose clinique), Maca (3 000 mg), fibres d\'Acacia (2 708 mg), Ashwagandha, Rhodiola, Cacao et NewCaff® brevetée. Fabrication française en Bretagne. Trustpilot 4,8/5.',
-    },
-    {
-      rank: 2,
       name: 'Super Café - Bonjour Drink',
       brand: 'Bonjour Drink',
       slug: 'bonjour-drink',
@@ -222,6 +190,37 @@ const config: SiteConfig = {
         'Gamme encore limitée à deux produits',
       ],
       description: 'Bonjour Drink est né de la volonté de deux entrepreneurs français passionnés de santé holistique, Juliette Di Marco et Raphaël Dary, qui souhaitaient créer une alternative au café sans ses effets indésirables. Le résultat ? Le Super Café et le Super Cacao, deux boissons innovantes qui réunissent dans une seule tasse les bienfaits de trois champignons adaptogènes exceptionnels : le Lion\'s Mane pour la concentration, le Cordyceps pour l\'énergie physique et le Reishi pour la résistance au stress. Leur formule combine orge torréfiée, cacao et 2250 mg d\'extraits de champignons pour un rituel matinal sain, sans caféine, à seulement 1€ par tasse.',
+    },
+    {
+      rank: 2,
+      name: 'Brainstoorm - Mush N Go',
+      brand: 'Mush N Go',
+      slug: 'brainstoorm-mush-n-go',
+      image: 'https://cdn.prod.website-files.com/68c02c2c477fdd467e6e08a1/69634d74b3e93e5fd12d108d_1_8789ecf0-bcc9-4b45-b2f9-c8bfca54ab16_1000x1000_crop_center.webp',
+      brandLogo: 'https://cdn.prod.website-files.com/68c02c2c477fdd467e6e08a1/68dd03c74aa741ba6fbc75d7_Logo%20mush%20n%20go.svg',
+      rating: 9.7,
+      reviewCount: 170,
+      promoCode: 'LMC15',
+      promoPercent: 15,
+      originalPrice: '29,90 €',
+      discountPrice: '25,42 €',
+      affiliateLink: 'https://taap.it/mushngo-brainstorm',
+      origin: '🇫🇷 France',
+      availability: 'En stock',
+      productType: 'Poudre (240g — 30 portions)',
+      pros: [
+        '6 250 mg d\'actifs par tasse — le café aux champignons le plus dosé de France',
+        '2 708 mg de fibres d\'Acacia prébiotique — unique sur le marché',
+        'NewCaff® brevetée : 20 mg caféine à libération prolongée, énergie 6-8h sans crash',
+        'Fabriqué en France, labo certifié Bretagne, bio, vegan, sans gluten, sans OGM',
+        'Trustpilot 4,8/5 avec plus de 170 avis vérifiés',
+      ],
+      cons: [
+        'Disponible uniquement en ligne sur mushngo.com',
+        'Seulement 2 saveurs : Choco-noisette et Coffee',
+        'Ruptures ponctuelles en période de forte demande',
+      ],
+      description: 'Brainstoorm de Mush N Go est le café aux champignons adaptogènes le plus concentré de France avec 6 250 mg d\'actifs par tasse. Formule à 8 actifs synergiques : Lion\'s Mane, Cordyceps, Chaga (1 000 mg chacun à dose clinique), Maca (3 000 mg), fibres d\'Acacia (2 708 mg), Ashwagandha, Rhodiola, Cacao et NewCaff® brevetée. Fabrication française en Bretagne. Trustpilot 4,8/5.',
     },
     {
       rank: 3,
@@ -350,7 +349,7 @@ const config: SiteConfig = {
   ],
 
   pages: [
-    { type: 'blog', label: 'Avis Mush N Go', slug: '/' },
+    { type: 'comparatif', label: 'Comparatif', slug: '/' },
   ],
 };
 

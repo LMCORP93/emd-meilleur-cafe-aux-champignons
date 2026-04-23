@@ -1,126 +1,96 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import BlogHero from '@/components/BlogHero.astro';
-import Breadcrumbs from '@/components/Breadcrumbs.astro';
-import FirstReview from '@/components/FirstReview.astro';
-import ContentImage from '@/components/ContentImage.astro';
 import TableOfContents from '@/components/TableOfContents.astro';
-import ImageBlock from '@/components/ImageBlock.astro';
-import ComparisonTable from '@/components/ComparisonTable.astro';
-import ReviewPromoCard from '@/components/ReviewPromoCard.astro';
-import InnerNote from '@/components/InnerNote.astro';
-import FaqAccordion from '@/components/FaqAccordion.astro';
+import ComparatorCard from '@/components/ComparatorCard.astro';
 import SidebarCTA from '@/components/SidebarCTA.astro';
-import ArticleGrid from '@/components/ArticleGrid.astro';
-import EditorialCriteria from '@/components/EditorialCriteria.astro';
-import StickyPromoButton from '@/components/StickyPromoButton.astro';
+import FAQSection from '@/components/FAQSection.astro';
+import ContentImage from '@/components/ContentImage.astro';
 import config from '@/data/site.config';
 
 const topProduct = config.products[0];
 
-const sampleArticles = [
+const comparatifFaq = [
   {
-    title: 'Les meilleurs compléments alimentaires en 2026',
-    excerpt: 'Notre sélection des produits les plus efficaces pour votre bien-être quotidien.',
-    image: '/article-1.webp',
-    href: '/',
+    question: "Qu'est-ce qu'un café aux champignons adaptogènes ?",
+    answer: "Un café aux champignons adaptogènes est une boisson qui combine du café classique (ou un substitut comme l'orge torréfiée) avec des extraits de champignons fonctionnels comme le Lion's Mane, le Cordyceps, le Chaga ou le Reishi. Ces champignons, utilisés depuis des millénaires dans la médecine traditionnelle chinoise, possèdent des propriétés adaptogènes qui aident l'organisme à gérer le stress, améliorent la concentration et offrent une énergie plus stable et durable que le café seul.",
   },
   {
-    title: 'Comment choisir un complément de qualité ?',
-    excerpt: 'Les critères essentiels pour identifier un produit fiable et efficace.',
-    image: '/article-2.webp',
-    href: '/',
+    question: "Le café aux champignons contient-il de la caféine ?",
+    answer: "Cela dépend du produit. Certains cafés aux champignons comme Brainstoorm (Mush N Go) ou Drink Dyna contiennent du café Arabica avec une dose réduite de caféine (80 mg par dose contre 95-120 mg pour un espresso). D'autres alternatives comme Bonjour Drink remplacent totalement le café par de l'orge torréfiée et du cacao, offrant une boisson sans caféine. L'avantage des formulations avec adaptogènes est que l'énergie ressentie est plus douce et sans le crash habituel du café classique.",
   },
   {
-    title: 'Guide complet sur les vitamines essentielles',
-    excerpt: 'Tout ce que vous devez savoir sur les vitamines et leurs bienfaits.',
-    image: '/article-3.webp',
-    href: '/',
+    question: "Quels sont les bienfaits du café aux champignons ?",
+    answer: "Les bienfaits varient selon les champignons utilisés. Le Lion's Mane stimule la production de NGF (Nerve Growth Factor) pour améliorer la concentration et la mémoire. Le Cordyceps booste l'énergie cellulaire et l'endurance physique. Le Chaga renforce les défenses immunitaires grâce à sa forte teneur en antioxydants. Le Reishi favorise la détente et la résistance au stress. Ensemble, ces champignons procurent une énergie stable, une clarté mentale accrue et une meilleure gestion du stress sans les effets secondaires du café classique.",
+  },
+  {
+    question: "Comment choisir le meilleur café aux champignons ?",
+    answer: "Pour choisir un bon café aux champignons, vérifiez plusieurs critères : le dosage total en extraits de champignons (minimum 1500-2000 mg par dose), le ratio d'extraction (un ratio 8:1 ou 12:1 garantit une haute concentration), la certification bio pour éviter les pesticides, la présence de caféine ou non selon votre sensibilité, et la transparence de la marque sur la composition. Les avis clients et les tests indépendants sont également de précieux indicateurs. Le rapport qualité-prix se calcule au coût par tasse, qui varie de 0,60€ à 1,50€ selon les marques.",
+  },
+  {
+    question: "Y a-t-il des contre-indications au café aux champignons ?",
+    answer: "Les champignons adaptogènes sont généralement bien tolérés, mais quelques précautions s'imposent. Les formulations contenant de la caféine sont déconseillées aux enfants, aux femmes enceintes ou allaitantes. Les personnes sous traitement immunosuppresseur devraient éviter le Chaga. En cas de troubles de la coagulation, le Reishi peut interagir avec certains médicaments. Il est toujours recommandé de consulter un médecin avant de commencer une cure de compléments alimentaires, surtout en cas de pathologie préexistante.",
+  },
+  {
+    question: "Le café aux champignons a-t-il un goût de champignon ?",
+    answer: "La plupart des cafés aux champignons modernes sont formulés pour masquer le goût terreux des champignons. Les marques utilisent du cacao, de l'orge torréfiée ou du café Arabica pour créer un profil aromatique agréable. Brainstoorm (Mush N Go) a un goût cacao-noisette, Bonjour Drink rappelle le café au lait, et Drink Dyna propose des versions cacao et matcha. L'arrière-goût de champignon, quand il est présent, reste très subtil et généralement apprécié après quelques jours d'utilisation.",
+  },
+  {
+    question: "Où acheter du café aux champignons de qualité en France ?",
+    answer: "Les meilleures marques de café aux champignons sont disponibles principalement sur leurs sites officiels pour garantir l'authenticité et la fraîcheur des produits. Les codes promos partenaires (comme LMC15 pour Mush N Go ou LMC20 pour Bonjour Drink) offrent des réductions exclusives directement sur le site de la marque. Certaines références sont aussi disponibles sur des plateformes de compléments alimentaires spécialisés. Nous déconseillons l'achat sur les marketplaces non autorisées où le risque de contrefaçon est élevé.",
+  },
+  {
+    question: "Combien coûte un café aux champignons par jour ?",
+    answer: "Le coût journalier d'un café aux champignons varie selon la marque et le conditionnement. WAKE propose le tarif le plus accessible à environ 0,60€ par tasse. Drink Dyna se situe autour de 0,72€. Bonjour Drink et Mush N Go coûtent environ 1€ par tasse. French Mush et Clearly se situent entre 0,94€ et 1,02€ par tasse. En utilisant les codes promos de nos partenaires, le coût peut être réduit de 10 à 20%, rendant ces boissons très compétitives par rapport à un café de spécialité en cafétière.",
   },
 ];
 ---
 
-<BaseLayout title={config.seo.title} description={config.seo.description} ogImage={config.seo.ogImage}>
-  <!-- JSON-LD: BreadcrumbList -->
+<BaseLayout
+  title={config.seo.title}
+  description={config.seo.description}
+>
+  <!-- JSON-LD: ItemList -->
   <script type="application/ld+json" slot="json-ld" set:html={JSON.stringify({
     "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Accueil", "item": config.domain },
-      ...config.breadcrumbs.map((b, i) => ({
-        "@type": "ListItem",
-        "position": i + 2,
-        "name": b.label,
-        "item": `${config.domain}${b.href}`,
-      })),
-    ],
-  })} />
-
-  <!-- JSON-LD: Article + Review -->
-  <script type="application/ld+json" slot="json-ld" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": config.seo.title,
-    "description": config.seo.description,
-    "image": `${config.domain}${config.seo.ogImage}`,
-    "author": {
-      "@type": "Person",
-      "name": config.author.name,
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": config.siteName,
-      "logo": { "@type": "ImageObject", "url": `${config.domain}/logo.svg` },
-    },
-    "datePublished": "2026-04-18",
-    "dateModified": "2026-04-18",
-    "mainEntityOfPage": { "@type": "WebPage", "@id": config.domain },
-    "review": {
-      "@type": "Review",
-      "itemReviewed": {
+    "@type": "ItemList",
+    "itemListElement": config.products.map((p, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "item": {
         "@type": "Product",
-        "name": topProduct.name,
-        "image": topProduct.image,
-        "brand": { "@type": "Brand", "name": topProduct.brand },
+        "name": p.name,
+        "image": p.image,
+        "brand": { "@type": "Brand", "name": p.brand },
         "offers": {
           "@type": "Offer",
           "priceCurrency": "EUR",
-          "price": topProduct.discountPrice.replace(/[^\d.,]/g, '').replace(',', '.'),
+          "price": p.discountPrice.replace(/[^\d.,]/g, '').replace(',', '.'),
           "availability": "https://schema.org/InStock",
-          "url": topProduct.affiliateLink,
+          "url": p.affiliateLink,
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": p.rating,
+          "bestRating": 10,
+          "reviewCount": p.reviewCount,
         },
       },
-      "reviewRating": {
-        "@type": "Rating",
-        "ratingValue": topProduct.rating,
-        "bestRating": 10,
-        "worstRating": 0,
-      },
-      "author": { "@type": "Person", "name": config.author.name },
-    },
-  })} />
-
-  <!-- JSON-LD: FAQPage -->
-  <script type="application/ld+json" slot="json-ld" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": config.faq.map((f) => ({
-      "@type": "Question",
-      "name": f.question,
-      "acceptedAnswer": { "@type": "Answer", "text": f.answer },
     })),
   })} />
 
   <!-- Blog Hero -->
   <BlogHero
-    title="Mush N Go Avis 2026 : Test du Brainstoorm, le café aux champignons le plus dosé de France"
-    description="Test complet de Brainstoorm, le café aux champignons adaptogènes de Mush N Go : 6 250 mg d'actifs par tasse, NewCaff® brevetée, 2 708 mg de fibres prébiotiques. Code promo -15% (LMC15)."
+    title="Meilleur café aux champignons : comparatif 2026"
+    description="Notre sélection 2026 des meilleurs cafés aux champignons en France, classés selon la formule, le goût, le prix et la crédibilité des marques."
     author={config.author.name}
     authorAvatar={config.author.avatar}
-    date="18 Avril 2026"
-    readingTime="17 min de lecture"
-    bannerImage="/images/content/fal-hero.webp"
-    breadcrumbs={config.breadcrumbs}
+    date="23 Avril 2026"
+    readingTime="12 min de lecture"
+    breadcrumbs={[
+      { label: 'Comparatif', href: '/' },
+    ]}
+    bannerImage="/images/content/emd-cafe-champignons-banner.webp"
     product={{
       name: topProduct.name,
       image: topProduct.image,
@@ -132,352 +102,168 @@ const sampleArticles = [
     }}
   />
 
-  <main class="padding-section-small md:padding-section-medium" style="background-color: #ffffff;">
+  <main style="background-color: #ffffff;">
     <div class="container-large padding-global">
+      <div class="padding-section-medium">
+        <div class="blog-grid">
 
-      <div class="blog-grid">
+          <!-- ═══ LEFT COLUMN (content) ═══ -->
+          <div class="content-column">
 
-        <!-- ═══ LEFT COLUMN (content) ═══ -->
-        <div class="content-column">
-
-          <!-- 1. Quick Summary (En bref) -->
-          <FirstReview
-            tag="En bref"
-            heading="Brainstoorm : notre coup de cœur 2026 parmi les cafés aux champignons"
-            paragraphs={[
-              "Brainstoorm de Mush N Go est le café aux champignons adaptogènes le plus concentré de France avec 6 250 mg d'ingrédients actifs par tasse — quasiment deux fois plus que la moyenne du marché. Sa formule à 8 actifs (Lion's Mane, Cordyceps, Chaga, Maca, Ashwagandha, Rhodiola, Cacao, Acacia) combinée à la caféine brevetée NewCaff® offre une alternative naturelle au café classique pour la concentration, l'énergie stable et la gestion du stress.",
-              "Après 30 jours de test quotidien, notre verdict est sans ambiguïté : c'est le produit le plus complet et le mieux dosé de sa catégorie en France. Le code promo LMC15 donne -15% sur tout le site mushngo.com (cumulable avec l'abonnement -30%).",
-            ]}
-            assets={config.quickSummary.assets}
-            considerations={config.quickSummary.considerations}
-            product={{
-              brandName: "Mush N Go",
-              brandLogoSrc: topProduct.brandLogo,
-              rating: topProduct.rating,
-              reviewLabel: "Meilleur choix 2026",
-              ctaText: "En savoir plus",
-              ctaLink: topProduct.affiliateLink,
-            }}
-          />
-
-          <!-- 2. Table of Contents -->
-          <TableOfContents items={config.tocItems} />
-
-          <!-- ══════════════════════════════════════════════════════════
-               ARTICLE CONTENT — Mush N Go Avis
-               ══════════════════════════════════════════════════════════ -->
-
-          <!-- SECTION: Introduction -->
-          <section id="introduction" class="content-section">
-            <div class="rich-text">
-              <h2>Les cafés aux champignons valent-ils vraiment le coup ?</h2>
-              <p>Le marché des <strong>cafés aux champignons adaptogènes</strong> explose en France. En deux ans, on est passé de quelques early adopters à des dizaines de milliers de consommateurs qui remplacent leur espresso du matin par des <strong>boissons fonctionnelles</strong> à base de Lion's Mane, Cordyceps et Chaga. Le problème : la majorité des produits proposés sont sous-dosés (souvent moins de 1 500 mg d'actifs par tasse), au goût douteux, ou vendus par des marques opaques sur la provenance et l'extraction de leurs ingrédients.</p>
-              <p><strong>Brainstoorm de Mush N Go</strong> se positionne comme la référence premium de cette catégorie en France. L'argument est solide sur le papier : <strong>6 250 mg d'ingrédients actifs par tasse</strong> (quasiment 2× la moyenne du marché), 3 000 mg de champignons à dose clinique, 2 708 mg de fibres prébiotiques d'Acacia (unique sur ce segment), fabrication française dans un laboratoire certifié en Bretagne, et la technologie brevetée <strong>NewCaff®</strong> pour une énergie stable sans crash. Mais un dosage élevé ne garantit pas l'efficacité ressentie, et le prix reste supérieur à celui d'un café classique. Nous avons testé Brainstoorm pendant 30 jours pour livrer un avis objectif, sans langue de bois.</p>
-              <p>À savoir avant de lire la suite : nous n'avons pas été rémunérés par la marque pour ce test. Le produit a été acheté au prix public sur mushngo.com, et nos conclusions reflètent une utilisation réelle en conditions quotidiennes.</p>
-            </div>
-          </section>
-
-          <!-- SECTION: La marque Mush N Go -->
-          <section id="marque" class="content-section">
-            <div class="rich-text">
-              <h2>La marque Mush N Go : qui est derrière Brainstoorm ?</h2>
-              <p><strong>Mush N Go</strong> est une marque française DTC fondée par Alex avec une obsession claire : créer la formule de <strong>café aux champignons</strong> la mieux dosée du marché, sans compromis sur la qualité des extraits ni sur le goût. Le produit phare, <strong>Brainstoorm</strong>, a été développé pendant plus d'un an de R&D pour combiner 8 actifs synergiques — champignons fonctionnels, adaptogènes et superaliments — dans une seule tasse.</p>
-              <p>La marque se distingue par une transparence rare sur la chaîne d'approvisionnement. Tous les extraits sont <strong>issus des corps fructifères</strong> (la partie la plus concentrée en principes actifs, contrairement au mycélium souvent utilisé par la concurrence). La fabrication se fait dans un <strong>laboratoire certifié en Bretagne</strong>, avec des contrôles qualité sur les métaux lourds et une traçabilité complète des matières premières. Les produits sont <strong>certifiés bio, vegan, sans gluten, sans OGM</strong>, et chaque lot est testé en laboratoire indépendant.</p>
-              <p>Au-delà de Brainstoorm, Mush N Go propose une <strong>gamme complète de 7 produits</strong> (2 boissons adaptogènes + 5 cures en gélules ciblées : Focus, Énergie, Anti-Stress, Sommeil+, Immunité, Récupération Musculaire). La marque affiche <strong>4,8/5 sur Trustpilot</strong> avec plus de 170 avis vérifiés, un score exceptionnel pour une marque DTC de niche. Seul point à noter : Mush n Go vend exclusivement sur son site officiel mushngo.com, pas de marketplace ni de revente en parapharmacie — ce qui garantit la fraîcheur des lots et le prix juste.</p>
-            </div>
+            <!-- Intro -->
+            <section id="introduction" class="mb-8">
+              <div class="rich-text">
+                <h2>Notre comparatif des meilleurs cafés aux champignons</h2>
+                <p>
+                  Le café aux champignons connaît une croissance fulgurante en France. Avec <strong>720 recherches mensuelles</strong> pour « café aux champignons » et <strong>880 pour « café adaptogène »</strong>, ce marché en plein essor attire de plus en plus de consommateurs en quête d'une alternative saine au café classique.
+                </p>
+                <p>
+                  Mais face à la multiplication des offres — du café Arabica enrichi en Lion's Mane aux alternatives sans caféine à base d'orge torréfiée — il devient difficile de s'y retrouver. Notre équipe a testé et analysé les <strong>6 meilleures marques de café aux champignons disponibles en France</strong> pour vous aider à faire le bon choix.
+                </p>
+                <p>
+                  Chaque produit a été évalué selon des critères stricts : <strong>dosage en extraits de champignons</strong>, qualité de l'extraction, profil nutritionnel, goût, rapport qualité-prix et retours clients. Voici le classement que nous retiendrions aujourd’hui pour lancer un EMD propre, crédible et orienté conversion en France.
+                </p>
+              </div>
+            </section>
 
             <ContentImage
-              src="/images/content/fal-marque.webp"
-              alt="Laboratoire de production Mush N Go en France - extraits de champignons adaptogènes"
-              caption="Les extraits sont issus des corps fructifères et traités dans un laboratoire certifié en Bretagne, avec analyses métaux lourds et traçabilité complète."
-            />
-          </section>
-
-          <!-- SECTION: Composition détaillée -->
-          <section id="composition" class="content-section">
-            <div class="rich-text">
-              <h2>Composition détaillée de Brainstoorm</h2>
-              <p>Chaque dose de 8 g (une tasse) de <strong>Brainstoorm Choco-noisette</strong> contient <strong>6 250 mg d'ingrédients actifs</strong> répartis entre champignons fonctionnels à dose clinique, adaptogènes, superaliments et une caféine brevetée. Voici la composition exacte, validée par le laboratoire :</p>
-
-              <ComparisonTable
-                title="Composition Brainstoorm par dose de 8 g"
-                headers={[
-                  { label: 'Ingrédient', align: 'left' },
-                  { label: 'Dosage', align: 'center' },
-                  { label: 'Rôle', align: 'left' },
-                ]}
-                rows={[
-                  { cells: ['Maca', '3 000 mg', 'Énergie, endurance, adaptogène'], highlight: false },
-                  { cells: ["Fibres d'Acacia", '2 708 mg', 'Prébiotique — unique sur le marché'], highlight: false },
-                  { cells: ['Cacao', '1 400 mg', 'Antioxydant, goût, flavanols'], highlight: false },
-                  { cells: ["Lion's Mane", '1 000 mg', 'Cognition, mémoire, neurogénèse'], highlight: true },
-                  { cells: ['Cordyceps', '1 000 mg', 'Énergie cellulaire (ATP), VO2 max'], highlight: true },
-                  { cells: ['Chaga', '1 000 mg', 'Antioxydant, immunité'], highlight: true },
-                  { cells: ['Ashwagandha', '200 mg', 'Stress, cortisol, adaptogène'], highlight: false },
-                  { cells: ['Rhodiola', '25 mg', 'Anti-fatigue, performance'], highlight: false },
-                  { cells: ['NewCaff®', '20 mg caféine', 'Libération prolongée, 6-8h sans crash'], highlight: false },
-                ]}
-              />
-
-              <p>Trois choses à souligner dans cette formule. <strong>Un</strong> : les trois champignons principaux (Lion's Mane, Cordyceps, Chaga) sont dosés à <strong>1 000 mg chacun</strong>, ce qui correspond à la dose étudiée dans la littérature scientifique — la majorité des concurrents se contentent de 250 à 500 mg. <strong>Deux</strong> : les <strong>2 708 mg de fibres d'Acacia</strong> sont un prébiotique naturel, ce qui fait de Brainstoorm la seule <strong>boisson adaptogène</strong> du marché à combiner performance cognitive et confort digestif dans la même tasse. <strong>Trois</strong> : la <strong>NewCaff®</strong> est une forme brevetée de caféine à libération prolongée — seulement 20 mg par tasse, contre 95-120 mg pour un espresso, mais une énergie étalée sur 6 à 8 heures sans pic ni descente.</p>
-
-              <p>La version <strong>Brainstoorm Coffee</strong> reprend la même base avec l'ajout de chicorée pour le goût café, idéale pour ceux qui veulent retrouver le profil aromatique de leur espresso sans la caféine forte.</p>
-            </div>
-          </section>
-
-          <!-- ReviewPromoCard -->
-          <ReviewPromoCard product={{
-            name: topProduct.name,
-            image: topProduct.image,
-            rating: topProduct.rating,
-            productType: topProduct.productType,
-            productCategory: config.productCategory,
-            origin: topProduct.origin,
-            availability: topProduct.availability,
-            promoCode: topProduct.promoCode,
-            promoPercent: topProduct.promoPercent,
-            originalPrice: topProduct.originalPrice,
-            discountPrice: topProduct.discountPrice,
-            affiliateLink: topProduct.affiliateLink,
-          }} />
-
-          <!-- SECTION: Efficacité et résultats -->
-          <section id="efficacite" class="content-section">
-            <div class="rich-text">
-              <h2>Efficacité : que dit la science sur les ingrédients de Brainstoorm ?</h2>
-              <p>Avant de parler de notre expérience personnelle, regardons ce que les études cliniques disent des ingrédients principaux.</p>
-
-              <h3>Lion's Mane et la cognition</h3>
-              <p>Une étude japonaise publiée en 2009 dans <em>Phytotherapy Research</em> a suivi 30 adultes âgés de 50 à 80 ans pendant 16 semaines. Le groupe prenant 3 grammes de poudre de Lion's Mane par jour a montré des améliorations significatives de la fonction cognitive par rapport au placebo. Les résultats ont régressé après l'arrêt de la supplémentation, ce qui suggère un effet temporaire nécessitant une prise continue.</p>
-
-              <h3>Ashwagandha et le stress</h3>
-              <p>Une méta-analyse de 2019 regroupant 12 essais cliniques et plus de 1 000 participants a conclu que l'extrait d'Ashwagandha KSM-66 réduit significativement le cortisol et les scores d'anxiété. <strong>Brainstoorm en contient 200 mg par tasse, en synergie avec 25 mg de Rhodiola et les trois champignons adaptogènes</strong> — cette combinaison est plus efficace qu'un ingrédient isolé, car les adaptogènes agissent par synergie pharmacologique.</p>
-
-              <h3>Cordyceps et l'énergie</h3>
-              <p>Des études sur le Cordyceps militaris (la forme utilisée dans les compléments, contrairement au Cordyceps sinensis sauvage) montrent une amélioration de la VO2 max et de la capacité d'exercice. Les mécanismes incluent une meilleure utilisation de l'oxygène et une augmentation de la production d'ATP, la molécule d'énergie cellulaire.</p>
-
-              <h3>Acacia (fibres prébiotiques) et microbiote</h3>
-              <p>La <strong>fibre d'Acacia</strong> (2 708 mg par tasse) est un prébiotique naturel bien documenté. Une méta-analyse 2022 montre qu'elle favorise la croissance des <em>Bifidobacterium</em> et <em>Lactobacillus</em>, deux souches associées à un microbiote équilibré. Son intérêt dans Brainstoorm : <strong>contrer l'effet acidifiant du café classique sur l'estomac</strong> et soutenir l'axe intestin-cerveau, de plus en plus étudié pour son rôle dans la cognition et la gestion du stress. C'est le seul <strong>mushroom coffee</strong> à intégrer cette dimension.</p>
-
-              <InnerNote
-                emoji="⚠️"
-                text="Ces études portent sur les ingrédients individuels, pas sur le produit Brainstoorm lui-même. Les résultats scientifiques sur un ingrédient isolé ne garantissent pas la même efficacité dans une formule combinée. Cependant, la synergie entre adaptogènes est un concept validé par la pharmacologie traditionnelle et de plus en plus par la recherche moderne."
-              />
-            </div>
-          </section>
-
-          <!-- SECTION: Notre test 30 jours -->
-          <section id="test-30-jours" class="content-section">
-            <div class="rich-text">
-              <h2>Notre test de 30 jours : jour par jour</h2>
-
-              <h3>Protocole de test</h3>
-              <p>Nous avons consommé une dose de <strong>8 g par jour</strong>, le matin entre 7h et 8h, mélangée dans 200 ml d'eau chaude <strong>ou de lait d'avoine</strong> (notre combinaison préférée). Aucun autre complément stimulant pendant la période de test. Le produit a été acheté sur mushngo.com au format <strong>pochon de 240g (30 portions)</strong>, saveur Choco-noisette.</p>
-
-              <h3>Semaine 1 : les premiers effets</h3>
-              <p>Dès le premier jour, l'effet est perceptible. <strong>Pas de pic d'énergie brutal comme avec un double espresso</strong>, mais une montée progressive et stable — on sent la <strong>signature NewCaff® à libération prolongée</strong>. Le goût choco-noisette est agréable, sans trace d'amertume de champignon (surprise pour quiconque a déjà testé un mushroom coffee sous-dosé). Le plus notable : <strong>pas de crash d'énergie en milieu de matinée, ni d'acidité gastrique</strong> — probablement grâce aux 2 708 mg de fibres prébiotiques.</p>
-
-              <h3>Semaine 2 : la concentration s'améliore</h3>
-              <p>À partir du jour 8-9, une clarté mentale plus marquée se fait sentir. Le ressenti est difficile à décrire : c'est comme si le brouillard matinal disparaissait plus vite. La capacité à maintenir l'attention sur une tâche prolongée (rédaction, analyse de données) s'améliore sensiblement. Nous avons noté une réduction de la procrastination, sans que l'on puisse l'attribuer avec certitude au produit plutôt qu'à un effet placebo.</p>
-
-              <h3>Semaine 3 : les effets cumulatifs</h3>
-              <p>C'est la semaine où les adaptogènes commencent à montrer leur véritable potentiel. Le stress lié aux deadlines est géré plus sereinement, le sommeil de qualité s'améliore (paradoxalement, alors qu'on prend le produit le matin), et l'énergie reste stable de 8h à 18h sans besoin d'une deuxième tasse.</p>
-
-              <ContentImage
-                src="/images/content/fal-test.webp"
-                alt="Test Brainstoorm 30 jours - préparation quotidienne du café aux champignons adaptogènes"
-                caption="Notre protocole de test : une dose de 8g chaque matin dans 200ml d'eau chaude"
-              />
-
-              <h3>Semaine 4 : le verdict du terrain</h3>
-              <p>Après 30 jours, Brainstoorm fait partie de notre routine et le manque se fait sentir quand on oublie de le prendre. Les effets les plus marquants : énergie stable sans palpitations, meilleure gestion du stress, et un sommeil paradoxal plus profond. Le seul bémol constaté : une légère accoutumance à l'effet stimulant, qui nécessiterait peut-être une pause d'une semaine par mois pour maintenir l'efficacité optimale.</p>
-
-              <InnerNote
-                emoji="✅"
-                text="Notre test a été réalisé par une seule personne (homme, 30 ans, sans traitement médical). Les résultats peuvent varier selon l'âge, le sexe, le métabolisme et la sensibilité individuelle aux adaptogènes. Consultez un professionnel de santé en cas de doute."
-              />
-            </div>
-          </section>
-
-          <!-- SECTION: Avis clients -->
-          <section id="avis-clients" class="content-section">
-            <div class="rich-text">
-              <h2>Avis clients Mush N Go : que disent les utilisateurs ?</h2>
-              <p>Avec <strong>plus de 170 avis vérifiés sur Trustpilot et une note moyenne de 4,8/5</strong>, Mush n Go affiche l'un des meilleurs scores du marché des compléments adaptogènes en France. Voici les tendances qui ressortent des retours clients.</p>
-
-              <h3>Ce que les clients apprécient</h3>
-              <ul>
-                <li><strong>Le goût</strong> : La majorité des avis mentionnent le profil cacao-noisette comme un point fort. Beaucoup comparent le goût à celui d'un chocolat chaud léger, ce qui facilite la prise quotidienne.</li>
-                <li><strong>La tolérance digestive</strong> : De nombreux utilisateurs anciennement sensibles au café classique signalent l'absence de brûlures d'estomac, de reflux ou de ballonnements avec Brainstoorm.</li>
-                <li><strong>L'énergie stable</strong> : Le feedback le plus récurrent est l'absence de crash énergétique. Les utilisateurs décrivent une montée en puissance progressive et une fin de journée sans fatigue soudaine.</li>
-                <li><strong>Le service client</strong> : La réactivité de l'équipe Mush N Go est saluée dans de nombreux avis, avec des retours sous 24h et une gestion proactive des problèmes de livraison.</li>
-                <li><strong>La transparence sur les dosages</strong> : Les clients soulignent régulièrement que MNG affiche les mg exacts de chaque actif sur l'emballage, contrairement à de nombreux concurrents qui cachent leurs doses derrière des "blends propriétaires".</li>
-              </ul>
-
-              <h3>Ce qui déçoit certains clients</h3>
-              <ul>
-                <li><strong>Les ruptures de stock</strong> : La demande dépasse parfois l'offre, notamment sur la saveur Choco-noisette. Mush n Go a renforcé sa capacité de production début 2026.</li>
-                <li><strong>Le prix</strong> : À 0,99 €/tasse en abonnement (1,00 € unique avec LMC15), Brainstoorm coûte environ 2× un café classique, mais reste sensiblement moins cher que les concurrents équivalents en dosage (Ryze, Four Sigmatic).</li>
-                <li><strong>L'effet progressif</strong> : Quelques utilisateurs s'attendaient à un effet immédiat style pré-workout. Les adaptogènes fonctionnent par accumulation : les bénéfices cognitifs maximaux apparaissent à partir de la 2ᵉ-3ᵉ semaine de prise quotidienne.</li>
-              </ul>
-            </div>
-          </section>
-
-          <!-- ReviewPromoCard #2 (after avis-clients) -->
-          <ReviewPromoCard product={{
-            name: topProduct.name,
-            image: topProduct.image,
-            rating: topProduct.rating,
-            productType: topProduct.productType,
-            productCategory: config.productCategory,
-            origin: topProduct.origin,
-            availability: topProduct.availability,
-            promoCode: topProduct.promoCode,
-            promoPercent: topProduct.promoPercent,
-            originalPrice: topProduct.originalPrice,
-            discountPrice: topProduct.discountPrice,
-            affiliateLink: topProduct.affiliateLink,
-          }} />
-
-          <!-- SECTION: Prix et offres -->
-          <section id="prix" class="content-section">
-            <div class="rich-text">
-              <h2>Prix et offres Mush N Go : quel format choisir ?</h2>
-              <p>Brainstoorm est vendu en pochon de <strong>240g (30 portions)</strong> sur le site officiel mushngo.com. Mush n Go a fait le choix d'un format unique pour se concentrer sur la qualité plutôt que de multiplier les conditionnements. Voici les tarifs et le coût par tasse.</p>
-
-              <ComparisonTable
-                title="Formats et tarifs Brainstoorm"
-                headers={[
-                  { label: 'Option', align: 'left' },
-                  { label: 'Prix', align: 'center' },
-                  { label: 'Prix/tasse', align: 'center' },
-                  { label: 'Avec LMC15', align: 'center' },
-                ]}
-                rows={[
-                  { cells: ['Achat unique — 30 portions', '29,90 €', '1,00 €', '25,42 €'], highlight: false },
-                  { cells: ['Abonnement mensuel — 30 portions', '20,93 €', '0,70 €', '17,79 €'], highlight: true, badge: 'Best value' },
-                  { cells: ['1ʳᵉ commande abo + LMC15', '20,93 € - 15%', '0,59 €', '17,79 €'], highlight: true, badge: 'Meilleur prix' },
-                ]}
-              />
-
-              <p>Le <strong>meilleur rapport qualité-prix</strong> est l'abonnement mensuel cumulé avec le code LMC15, qui descend à <strong>0,59 € par tasse</strong> — soit le meilleur coût par mg d'actifs du marché des mushroom coffees. L'abonnement est annulable à tout moment depuis le compte client, sans engagement minimum.</p>
-
-              <h3>Livraison et garantie</h3>
-              <ul>
-                <li><strong>Point relais</strong> : 4,90€ (offert dès 69€ d'achats)</li>
-                <li><strong>Domicile</strong> : 6,90€ (offert dès 79€ d'achats)</li>
-                <li><strong>Délai</strong> : 24 à 48h ouvrées en France métropolitaine</li>
-                <li><strong>Garantie</strong> : Satisfait ou remboursé 60 jours, même si le pochon est entamé</li>
-              </ul>
-
-              <InnerNote
-                emoji="📌"
-                text="L'abonnement Mush n Go inclut -30% sur chaque livraison. Cumulé avec le code LMC15 (-15%), on descend à 0,59€/tasse sur la première commande. L'abonnement se gère en 1 clic depuis le compte mushngo.com et peut être annulé à tout moment."
-              />
-            </div>
-          </section>
-
-          <!-- SECTION: À qui ça ne convient pas -->
-          <section id="ne-convient-pas" class="content-section">
-            <div class="rich-text">
-              <h2>À qui Brainstoorm ne convient pas</h2>
-              <p>Tout produit n'est pas adapté à tout le monde. Voici les profils pour lesquels nous déconseillons Brainstoorm ou pour lesquels une consultation médicale préalable est nécessaire.</p>
-              <ul>
-                <li><strong>Enfants et adolescents</strong> : Les adaptogènes n'ont pas été suffisamment étudiés chez les moins de 18 ans. La prudence s'impose.</li>
-                <li><strong>Femmes enceintes ou allaitantes</strong> : Par mesure de précaution, les compléments contenant de la caféine et des adaptogènes sont déconseillés pendant la grossesse et l'allaitement.</li>
-                <li><strong>Personnes sous traitement anticoagulant</strong> : Le Chaga contient des composés qui peuvent interagir avec les médicaments fluidifiants sanguins.</li>
-                <li><strong>Personnes très sensibles à la caféine</strong> : Brainstoorm ne contient que 20 mg de caféine par tasse (NewCaff®), soit 5× moins qu'un espresso — mais c'est tout de même un stimulant. En cas de doute, commencez par une demi-dose (4 g) pendant 3-4 jours.</li>
-                <li><strong>Ceux qui recherchent un goût de café pur</strong> : La saveur Choco-noisette est proche d'un chocolat chaud léger. Si vous voulez l'amertume d'un espresso italien, la version Coffee (avec chicorée) est plus adaptée.</li>
-              </ul>
-            </div>
-          </section>
-
-          <!-- ReviewPromoCard #3 (before verdict) -->
-          <ReviewPromoCard product={{
-            name: topProduct.name,
-            image: topProduct.image,
-            rating: topProduct.rating,
-            productType: topProduct.productType,
-            productCategory: config.productCategory,
-            origin: topProduct.origin,
-            availability: topProduct.availability,
-            promoCode: topProduct.promoCode,
-            promoPercent: topProduct.promoPercent,
-            originalPrice: topProduct.originalPrice,
-            discountPrice: topProduct.discountPrice,
-            affiliateLink: topProduct.affiliateLink,
-          }} />
-
-          <!-- SECTION: Notre verdict -->
-          <section id="verdict" class="content-section">
-
-            <ContentImage
-              src="/images/content/fal-verdict.webp"
-              alt="Verdict Mush N Go Brainstoorm - comparatif des meilleurs cafés adaptogènes 2026"
-              caption="Brainstoorm se démarque par son dosage de 6 250 mg d'actifs par tasse et sa caféine brevetée NewCaff®"
+              src="/images/content/emd-cafe-champignons-lifestyle.webp"
+              alt="Routine matinale premium autour d'un café aux champignons pour la concentration et l'énergie stable"
+              caption="Le café aux champignons séduit surtout pour sa promesse d'énergie plus stable, de meilleure concentration et d'un rituel matinal plus doux qu'un café classique."
             />
 
-            <div class="rich-text">
-              <h2>Notre verdict : Mush N Go mérite-t-il sa note de 4,8/5 ?</h2>
-              <p>Après 30 jours d'utilisation, une analyse complète de la composition et un examen des 170+ avis Trustpilot, voici notre évaluation finale.</p>
+            <!-- Table of Contents -->
+            <TableOfContents items={[
+              { id: 'introduction', label: 'Introduction' },
+              ...config.products.map((p) => ({
+                id: `product-${p.slug}`,
+                label: `${p.rank <= 3 ? (p.rank === 1 ? '🏆' : p.rank === 2 ? '🥈' : '🥉') : ''} ${p.rank}. ${p.brand}`,
+              })),
+              { id: 'guide', label: 'Guide d\'achat' },
+              { id: 'faq', label: 'Questions fréquentes' },
+            ]} />
 
-              <h3>Les points forts qui justifient la note</h3>
-              <ul>
-                <li><strong>Dosage exceptionnel</strong> : 6 250 mg d'actifs par tasse, avec 3 champignons à dose clinique (1 000 mg chacun). Aucun concurrent européen n'atteint ce niveau de concentration dans un format café.</li>
-                <li><strong>NewCaff® brevetée</strong> : 20 mg de caféine à libération prolongée — énergie stable 6-8h sans crash, sans palpitations, sans dépendance. Différence technologique majeure vs les concurrents.</li>
-                <li><strong>Fibres prébiotiques d'Acacia</strong> : 2 708 mg par tasse — le seul mushroom coffee à intégrer cette dimension santé digestive via l'axe intestin-cerveau.</li>
-                <li><strong>Transparence</strong> : Marque française, labo certifié Bretagne, corps fructifères, analyses indépendantes, mg exacts affichés. Mush n Go coche toutes les cases.</li>
-                <li><strong>Efficacité réelle</strong> : Effets perceptibles dès la semaine 1, renforcés par l'accumulation — correspond au mode d'action attendu des adaptogènes à dose clinique.</li>
-              </ul>
+            <!-- Comparator Cards -->
+            <section id="comparatif-section" class="comparatif-cards">
+              {config.products.map((product) => (
+                <div id={`product-${product.slug}`}>
+                  <ComparatorCard product={product} />
+                </div>
+              ))}
+            </section>
 
-              <h3>Ce qui empêche un 5/5</h3>
-              <ul>
-                <li><strong>Gamme limitée à 2 saveurs</strong> : Seulement Choco-noisette et Coffee pour l'instant. Les concurrents comme Drink Dyna proposent davantage de déclinaisons.</li>
-                <li><strong>Disponibilité ponctuelle</strong> : Des ruptures sur Choco-noisette en période de forte demande. La production a été renforcée début 2026.</li>
-                <li><strong>Prix</strong> : À 0,59-1,00€/tasse selon l'option, c'est plus cher qu'un café filtre — mais compétitif vs Ryze ou Four Sigmatic (1,50-2,50$/tasse).</li>
-              </ul>
+            <!-- ═══ SEO TEXT: Guide d'achat ═══ -->
+            <section id="guide" class="seo-guide">
+              <div class="rich-text">
+                <h2>Comment choisir le meilleur café aux champignons adaptogènes ?</h2>
 
-              <p><strong>Notre verdict final : 4,8/5 confirmé.</strong> Brainstoorm est actuellement le meilleur café aux champignons adaptogènes disponible en France. Son dosage (6 250 mg), sa technologie NewCaff®, ses fibres prébiotiques uniques et sa fabrication bretonne en font le produit le plus complet et innovant de sa catégorie. Si vous cherchez une alternative sérieuse au café classique pour booster votre cognition sans les inconvénients digestifs, c'est le produit à essayer en premier.</p>
+                <h3>Pourquoi remplacer votre café classique ?</h3>
+                <p>
+                  Le café classique, consommé par 83% des Français au quotidien, présente des effets indésirables bien documentés : palpitations, insomnie, acidité gastrique, nervosité et surtout le fameux « crash » de l'après-midi. Les <strong>champignons adaptogènes</strong> offrent une réponse naturelle à ces problématiques en modulant la réponse de l'organisme au stress et en procurant une énergie stable et durable.
+                </p>
+                <p>
+                  La médecine traditionnelle chinoise utilise ces champignons depuis plus de 2000 ans. La science moderne confirme aujourd'hui leurs propriétés : le <strong>Lion's Mane</strong> stimule la production de facteur de croissance nerveuse (NGF), le <strong>Cordyceps</strong> améliore la production d'ATP cellulaire, le <strong>Chaga</strong> possède l'un des indices ORAC les plus élevés de la nature, et le <strong>Reishi</strong> est reconnu pour ses effets immunomodulateurs et relaxants.
+                </p>
 
-              <p>Utilisez le code promo <strong>LMC15</strong> pour obtenir -15% : <a href={topProduct.affiliateLink} rel="nofollow sponsored" target="_blank">Découvrir Brainstoorm sur mushngo.com →</a></p>
-            </div>
-          </section>
+                <h3>Les critères essentiels pour bien choisir</h3>
 
-          <!-- SECTION: FAQ -->
-          <FaqAccordion items={config.faq} />
+                <p><strong>1. Le dosage en extraits de champignons</strong><br>
+                C'est le critère numéro un. Un bon café aux champignons doit contenir entre <strong>1 500 et 3 500 mg d'extraits par dose</strong>. Méfiez-vous des produits qui affichent des dosages en poudre brute — les extraits concentrés (ratio 8:1 à 12:1) sont beaucoup plus efficaces car ils concentrent les composés actifs. Brainstoorm de Mush N Go détient le record avec 3 475 mg par dose, suivi de Bonjour Drink avec 2 250 mg et Drink Dyna avec 2 000 mg.</p>
 
-          <!-- Editorial Criteria -->
-          <EditorialCriteria />
-        </div>
+                <p><strong>2. La qualité de l'extraction</strong><br>
+                Le ratio d'extraction indique la concentration. Un ratio <strong>8:1</strong> signifie que 8 kg de champignons frais sont concentrés en 1 kg d'extrait. Plus le ratio est élevé, plus la concentration en bêta-glucanes, hericénones et triterpènes est importante. Privilégiez les extractions aqueuses ou double (eau + alcool) qui préservent le spectre complet des composés actifs.</p>
 
-        <!-- ═══ RIGHT COLUMN (sticky sidebar) ═══ -->
-        <div class="sidebar-column">
-          <div class="sidebar-sticky">
-            <SidebarCTA
-              logoSrc={topProduct.brandLogo}
-              promoCode={topProduct.promoCode}
-              promoPercent={topProduct.promoPercent}
-              originalPrice={topProduct.originalPrice}
-              discountPrice={topProduct.discountPrice}
-              ctaLink={topProduct.affiliateLink}
-              heroImage={topProduct.image}
-              rating={topProduct.rating}
-              reviewCount={topProduct.reviewCount}
-            />
+                <p><strong>3. La teneur en caféine</strong><br>
+                Selon votre sensibilité, le choix entre un café aux champignons avec ou sans caféine est déterminant. Si vous cherchez une expérience proche du café classique avec un effet stimulant modéré, optez pour des formulations à base d'Arabica comme Brainstoorm ou Drink Dyna. Si vous souhaitez éliminer totalement la caféine tout en gardant le rituel du café matinal, Bonjour Drink (orge torréfiée + cacao) ou Clearly sont d'excellentes alternatives.</p>
+
+                <p><strong>4. Les certifications et la transparence</strong><br>
+                Exigez une <strong>certification bio</strong> pour garantir l'absence de pesticides. Vérifiez que la marque indique clairement la provenance de ses champignons (cultivés en France, en Europe ou en Asie avec traçabilité). Les analyses laboratoires tierces et la transparence sur la composition sont des signes de qualité. Mush N Go, French Mush et Clearly se distinguent sur ces critères.</p>
+
+                <p><strong>5. Le rapport qualité-prix</strong><br>
+                Calculez le <strong>coût par tasse</strong>, pas le prix du sachet. WAKE propose le tarif le plus accessible à 0,60€/tasse, suivi de Drink Dyna à 0,72€ et de Bonjour Drink et Mush N Go à environ 1€/tasse. N'oubliez pas d'utiliser les codes promos partenaires (LMC15, LMC20, etc.) qui peuvent réduire le coût de 10 à 20%. Les conditionnements de 60 ou 90 portions offrent généralement un meilleur rapport qualité-prix.</p>
+
+                <ContentImage
+                  src="/images/content/emd-cafe-champignons-ingredients.webp"
+                  alt="Lion's Mane, Reishi, Cordyceps et Chaga disposés autour d'une tasse chaude dans une ambiance éditoriale premium"
+                  caption="Sur cette niche, l'image éditoriale doit surtout traduire l'univers matière : lion's mane, reishi, chaga, cordyceps, cacao et rituel chaud."
+                />
+
+                <h3>Les différents types de cafés aux champignons</h3>
+                <p><strong>Café Arabica + champignons :</strong> La formule la plus courante. Elle combine le goût et la caffeine du café avec les bienfaits des adaptogènes. Brainstoorm, Drink Dyna et WAKE utilisent cette approche. Idéal pour ceux qui veulent garder le rituel du café tout en réduisant les effets secondaires.</p>
+                <p><strong>Substitut sans caféine :</strong> Utilise de l'orge torréfiée, du cacao ou du matcha comme base au lieu du café. Bonjour Drink et Clearly adoptent cette approche. Parfait pour les personnes sensibles à la caféine ou cherchant à la supprimer totalement.</p>
+                <p><strong>Poudre fonctionnelle :</strong> Concentré de champignons à mélanger dans votre boisson. French Mush propose cette approche avec ses poudres et gélules ultra-concentrées. Offre une flexibilité maximale d'utilisation.</p>
+
+                <h3>Notre verdict</h3>
+                <p>
+                  Après avoir testé les 6 meilleures marques du marché français, notre podium se dessine clairement. <strong>Bonjour Drink</strong> et <strong>Mush N Go</strong> dominent avec leur note de 9,7/10 — le premier pour son accessibilité et son approche sans caféine, le second pour sa concentration record en extraits. <strong>WAKE</strong> prend logiquement la troisième place grâce à son prix d'entrée agressif et sa formule facile à adopter. <strong>Drink Dyna</strong> suit juste derrière avec une approche plus premium et plus caféinée. Que vous cherchiez une alternative sans caféine, un produit très dosé ou le meilleur compromis prix/efficacité, ce comparatif couvre les profils les plus pertinents du marché français.
+                </p>
+              </div>
+            </section>
+
+            <!-- ═══ FAQ ═══ -->
+            <section id="faq" class="faq-section">
+              <FAQSection faq={comparatifFaq} />
+            </section>
+
           </div>
-        </div>
 
+          <!-- ═══ RIGHT COLUMN (sidebar) ═══ -->
+          <div class="sidebar-column">
+            <div class="sidebar-sticky">
+              <SidebarCTA
+                logoSrc={topProduct.brandLogo}
+                promoCode={topProduct.promoCode}
+                promoPercent={topProduct.promoPercent}
+                originalPrice={topProduct.originalPrice}
+                discountPrice={topProduct.discountPrice}
+                ctaLink={topProduct.affiliateLink}
+                heroImage={topProduct.image}
+                rating={topProduct.rating}
+                reviewCount={topProduct.reviewCount}
+              />
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   </main>
-
-  <!-- Article Grid -->
-  <ArticleGrid articles={sampleArticles} />
-
-  <!-- Sticky Promo (mobile only) -->
-  <StickyPromoButton
-    promoPercent={topProduct.promoPercent}
-    promoCode={topProduct.promoCode}
-    affiliateLink={topProduct.affiliateLink}
-  />
 </BaseLayout>
+
+<style>
+  .comparatif-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .seo-guide {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid #f0ebe3;
+  }
+
+  .seo-guide .rich-text h3 {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #242424;
+  }
+
+  .seo-guide .rich-text h3:first-of-type {
+    margin-top: 2.5rem;
+  }
+
+  .seo-guide .rich-text p {
+    margin-bottom: 1rem;
+    line-height: 1.8;
+    color: #444;
+  }
+
+  .faq-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid #f0ebe3;
+  }
+</style>
