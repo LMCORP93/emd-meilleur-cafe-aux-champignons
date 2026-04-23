@@ -24,6 +24,7 @@ export interface Product {
 
 export interface SiteConfig {
   domain: string;
+  isIndexable?: boolean;
   siteName: string;
   brand: string;
   product: string;
@@ -62,6 +63,7 @@ export interface SiteConfig {
 
 const config: SiteConfig = {
   domain: 'https://meilleur-cafe-aux-champignons.com',
+  isIndexable: false,
   siteName: 'Meilleur Café aux Champignons',
   brand: 'Bonjour Drink',
   product: 'Comparatif 2026',
