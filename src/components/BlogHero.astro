@@ -11,6 +11,12 @@ interface HeroProduct {
   affiliateLink: string;
 }
 
+interface HeroButton {
+  text: string;
+  href: string;
+  external?: boolean;
+}
+
 interface Props {
   title: string;
   description: string;
@@ -21,9 +27,23 @@ interface Props {
   bannerImage: string;
   breadcrumbs?: { label: string; href: string }[];
   product?: HeroProduct;
+  heroButton?: HeroButton;
+  showOfferBlock?: boolean;
 }
 
-const { title, description, author, authorAvatar, date, readingTime, bannerImage, breadcrumbs, product } = Astro.props;
+const {
+  title,
+  description,
+  author,
+  authorAvatar,
+  date,
+  readingTime,
+  bannerImage,
+  breadcrumbs,
+  product,
+  heroButton,
+  showOfferBlock = true,
+} = Astro.props;
 ---
 
 <!-- Blog Hero — dark (#222) background, white text, review page header -->
@@ -55,7 +75,7 @@ const { title, description, author, authorAvatar, date, readingTime, bannerImage
     <p class="text-text-dark/80 text-paragraph leading-[1.6] max-w-[45rem]">{description}</p>
 
     <!-- Price block: compare-at + discount + promo tag -->
-    {product && (
+    {product && showOfferBlock && (
       <div class="flex flex-wrap items-baseline gap-2">
         <span class="compare-at-price-text">{product.originalPrice}</span>
         <span class="price-text">{product.discountPrice}</span>
@@ -66,7 +86,7 @@ const { title, description, author, authorAvatar, date, readingTime, bannerImage
     )}
 
     <!-- CTA buttons: promo code + visit site -->
-    {product && (
+    {product && showOfferBlock && (
       <div class="hero-cta-row">
         <PromoCodeButton code={product.promoCode} percent={`${product.promoPercent}%`} />
         <a
@@ -80,6 +100,22 @@ const { title, description, author, authorAvatar, date, readingTime, bannerImage
             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
             <polyline points="15 3 21 3 21 9"/>
             <line x1="10" x2="21" y1="14" y2="3"/>
+          </svg>
+        </a>
+      </div>
+    )}
+
+    {heroButton && !showOfferBlock && (
+      <div class="hero-cta-row hero-cta-row--single">
+        <a
+          href={heroButton.href}
+          {...(heroButton.external ? { target: '_blank', rel: 'nofollow sponsored' } : {})}
+          class="hero-visit-btn hero-visit-btn--anchor"
+        >
+          {heroButton.text}
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v14"/>
+            <path d="m19 12-7 7-7-7"/>
           </svg>
         </a>
       </div>
@@ -320,6 +356,15 @@ const { title, description, author, authorAvatar, date, readingTime, bannerImage
     transform: translateY(-1px);
     color: #ffffff;
   }
+  .hero-cta-row--single .hero-visit-btn {
+    min-width: 15rem;
+    justify-content: center;
+  }
+
+  .hero-visit-btn--anchor {
+    background-color: #ef7a1a;
+  }
+
   .hero-visit-btn svg {
     flex-shrink: 0;
   }

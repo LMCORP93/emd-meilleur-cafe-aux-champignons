@@ -55,8 +55,8 @@ const { siteName, logoSrc, navLinks, ctaText, ctaLink } = Astro.props;
       <!-- ═══ CTA Button — orange rounded pill ═══ -->
       <a
         href={ctaLink}
-        rel="nofollow sponsored"
-        target="_blank"
+        rel={ctaLink.startsWith('#') ? undefined : 'nofollow sponsored'}
+        target={ctaLink.startsWith('#') ? undefined : '_blank'}
         class="inline-flex shrink-0 items-center gap-2 rounded-button bg-orange px-5 py-2.5 font-primary text-sm font-bold leading-none text-white no-underline transition-all duration-200 hover:bg-[#d66a12] hover:-translate-y-px"
       >
         <span>{ctaText}</span>
@@ -134,8 +134,8 @@ const { siteName, logoSrc, navLinks, ctaText, ctaLink } = Astro.props;
   <!-- Mobile CTA Button -->
   <a
     href={ctaLink}
-    rel="nofollow sponsored"
-    target="_blank"
+    rel={ctaLink.startsWith('#') ? undefined : 'nofollow sponsored'}
+    target={ctaLink.startsWith('#') ? undefined : '_blank'}
     class="mt-2 inline-flex items-center gap-2.5 rounded-button bg-orange px-8 py-4 font-primary text-lg font-bold leading-none text-white no-underline transition-all duration-200 hover:bg-[#d66a12]"
   >
     <span>{ctaText}</span>

@@ -19,6 +19,7 @@ const {
 
 // Auto-generate nav links from pages config (max 3 words each)
 const navLinks = config.pages.map(p => ({ label: p.label, href: p.slug }));
+const headerCtaLink = config.pages[0]?.type === 'comparatif' ? config.pages[0].slug : config.products[0].affiliateLink;
 const footerLinks = [
   { label: 'Accueil', href: '/' },
   ...config.pages.map(p => ({ label: p.label, href: p.slug })),
@@ -80,7 +81,7 @@ const footerLinks = [
       logoSrc="/logo.svg"
       navLinks={navLinks}
       ctaText="Acheter"
-      ctaLink={config.products[0].affiliateLink}
+      ctaLink={headerCtaLink}
     />
 
     <slot />

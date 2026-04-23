@@ -349,7 +349,7 @@ const config: SiteConfig = {
   ],
 
   pages: [
-    { type: 'comparatif', label: 'Comparatif', slug: '/' },
+    { type: 'comparatif', label: 'Top 6', slug: '#product-bonjour-drink' },
   ],
 };
 

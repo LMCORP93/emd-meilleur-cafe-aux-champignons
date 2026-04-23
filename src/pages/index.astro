@@ -100,6 +100,11 @@ const comparatifFaq = [
       discountPrice: topProduct.discountPrice,
       affiliateLink: topProduct.affiliateLink,
     }}
+    heroButton={{
+      text: 'Voir le comparatif',
+      href: `#product-${topProduct.slug}`,
+    }}
+    showOfferBlock={false}
   />
 
   <main style="background-color: #ffffff;">
