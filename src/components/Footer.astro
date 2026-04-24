@@ -27,12 +27,16 @@ const {
   year = new Date().getFullYear(),
 } = Astro.props;
 
-// Blog guide links (placeholder for future articles)
-const guideLinks: NavLink[] = [
-  // { label: 'Guide des compléments alimentaires', href: '/guides/complements-alimentaires' },
-  // { label: 'Bienfaits des adaptogènes', href: '/guides/adaptogenes' },
-  // { label: 'Comparatif des cafés fonctionnels', href: '/guides/cafes-fonctionnels' },
-];
+const reservedFooterRoutes = new Set([
+  "/",
+  "/contact",
+  "/mentions-legales",
+  "/politique-de-confidentialite",
+]);
+
+const guideLinks = navLinks
+  .filter((link) => !reservedFooterRoutes.has(link.href))
+  .slice(0, 6);
 
 // Legal / information links
 const infoLinks: NavLink[] = [
