@@ -193,6 +193,7 @@ const config: SiteConfig = {
       ],
       description: 'Bonjour Drink est né de la volonté de deux entrepreneurs français passionnés de santé holistique, Juliette Di Marco et Raphaël Dary, qui souhaitaient créer une alternative au café sans ses effets indésirables. Le résultat ? Le Super Café et le Super Cacao, deux boissons innovantes qui réunissent dans une seule tasse les bienfaits de trois champignons adaptogènes exceptionnels : le Lion\'s Mane pour la concentration, le Cordyceps pour l\'énergie physique et le Reishi pour la résistance au stress. Leur formule combine orge torréfiée, cacao et 2250 mg d\'extraits de champignons pour un rituel matinal sain, sans caféine, à seulement 1€ par tasse.',
     },
+    
     {
       rank: 2,
       name: 'Brainstoorm - Mush N Go',
@@ -224,39 +225,9 @@ const config: SiteConfig = {
       ],
       description: 'Brainstoorm de Mush N Go est le café aux champignons adaptogènes le plus concentré de France avec 6 250 mg d\'actifs par tasse. Formule à 8 actifs synergiques : Lion\'s Mane, Cordyceps, Chaga (1 000 mg chacun à dose clinique), Maca (3 000 mg), fibres d\'Acacia (2 708 mg), Ashwagandha, Rhodiola, Cacao et NewCaff® brevetée. Fabrication française en Bretagne. Trustpilot 4,8/5.',
     },
+    
     {
       rank: 3,
-      name: 'Super Café Évolutif - WAKE',
-      brand: 'WAKE',
-      slug: 'wake-super-cafe',
-      image: 'https://cdn.prod.website-files.com/68c02c2c477fdd467e6e08a1/697aa86fc6c672a505d8fdeb_Frame%2012.webp',
-      brandLogo: 'https://cdn.prod.website-files.com/68c02c2c477fdd467e6e08a1/692f76928a50c48f82cadc35_logo_wake.avif',
-      rating: 8.9,
-      reviewCount: 95,
-      promoCode: 'LMC',
-      promoPercent: 10,
-      originalPrice: '19,95 €',
-      discountPrice: '17,95 €',
-      affiliateLink: 'https://taap.it/wake-super-cafe',
-      origin: '🇫🇷 France',
-      availability: 'En stock',
-      productType: 'Poudre',
-      pros: [
-        'Prix très accessible : à partir de 17,95€ le sachet',
-        'Formule innovante : arabica + orge torréfiée + collagène marin AAA + champignons',
-        'Dosage évolutif adaptable selon les besoins et la sensibilité',
-        'Marque parisienne avec une approche nutritionnelle moderne',
-        'Peu de caféine grâce au mélange arabica + orge',
-      ],
-      cons: [
-        'Nouveau sur le marché — moins de retours clients que les concurrents',
-        'Format monoproduit, pas de déclinaison',
-        'Collagène marin non adapté aux végétaliens stricts',
-      ],
-      description: 'Basée à Paris, Wake est née d\'une vision moderne de la nutrition : harmoniser nos besoins physiologiques avec les cycles naturels. Son Super Café est une boisson fonctionnelle innovante qui combine arabica premium, orge torréfiée, collagène marin AAA (1000 Da) et champignons adaptogènes bio (Lion\'s Mane, Cordyceps, Chaga). Le dosage est évolutif pour s\'adapter à votre sensibilité. Prix d\'entrée très accessible à 19,95€.',
-    },
-    {
-      rank: 4,
       name: 'Super Coffee - Drink Dyna',
       brand: 'Drink Dyna',
       slug: 'drink-dyna',
@@ -286,8 +257,9 @@ const config: SiteConfig = {
       ],
       description: 'Dyna réinvente le rituel matinal avec son Super Coffee, une fusion intelligente entre café Arabica premium et adaptogènes. Cette formule instantanée offre une énergie stable et une concentration décuplée sans le crash habituel. Elle combine 2000 mg d\'extraits concentrés de Lion\'s Mane et d\'Ashwagandha KSM-66. Formules disponibles en versions cacao, malt et matcha pour varier les rituels. Pack découverte trio à 24€.',
     },
+    
     {
-      rank: 5,
+      rank: 4,
       name: 'Boisson Boost - French Mush',
       brand: 'French Mush',
       slug: 'french-mush',
@@ -317,8 +289,9 @@ const config: SiteConfig = {
       ],
       description: 'French Mush démocratise l\'accès aux champignons fonctionnels avec une gamme complète de champignons adaptogènes biologiques fabriqués en France : Lion\'s Mane pour la concentration, Cordyceps pour l\'énergie, Chaga pour les défenses immunitaires, Reishi et Shiitaké. Poudres et gélules ultra-concentrées certifiées bio. Leur boisson Boost combine plusieurs extraits pour un effet synergique complet.',
     },
+    
     {
-      rank: 6,
+      rank: 5,
       name: 'Not Coffee - Clearly',
       brand: 'Clearly',
       slug: 'clearly-not-coffee',
@@ -348,7 +321,39 @@ const config: SiteConfig = {
       ],
       description: 'Clearly est une marque néerlandaise certifiée BIO qui place la qualité au rang #1. Fondée par des passionnés confrontés au brouillard mental, à la fatigue chronique et aux ballonnements, la marque a créé une formule qui combine champignons adaptogènes et superaliments pour l\'énergie, la clarté mentale et la digestion. Ingrédients sourcés chez les meilleurs producteurs mondiaux, production contrôlée aux Pays-Bas, transparence totale sur la composition.',
     },
-  ],
+  
+    {
+      rank: 6,
+      name: 'Super Café Évolutif - WAKE',
+      brand: 'WAKE',
+      slug: 'wake-super-cafe',
+      image: 'https://cdn.prod.website-files.com/68c02c2c477fdd467e6e08a1/697aa86fc6c672a505d8fdeb_Frame%2012.webp',
+      brandLogo: 'https://cdn.prod.website-files.com/68c02c2c477fdd467e6e08a1/692f76928a50c48f82cadc35_logo_wake.avif',
+      rating: 8.9,
+      reviewCount: 95,
+      promoCode: 'LMC',
+      promoPercent: 10,
+      originalPrice: '19,95 €',
+      discountPrice: '17,95 €',
+      affiliateLink: 'https://taap.it/wake-super-cafe',
+      origin: '🇫🇷 France',
+      availability: 'En stock',
+      productType: 'Poudre',
+      pros: [
+        'Prix très accessible : à partir de 17,95€ le sachet',
+        'Formule innovante : arabica + orge torréfiée + collagène marin AAA + champignons',
+        'Dosage évolutif adaptable selon les besoins et la sensibilité',
+        'Marque parisienne avec une approche nutritionnelle moderne',
+        'Peu de caféine grâce au mélange arabica + orge',
+      ],
+      cons: [
+        'Nouveau sur le marché — moins de retours clients que les concurrents',
+        'Format monoproduit, pas de déclinaison',
+        'Collagène marin non adapté aux végétaliens stricts',
+      ],
+      description: 'Basée à Paris, Wake est née d\'une vision moderne de la nutrition : harmoniser nos besoins physiologiques avec les cycles naturels. Son Super Café est une boisson fonctionnelle innovante qui combine arabica premium, orge torréfiée, collagène marin AAA (1000 Da) et champignons adaptogènes bio (Lion\'s Mane, Cordyceps, Chaga). Le dosage est évolutif pour s\'adapter à votre sensibilité. Prix d\'entrée très accessible à 19,95€.',
+    },
+    ],
 
   pages: [
     { type: 'comparatif', label: 'Top 6', slug: '#product-bonjour-drink' },
