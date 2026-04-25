@@ -52,7 +52,7 @@ const { siteName, logoSrc, navLinks, ctaText, ctaLink } = Astro.props;
         ))}
       </nav>
 
-      <!-- ═══ CTA Button — orange rounded pill ═══ -->
+      <!-- ═══ CTA Button - orange rounded pill ═══ -->
       <a
         href={ctaLink}
         rel={ctaLink.startsWith('#') ? undefined : 'nofollow sponsored'}
@@ -163,14 +163,14 @@ const { siteName, logoSrc, navLinks, ctaText, ctaLink } = Astro.props;
     box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1);
   }
 
-  /* ── Mobile overlay — closed (slides out to right) ── */
+  /* ── Mobile overlay - closed (slides out to right) ── */
   .mobile-overlay {
     opacity: 0;
     pointer-events: none;
     transform: translateX(100%);
   }
 
-  /* ── Mobile overlay — open (slides in) ── */
+  /* ── Mobile overlay - open (slides in) ── */
   .mobile-overlay.open {
     opacity: 1;
     pointer-events: auto;

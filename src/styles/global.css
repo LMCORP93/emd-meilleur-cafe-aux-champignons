@@ -281,7 +281,7 @@ html {
 }
 
 /* ── Buttons: 2 global classes ────────────────────────────────────── */
-/* .btn-solid — primary CTA (filled orange) */
+/* .btn-solid - primary CTA (filled orange) */
 .btn-solid {
   display: inline-flex;
   align-items: center;
@@ -336,7 +336,7 @@ html {
   height: 12px;
 }
 
-/* .btn-dashed — promo code (dashed outline) */
+/* .btn-dashed - promo code (dashed outline) */
 .btn-dashed {
   display: inline-flex;
   align-items: center;

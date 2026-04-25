@@ -86,7 +86,7 @@ const config: SiteConfig = {
 
   seo: {
     title: 'Meilleur Café aux Champignons 2026 : comparatif Top 6',
-    description: 'Mush N Go avis après 30 jours de test : Brainstoorm, le café aux champignons le plus dosé de France (6 250 mg d\'actifs). Composition, prix, code LMC15.',
+    description: 'Comparatif 2026 des meilleurs cafés aux champignons en France : formules, dosages, prix, avis, caféine et codes promo pour choisir la bonne marque.',
     ogImage: '/og-image.jpg',
   },
 
@@ -98,10 +98,10 @@ const config: SiteConfig = {
 
   quickSummary: {
     assets: [
-      'Formule ultra-concentrée à 6 250 mg d\'actifs par tasse — le café aux champignons le plus dosé de France',
-      '2 708 mg de fibres d\'Acacia prébiotique — unique sur le marché : performance cognitive + confort digestif',
-      'NewCaff® : caféine brevetée à libération prolongée (20 mg) — énergie stable 6-8h sans pic ni crash',
-      'Pochon de 240g (30 tasses) — le plus gros format du marché, vegan, sans OGM, sans gluten, 11,84 kcal/portion',
+      'Formule ultra-concentrée à 6 250 mg d\'actifs par tasse : le café aux champignons le plus dosé de France',
+      '2 708 mg de fibres d\'Acacia prébiotique : unique sur le marché : performance cognitive + confort digestif',
+      'NewCaff® : caféine brevetée à libération prolongée (20 mg) : énergie stable 6-8h sans pic ni crash',
+      'Pochon de 240g (30 tasses) : le plus gros format du marché, vegan, sans OGM, sans gluten, 11,84 kcal/portion',
       'Fabriqué en France dans un laboratoire certifié en Bretagne, testé en laboratoire indépendant',
       'Code LMC15 = -15% sur tout le site, cumulable avec l\'abonnement -30% (0,99 €/tasse) + garantie 60 jours',
     ],
@@ -122,7 +122,7 @@ const config: SiteConfig = {
   cons: [
     'Seulement 2 saveurs pour l\'instant (Choco-noisette et Coffee)',
     'Ruptures ponctuelles sur Choco-noisette en période de forte demande',
-    'Disponible uniquement en ligne — pas en boutique physique ni parapharmacie',
+    'Disponible uniquement en ligne : pas en boutique physique ni parapharmacie',
   ],
 
   faq: [
@@ -144,7 +144,7 @@ const config: SiteConfig = {
     },
     {
       question: 'Où acheter Brainstoorm de Mush N Go au meilleur prix ?',
-      answer: 'Brainstoorm est disponible exclusivement sur le site officiel mushngo.com en pochon de 240g (30 portions). C\'est le seul canal de distribution autorisé par la marque. Le meilleur rapport qualité-prix est l\'abonnement mensuel à 20,93 € (0,70 €/tasse). Avec le code LMC15 cumulé à l\'abonnement, on descend à 0,59 €/tasse — le meilleur coût/mg d\'actifs du marché.',
+      answer: 'Brainstoorm est disponible exclusivement sur le site officiel mushngo.com en pochon de 240g (30 portions). C\'est le seul canal de distribution autorisé par la marque. Le meilleur rapport qualité-prix est l\'abonnement mensuel à 20,93 € (0,70 €/tasse). Avec le code LMC15 cumulé à l\'abonnement, on descend à 0,59 €/tasse : le meilleur coût/mg d\'actifs du marché.',
     },
     {
       question: 'Brainstoorm est-il adapté aux personnes sensibles à la caféine ?',
@@ -185,13 +185,13 @@ const config: SiteConfig = {
       pros: [
         'Formule complète : orge torréfiée + cacao + 2250 mg de champignons adaptogènes',
         'Co-fondée par des experts en santé holistique (Juliette Di Marco & Raphaël Dary)',
-        'Coût ramené à seulement 1€ par tasse — l\'un des plus accessibles du marché',
+        'Coût ramené à seulement 1€ par tasse : l\'un des plus accessibles du marché',
         '100% naturel, vegan, sans additifs, fabriqué en France',
         'Deux déclinaisons : Super Café et Super Cacao pour varier les plaisirs',
       ],
       cons: [
         'Goût d\'orge torréfiée qui peut surprendre les amateurs de café classique',
-        'N\'est pas un café au sens strict — alternative sans caféine',
+        'N\'est pas un café au sens strict : alternative sans caféine',
         'Gamme encore limitée à deux produits',
       ],
       description: 'Bonjour Drink est né de la volonté de deux entrepreneurs français passionnés de santé holistique, Juliette Di Marco et Raphaël Dary, qui souhaitaient créer une alternative au café sans ses effets indésirables. Le résultat ? Le Super Café et le Super Cacao, deux boissons innovantes qui réunissent dans une seule tasse les bienfaits de trois champignons adaptogènes exceptionnels : le Lion\'s Mane pour la concentration, le Cordyceps pour l\'énergie physique et le Reishi pour la résistance au stress. Leur formule combine orge torréfiée, cacao et 2250 mg d\'extraits de champignons pour un rituel matinal sain, sans caféine, à seulement 1€ par tasse.',
@@ -213,10 +213,10 @@ const config: SiteConfig = {
       affiliateLink: 'https://taap.it/mushngo-brainstorm',
       origin: '🇫🇷 France',
       availability: 'En stock',
-      productType: 'Poudre (240g — 30 portions)',
+      productType: 'Poudre (240g : 30 portions)',
       pros: [
-        '6 250 mg d\'actifs par tasse — le café aux champignons le plus dosé de France',
-        '2 708 mg de fibres d\'Acacia prébiotique — unique sur le marché',
+        '6 250 mg d\'actifs par tasse : le café aux champignons le plus dosé de France',
+        '2 708 mg de fibres d\'Acacia prébiotique : unique sur le marché',
         'NewCaff® brevetée : 20 mg caféine à libération prolongée, énergie 6-8h sans crash',
         'Fabriqué en France, labo certifié Bretagne, bio, vegan, sans gluten, sans OGM',
         'Trustpilot 4,8/5 avec plus de 170 avis vérifiés',
@@ -255,7 +255,7 @@ const config: SiteConfig = {
       ],
       cons: [
         'Gamme de saveurs peut être déroutante au premier abord',
-        'Caféine présente (Arabica) — déconseillé aux sensibles',
+        'Caféine présente (Arabica) : déconseillé aux sensibles',
         'Moins concentré en actifs que Mush N Go (2000 mg vs 6 250 mg)',
       ],
       description: 'Dyna réinvente le rituel matinal avec son Super Coffee, une fusion intelligente entre café Arabica premium et adaptogènes. Cette formule instantanée offre une énergie stable et une concentration décuplée sans le crash habituel. Elle combine 2000 mg d\'extraits concentrés de Lion\'s Mane et d\'Ashwagandha KSM-66. Formules disponibles en versions cacao, malt et matcha pour varier les rituels. Pack découverte trio à 24€.',
@@ -286,7 +286,7 @@ const config: SiteConfig = {
         'Prix compétitif pour la qualité des extraits français',
       ],
       cons: [
-        'Marque généraliste — pas un produit dédié "café"',
+        'Marque généraliste : pas un produit dédié "café"',
         'Moins de visibilité marketing que les concurrents',
         'Boisson Boost moins goûteuse que les formulations cacao/café',
       ],
@@ -318,7 +318,7 @@ const config: SiteConfig = {
         'Bonne note Trustpilot et communauté fidèle',
       ],
       cons: [
-        'Origine européenne (Pays-Bas) — pas fabriqué en France',
+        'Origine européenne (Pays-Bas) : pas fabriqué en France',
         'Marque moins connue sur le marché français',
         'Prix légèrement supérieur à la moyenne pour un format standard',
       ],
@@ -350,7 +350,7 @@ const config: SiteConfig = {
         'Peu de caféine grâce au mélange arabica + orge',
       ],
       cons: [
-        'Nouveau sur le marché — moins de retours clients que les concurrents',
+        'Nouveau sur le marché : moins de retours clients que les concurrents',
         'Format monoproduit, pas de déclinaison',
         'Collagène marin non adapté aux végétaliens stricts',
       ],
@@ -359,7 +359,7 @@ const config: SiteConfig = {
     ],
 
   pages: [
-    { type: 'comparatif', label: 'Top 6', slug: '#product-bonjour-drink' },
+    { type: 'comparatif', label: 'Top 6', slug: '/#product-bonjour-drink' },
     { type: 'blog', label: 'Dangers', slug: '/cafe-aux-champignons-danger' },
   ],
 };
