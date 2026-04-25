@@ -360,6 +360,7 @@ const config: SiteConfig = {
 
   pages: [
     { type: 'comparatif', label: 'Top 6', slug: '/#product-bonjour-drink' },
+    { type: 'blog', label: 'Avis Bonjour', slug: '/bonjour-drink-avis' },
     { type: 'blog', label: 'Dangers', slug: '/cafe-aux-champignons-danger' },
   ],
 };
