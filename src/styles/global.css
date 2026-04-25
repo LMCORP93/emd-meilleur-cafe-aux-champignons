@@ -241,6 +241,11 @@ html {
 .content-section {
   margin-bottom: 0;
 }
+.promo-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
 /* ── Sidebar (sticky) ───────────────────────────────────────────── */
 .sidebar-column {
