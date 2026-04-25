@@ -10,7 +10,6 @@ import InnerNote from '@/components/InnerNote.astro';
 import ComparisonTable from '@/components/ComparisonTable.astro';
 import ArticleGrid from '@/components/ArticleGrid.astro';
 import EditorialCriteria from '@/components/EditorialCriteria.astro';
-import StickyPromoButton from '@/components/StickyPromoButton.astro';
 import config from '@/data/site.config';
 
 const topProduct = config.products[0];
@@ -318,12 +317,6 @@ const comparatifFaq = [
   </main>
 
   <ArticleGrid articles={ relatedArticles.filter((article) => article.href !== '/') } />
-
-  <StickyPromoButton
-    promoPercent={topProduct.promoPercent}
-    promoCode={topProduct.promoCode}
-    affiliateLink={topProduct.affiliateLink}
-  />
 </BaseLayout>
 
 <style>
