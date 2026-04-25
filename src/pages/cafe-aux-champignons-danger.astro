@@ -5,6 +5,7 @@ import TableOfContents from '@/components/TableOfContents.astro';
 import SidebarCTA from '@/components/SidebarCTA.astro';
 import ContentImage from '@/components/ContentImage.astro';
 import FAQSection from '@/components/FAQSection.astro';
+import ReviewPromoCard from '@/components/ReviewPromoCard.astro';
 import config from '@/data/site.config';
 
 const topProduct = config.products[0];
@@ -12,6 +13,10 @@ const title = 'Café aux champignons danger : risques et précautions';
 const description = 'Le café aux champignons est-il dangereux ? Effets secondaires, caféine, interactions, grossesse et conseils pour choisir une boisson sûre.';
 const pageUrl = `${config.domain}/cafe-aux-champignons-danger`;
 const publishedDate = '2026-04-25';
+const promoProducts = [config.products[0], config.products[1], config.products[5]].filter(Boolean).map((product) => ({
+  ...product,
+  productCategory: config.productCategory,
+}));
 
 const faq = [
   {
@@ -114,6 +119,7 @@ const faq = [
               { id: 'intro', label: 'Danger réel ?' },
               { id: 'effets-secondaires', label: 'Effets secondaires' },
               { id: 'cafeine', label: 'Caféine et sommeil' },
+              { id: 'selection', label: 'Notre sélection' },
               { id: 'interactions', label: 'Interactions' },
               { id: 'grossesse', label: 'Grossesse' },
               { id: 'choisir', label: 'Choisir sans risque' },
@@ -151,6 +157,18 @@ const faq = [
               <p>
                 À l’inverse, si vous supportez bien le café, une formule modérée peut offrir une énergie plus stable qu’un espresso classique. L’intérêt des champignons adaptogènes est justement d’adoucir le rituel, pas de multiplier les stimulants.
               </p>
+            </section>
+
+            <section id="selection" class="promo-selection">
+              <div class="rich-text">
+                <h2>Notre sélection prudente si vous voulez tester</h2>
+                <p>
+                  Si vous voulez essayer malgré vos questions sur les dangers potentiels, privilégiez une formule claire, bien dosée et cohérente avec votre sensibilité à la caféine. Voici trois options pertinentes selon les profils : une alternative plus douce, une formule très complète, et une option prix accessible.
+                </p>
+              </div>
+              {promoProducts.map((product) => (
+                <ReviewPromoCard product={product} />
+              ))}
             </section>
 
             <section id="interactions" class="rich-text">
