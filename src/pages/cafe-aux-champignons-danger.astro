@@ -7,6 +7,8 @@ import ContentImage from '@/components/ContentImage.astro';
 import FAQSection from '@/components/FAQSection.astro';
 import ReviewPromoCard from '@/components/ReviewPromoCard.astro';
 import FirstReview from '@/components/FirstReview.astro';
+import InnerNote from '@/components/InnerNote.astro';
+import ComparisonTable from '@/components/ComparisonTable.astro';
 import config from '@/data/site.config';
 
 const topProduct = config.products[0];
@@ -186,6 +188,26 @@ const faq = [
               </p>
             </section>
 
+            <InnerNote
+              emoji="⚠️"
+              text="<strong>Point vigilance :</strong> si vous êtes sensible au café, évitez les formules caféinées en fin de journée. La tolérance individuelle compte plus que la promesse marketing."
+            />
+
+            <ComparisonTable
+              title="Café aux champignons : niveaux de prudence"
+              headers={[
+                { label: 'Profil' },
+                { label: 'Recommandation' },
+              ]}
+              rows={[
+                { cells: ['Adulte sans antécédent', 'Commencer progressivement'], highlight: true },
+                { cells: ['Sensible à la caféine', 'Privilégier une formule sans caféine'] },
+                { cells: ['Sommeil fragile', 'Éviter après 14 h'], highlight: true },
+                { cells: ['Grossesse ou allaitement', 'Demander un avis médical'] },
+                { cells: ['Traitement chronique', 'Vérifier les interactions possibles'], highlight: true },
+              ]}
+            />
+
             <section id="cafeine" class="rich-text">
               <h2>Caféine, anxiété et sommeil : le vrai point sensible</h2>
               <p>
@@ -221,6 +243,11 @@ const faq = [
                 Si vous prenez déjà plusieurs compléments ou médicaments, évitez de superposer les produits “énergie”, “stress” et “immunité” sans logique. Le café aux champignons doit rester un rituel simple, pas une accumulation incontrôlée d’actifs.
               </p>
             </section>
+
+            <InnerNote
+              emoji="📌"
+              text="<strong>À retenir :</strong> le danger vient rarement du mot champignon seul. Il vient surtout du dosage, de la caféine, des interactions possibles et de votre situation personnelle."
+            />
 
             <section id="grossesse" class="rich-text">
               <h2>Grossesse, allaitement, enfants : prudence par défaut</h2>

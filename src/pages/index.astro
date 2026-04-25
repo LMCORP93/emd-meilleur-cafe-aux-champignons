@@ -6,6 +6,8 @@ import ComparatorCard from '@/components/ComparatorCard.astro';
 import SidebarCTA from '@/components/SidebarCTA.astro';
 import FAQSection from '@/components/FAQSection.astro';
 import ContentImage from '@/components/ContentImage.astro';
+import InnerNote from '@/components/InnerNote.astro';
+import ComparisonTable from '@/components/ComparisonTable.astro';
 import config from '@/data/site.config';
 
 const topProduct = config.products[0];
@@ -220,6 +222,26 @@ const comparatifFaq = [
 
                 <p><strong>5. Le rapport qualité-prix</strong><br>
                 Calculez le <strong>coût par tasse</strong>, pas le prix du sachet. WAKE propose le tarif le plus accessible à 0,60€/tasse, suivi de Drink Dyna à 0,72€ et de Bonjour Drink et Mush N Go à environ 1€/tasse. N'oubliez pas d'utiliser les codes promos partenaires (LMC15, LMC20, etc.) qui peuvent réduire le coût de 10 à 20%. Les conditionnements de 60 ou 90 portions offrent généralement un meilleur rapport qualité-prix.</p>
+
+                <InnerNote
+                  emoji="📌"
+                  text="<strong>Notre méthode :</strong> nous ne classons pas seulement les produits selon la note. Nous croisons le dosage, la caféine, le goût, le prix par tasse, la transparence et la facilité d’utilisation au quotidien."
+                />
+
+                <ComparisonTable
+                  title="Critères de comparaison utilisés"
+                  headers={[
+                    { label: 'Critère' },
+                    { label: 'Pourquoi ça compte' },
+                  ]}
+                  rows={[
+                    { cells: ['Caféine', 'Détermine la tolérance et le sommeil'], highlight: true },
+                    { cells: ['Dosage', 'Permet de comparer la concentration réelle'] },
+                    { cells: ['Goût', 'Conditionne l’usage quotidien'], highlight: true },
+                    { cells: ['Prix par tasse', 'Plus fiable que le prix du sachet'] },
+                    { cells: ['Transparence', 'Réduit le risque de promesses floues'], highlight: true },
+                  ]}
+                />
 
                 <ContentImage
                   src="/images/content/emd-cafe-champignons-ingredients.webp"

@@ -7,6 +7,8 @@ import ContentImage from '@/components/ContentImage.astro';
 import FAQSection from '@/components/FAQSection.astro';
 import ReviewPromoCard from '@/components/ReviewPromoCard.astro';
 import FirstReview from '@/components/FirstReview.astro';
+import InnerNote from '@/components/InnerNote.astro';
+import ComparisonTable from '@/components/ComparisonTable.astro';
 import config from '@/data/site.config';
 
 const topProduct = config.products[0];
@@ -205,6 +207,26 @@ const faq = [
               </p>
             </section>
 
+            <InnerNote
+              emoji="📌"
+              text="<strong>À retenir :</strong> Bonjour Drink est surtout intéressant si vous cherchez une alternative sans caféine, plus douce qu’un espresso, avec une composition simple à comprendre."
+            />
+
+            <ComparisonTable
+              title="Bonjour Drink : points clés à vérifier"
+              headers={[
+                { label: 'Critère' },
+                { label: 'Notre lecture' },
+              ]}
+              rows={[
+                { cells: ['Type de boisson', 'Alternative au café sans caféine'], highlight: true },
+                { cells: ['Base principale', 'Orge torréfiée, cacao, champignons adaptogènes'] },
+                { cells: ['Profil idéal', 'Personnes sensibles au café classique'], highlight: true },
+                { cells: ['Objectif', 'Routine douce, goût gourmand, énergie plus stable'] },
+                { cells: ['Limite', 'Moins stimulant qu’un café Arabica'], highlight: true },
+              ]}
+            />
+
             <section id="gout" class="rich-text">
               <h2>Goût Bonjour Drink : à quoi s'attendre ?</h2>
               <p>
@@ -247,6 +269,11 @@ const faq = [
                 Le produit est aussi intéressant pour les débutants dans l'univers des cafés aux champignons. La formule est moins intimidante que certaines poudres très concentrées, et le rituel reste facile à comprendre : une tasse, une routine, un goût gourmand.
               </p>
             </section>
+
+            <InnerNote
+              emoji="✅"
+              text="<strong>Notre conseil :</strong> commencez par tester Bonjour Drink le matin pendant quelques jours, surtout si votre objectif est de réduire la caféine sans supprimer le rituel de la boisson chaude."
+            />
 
             <section id="limites" class="rich-text">
               <h2>Les limites de Bonjour Drink</h2>
