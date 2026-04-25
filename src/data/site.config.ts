@@ -46,6 +46,7 @@ export interface SiteConfig {
     description: string;
     ogImage: string;
   };
+  analyticsMeasurementId?: string;
   breadcrumbs: { label: string; href: string }[];
   quickSummary: {
     assets: string[];
@@ -63,7 +64,7 @@ export interface SiteConfig {
 
 const config: SiteConfig = {
   domain: 'https://meilleur-cafe-aux-champignons.com',
-  isIndexable: false,
+  isIndexable: true,
   siteName: 'Meilleur Café aux Champignons',
   brand: 'Bonjour Drink',
   product: 'Comparatif 2026',
@@ -86,8 +87,10 @@ const config: SiteConfig = {
   seo: {
     title: 'Meilleur Café aux Champignons 2026 : comparatif Top 6',
     description: 'Mush N Go avis après 30 jours de test : Brainstoorm, le café aux champignons le plus dosé de France (6 250 mg d\'actifs). Composition, prix, code LMC15.',
-    ogImage: '/images/content/emd-cafe-champignons-banner.webp',
+    ogImage: '/og-image.jpg',
   },
+
+  analyticsMeasurementId: 'G-7QVMW860XF',
 
   breadcrumbs: [
     { label: 'Comparatif', href: '/' },
