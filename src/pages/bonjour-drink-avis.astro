@@ -121,7 +121,7 @@ const faq = [
     authorAvatar={config.author.avatar}
     date="25 Avril 2026"
     readingTime="9 min de lecture"
-    breadcrumbs={[{ label: 'Avis', href: '/bonjour-drink-avis' }]}
+    breadcrumbs={[{ label: 'Bonjour Drink avis', href: '/bonjour-drink-avis' }]}
     bannerImage="/images/content/emd-cafe-champignons-lifestyle.webp"
     product={{
       name: topProduct.name,
@@ -140,19 +140,6 @@ const faq = [
       <div class="padding-section-medium">
         <div class="blog-grid">
           <div class="content-column">
-            <section id="intro" class="rich-text">
-              <h2>Notre avis rapide sur Bonjour Drink</h2>
-              <p>
-                Notre avis sur <strong>Bonjour Drink</strong> est positif si votre objectif est simple : remplacer le café classique par une boisson plus douce, sans caféine, avec une composition lisible et un vrai rituel gourmand. Ce n'est pas le produit le plus agressif du marché en dosage, mais c'est justement ce qui le rend intéressant pour débuter.
-              </p>
-              <p>
-                Bonjour Drink se positionne comme une alternative au café, à base d'orge torréfiée, de cacao et de champignons adaptogènes. L'intérêt principal n'est donc pas de chercher un effet stimulant brutal, mais de garder une boisson chaude agréable tout en évitant la nervosité, les palpitations ou le crash que certaines personnes ressentent avec le café.
-              </p>
-              <p>
-                Bonjour Drink ressort comme notre recommandation principale parce que le produit colle bien à l'intention de recherche : aider à choisir un café aux champignons crédible, accessible et facile à intégrer dans une routine quotidienne.
-              </p>
-            </section>
-
             <FirstReview
               tag={quickSummary.tag}
               heading={quickSummary.heading}
@@ -168,6 +155,24 @@ const faq = [
                 ctaLink: topProduct.affiliateLink,
               }}
             />
+
+            <section id="summary-cta" class="promo-selection">
+              <ReviewPromoCard product={promoProduct} />
+            </section>
+
+            <section id="intro" class="rich-text">
+              <h2>Notre avis rapide sur Bonjour Drink</h2>
+              <p>
+                Notre avis sur <strong>Bonjour Drink</strong> est positif si votre objectif est simple : remplacer le café classique par une boisson plus douce, sans caféine, avec une composition lisible et un vrai rituel gourmand. Ce n'est pas le produit le plus agressif du marché en dosage, mais c'est justement ce qui le rend intéressant pour débuter.
+              </p>
+              <p>
+                Bonjour Drink se positionne comme une alternative au café, à base d'orge torréfiée, de cacao et de champignons adaptogènes. L'intérêt principal n'est donc pas de chercher un effet stimulant brutal, mais de garder une boisson chaude agréable tout en évitant la nervosité, les palpitations ou le crash que certaines personnes ressentent avec le café.
+              </p>
+              <p>
+                Bonjour Drink ressort comme notre recommandation principale parce que le produit colle bien à l'intention de recherche : aider à choisir un café aux champignons crédible, accessible et facile à intégrer dans une routine quotidienne.
+              </p>
+            </section>
+
 
             <TableOfContents items={[
               { id: 'intro', label: 'Avis rapide' },

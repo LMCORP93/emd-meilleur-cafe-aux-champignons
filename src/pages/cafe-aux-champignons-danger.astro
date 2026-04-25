@@ -102,7 +102,7 @@ const faq = [
     authorAvatar={config.author.avatar}
     date="25 Avril 2026"
     readingTime="8 min de lecture"
-    breadcrumbs={[{ label: 'Guides', href: '/' }, { label: 'Danger', href: '/cafe-aux-champignons-danger' }]}
+    breadcrumbs={[{ label: 'Café aux champignons danger', href: '/cafe-aux-champignons-danger' }]}
     bannerImage="/images/content/emd-cafe-champignons-lifestyle.webp"
     product={{
       name: topProduct.name,
@@ -121,19 +121,6 @@ const faq = [
       <div class="padding-section-medium">
         <div class="blog-grid">
           <div class="content-column">
-            <section id="intro" class="rich-text">
-              <h2>Le café aux champignons est-il dangereux ?</h2>
-              <p>
-                Le <strong>café aux champignons</strong> n’est pas dangereux par nature. Pour un adulte en bonne santé, une formule bien dosée, consommée raisonnablement, ressemble davantage à une boisson fonctionnelle qu’à un produit risqué. Le problème, c’est que le terme “champignons adaptogènes” donne parfois une impression de produit 100 % naturel donc sans précaution. C’est faux.
-              </p>
-              <p>
-                Les risques réels viennent surtout de quatre facteurs : la présence ou non de caféine, le dosage en extraits de champignons, la qualité de la marque et votre situation personnelle. Une personne sensible à la caféine, sous traitement médical ou enceinte ne doit pas raisonner comme un adulte sans antécédent qui boit déjà du café tous les matins.
-              </p>
-              <p>
-                La bonne approche est donc simple : ne pas dramatiser, mais ne pas banaliser non plus. Cette page vous aide à identifier les vrais points de vigilance avant d’acheter ou de consommer un café aux champignons.
-              </p>
-            </section>
-
             <FirstReview
               tag={quickSummary.tag}
               heading={quickSummary.heading}
@@ -149,6 +136,24 @@ const faq = [
                 ctaLink: topProduct.affiliateLink,
               }}
             />
+
+            <section id="summary-cta" class="promo-selection">
+              <ReviewPromoCard product={promoProduct} />
+            </section>
+
+            <section id="intro" class="rich-text">
+              <h2>Le café aux champignons est-il dangereux ?</h2>
+              <p>
+                Le <strong>café aux champignons</strong> n’est pas dangereux par nature. Pour un adulte en bonne santé, une formule bien dosée, consommée raisonnablement, ressemble davantage à une boisson fonctionnelle qu’à un produit risqué. Le problème, c’est que le terme “champignons adaptogènes” donne parfois une impression de produit 100 % naturel donc sans précaution. C’est faux.
+              </p>
+              <p>
+                Les risques réels viennent surtout de quatre facteurs : la présence ou non de caféine, le dosage en extraits de champignons, la qualité de la marque et votre situation personnelle. Une personne sensible à la caféine, sous traitement médical ou enceinte ne doit pas raisonner comme un adulte sans antécédent qui boit déjà du café tous les matins.
+              </p>
+              <p>
+                La bonne approche est donc simple : ne pas dramatiser, mais ne pas banaliser non plus. Cette page vous aide à identifier les vrais points de vigilance avant d’acheter ou de consommer un café aux champignons.
+              </p>
+            </section>
+
 
             <TableOfContents items={[
               { id: 'intro', label: 'Danger réel ?' },
