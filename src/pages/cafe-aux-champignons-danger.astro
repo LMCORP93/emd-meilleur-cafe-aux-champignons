@@ -4,11 +4,14 @@ import BlogHero from '@/components/BlogHero.astro';
 import TableOfContents from '@/components/TableOfContents.astro';
 import SidebarCTA from '@/components/SidebarCTA.astro';
 import ContentImage from '@/components/ContentImage.astro';
-import FAQSection from '@/components/FAQSection.astro';
+import FaqAccordion from '@/components/FaqAccordion.astro';
 import ReviewPromoCard from '@/components/ReviewPromoCard.astro';
 import FirstReview from '@/components/FirstReview.astro';
 import InnerNote from '@/components/InnerNote.astro';
 import ComparisonTable from '@/components/ComparisonTable.astro';
+import ArticleGrid from '@/components/ArticleGrid.astro';
+import EditorialCriteria from '@/components/EditorialCriteria.astro';
+import StickyPromoButton from '@/components/StickyPromoButton.astro';
 import config from '@/data/site.config';
 
 const topProduct = config.products[0];
@@ -20,6 +23,28 @@ const promoProduct = {
   ...topProduct,
   productCategory: config.productCategory,
 };
+
+
+const relatedArticles = [
+  {
+    title: 'Bonjour Drink avis : test, prix et code promo',
+    excerpt: 'Notre avis sur Bonjour Drink, son goût, sa formule sans caféine, son prix et le code promo LMC20.',
+    image: '/images/content/emd-cafe-champignons-lifestyle.webp',
+    href: '/bonjour-drink-avis/',
+  },
+  {
+    title: 'Café aux champignons danger : faut-il être prudent ?',
+    excerpt: 'Effets secondaires, caféine, interactions, grossesse : les vrais points à vérifier avant de tester.',
+    image: '/images/content/emd-cafe-champignons-ingredients.webp',
+    href: '/cafe-aux-champignons-danger/',
+  },
+  {
+    title: 'Comparatif des meilleurs cafés aux champignons',
+    excerpt: 'Notre classement des meilleures marques de café aux champignons disponibles en France.',
+    image: '/images/content/emd-cafe-champignons-banner.webp',
+    href: '/',
+  },
+];
 
 const quickSummary = {
   tag: 'En bref',
@@ -300,9 +325,12 @@ const faq = [
               <ReviewPromoCard product={promoProduct} />
             </section>
 
-            <section id="faq">
-              <FAQSection faq={faq} />
+            <section id="faq" class="rich-text">
+              <h2>Questions fréquentes</h2>
+              <FaqAccordion items={faq} />
             </section>
+
+            <EditorialCriteria />
           </div>
 
           <aside class="sidebar-column">
@@ -322,4 +350,12 @@ const faq = [
       </div>
     </div>
   </main>
+
+  <ArticleGrid articles={ relatedArticles.filter((article) => article.href !== '/cafe-aux-champignons-danger/') } />
+
+  <StickyPromoButton
+    promoPercent={topProduct.promoPercent}
+    promoCode={topProduct.promoCode}
+    affiliateLink={topProduct.affiliateLink}
+  />
 </BaseLayout>
