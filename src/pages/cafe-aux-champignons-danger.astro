@@ -6,6 +6,7 @@ import SidebarCTA from '@/components/SidebarCTA.astro';
 import ContentImage from '@/components/ContentImage.astro';
 import FAQSection from '@/components/FAQSection.astro';
 import ReviewPromoCard from '@/components/ReviewPromoCard.astro';
+import FirstReview from '@/components/FirstReview.astro';
 import config from '@/data/site.config';
 
 const topProduct = config.products[0];
@@ -16,6 +17,25 @@ const publishedDate = '2026-04-25';
 const promoProduct = {
   ...topProduct,
   productCategory: config.productCategory,
+};
+
+const quickSummary = {
+  tag: 'En bref',
+  heading: 'Café aux champignons : notre avis prudent avant de tester',
+  paragraphs: [
+    "Le café aux champignons n'est pas dangereux par nature, mais il ne doit pas être consommé n'importe comment. Le vrai sujet se joue sur la caféine, le dosage, la qualité de la formule et votre situation personnelle.",
+    "Pour un premier test, nous privilégions une formule simple, sans caféine et facile à comprendre. Bonjour Drink coche bien cette case, avec une approche plus douce que les cafés aux champignons très stimulants.",
+  ],
+  assets: [
+    'Alternative sans caféine, plus adaptée aux profils sensibles au café classique',
+    'Composition lisible avec orge torréfiée, cacao et champignons adaptogènes',
+    'Positionnement prudent pour tester sans chercher un effet stimulant trop marqué',
+    'Code LMC20 disponible via le lien partenaire officiel',
+  ],
+  considerations: [
+    "Ce n'est pas un espresso classique : le goût est plus doux et plus gourmand",
+    'Prudence en cas de grossesse, traitement médical ou pathologie chronique',
+  ],
 };
 
 const faq = [
@@ -93,8 +113,7 @@ const faq = [
       discountPrice: topProduct.discountPrice,
       affiliateLink: topProduct.affiliateLink,
     }}
-    heroButton={{ text: 'Voir le comparatif', href: '/' }}
-    showOfferBlock={false}
+    showOfferBlock={true}
   />
 
   <main style="background-color: #ffffff;">
@@ -114,6 +133,22 @@ const faq = [
                 La bonne approche est donc simple : ne pas dramatiser, mais ne pas banaliser non plus. Cette page vous aide à identifier les vrais points de vigilance avant d’acheter ou de consommer un café aux champignons.
               </p>
             </section>
+
+            <FirstReview
+              tag={quickSummary.tag}
+              heading={quickSummary.heading}
+              paragraphs={quickSummary.paragraphs}
+              assets={quickSummary.assets}
+              considerations={quickSummary.considerations}
+              product={{
+                brandName: topProduct.brand,
+                brandLogoSrc: topProduct.brandLogo,
+                rating: topProduct.rating,
+                reviewLabel: 'Meilleur choix prudent',
+                ctaText: 'Voir l’offre',
+                ctaLink: topProduct.affiliateLink,
+              }}
+            />
 
             <TableOfContents items={[
               { id: 'intro', label: 'Danger réel ?' },

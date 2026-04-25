@@ -6,6 +6,7 @@ import SidebarCTA from '@/components/SidebarCTA.astro';
 import ContentImage from '@/components/ContentImage.astro';
 import FAQSection from '@/components/FAQSection.astro';
 import ReviewPromoCard from '@/components/ReviewPromoCard.astro';
+import FirstReview from '@/components/FirstReview.astro';
 import config from '@/data/site.config';
 
 const topProduct = config.products[0];
@@ -16,6 +17,25 @@ const publishedDate = '2026-04-25';
 const promoProduct = {
   ...topProduct,
   productCategory: config.productCategory,
+};
+
+const quickSummary = {
+  tag: 'En bref',
+  heading: 'Bonjour Drink : notre choix 2026 pour débuter sans caféine',
+  paragraphs: [
+    "Bonjour Drink est notre recommandation principale pour les personnes qui veulent tester le café aux champignons sans caféine. La formule mise sur une boisson chaude plus douce, avec orge torréfiée, cacao et champignons adaptogènes.",
+    "Notre avis est positif pour un premier achat : le produit est accessible, la promesse est claire et le code LMC20 permet de réduire le prix. Ce n'est pas la formule la plus stimulante, mais c'est justement ce qui la rend intéressante pour commencer.",
+  ],
+  assets: [
+    'Alternative sans caféine adaptée aux profils sensibles',
+    'Goût plus gourmand et plus doux qu’un café noir classique',
+    'Formule claire avec champignons adaptogènes et base torréfiée',
+    'Code promo LMC20 actif via le lien partenaire officiel',
+  ],
+  considerations: [
+    "Ce n'est pas un vrai café espresso, mais une alternative au café",
+    'Moins adapté si vous cherchez un effet stimulant immédiat',
+  ],
 };
 
 const faq = [
@@ -112,8 +132,7 @@ const faq = [
       discountPrice: topProduct.discountPrice,
       affiliateLink: topProduct.affiliateLink,
     }}
-    heroButton={{ text: 'Voir l’offre Bonjour Drink', href: topProduct.affiliateLink, external: true }}
-    showOfferBlock={false}
+    showOfferBlock={true}
   />
 
   <main style="background-color: #ffffff;">
@@ -133,6 +152,22 @@ const faq = [
                 Bonjour Drink ressort comme notre recommandation principale parce que le produit colle bien à l'intention de recherche : aider à choisir un café aux champignons crédible, accessible et facile à intégrer dans une routine quotidienne.
               </p>
             </section>
+
+            <FirstReview
+              tag={quickSummary.tag}
+              heading={quickSummary.heading}
+              paragraphs={quickSummary.paragraphs}
+              assets={quickSummary.assets}
+              considerations={quickSummary.considerations}
+              product={{
+                brandName: topProduct.brand,
+                brandLogoSrc: topProduct.brandLogo,
+                rating: topProduct.rating,
+                reviewLabel: 'Meilleur choix prudent',
+                ctaText: 'Voir l’offre',
+                ctaLink: topProduct.affiliateLink,
+              }}
+            />
 
             <TableOfContents items={[
               { id: 'intro', label: 'Avis rapide' },
