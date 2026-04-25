@@ -13,10 +13,10 @@ const title = 'Café aux champignons danger : risques et précautions';
 const description = 'Le café aux champignons est-il dangereux ? Effets secondaires, caféine, interactions, grossesse et conseils pour choisir une boisson sûre.';
 const pageUrl = `${config.domain}/cafe-aux-champignons-danger`;
 const publishedDate = '2026-04-25';
-const promoProducts = [config.products[0], config.products[1], config.products[5]].filter(Boolean).map((product) => ({
-  ...product,
+const promoProduct = {
+  ...topProduct,
   productCategory: config.productCategory,
-}));
+};
 
 const faq = [
   {
@@ -161,14 +161,12 @@ const faq = [
 
             <section id="selection" class="promo-selection">
               <div class="rich-text">
-                <h2>Notre sélection prudente si vous voulez tester</h2>
+                <h2>Notre recommandation prudente si vous voulez tester</h2>
                 <p>
-                  Si vous voulez essayer malgré vos questions sur les dangers potentiels, privilégiez une formule claire, bien dosée et cohérente avec votre sensibilité à la caféine. Voici trois options pertinentes selon les profils : une alternative plus douce, une formule très complète, et une option prix accessible.
+                  Sur une page blog, on ne multiplie pas les offres : on met en avant uniquement le partenaire principal de l’EMD. Ici, c’est le top 1 du site. L’objectif est simple : garder une page claire, crédible et orientée conversion, sans recréer un mini-comparatif.
                 </p>
               </div>
-              {promoProducts.map((product) => (
-                <ReviewPromoCard product={product} />
-              ))}
+              <ReviewPromoCard product={promoProduct} />
             </section>
 
             <section id="interactions" class="rich-text">
