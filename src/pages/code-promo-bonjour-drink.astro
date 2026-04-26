@@ -1,0 +1,358 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import BlogHero from '@/components/BlogHero.astro';
+import TableOfContents from '@/components/TableOfContents.astro';
+import SidebarCTA from '@/components/SidebarCTA.astro';
+import ContentImage from '@/components/ContentImage.astro';
+import FaqAccordion from '@/components/FaqAccordion.astro';
+import ReviewPromoCard from '@/components/ReviewPromoCard.astro';
+import FirstReview from '@/components/FirstReview.astro';
+import InnerNote from '@/components/InnerNote.astro';
+import ComparisonTable from '@/components/ComparisonTable.astro';
+import ArticleGrid from '@/components/ArticleGrid.astro';
+import EditorialCriteria from '@/components/EditorialCriteria.astro';
+import config from '@/data/site.config';
+
+const topProduct = config.products[0];
+const title = 'Code promo Bonjour Drink : -20% avec LMC20';
+const description = 'Code promo Bonjour Drink actif : LMC20 pour obtenir 20% de réduction sur le site officiel. Prix, conditions, lien vérifié et avis rapide avant commande.';
+const pageUrl = `${config.domain}/code-promo-bonjour-drink`;
+const publishedDate = '2026-04-26';
+const promoProduct = {
+  ...topProduct,
+  productCategory: config.productCategory,
+};
+
+const relatedArticles = [
+  {
+    title: 'Bonjour Drink avis : test, prix et code promo',
+    excerpt: 'Notre avis complet sur Bonjour Drink, son goût, sa formule sans caféine, son prix et le code LMC20.',
+    image: '/images/content/emd-cafe-champignons-bonjour-packaging.webp',
+    href: '/bonjour-drink-avis/',
+  },
+  {
+    title: 'Café aux champignons danger : faut-il être prudent ?',
+    excerpt: 'Effets secondaires, caféine, interactions, grossesse : les vrais points à vérifier avant de tester.',
+    image: '/images/content/emd-cafe-champignons-ingredients.webp',
+    href: '/cafe-aux-champignons-danger/',
+  },
+  {
+    title: 'Comparatif des meilleurs cafés aux champignons',
+    excerpt: 'Notre classement des meilleures marques de café aux champignons disponibles en France.',
+    image: '/images/content/emd-cafe-champignons-banner.webp',
+    href: '/',
+  },
+];
+
+const quickSummary = {
+  tag: 'Code vérifié',
+  heading: 'Code promo Bonjour Drink : LMC20 actif en 2026',
+  paragraphs: [
+    "Le code promo Bonjour Drink actuellement vérifié est LMC20. Il permet d'obtenir 20% de réduction via notre lien partenaire officiel, sans passer par un code générique incertain ou une fausse promo expirée.",
+    "Bonjour Drink est notre choix principal pour tester une alternative au café sans caféine, avec une formule française à base d'orge torréfiée, cacao et champignons adaptogènes. Le code LMC20 rend l'essai plus intéressant si vous voulez commander sur le site officiel.",
+  ],
+  assets: [
+    'Code LMC20 actif via le lien partenaire officiel',
+    'Réduction de 20% sur Bonjour Drink',
+    'Prix remisé affiché à 31,20 € au lieu de 39,00 €',
+    'Produit sans caféine, vegan, sans gluten et fabriqué en France',
+  ],
+  considerations: [
+    'La réduction dépend des conditions affichées au moment de la commande',
+    "Le code doit être saisi sur le site officiel Bonjour Drink, pas sur une marketplace",
+  ],
+};
+
+const faq = [
+  {
+    question: 'Quel est le code promo Bonjour Drink actif ?',
+    answer: 'Le code promo Bonjour Drink actif est LMC20. Il permet d’obtenir 20% de réduction via notre lien partenaire officiel vers bonjourdrink.co.',
+  },
+  {
+    question: 'Comment utiliser le code promo Bonjour Drink ?',
+    answer: 'Cliquez sur le lien partenaire officiel, ajoutez Bonjour Drink au panier, puis saisissez le code LMC20 au moment du paiement si la réduction n’est pas déjà appliquée automatiquement.',
+  },
+  {
+    question: 'Le code LMC20 fonctionne-t-il sur toutes les commandes ?',
+    answer: 'Le code est prévu pour Bonjour Drink, mais les conditions peuvent varier selon les offres en cours, les packs, les abonnements ou les promotions temporaires affichées par la marque.',
+  },
+  {
+    question: 'Bonjour Drink est-il sans caféine ?',
+    answer: "Oui, Bonjour Drink se positionne comme une alternative au café sans caféine. La formule utilise notamment de l'orge torréfiée, du cacao et des champignons adaptogènes pour garder un rituel chaud sans l'effet café classique.",
+  },
+  {
+    question: 'Où acheter Bonjour Drink au meilleur prix ?',
+    answer: 'Le plus simple est de passer par le site officiel Bonjour Drink avec le code LMC20. Cela permet de vérifier le prix final, les éventuels cadeaux en cours et les conditions de livraison directement chez la marque.',
+  },
+  {
+    question: 'Le code promo Bonjour Drink est-il cumulable ?',
+    answer: 'La cumulabilité dépend des offres affichées par Bonjour Drink au moment de la commande. Si une offre spéciale est déjà active, il faut vérifier le total panier avant paiement.',
+  },
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" slot="json-ld" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Accueil', item: config.domain },
+      { '@type': 'ListItem', position: 2, name: 'Code promo Bonjour Drink', item: pageUrl },
+    ],
+  })} />
+
+  <script type="application/ld+json" slot="json-ld" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: title,
+    description,
+    image: `${config.domain}/images/content/bonjour-drink-code-promo-packaging.webp`,
+    datePublished: publishedDate,
+    dateModified: publishedDate,
+    author: { '@type': 'Person', name: config.author.name },
+    publisher: { '@type': 'Organization', name: config.siteName, logo: { '@type': 'ImageObject', url: `${config.domain}/logo.svg` } },
+    mainEntityOfPage: pageUrl,
+    about: {
+      '@type': 'Product',
+      name: topProduct.name,
+      brand: { '@type': 'Brand', name: topProduct.brand },
+      image: topProduct.image,
+      offers: {
+        '@type': 'Offer',
+        priceCurrency: 'EUR',
+        price: topProduct.discountPrice.replace(/[^\d.,]/g, '').replace(',', '.'),
+        availability: 'https://schema.org/InStock',
+        url: topProduct.affiliateLink,
+      },
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: topProduct.rating,
+        bestRating: 10,
+        reviewCount: topProduct.reviewCount,
+      },
+    },
+  })} />
+
+  <script type="application/ld+json" slot="json-ld" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer },
+    })),
+  })} />
+
+  <BlogHero
+    title="Code promo Bonjour Drink : -20% avec LMC20"
+    description="Code vérifié, prix remisé, conditions d’utilisation et lien officiel : tout ce qu’il faut vérifier avant de commander Bonjour Drink."
+    author={config.author.name}
+    authorAvatar={config.author.avatar}
+    date="26 Avril 2026"
+    readingTime="7 min de lecture"
+    breadcrumbs={[{ label: 'Code promo Bonjour Drink', href: '/code-promo-bonjour-drink' }]}
+    bannerImage="/images/content/bonjour-drink-code-promo-packaging.webp"
+    product={{
+      name: topProduct.name,
+      image: topProduct.image,
+      promoCode: topProduct.promoCode,
+      promoPercent: topProduct.promoPercent,
+      originalPrice: topProduct.originalPrice,
+      discountPrice: topProduct.discountPrice,
+      affiliateLink: topProduct.affiliateLink,
+    }}
+    showOfferBlock={true}
+  />
+
+  <main style="background-color: #ffffff;">
+    <div class="container-large padding-global">
+      <div class="padding-section-medium">
+        <div class="blog-grid">
+          <div class="content-column">
+            <FirstReview
+              tag={quickSummary.tag}
+              heading={quickSummary.heading}
+              paragraphs={quickSummary.paragraphs}
+              assets={quickSummary.assets}
+              considerations={quickSummary.considerations}
+              product={{
+                brandName: topProduct.brand,
+                brandLogoSrc: topProduct.brandLogo,
+                rating: topProduct.rating,
+                reviewLabel: 'Code promo vérifié',
+                ctaText: 'Utiliser le code',
+                ctaLink: topProduct.affiliateLink,
+              }}
+            />
+
+            <section id="summary-cta" class="promo-selection">
+              <ReviewPromoCard product={promoProduct} />
+            </section>
+
+            <section id="intro" class="rich-text">
+              <h2>Code promo Bonjour Drink : le verdict rapide</h2>
+              <p>
+                Le code promo <strong>Bonjour Drink</strong> à utiliser est <strong>{topProduct.promoCode}</strong>. Il donne actuellement <strong>{topProduct.promoPercent}% de réduction</strong> via notre lien partenaire officiel. Concrètement, le prix passe de {topProduct.originalPrice} à {topProduct.discountPrice} sur l’offre suivie.
+              </p>
+              <p>
+                L’intérêt de cette page est simple : éviter les faux codes promo, les coupons expirés et les liens qui renvoient vers une mauvaise version du site. Ici, le lien est celui que nous utilisons pour Bonjour Drink sur ce comparatif.
+              </p>
+              <p>
+                Si vous voulez d’abord comprendre le produit avant d’acheter, notre page <a href="/bonjour-drink-avis/">avis Bonjour Drink</a> détaille la composition, le goût, la caféine et les limites. Si vous voulez juste commander au meilleur prix, le bloc ci-dessus suffit.
+              </p>
+            </section>
+
+            <TableOfContents items={[
+              { id: 'intro', label: 'Code actif' },
+              { id: 'utilisation', label: 'Utilisation' },
+              { id: 'prix', label: 'Prix remisé' },
+              { id: 'conditions', label: 'Conditions' },
+              { id: 'packaging', label: 'Packaging' },
+              { id: 'avis', label: 'Avis rapide' },
+              { id: 'alternatives', label: 'Alternatives' },
+              { id: 'verdict', label: 'Verdict' },
+              { id: 'faq', label: 'FAQ' },
+            ]} />
+
+            <ContentImage
+              src="/images/content/bonjour-drink-code-promo-packaging.webp"
+              alt="Packaging Bonjour Drink avec boisson sur fond jaune"
+              caption="Visuel récupéré depuis le site officiel bonjourdrink.co : le packaging Bonjour Drink est utilisé ici pour éviter une image générique."
+            />
+
+            <section id="utilisation" class="rich-text">
+              <h2>Comment utiliser le code promo Bonjour Drink ?</h2>
+              <p>
+                Pour utiliser le code, cliquez sur le lien partenaire officiel, choisissez votre produit ou votre pack sur le site Bonjour Drink, puis vérifiez le champ code promo au panier. Si la réduction n’est pas appliquée automatiquement, saisissez <strong>{topProduct.promoCode}</strong> avant le paiement.
+              </p>
+              <p>
+                Le point important est de vérifier le prix final avant validation. Bonjour Drink peut afficher des offres saisonnières, des packs ou des cadeaux selon la période. Le bon indicateur n’est donc pas seulement le pourcentage annoncé, mais le total final payé.
+              </p>
+            </section>
+
+            <InnerNote
+              emoji="📌"
+              text="<strong>À retenir :</strong> utilisez le code LMC20 depuis le lien partenaire officiel, puis contrôlez le total panier avant paiement. C’est la manière la plus fiable d’éviter les codes expirés."
+            />
+
+            <section id="prix" class="promo-selection">
+              <div class="rich-text">
+                <h2>Prix Bonjour Drink avec le code LMC20</h2>
+                <p>
+                  Sur notre suivi actuel, Bonjour Drink est affiché à {topProduct.originalPrice}. Avec le code <strong>{topProduct.promoCode}</strong>, le prix remisé descend à <strong>{topProduct.discountPrice}</strong>. Cela rend l’essai plus cohérent si vous découvrez ce type de boisson fonctionnelle.
+                </p>
+                <p>
+                  Le produit reste dans une gamme premium, mais le positionnement est plus accessible que beaucoup de cafés aux champignons très dosés. Bonjour Drink vise surtout les personnes qui veulent un rituel sans caféine, pas un café stimulant classique.
+                </p>
+              </div>
+              <ReviewPromoCard product={promoProduct} />
+            </section>
+
+            <ComparisonTable
+              title="Code promo Bonjour Drink : résumé pratique"
+              headers={[
+                { label: 'Élément' },
+                { label: 'Information vérifiée' },
+              ]}
+              rows={[
+                { cells: ['Code promo', 'LMC20'], highlight: true },
+                { cells: ['Réduction', '20%'], highlight: true },
+                { cells: ['Prix suivi', '39,00 € puis 31,20 € avec le code'] },
+                { cells: ['Site concerné', 'bonjourdrink.co via lien partenaire officiel'], highlight: true },
+                { cells: ['Produit recommandé', 'Super Café Bonjour Drink'] },
+                { cells: ['Profil idéal', 'Personnes qui veulent réduire la caféine'], highlight: true },
+              ]}
+            />
+
+            <section id="conditions" class="rich-text">
+              <h2>Conditions à vérifier avant commande</h2>
+              <p>
+                Comme toutes les offres partenaires, le code promo Bonjour Drink peut dépendre des conditions affichées au moment de la commande. Il faut donc regarder si le code fonctionne sur le produit seul, les packs, les abonnements ou les offres spéciales de saison.
+              </p>
+              <p>
+                Si une promotion plus forte est déjà active sur le site, le code peut parfois ne pas être cumulable. Dans ce cas, il faut comparer le prix final avec et sans code. Notre règle est simple : on garde le lien officiel, mais on ne force jamais une promesse si le panier affiche une condition différente.
+              </p>
+            </section>
+
+            <ContentImage
+              src="/images/content/emd-cafe-champignons-bonjour-test.webp"
+              alt="Routine de test Bonjour Drink avec notes et boisson chaude"
+              caption="Bonjour Drink se juge surtout sur le rituel, le goût et la tolérance sans caféine. Le code promo sert à rendre le premier test plus accessible."
+            />
+
+            <section id="packaging" class="rich-text">
+              <h2>Packaging Bonjour Drink : ce que montre le produit officiel</h2>
+              <p>
+                Pour cette page, nous avons récupéré le visuel packaging directement depuis le site officiel bonjourdrink.co. C’est important parce que les pages code promo utilisent trop souvent des images génériques ou obsolètes, ce qui réduit la confiance avant achat.
+              </p>
+              <p>
+                Le packaging met en avant une boisson fonctionnelle autour de l’énergie, de la concentration et du bien-être. Le positionnement est clair : Bonjour Drink n’est pas un espresso, mais un rituel chaud enrichi en champignons adaptogènes, pensé pour remplacer le café sans caféine.
+              </p>
+            </section>
+
+            <section id="avis" class="rich-text">
+              <h2>Notre avis rapide avant d’utiliser le code</h2>
+              <p>
+                Notre avis est favorable si vous cherchez une alternative au café plus douce. Bonjour Drink est cohérent pour les profils sensibles à la caféine, les personnes qui veulent réduire le café ou celles qui veulent garder une routine matinale sans nervosité.
+              </p>
+              <p>
+                En revanche, ce n’est pas le meilleur choix si vous cherchez un effet stimulant immédiat ou un goût de café noir très marqué. Dans ce cas, un café aux champignons caféiné peut mieux correspondre à l’usage recherché. Pour comparer les options, consultez notre <a href="/">classement des meilleurs cafés aux champignons</a>.
+              </p>
+            </section>
+
+            <InnerNote
+              emoji="✅"
+              text="<strong>Notre lecture :</strong> Bonjour Drink est surtout un bon achat avec code promo si vous voulez tester une alternative sans caféine, pas si vous cherchez un café puissant."
+            />
+
+            <section id="alternatives" class="rich-text">
+              <h2>Alternatives si le code Bonjour Drink ne convient pas</h2>
+              <p>
+                Si le code ne fonctionne pas sur votre panier ou si le produit ne correspond pas à votre profil, les alternatives dépendent de votre besoin. Pour une formule plus stimulante, Mush N Go est plus orienté café fonctionnel. Pour une approche européenne et bio, Clearly peut aussi être pertinent.
+              </p>
+              <p>
+                Mais pour une requête <strong>code promo Bonjour Drink</strong>, le plus logique reste de rester sur Bonjour Drink : l’intention est déjà marque + achat. Cette page ne cherche donc pas à disperser le choix, mais à sécuriser le bon code et le bon lien.
+              </p>
+            </section>
+
+            <section id="verdict" class="promo-selection">
+              <div class="rich-text">
+                <h2>Verdict : faut-il utiliser le code promo Bonjour Drink ?</h2>
+                <p>
+                  Oui, si vous voulez commander Bonjour Drink, le code <strong>{topProduct.promoCode}</strong> est le meilleur point d’entrée que nous suivons actuellement. Il réduit le prix, renvoie vers le site officiel et colle à l’usage principal : tester une alternative au café sans caféine.
+                </p>
+                <p>
+                  Notre recommandation : utilisez le lien partenaire officiel, saisissez LMC20 si nécessaire, puis vérifiez le prix final avant paiement. Si tout est cohérent, c’est une bonne manière de tester Bonjour Drink sans payer plein tarif.
+                </p>
+              </div>
+              <ReviewPromoCard product={promoProduct} />
+            </section>
+
+            <section id="faq" class="rich-text">
+              <h2>Questions fréquentes</h2>
+              <FaqAccordion items={faq} />
+            </section>
+
+            <EditorialCriteria />
+          </div>
+
+          <aside class="sidebar-column">
+            <SidebarCTA
+              logoSrc={topProduct.brandLogo}
+              promoCode={topProduct.promoCode}
+              promoPercent={topProduct.promoPercent}
+              originalPrice={topProduct.originalPrice}
+              discountPrice={topProduct.discountPrice}
+              ctaLink={topProduct.affiliateLink}
+              heroImage={topProduct.image}
+              rating={topProduct.rating}
+              reviewCount={topProduct.reviewCount}
+            />
+          </aside>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <ArticleGrid articles={ relatedArticles.filter((article) => article.href !== '/code-promo-bonjour-drink/') } />
+</BaseLayout>
