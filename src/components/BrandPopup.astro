@@ -100,7 +100,7 @@ const shortDesc = description.length > 100 ? description.slice(0, 97) + '...' : 
       autoTimer = setTimeout(() => {
         openPopup();
         sessionStorage.setItem('emd-brand-popup-shown', 'true');
-      }, 7000);
+      }, 15000);
     };
 
     const openPopup = () => {
@@ -118,7 +118,7 @@ const shortDesc = description.length > 100 ? description.slice(0, 97) + '...' : 
       if (trigger) trigger.style.display = '';
     };
 
-    // Auto show after 7s
+    // Auto show after 15s
     autoShow();
 
     // Manual open from floating button
