@@ -27,7 +27,7 @@ const robotsContent = config.isIndexable === false
 
 // Auto-generate nav links from pages config (max 3 words each)
 const navLinks = config.pages.map(p => ({ label: p.label, href: p.slug }));
-const headerCtaLink = config.pages[0]?.type === 'comparatif' ? config.pages[0].slug : config.products[0].affiliateLink;
+const headerCtaLink = config.products[0].affiliateLink;
 const footerLinks = [
   { label: 'Accueil', href: '/' },
   ...config.pages.map(p => ({ label: p.label, href: p.slug })),
