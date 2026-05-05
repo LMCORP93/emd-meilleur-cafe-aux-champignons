@@ -11,6 +11,7 @@ import InnerNote from '@/components/InnerNote.astro';
 import ComparisonTable from '@/components/ComparisonTable.astro';
 import ArticleGrid from '@/components/ArticleGrid.astro';
 import EditorialCriteria from '@/components/EditorialCriteria.astro';
+import AuthorBioCard from '@/components/AuthorBioCard.astro';
 import config from '@/data/site.config';
 
 const topProduct = config.products[0];
@@ -334,6 +335,8 @@ const faq = [
               <h2>Questions fréquentes</h2>
               <FaqAccordion items={faq} />
             </section>
+
+            <AuthorBioCard />
 
             <EditorialCriteria />
           </div>

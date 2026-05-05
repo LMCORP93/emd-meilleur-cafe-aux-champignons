@@ -10,6 +10,7 @@ import InnerNote from '@/components/InnerNote.astro';
 import ComparisonTable from '@/components/ComparisonTable.astro';
 import ArticleGrid from '@/components/ArticleGrid.astro';
 import EditorialCriteria from '@/components/EditorialCriteria.astro';
+import AuthorBioCard from '@/components/AuthorBioCard.astro';
 import config from '@/data/site.config';
 
 const topProduct = config.products[0];
@@ -326,6 +327,8 @@ const productSchema = (p: typeof config.products[number]) => ({
             <section id="faq" class="faq-section">
               <FAQSection faq={comparatifFaq} />
             </section>
+
+            <AuthorBioCard />
 
             <EditorialCriteria />
 
