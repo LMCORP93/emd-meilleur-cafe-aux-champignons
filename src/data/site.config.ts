@@ -57,7 +57,7 @@ export interface SiteConfig {
   faq: { question: string; answer: string }[];
   products: Product[];
   tocItems: { id: string; label: string }[];
-  pages: { type: 'comparatif' | 'blog'; label: string; slug: string }[];
+  pages: { type: 'comparatif' | 'blog'; label: string; slug: string; image?: string }[];
 }
 
 // ── Config ─────────────────────────────────────────────────────────────
@@ -360,9 +360,9 @@ const config: SiteConfig = {
     ],
 
   pages: [
-    { type: 'comparatif', label: 'Top 6', slug: '/#product-bonjour-drink' },
-    { type: 'blog', label: 'Avis Bonjour', slug: '/bonjour-drink-avis' },
-    { type: 'blog', label: 'Dangers', slug: '/cafe-aux-champignons-danger' },
+    { type: 'comparatif', label: 'Top 6', slug: '/', image: '/images/content/emd-cafe-champignons-banner.webp' },
+    { type: 'blog', label: 'Avis Bonjour', slug: '/bonjour-drink-avis/', image: '/images/content/emd-cafe-champignons-bonjour-packaging.webp' },
+    { type: 'blog', label: 'Dangers', slug: '/cafe-aux-champignons-danger/', image: '/images/content/emd-cafe-champignons-lifestyle.webp' },
   ],
 };
 
