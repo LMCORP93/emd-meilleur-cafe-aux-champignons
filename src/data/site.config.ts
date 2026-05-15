@@ -180,7 +180,7 @@ const config: SiteConfig = {
       discountPrice: '31,20 €',
       affiliateLink: 'https://taap.it/bonjour-drink-lmc',
       origin: '🇫🇷 France',
-      availability: 'En stock',
+      availability: 'Livraison en France possible via la boutique officielle ou un revendeur',
       productType: 'Poudre',
       pros: [
         'Formule complète : orge torréfiée + cacao + 2250 mg de champignons adaptogènes',
@@ -212,7 +212,7 @@ const config: SiteConfig = {
       discountPrice: '25,42 €',
       affiliateLink: 'https://taap.it/mushngo-brainstorm',
       origin: '🇫🇷 France',
-      availability: 'En stock',
+      availability: 'Livraison en France possible via la boutique officielle ou un revendeur',
       productType: 'Poudre (240g : 30 portions)',
       pros: [
         '6 250 mg d\'actifs par tasse : le café aux champignons le plus dosé de France',
@@ -244,7 +244,7 @@ const config: SiteConfig = {
       discountPrice: '17,95 €',
       affiliateLink: 'https://taap.it/wake-super-cafe',
       origin: '🇫🇷 France',
-      availability: 'En stock',
+      availability: 'Livraison en France possible via la boutique officielle ou un revendeur',
       productType: 'Poudre',
       pros: [
         'Prix très accessible : à partir de 17,95€ le sachet',
@@ -276,7 +276,7 @@ const config: SiteConfig = {
       discountPrice: '21,60 €',
       affiliateLink: 'https://taap.it/Dyna-pack-decouverte-trio',
       origin: '🇫🇷 France',
-      availability: 'En stock',
+      availability: 'Livraison en France possible via la boutique officielle ou un revendeur',
       productType: 'Poudre',
       pros: [
         'Haute dose de 2000 mg d\'extraits concentrés (Lion\'s Mane, KSM-66 Ashwagandha)',
@@ -308,7 +308,7 @@ const config: SiteConfig = {
       discountPrice: '28,16 €',
       affiliateLink: 'https://taap.it/french-mush-boisson-boost',
       origin: '🇫🇷 France',
-      availability: 'En stock',
+      availability: 'Livraison en France possible via la boutique officielle ou un revendeur',
       productType: 'Poudre',
       pros: [
         'La référence française des champignons adaptogènes bio fabriqués en France',
@@ -340,7 +340,7 @@ const config: SiteConfig = {
       discountPrice: '25,50 €',
       affiliateLink: 'https://taap.it/clearly-not-coffee',
       origin: '🇳🇱 Pays-Bas',
-      availability: 'En stock',
+      availability: 'Livraison en France possible via la boutique officielle ou un revendeur',
       productType: 'Poudre',
       pros: [
         'Marque néerlandaise certifiée BIO avec ingrédients premium sourcés mondialement',
