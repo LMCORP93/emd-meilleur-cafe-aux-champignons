@@ -85,8 +85,8 @@ const config: SiteConfig = {
   },
 
   seo: {
-    title: 'Meilleur Café aux Champignons 2026 : comparatif Top 6',
-    description: 'Comparatif 2026 des meilleurs cafés aux champignons en France : formules, dosages, prix, avis, caféine et codes promo pour choisir la bonne marque.',
+    title: 'Meilleur Café aux Champignons 2026 : Top 6 — Bonjour Drink, Mush N Go, WAKE',
+    description: 'Comparatif 2026 des meilleurs cafés aux champignons en France. Bonjour Drink (Juliette Di Marco & Raphaël Dary), Mush N Go, WAKE, Dyna : formules, dosages, caféine, codes promo.',
     ogImage: '/og-image.jpg',
   },
 
@@ -126,6 +126,10 @@ const config: SiteConfig = {
   ],
 
   faq: [
+    {
+      question: 'Qui sont les créateurs de Bonjour Drink ?',
+      answer: 'Bonjour Drink a été fondée par Juliette Di Marco et Raphaël Dary, deux entrepreneurs français passionnés de santé holistique. Leur Super Café est une boisson aux champignons adaptogènes sans caféine, conçue pour remplacer le café du matin sans ses effets stimulants. C’est le premier choix de notre comparatif pour sa formule lisible, son prix accessible et son approche adaptée aux débutants.',
+    },
     {
       question: 'Quels sont les ingrédients de Brainstoorm Mush N Go ?',
       answer: 'Brainstoorm contient 6 250 mg d\'ingrédients actifs par dose de 8 g : Maca (3 000 mg), fibres d\'Acacia (2 708 mg), Cacao (1 400 mg), Lion\'s Mane (1 000 mg), Cordyceps (1 000 mg), Chaga (1 000 mg), Ashwagandha (200 mg), Rhodiola (25 mg) et NewCaff® caféine brevetée (20 mg). Les trois champignons principaux sont dosés à dose clinique (1 000 mg chacun).',
