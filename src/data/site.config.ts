@@ -66,16 +66,16 @@ const config: SiteConfig = {
   domain: 'https://meilleur-cafe-aux-champignons.com',
   isIndexable: true,
   siteName: 'Meilleur Café aux Champignons',
-  brand: 'Bonjour Drink',
-  product: 'Comparatif 2026',
+  brand: 'Mush N Go',
+  product: 'Brainstoorm',
   productCategory: 'Champignons Adaptogènes',
   productFormat: 'Poudre',
   tagline: 'Comparatif honnête des meilleurs cafés aux champignons',
 
-  affiliateLink: 'https://taap.it/bonjour-drink-lmc',
-  promoCode: 'LMC20',
-  originalPrice: '39,00 €',
-  discountPrice: '31,20 €',
+  affiliateLink: 'https://taap.it/mushngo-brainstorm',
+  promoCode: 'LMC15',
+  originalPrice: '29,90 €',
+  discountPrice: '25,42 €',
   rating: 9.7,
 
   author: {
@@ -85,8 +85,8 @@ const config: SiteConfig = {
   },
 
   seo: {
-    title: 'Meilleur Café aux Champignons 2026 : Top 6 — Bonjour Drink, Mush N Go, WAKE',
-    description: 'Comparatif 2026 des meilleurs cafés aux champignons en France. Bonjour Drink (Juliette Di Marco & Raphaël Dary), Mush N Go, WAKE, Dyna : formules, dosages, caféine, codes promo.',
+    title: 'Meilleur Café aux Champignons 2026 : Top 6 — Mush N Go, Bonjour Drink, WAKE',
+    description: 'Comparatif 2026 des meilleurs cafés aux champignons en France. Mush N Go, Bonjour Drink, WAKE, Dyna : formules, dosages, caféine, codes promo.',
     ogImage: '/og-image.jpg',
   },
 
@@ -128,7 +128,7 @@ const config: SiteConfig = {
   faq: [
     {
       question: 'Qui sont les créateurs de Bonjour Drink ?',
-      answer: 'Bonjour Drink a été fondée par Juliette Di Marco et Raphaël Dary, deux entrepreneurs français passionnés de santé holistique. Leur Super Café est une boisson aux champignons adaptogènes sans caféine, conçue pour remplacer le café du matin sans ses effets stimulants. C’est le premier choix de notre comparatif pour sa formule lisible, son prix accessible et son approche adaptée aux débutants.',
+      answer: 'Bonjour Drink a été fondée par Juliette Di Marco et Raphaël Dary, deux entrepreneurs français passionnés de santé holistique. Leur Super Café est une boisson aux champignons adaptogènes sans caféine, conçue pour remplacer le café du matin sans ses effets stimulants. C’est désormais une alternative douce du comparatif, derrière Mush N Go qui prend la première place pour son fit plus direct avec le café aux champignons.',
     },
     {
       question: 'Quels sont les ingrédients de Brainstoorm Mush N Go ?',
@@ -169,40 +169,8 @@ const config: SiteConfig = {
   ],
 
   products: [
-    {
+  {
       rank: 1,
-      name: 'Super Café - Bonjour Drink',
-      brand: 'Bonjour Drink',
-      slug: 'bonjour-drink',
-      image: 'https://cdn.prod.website-files.com/68c02c2c477fdd467e6e08a1/68d7c7d22051cb9faf0ade48_bonjour%20drink%202e%CC%80me%20image.avif',
-      brandLogo: 'https://cdn.prod.website-files.com/68c02c2c477fdd467e6e08a1/68d666ee3daf1b2e78ab7a9a_logo%20Bonjour%20Drink.svg',
-      rating: 9.7,
-      reviewCount: 320,
-      promoCode: 'LMC20',
-      promoPercent: 20,
-      originalPrice: '39,00 €',
-      discountPrice: '31,20 €',
-      affiliateLink: 'https://taap.it/bonjour-drink-lmc',
-      origin: '🇫🇷 France',
-      availability: 'Livraison en France possible via la boutique officielle ou un revendeur',
-      productType: 'Poudre',
-      pros: [
-        'Formule complète : orge torréfiée + cacao + 2250 mg de champignons adaptogènes',
-        'Co-fondée par des experts en santé holistique (Juliette Di Marco & Raphaël Dary)',
-        'Coût ramené à seulement 1€ par tasse : l\'un des plus accessibles du marché',
-        '100% naturel, vegan, sans additifs, fabriqué en France',
-        'Deux déclinaisons : Super Café et Super Cacao pour varier les plaisirs',
-      ],
-      cons: [
-        'Goût d\'orge torréfiée qui peut surprendre les amateurs de café classique',
-        'N\'est pas un café au sens strict : alternative sans caféine',
-        'Gamme encore limitée à deux produits',
-      ],
-      description: 'Bonjour Drink est né de la volonté de deux entrepreneurs français passionnés de santé holistique, Juliette Di Marco et Raphaël Dary, qui souhaitaient créer une alternative au café sans ses effets indésirables. Le résultat ? Le Super Café et le Super Cacao, deux boissons innovantes qui réunissent dans une seule tasse les bienfaits de trois champignons adaptogènes exceptionnels : le Lion\'s Mane pour la concentration, le Cordyceps pour l\'énergie physique et le Reishi pour la résistance au stress. Leur formule combine orge torréfiée, cacao et 2250 mg d\'extraits de champignons pour un rituel matinal sain, sans caféine, à seulement 1€ par tasse.',
-    },
-    
-    {
-      rank: 2,
       name: 'Brainstoorm - Mush N Go',
       brand: 'Mush N Go',
       slug: 'brainstoorm-mush-n-go',
@@ -232,8 +200,38 @@ const config: SiteConfig = {
       ],
       description: 'Brainstoorm de Mush N Go est le café aux champignons adaptogènes le plus concentré de France avec 6 250 mg d\'actifs par tasse. Formule à 8 actifs synergiques : Lion\'s Mane, Cordyceps, Chaga (1 000 mg chacun à dose clinique), Maca (3 000 mg), fibres d\'Acacia (2 708 mg), Ashwagandha, Rhodiola, Cacao et NewCaff® brevetée. Fabrication française en Bretagne. Trustpilot 4,8/5.',
     },
-    
-    {
+  {
+      rank: 2,
+      name: 'Super Café - Bonjour Drink',
+      brand: 'Bonjour Drink',
+      slug: 'bonjour-drink',
+      image: 'https://cdn.prod.website-files.com/68c02c2c477fdd467e6e08a1/68d7c7d22051cb9faf0ade48_bonjour%20drink%202e%CC%80me%20image.avif',
+      brandLogo: 'https://cdn.prod.website-files.com/68c02c2c477fdd467e6e08a1/68d666ee3daf1b2e78ab7a9a_logo%20Bonjour%20Drink.svg',
+      rating: 9.7,
+      reviewCount: 320,
+      promoCode: 'LMC20',
+      promoPercent: 20,
+      originalPrice: '39,00 €',
+      discountPrice: '31,20 €',
+      affiliateLink: 'https://taap.it/bonjour-drink-lmc',
+      origin: '🇫🇷 France',
+      availability: 'Livraison en France possible via la boutique officielle ou un revendeur',
+      productType: 'Poudre',
+      pros: [
+        'Formule complète : orge torréfiée + cacao + 2250 mg de champignons adaptogènes',
+        'Co-fondée par des experts en santé holistique (Juliette Di Marco & Raphaël Dary)',
+        'Coût ramené à seulement 1€ par tasse : l\'un des plus accessibles du marché',
+        '100% naturel, vegan, sans additifs, fabriqué en France',
+        'Deux déclinaisons : Super Café et Super Cacao pour varier les plaisirs',
+      ],
+      cons: [
+        'Goût d\'orge torréfiée qui peut surprendre les amateurs de café classique',
+        'N\'est pas un café au sens strict : alternative sans caféine',
+        'Gamme encore limitée à deux produits',
+      ],
+      description: 'Bonjour Drink passe derrière Mush N Go dans ce classement, mais reste une option douce née de la volonté de deux entrepreneurs français passionnés de santé holistique, Juliette Di Marco et Raphaël Dary, qui souhaitaient créer une alternative au café sans ses effets indésirables. Le résultat ? Le Super Café et le Super Cacao, deux boissons innovantes qui réunissent dans une seule tasse les bienfaits de trois champignons adaptogènes exceptionnels : le Lion\'s Mane pour la concentration, le Cordyceps pour l\'énergie physique et le Reishi pour la résistance au stress. Leur formule combine orge torréfiée, cacao et 2250 mg d\'extraits de champignons pour un rituel matinal sain, sans caféine, à seulement 1€ par tasse.',
+    },
+  {
       rank: 3,
       name: 'Super Café Évolutif - WAKE',
       brand: 'WAKE',
@@ -264,8 +262,7 @@ const config: SiteConfig = {
       ],
       description: 'Basée à Paris, Wake est née d\'une vision moderne de la nutrition : harmoniser nos besoins physiologiques avec les cycles naturels. Son Super Café est une boisson fonctionnelle innovante qui combine arabica premium, orge torréfiée, collagène marin AAA (1000 Da) et champignons adaptogènes bio (Lion\'s Mane, Cordyceps, Chaga). Le dosage est évolutif pour s\'adapter à votre sensibilité. Prix d\'entrée très accessible à 19,95€.',
     },
-    
-    {
+  {
       rank: 4,
       name: 'Super Coffee - Drink Dyna',
       brand: 'Drink Dyna',
@@ -296,8 +293,7 @@ const config: SiteConfig = {
       ],
       description: 'Dyna réinvente le rituel matinal avec son Super Coffee, une fusion intelligente entre café Arabica premium et adaptogènes. Cette formule instantanée offre une énergie stable et une concentration décuplée sans le crash habituel. Elle combine 2000 mg d\'extraits concentrés de Lion\'s Mane et d\'Ashwagandha KSM-66. Formules disponibles en versions cacao, malt et matcha pour varier les rituels. Pack découverte trio à 24€.',
     },
-    
-    {
+  {
       rank: 5,
       name: 'Boisson Boost - French Mush',
       brand: 'French Mush',
@@ -328,8 +324,7 @@ const config: SiteConfig = {
       ],
       description: 'French Mush démocratise l\'accès aux champignons fonctionnels avec une gamme complète de champignons adaptogènes biologiques fabriqués en France : Lion\'s Mane pour la concentration, Cordyceps pour l\'énergie, Chaga pour les défenses immunitaires, Reishi et Shiitaké. Poudres et gélules ultra-concentrées certifiées bio. Leur boisson Boost combine plusieurs extraits pour un effet synergique complet.',
     },
-    
-    {
+  {
       rank: 6,
       name: 'Not Coffee - Clearly',
       brand: 'Clearly',
@@ -359,9 +354,8 @@ const config: SiteConfig = {
         'Prix légèrement supérieur à la moyenne pour un format standard',
       ],
       description: 'Clearly est une marque néerlandaise certifiée BIO qui place la qualité au rang #1. Fondée par des passionnés confrontés au brouillard mental, à la fatigue chronique et aux ballonnements, la marque a créé une formule qui combine champignons adaptogènes et superaliments pour l\'énergie, la clarté mentale et la digestion. Ingrédients sourcés chez les meilleurs producteurs mondiaux, production contrôlée aux Pays-Bas, transparence totale sur la composition.',
-    },
-
-    ],
+    }
+],
 
   pages: [
     { type: 'comparatif', label: 'Top 6', slug: '/', image: '/images/content/emd-cafe-champignons-banner.webp' },
