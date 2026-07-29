@@ -85,7 +85,7 @@ const config: SiteConfig = {
   },
 
   seo: {
-    title: 'Meilleur Café aux Champignons 2026 : Top 6 — Mush N Go, Bonjour Drink, WAKE',
+    title: 'Meilleur café aux champignons 2026 : Top 6 comparatif',
     description: 'Comparatif 2026 des meilleurs cafés aux champignons en France. Mush N Go, Bonjour Drink, WAKE, Dyna : formules, dosages, caféine, codes promo.',
     ogImage: '/og-image.jpg',
   },
