@@ -85,7 +85,7 @@ const config: SiteConfig = {
   },
 
   seo: {
-    title: 'Meilleur Café aux Champignons 2026 : Top 6 — Mush N Go, Bonjour Drink, WAKE',
+    title: 'Meilleur café aux champignons 2026 : Top 6 comparatif',
     description: 'Comparatif 2026 des meilleurs cafés aux champignons en France. Mush N Go, Bonjour Drink, WAKE, Dyna : formules, dosages, caféine, codes promo.',
     ogImage: '/og-image.jpg',
   },
@@ -358,9 +358,9 @@ const config: SiteConfig = {
 ],
 
   pages: [
-    { type: 'comparatif', label: 'Top 6', slug: '/', image: '/images/content/emd-cafe-champignons-banner.webp' },
-    { type: 'blog', label: 'Avis Bonjour', slug: '/bonjour-drink-avis/', image: '/images/content/emd-cafe-champignons-bonjour-packaging.webp' },
-    { type: 'blog', label: 'Dangers', slug: '/cafe-aux-champignons-danger/', image: '/images/content/emd-cafe-champignons-lifestyle.webp' },
+    { type: 'comparatif', label: 'Top 6 cafés champignons', slug: '/', image: '/images/content/emd-cafe-champignons-banner.webp' },
+    { type: 'blog', label: 'Avis Bonjour Drink', slug: '/bonjour-drink-avis/', image: '/images/content/emd-cafe-champignons-bonjour-packaging.webp' },
+    { type: 'blog', label: 'Café champignons : danger ?', slug: '/cafe-aux-champignons-danger/', image: '/images/content/emd-cafe-champignons-lifestyle.webp' },
   ],
 };
 
