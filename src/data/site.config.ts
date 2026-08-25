@@ -183,7 +183,7 @@ const config: SiteConfig = {
       originalPrice: '29,90 €',
       discountPrice: '25,42 €',
       affiliateLink: 'https://taap.it/mushngo-brainstorm',
-      origin: '🇫🇷 France',
+      origin: 'France',
       availability: 'Livraison en France possible via la boutique officielle ou un revendeur',
       productType: 'Poudre (240g : 30 portions)',
       pros: [
@@ -214,7 +214,7 @@ const config: SiteConfig = {
       originalPrice: '39,00 €',
       discountPrice: '31,20 €',
       affiliateLink: 'https://taap.it/bonjour-drink-lmc',
-      origin: '🇫🇷 France',
+      origin: 'France',
       availability: 'Livraison en France possible via la boutique officielle ou un revendeur',
       productType: 'Poudre',
       pros: [
@@ -245,7 +245,7 @@ const config: SiteConfig = {
       originalPrice: '19,95 €',
       discountPrice: '17,95 €',
       affiliateLink: 'https://taap.it/wake-super-cafe',
-      origin: '🇫🇷 France',
+      origin: 'France',
       availability: 'Livraison en France possible via la boutique officielle ou un revendeur',
       productType: 'Poudre',
       pros: [
@@ -276,7 +276,7 @@ const config: SiteConfig = {
       originalPrice: '24,00 €',
       discountPrice: '21,60 €',
       affiliateLink: 'https://taap.it/Dyna-pack-decouverte-trio',
-      origin: '🇫🇷 France',
+      origin: 'France',
       availability: 'Livraison en France possible via la boutique officielle ou un revendeur',
       productType: 'Poudre',
       pros: [
@@ -307,7 +307,7 @@ const config: SiteConfig = {
       originalPrice: '32,00 €',
       discountPrice: '28,16 €',
       affiliateLink: 'https://taap.it/french-mush-boisson-boost',
-      origin: '🇫🇷 France',
+      origin: 'France',
       availability: 'Livraison en France possible via la boutique officielle ou un revendeur',
       productType: 'Poudre',
       pros: [
@@ -338,7 +338,7 @@ const config: SiteConfig = {
       originalPrice: '30,00 €',
       discountPrice: '25,50 €',
       affiliateLink: 'https://taap.it/clearly-not-coffee',
-      origin: '🇳🇱 Pays-Bas',
+      origin: 'Pays-Bas',
       availability: 'Livraison en France possible via la boutique officielle ou un revendeur',
       productType: 'Poudre',
       pros: [
@@ -361,6 +361,7 @@ const config: SiteConfig = {
     { type: 'comparatif', label: 'Top 6 cafés champignons', slug: '/', image: '/images/content/emd-cafe-champignons-banner.webp' },
     { type: 'blog', label: 'Avis Bonjour Drink', slug: '/bonjour-drink-avis/', image: '/images/content/emd-cafe-champignons-bonjour-packaging.webp' },
     { type: 'blog', label: 'Café champignons : danger ?', slug: '/cafe-aux-champignons-danger/', image: '/images/content/emd-cafe-champignons-lifestyle.webp' },
+    { type: 'blog', label: 'Quiz café champignons', slug: '/quiz-cafe-champignons/' },
   ],
 };
 

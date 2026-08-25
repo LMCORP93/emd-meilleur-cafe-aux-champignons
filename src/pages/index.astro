@@ -193,7 +193,7 @@ const productSchema = (p: typeof config.products[number]) => ({
     showOfferBlock={false}
   />
 
-  <main style="background-color: #ffffff;">
+  <main style="background-color: #fcfbf7;">
     <div class="container-large padding-global">
       <div class="padding-section-medium">
         <div class="blog-grid">
@@ -208,7 +208,7 @@ const productSchema = (p: typeof config.products[number]) => ({
                 <p>
                   Le café aux champignons connaît une croissance fulgurante en France. Avec <strong>720 recherches mensuelles</strong> pour « café aux champignons » et <strong>880 pour « café adaptogène »</strong>, ce marché en plein essor attire de plus en plus de consommateurs en quête d'une alternative saine au café classique.
                 </p>
-                <p>Bonjour Drink, fondée par Juliette Di Marco et Raphaël Dary, est la marque qui a lancé une alternative française au café aux champignons sans caféine. Leur Super Café associe orge torréfiée, cacao et champignons adaptogènes — Lion’s Mane, Cordyceps, Reishi — dans une boisson pensée comme rituel matinal doux. C’est notre première recommandation dans ce comparatif, non pas pour le storytelling de la marque, mais parce que le rapport formule, prix et accessibilité reste lisible pour un premier achat.</p>
+                <p>Bonjour Drink, fondée par Juliette Di Marco et Raphaël Dary, est la marque qui a lancé une alternative française au café aux champignons sans caféine. Leur Super Café associe orge torréfiée, cacao et champignons adaptogènes, Lion’s Mane, Cordyceps, Reishi, dans une boisson pensée comme rituel matinal doux. C’est notre première recommandation dans ce comparatif, non pas pour le storytelling de la marque, mais parce que le rapport formule, prix et accessibilité reste lisible pour un premier achat.</p>
                 <p>
                   Mais face à la multiplication des offres, du café Arabica enrichi en Lion's Mane aux alternatives sans caféine à base d'orge torréfiée, il devient difficile de s'y retrouver. Notre équipe a testé et analysé les <strong>6 meilleures marques de café aux champignons disponibles en France</strong> pour vous aider à faire le bon choix.
                 </p>
@@ -230,7 +230,7 @@ const productSchema = (p: typeof config.products[number]) => ({
               { id: 'methodologie-classement', label: 'Méthode' },
               ...config.products.map((p) => ({
                 id: `product-${p.slug}`,
-                label: `${p.rank <= 3 ? (p.rank === 1 ? '🏆' : p.rank === 2 ? '🥈' : '🥉') : ''} ${p.rank}. ${p.brand}`,
+                label: `${p.rank <= 3 ? (p.rank === 1 ? '' : p.rank === 2 ? '' : '') : ''} ${p.rank}. ${p.brand}`,
               })),
               { id: 'guide', label: 'Guide d\'achat' },
               { id: 'faq', label: 'Questions fréquentes' },
@@ -292,7 +292,7 @@ const productSchema = (p: typeof config.products[number]) => ({
                 Calculez le <strong>coût par tasse</strong>, pas le prix du sachet. WAKE propose le tarif le plus accessible à 0,60€/tasse, suivi de Drink Dyna à 0,72€ et de Bonjour Drink et Mush N Go à environ 1€/tasse. N'oubliez pas d'utiliser les codes promos partenaires (LMC15, LMC20, etc.) qui peuvent réduire le coût de 10 à 20%. Les conditionnements de 60 ou 90 portions offrent généralement un meilleur rapport qualité-prix.</p>
 
                 <InnerNote
-                  emoji="📌"
+                  emoji=""
                   text="<strong>Notre méthode :</strong> nous ne classons pas seulement les produits selon la note. Nous croisons le dosage, la caféine, le goût, le prix par tasse, la transparence et la facilité d’utilisation au quotidien."
                 />
 
@@ -376,9 +376,7 @@ const productSchema = (p: typeof config.products[number]) => ({
 
   .seo-guide {
     margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 2px solid #f0ebe3;
-  }
+    }
 
   .seo-guide .rich-text h3 {
     margin-top: 1rem;
@@ -400,9 +398,7 @@ const productSchema = (p: typeof config.products[number]) => ({
 
   .faq-section {
     margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 2px solid #f0ebe3;
-  }
+    }
 
 .methodology-box { margin: 2rem 0; padding: 1.35rem; border: 1px solid #eadfce; border-radius: 18px; background: #f8f4ec; color: #2f2922; }
 .methodology-box, .methodology-box h2, .methodology-box p, .methodology-box li, .methodology-box strong { color: #2f2922; }
